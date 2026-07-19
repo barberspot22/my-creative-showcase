@@ -38,7 +38,6 @@ function GBSocialPage() {
           <div className="socialChatBody">
             <p className="chatUser">Preciso de uma arte pro Instagram anunciando agenda aberta.</p>
             <p className="chatAgent"><b>GB Social</b>Perfeito. Vou seguir o DNA da marca e preparar uma peça com chamada direta para WhatsApp.</p>
-            <p className="socialDesignerStatus"><i/><i/><i/> Designer montando layout</p>
             <article className="socialDesignPreview socialDesignPreviewImage" aria-label="Preview da arte criada pelo designer">
               <img src={consumoConscienteAsset.url} alt="Design Consumo Consciente criado pelo GB Social" />
             </article>
