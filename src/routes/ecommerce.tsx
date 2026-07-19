@@ -35,7 +35,7 @@ function EcommercePage() {
         <p className="studioEyebrow">GB IA — E-COMMERCE</p>
         <h1>Loja pronta pra vender não é loja pronta.<br/><em>É a loja + o sistema que roda em volta dela.</em></h1>
         <p>Construímos e-commerces completos — não só a vitrine, mas a automação de atendimento, IA vendedora e painel administrativo que fazem a loja vender sem você precisar estar o tempo todo em cima.</p>
-        <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">Falar no WhatsApp <span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Automação · IA vendedora · Tráfego rastreado</small>
       </section>
 
@@ -66,7 +66,7 @@ function EcommercePage() {
         <blockquote>Critério de pronto: se o cliente consegue ver o produto, ser atendido pela IA, comprar e ainda ser impactado por anúncio depois — o sistema tá pronto.</blockquote>
       </section>
 
-      <section className="commerceFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que você vende.<br/>A gente desenha o sistema que vende por você.</h2><p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">Chamar no WhatsApp <span>↗</span></a></section>
+      <section className="commerceFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que você vende.<br/>A gente desenha o sistema que vende por você.</h2><p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>E-commerce · Loja, automação e IA vendedora</span></footer>
   </div>;
