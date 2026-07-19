@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FormEvent, useState } from "react";
+import { FormEvent, ReactNode, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
+import { usePageLink } from "@/lib/adminLinks";
 
 const channels = ["Instagram", "Facebook", "Google Business Profile", "Outros canais da empresa"];
 const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao DNA da empresa", "Criação e adaptação", "Aprovação e publicação"];
@@ -8,16 +9,23 @@ const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao
 function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const { ctaUrl, ctaLabel } = usePageLink("gb-social");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
+  const CtaPrimary = ({ children, className = "socialPrimary" }: { children: ReactNode; className?: string }) =>
+    ctaUrl
+      ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
+      : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
-    <header className="studioNav"><a href="/" className="studioBrand">GB IA.</a><a href="#começar" className="studioNavCta">Conhecer o GB Social <span>↗</span></a></header>
+    <header className="studioNav"><a href="/" className="studioBrand">GB IA.</a>{ctaUrl
+      ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a>
+      : <a href="#começar" className="studioNavCta">{ctaLabel} <span>↗</span></a>}</header>
     <main>
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
         <h1>Sua empresa ativa em todos os canais.<br/><em>Sem você cuidar de todos eles.</em></h1>
         <p>Um Social Media de IA que trabalha pelo WhatsApp, aprende o DNA da sua empresa, cria conteúdo e mantém sua presença digital funcionando.</p>
         <strong>Você manda uma mensagem. Ele trabalha.</strong>
-        <button className="socialPrimary" onClick={() => setOpen(true)}>Quero meu Social Media de IA <span>↗</span></button>
+        <CtaPrimary>{ctaLabel} <span>↗</span></CtaPrimary>
         <small>100% pelo WhatsApp · Sem prompts complicados · Feito para toda a sua equipe</small>
       </section>
 
@@ -66,7 +74,7 @@ function GBSocialPage() {
 
       <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA A INTERNET</p><h2>Uma mensagem. Uma operação inteira.</h2><ol>{flow.map((item, i) => <li key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b></li>)}</ol></section>
 
-      <section id="começar" className="socialFinal"><p className="studioEyebrow">TUDO COMEÇA COM UMA MENSAGEM</p><h2>Você cuida da empresa.<br/>Seu agente cuida para que ela continue aparecendo.</h2><p>Sem aprender prompts. Sem administrar ferramentas. Abra o WhatsApp e delegue o trabalho.</p><button className="socialPrimary" onClick={() => setOpen(true)}>Quero conhecer o GB Social <span>↗</span></button></section>
+      <section id="começar" className="socialFinal"><p className="studioEyebrow">TUDO COMEÇA COM UMA MENSAGEM</p><h2>Você cuida da empresa.<br/>Seu agente cuida para que ela continue aparecendo.</h2><p>Sem aprender prompts. Sem administrar ferramentas. Abra o WhatsApp e delegue o trabalho.</p><CtaPrimary>{ctaLabel} <span>↗</span></CtaPrimary></section>
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA no WhatsApp</span></footer>
 

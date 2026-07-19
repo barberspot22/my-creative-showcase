@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
 
 const structure = [
@@ -21,7 +22,6 @@ const proof = [
   "Kanban de produção com status próprio e sem ferramenta genérica de terceiro",
 ];
 
-const whatsapp = "https://wa.me/?text=Olá%2C%20quero%20conversar%20sobre%20um%20CRM%20próprio.";
 
 function PipelineDemo() {
   return <div className="crmDemo" aria-label="Demonstração dos módulos Comercial e Produção">
@@ -48,14 +48,15 @@ function PipelineDemo() {
 }
 
 function CRMPage() {
+  const { ctaUrl: whatsapp, ctaLabel } = usePageLink("crm");
   return <div className="crmPage">
-    <header className="studioNav crmNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">Falar no WhatsApp <span>↗</span></a></header>
+    <header className="studioNav crmNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="crmHero">
         <p className="studioEyebrow">GB IA — CRM</p>
         <h1>Comercial e produção não podem viver na mesma bagunça.</h1>
         <p>Construímos um CRM próprio, dividido em dois módulos reais — um para o funil de vendas, outro para o fluxo de entrega — porque qualificar lead e entregar projeto são dois jogos completamente diferentes.</p>
-        <div className="crmHeroActions"><a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">Falar no WhatsApp <span>↗</span></a><a className="crmSecondary" href="#estrutura">Ver como funciona <span>↓</span></a></div>
+        <div className="crmHeroActions"><a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="crmSecondary" href="#estrutura">Ver como funciona <span>↓</span></a></div>
         <small>Comercial separado da produção · Responsável por card · Fluxo próprio</small>
       </section>
 
@@ -83,7 +84,7 @@ function CRMPage() {
         <ul>{proof.map(item => <li key={item}>{item}</li>)}</ul>
       </section>
 
-      <section className="crmFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta como seu comercial e sua entrega funcionam hoje.<br/>A gente desenha o CRM certo.</h2><p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p><a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">Chamar no WhatsApp <span>↗</span></a></section>
+      <section className="crmFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta como seu comercial e sua entrega funcionam hoje.<br/>A gente desenha o CRM certo.</h2><p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p><a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>CRM · Comercial e produção em fluxos próprios</span></footer>
   </div>;

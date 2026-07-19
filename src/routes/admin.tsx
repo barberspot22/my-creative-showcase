@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { PAGE_META, defaultLinks, resetLinks, saveLinks, ADMIN_LINKS_KEY, type PageKey, type PageLinks } from "@/lib/adminLinks";
 
 type AdminCase = {
   href: string;
@@ -134,20 +135,71 @@ function AdminPage() {
     setStatus("Voltou para o padrão original.");
   };
 
+  const [tab, setTab] = useState<"cards" | "links">("cards");
+  const [links, setLinks] = useState<PageLinks>(defaultLinks);
+  const [linkStatus, setLinkStatus] = useState("Pronto para editar links.");
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(ADMIN_LINKS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Partial<PageLinks>;
+        setLinks({ ...defaultLinks, ...parsed } as PageLinks);
+      }
+    } catch { /* ignore */ }
+  }, []);
+
+  const updateLink = (key: PageKey, patch: Partial<PageLinks[PageKey]>) => {
+    setLinks((current) => ({ ...current, [key]: { ...current[key], ...patch } }));
+    setLinkStatus("Alteração de link ainda não salva.");
+  };
+  const saveAllLinks = () => { saveLinks(links); setLinkStatus("Links salvos. Todas as páginas já refletem os novos botões."); };
+  const resetAllLinks = () => { resetLinks(); setLinks(defaultLinks); setLinkStatus("Links restaurados ao padrão."); };
+
   return <main className="adminShell">
     <aside className="adminSidebar">
       <a className="adminBack" href="/">← Voltar para o site</a>
       <div>
         <p className="adminEyebrow">GB IA Admin</p>
-        <h1>Editar produtos e serviços</h1>
-        <p>Altere nome, descrição, selo e imagens do loop de capa dos cardboxes.</p>
+        <h1>Painel administrativo</h1>
+        <p>Edite cardboxes da home e os links dos botões de cada página.</p>
       </div>
-      <nav>
+      <div className="adminTabs">
+        <button className={tab === "cards" ? "active" : ""} onClick={() => setTab("cards")} type="button">Cardboxes</button>
+        <button className={tab === "links" ? "active" : ""} onClick={() => setTab("links")} type="button">Links de botões</button>
+      </div>
+      {tab === "cards" && <nav>
         {cases.map((item) => <button className={item.href === activeHref ? "active" : ""} key={item.href} onClick={() => setActiveHref(item.href)}>{item.title}</button>)}
-      </nav>
+      </nav>}
     </aside>
 
-    <section className="adminEditor">
+    {tab === "links" ? <section className="adminEditor">
+      <div className="adminTopbar">
+        <div><span>Status</span><strong>{linkStatus}</strong></div>
+        <div className="adminActions">
+          <button onClick={resetAllLinks} type="button">Restaurar padrão</button>
+          <button onClick={saveAllLinks} type="button">Salvar todos os links</button>
+        </div>
+      </div>
+      <div className="adminLinksGrid">
+        {PAGE_META.map((meta) => {
+          const value = links[meta.key];
+          return <article className="adminLinkCard" key={meta.key}>
+            <header>
+              <div><p className="adminEyebrow">Página</p><h3>{meta.label}</h3></div>
+              <a href={`/${meta.key}`} target="_blank" rel="noreferrer">/{meta.key} ↗</a>
+            </header>
+            <label>Texto do botão
+              <input value={value.ctaLabel} onChange={(event) => updateLink(meta.key, { ctaLabel: event.target.value })} placeholder={meta.defaultLabel}/>
+            </label>
+            <label>Link de redirecionamento
+              <input value={value.ctaUrl} onChange={(event) => updateLink(meta.key, { ctaUrl: event.target.value })} placeholder={meta.defaultUrl || "https://wa.me/... ou https://sua-url.com"}/>
+            </label>
+            <small>Esse link é aplicado em todos os botões principais da página (menu, hero e CTA final). Deixe em branco para usar o comportamento padrão.</small>
+          </article>;
+        })}
+      </div>
+    </section> : <section className="adminEditor">
       <div className="adminTopbar">
         <div><span>Status</span><strong>{status}</strong></div>
         <div className="adminActions">
@@ -205,7 +257,7 @@ function AdminPage() {
           </div>
         </div>
       </div>
-    </section>
+    </section>}
   </main>;
 }
 

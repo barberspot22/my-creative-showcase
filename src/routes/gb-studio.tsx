@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FormEvent, useState } from "react";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
+import { usePageLink } from "@/lib/adminLinks";
 
 const differences = [
   "Qualidade visual equivalente a um estúdio convencional",
@@ -20,12 +21,19 @@ const steps = [
 function GBStudioPage() {
   const [briefing, setBriefing] = useState(false);
   const [sent, setSent] = useState(false);
+  const { ctaUrl, ctaLabel } = usePageLink("gb-studio");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
+  const navCtaProps = ctaUrl
+    ? { href: ctaUrl, target: "_blank" as const, rel: "noreferrer" }
+    : { href: "#briefing" };
+  const heroCtaProps = ctaUrl
+    ? { href: ctaUrl, target: "_blank" as const, rel: "noreferrer" }
+    : { href: "#briefing" };
 
   return <div className="studioPage">
     <header className="studioNav">
       <a href="/" className="studioBrand" aria-label="GB IA — início">GB IA.</a>
-      <a href="#briefing" className="studioNavCta">Solicitar briefing <span>↗</span></a>
+      <a className="studioNavCta" {...navCtaProps}>{ctaLabel} <span>↗</span></a>
     </header>
 
     <main>
@@ -33,7 +41,7 @@ function GBStudioPage() {
         <p className="studioEyebrow">GB STUDIO · FOTOGRAFIA DE MODA COM IA</p>
         <h1>Lookbooks completos.<br/>Sem montar um estúdio.</h1>
         <p>Imagens hiper-realistas de modelos para marcas de varejo e confecção têxtil no Brasil.</p>
-        <a className="studioButton" href="#briefing">Solicitar um briefing <span>↗</span></a>
+        <a className="studioButton" {...heroCtaProps}>{ctaLabel} <span>↗</span></a>
       </section>
 
       <section className="problemBlock">
@@ -70,7 +78,9 @@ function GBStudioPage() {
 
       <section id="briefing" className="briefingBlock">
         <div><p className="studioEyebrow">PRÓXIMO PASSO</p><h2>Conte o que você precisa fotografar.</h2><p>A equipe prepara o briefing com você.</p></div>
-        <button className="studioButton" onClick={() => setBriefing(true)}>Falar com a equipe <span>↗</span></button>
+        {ctaUrl
+          ? <a className="studioButton" href={ctaUrl} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
+          : <button className="studioButton" onClick={() => setBriefing(true)}>{ctaLabel} <span>↗</span></button>}
       </section>
     </main>
 
