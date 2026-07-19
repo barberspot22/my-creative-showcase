@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BentoMorphGallery } from "@/components/imported/ecommerce/BentoMorphGallery";
+import { usePageLink } from "@/lib/adminLinks";
 
 const deliverables = [
   ["Loja funcional", "E-commerce estruturado com catálogo, carrinho e checkout, já com a identidade visual da sua marca — pronto para escalar, não só para existir."],
