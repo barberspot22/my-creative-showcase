@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
+import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWidget";
 
 const deliverables = [
   ["Cardápio digital via WhatsApp", "O cliente pede e recebe na hora, com formato definido caso a caso — arquivo direto ou navegação interativa por categoria."],
@@ -34,6 +35,15 @@ function CardapioDigitalPage() {
         <h1>Seu cardápio parado no PDF.<br/>Suas redes sociais paradas também.<br/>A gente resolve os dois juntos.</h1>
         <p>Cardápio digital integrado ao WhatsApp e redes sociais rodando sozinhas — pro cliente decidir o que pedir e pro seu Instagram não ficar semanas sem postar.</p>
         <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+      </section>
+
+      <section className="menuCatalogWidgetSection">
+        <div className="menuCatalogIntro">
+          <p className="studioEyebrow">EXPERIMENTE</p>
+          <h2>Sinta como seria ter <em>seu próprio catálogo</em>.</h2>
+          <p>Toque em qualquer produto para abrir os detalhes — imagens, tamanhos e valores, exatamente como o seu cliente veria.</p>
+        </div>
+        <CatalogWidget />
       </section>
 
       <section className="menuProductProblem"><div><p className="studioEyebrow">POR QUE OS DOIS PROBLEMAS SÃO O MESMO PROBLEMA</p><h2>Cardápio desatualizado e rede social parada afastam cliente do mesmo jeito.</h2></div><p>PDF de cardápio que ninguém atualiza, foto de prato antiga no Instagram, cliente perguntando preço no WhatsApp e esperando resposta. A gente integra cardápio e social media num sistema só, rodando de forma autônoma.</p></section>
