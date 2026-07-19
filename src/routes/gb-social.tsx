@@ -11,7 +11,7 @@ function GBSocialPage() {
   const [sent, setSent] = useState(false);
   const { ctaUrl, ctaLabel } = usePageLink("gb-social");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
-  const CtaPrimary = ({ children, className = "socialPrimary" }: { children: React.ReactNode; className?: string }) =>
+  const CtaPrimary = ({ children, className = "socialPrimary" }: { children: ReactNode; className?: string }) =>
     ctaUrl
       ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
       : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
