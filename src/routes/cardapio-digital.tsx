@@ -37,6 +37,15 @@ function CardapioDigitalPage() {
         <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
       </section>
 
+      <section className="menuCatalogWidgetSection">
+        <div className="menuCatalogIntro">
+          <p className="studioEyebrow">EXPERIMENTE</p>
+          <h2>Sinta como seria ter <em>seu próprio catálogo</em>.</h2>
+          <p>Toque em qualquer produto para abrir os detalhes — imagens, tamanhos e valores, exatamente como o seu cliente veria.</p>
+        </div>
+        <CatalogWidget />
+      </section>
+
       <section className="menuProductProblem"><div><p className="studioEyebrow">POR QUE OS DOIS PROBLEMAS SÃO O MESMO PROBLEMA</p><h2>Cardápio desatualizado e rede social parada afastam cliente do mesmo jeito.</h2></div><p>PDF de cardápio que ninguém atualiza, foto de prato antiga no Instagram, cliente perguntando preço no WhatsApp e esperando resposta. A gente integra cardápio e social media num sistema só, rodando de forma autônoma.</p></section>
 
       <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE ENTREGAMOS</p><h2>Pedido e presença digital no mesmo fluxo.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
