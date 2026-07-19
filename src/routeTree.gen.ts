@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SiteInstitucionalRouteImport } from './routes/site-institucional'
+import { Route as GbStudioRouteImport } from './routes/gb-studio'
+import { Route as GbSocialRouteImport } from './routes/gb-social'
+import { Route as EcommerceRouteImport } from './routes/ecommerce'
+import { Route as CrmRouteImport } from './routes/crm'
+import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SiteInstitucionalRoute = SiteInstitucionalRouteImport.update({
+  id: '/site-institucional',
+  path: '/site-institucional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GbStudioRoute = GbStudioRouteImport.update({
+  id: '/gb-studio',
+  path: '/gb-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GbSocialRoute = GbSocialRouteImport.update({
+  id: '/gb-social',
+  path: '/gb-social',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EcommerceRoute = EcommerceRouteImport.update({
+  id: '/ecommerce',
+  path: '/ecommerce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CardapioDigitalRoute = CardapioDigitalRouteImport.update({
+  id: '/cardapio-digital',
+  path: '/cardapio-digital',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cardapio-digital': typeof CardapioDigitalRoute
+  '/crm': typeof CrmRoute
+  '/ecommerce': typeof EcommerceRoute
+  '/gb-social': typeof GbSocialRoute
+  '/gb-studio': typeof GbStudioRoute
+  '/site-institucional': typeof SiteInstitucionalRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cardapio-digital': typeof CardapioDigitalRoute
+  '/crm': typeof CrmRoute
+  '/ecommerce': typeof EcommerceRoute
+  '/gb-social': typeof GbSocialRoute
+  '/gb-studio': typeof GbStudioRoute
+  '/site-institucional': typeof SiteInstitucionalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/cardapio-digital': typeof CardapioDigitalRoute
+  '/crm': typeof CrmRoute
+  '/ecommerce': typeof EcommerceRoute
+  '/gb-social': typeof GbSocialRoute
+  '/gb-studio': typeof GbStudioRoute
+  '/site-institucional': typeof SiteInstitucionalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/cardapio-digital'
+    | '/crm'
+    | '/ecommerce'
+    | '/gb-social'
+    | '/gb-studio'
+    | '/site-institucional'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/cardapio-digital'
+    | '/crm'
+    | '/ecommerce'
+    | '/gb-social'
+    | '/gb-studio'
+    | '/site-institucional'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/cardapio-digital'
+    | '/crm'
+    | '/ecommerce'
+    | '/gb-social'
+    | '/gb-studio'
+    | '/site-institucional'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  CardapioDigitalRoute: typeof CardapioDigitalRoute
+  CrmRoute: typeof CrmRoute
+  EcommerceRoute: typeof EcommerceRoute
+  GbSocialRoute: typeof GbSocialRoute
+  GbStudioRoute: typeof GbStudioRoute
+  SiteInstitucionalRoute: typeof SiteInstitucionalRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/site-institucional': {
+      id: '/site-institucional'
+      path: '/site-institucional'
+      fullPath: '/site-institucional'
+      preLoaderRoute: typeof SiteInstitucionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gb-studio': {
+      id: '/gb-studio'
+      path: '/gb-studio'
+      fullPath: '/gb-studio'
+      preLoaderRoute: typeof GbStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gb-social': {
+      id: '/gb-social'
+      path: '/gb-social'
+      fullPath: '/gb-social'
+      preLoaderRoute: typeof GbSocialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ecommerce': {
+      id: '/ecommerce'
+      path: '/ecommerce'
+      fullPath: '/ecommerce'
+      preLoaderRoute: typeof EcommerceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm': {
+      id: '/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cardapio-digital': {
+      id: '/cardapio-digital'
+      path: '/cardapio-digital'
+      fullPath: '/cardapio-digital'
+      preLoaderRoute: typeof CardapioDigitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  CardapioDigitalRoute: CardapioDigitalRoute,
+  CrmRoute: CrmRoute,
+  EcommerceRoute: EcommerceRoute,
+  GbSocialRoute: GbSocialRoute,
+  GbStudioRoute: GbStudioRoute,
+  SiteInstitucionalRoute: SiteInstitucionalRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
