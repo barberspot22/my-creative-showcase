@@ -187,20 +187,30 @@ function CaseFramePreview({ frame }: { frame: CaseFrame }) {
       </div>
     </div>
   </div>;
-  if (frame.variant === "institutional-relaunch") return <div className="caseUiFrame institutionalRelaunchFrame" aria-label={frame.label}>
-    <div className="institutionalBrowser">
-      <header>
-        <b>GB Sites</b>
-        <nav><span>Serviços</span><span>Blog</span><span>Contato</span></nav>
-        <small>Orçamento</small>
+  if (frame.variant === "institutional-relaunch") return <div className="caseUiFrame institutionalLiveFrame" aria-label={frame.label}>
+    <div className="instSite">
+      <header className="instTop">
+        <b>GB<i>.</i>studio</b>
+        <nav><span>Home</span><span>Sobre</span><span>Cases</span><span>Contato</span></nav>
+        <small>Fale conosco</small>
       </header>
-      <h4>para sua marca memorável</h4>
-      <div className="institutionalSeal"><span>GB</span></div>
-      <div className="institutionalCards" aria-hidden="true">
-        <article className="ghost"><strong>Presença</strong><small>Autoridade online</small></article>
-        <article className="main"><strong>Website Relaunch</strong><small>Site Institucional</small></article>
-        <article><strong>Conversão</strong><small>Contato direto</small></article>
+      <div className="instHero">
+        <span className="instTag">● Marca viva desde 2019</span>
+        <h5>
+          <em>Sua marca</em>
+          <strong>merece um site</strong>
+          <u>memorável.</u>
+        </h5>
+        <p>Design, código e conteúdo em um só ciclo — publicado em dias, não meses.</p>
+        <div className="instCta"><button className="primary">Começar projeto</button><button className="ghost">Ver cases →</button></div>
+        <div className="instStats">
+          <div><b>+120</b><small>marcas</small></div>
+          <div><b>4.9</b><small>avaliação</small></div>
+          <div><b>7d</b><small>entrega</small></div>
+        </div>
       </div>
+      <div className="instFloatCard"><i/><div><strong>Aprovado</strong><span>Nova identidade no ar</span></div></div>
+      <div className="instCursor" aria-hidden="true"/>
     </div>
   </div>;
   return <div className={`caseUiFrame ${frame.variant}`} aria-label={frame.label}>
@@ -283,17 +293,17 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    drag.current = { active: true, x: event.clientX, moved: false };
-    event.currentTarget.setPointerCapture(event.pointerId);
+    drag.current = { active: true, x: event.clientX, y: event.clientY, moved: false } as any;
     setPaused(true);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
-    const delta = event.clientX - drag.current.x;
-    if (Math.abs(delta) < 55) return;
-    drag.current = { active: true, x: event.clientX, moved: true };
-    moveTo(activeRef.current + (delta < 0 ? 1 : -1));
+    const dx = event.clientX - drag.current.x;
+    const dy = event.clientY - (drag.current as any).y;
+    if (Math.abs(dx) < 36 || Math.abs(dx) < Math.abs(dy)) return;
+    (drag.current as any) = { active: true, x: event.clientX, y: event.clientY, moved: true };
+    moveTo(activeRef.current + (dx < 0 ? 1 : -1));
   };
 
   const onPointerUp = () => {

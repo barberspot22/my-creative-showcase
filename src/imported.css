@@ -460,3 +460,60 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .gbImageBrand img{width:132px;height:auto;filter:drop-shadow(0 2px 8px rgba(120,180,255,.25)) drop-shadow(0 4px 18px rgba(0,0,0,.55))!important;transition:filter .3s ease,transform .3s ease}
 .gbImageBrand:hover img{filter:drop-shadow(0 2px 10px rgba(140,200,255,.5)) drop-shadow(0 6px 22px rgba(0,0,0,.6))!important;transform:translateY(-1px)}
 @media(max-width:760px){.gbImageBrand img{width:96px}}
+
+/* ---- Circle carousel: tighter mobile line spacing + swipe hint ---- */
+@media(max-width:760px){
+  .circleProductSection h2{line-height:.84!important;letter-spacing:-2px!important;margin-bottom:18px!important}
+  .circleProductCarousel{touch-action:pan-y}
+}
+
+/* ---- Site Institucional: interactive live-site card ---- */
+.institutionalLiveFrame{padding:0!important;background:radial-gradient(circle at 30% 20%,#2b1a5a 0,#0a0714 55%,#050308 100%)!important;display:grid!important;place-items:center!important;overflow:hidden}
+.institutionalLiveFrame:before{display:none!important}
+.instSite{position:relative;width:92%;height:88%;border-radius:14px;background:linear-gradient(160deg,#f6f5f2 0%,#eae6de 100%);color:#111;overflow:hidden;box-shadow:0 40px 90px #000a,0 0 0 1px #ffffff20;isolation:isolate}
+.instSite:before{content:"";position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,#c9a15a55,transparent 60%);pointer-events:none}
+.instSite:after{content:"";position:absolute;bottom:-40%;left:-10%;width:80%;height:70%;background:radial-gradient(circle,#3e2a7a44,transparent 60%);pointer-events:none}
+.instTop{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid #00000010;background:#ffffffb8;backdrop-filter:blur(6px)}
+.instTop b{font:800 13px 'Melodrama',serif;letter-spacing:-.3px;color:#111}
+.instTop b i{color:#c9a15a;font-style:normal}
+.instTop nav{display:flex;gap:12px;font:600 8px Manrope,sans-serif;text-transform:uppercase;letter-spacing:1.1px;color:#333}
+.instTop nav span{position:relative;padding:2px 0}
+.instTop nav span:first-child:after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:#c9a15a;border-radius:2px;animation:instUnderline 4s ease-in-out infinite}
+.instTop small{padding:5px 9px;border-radius:999px;background:#111;color:#f6f5f2;font:700 7px Manrope,sans-serif;letter-spacing:.7px;text-transform:uppercase;box-shadow:0 6px 14px #0004}
+.instHero{position:relative;z-index:3;padding:14px 16px 12px;display:flex;flex-direction:column;gap:8px}
+.instTag{align-self:flex-start;font:600 7px Manrope,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:#5b4a1f;background:#c9a15a22;border:1px solid #c9a15a55;padding:3px 8px;border-radius:999px;animation:instPulse 2.4s ease-in-out infinite}
+.instHero h5{margin:2px 0 0;font:700 22px/1 'Melodrama',serif;letter-spacing:-.6px;color:#111;display:flex;flex-direction:column;gap:1px}
+.instHero h5 em{font-style:italic;color:#5b4a1f;font-size:14px;font-weight:500;letter-spacing:0}
+.instHero h5 strong{font-weight:800}
+.instHero h5 u{text-decoration:none;color:#c9a15a;background:linear-gradient(90deg,#c9a15a,#8b6a2f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;position:relative}
+.instHero h5 u:after{content:"";position:absolute;left:0;bottom:1px;width:100%;height:2px;background:#c9a15a;transform-origin:left;animation:instLine 3.2s ease-in-out infinite}
+.instHero p{margin:2px 0 0;font:500 9px/1.35 Manrope,sans-serif;color:#3b3a35;max-width:88%}
+.instCta{display:flex;gap:6px;margin-top:2px}
+.instCta button{border:0;font:700 8px Manrope,sans-serif;text-transform:uppercase;letter-spacing:1px;padding:7px 10px;border-radius:999px;cursor:pointer}
+.instCta .primary{background:#111;color:#f6f5f2;box-shadow:0 8px 18px #0005;animation:instBtn 2.6s ease-in-out infinite}
+.instCta .ghost{background:transparent;color:#111;border:1px solid #1113}
+.instStats{margin-top:6px;display:flex;gap:14px;padding-top:8px;border-top:1px dashed #00000018}
+.instStats div{display:flex;flex-direction:column;line-height:1}
+.instStats b{font:800 13px 'Melodrama',serif;color:#111}
+.instStats small{margin-top:2px;font:500 6.5px Manrope,sans-serif;text-transform:uppercase;letter-spacing:1px;color:#665}
+.instFloatCard{position:absolute;z-index:4;right:10px;bottom:12px;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:12px;background:#111e;color:#f6f5f2;box-shadow:0 20px 40px #0008;backdrop-filter:blur(8px);animation:instFloat 3.4s ease-in-out infinite}
+.instFloatCard i{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px #4ade8033;animation:instDot 1.4s ease-in-out infinite}
+.instFloatCard strong{display:block;font:700 8px Manrope,sans-serif;text-transform:uppercase;letter-spacing:1px}
+.instFloatCard span{font:500 7.5px Manrope,sans-serif;color:#f6f5f2b0}
+.instCursor{position:absolute;z-index:5;width:12px;height:12px;border-radius:50%;background:#c9a15a;box-shadow:0 0 0 3px #c9a15a44,0 4px 14px #0006;pointer-events:none;animation:instCursor 6s ease-in-out infinite}
+@keyframes instUnderline{0%,100%{transform:scaleX(1);transform-origin:left}50%{transform:scaleX(.3);transform-origin:right}}
+@keyframes instPulse{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes instLine{0%{transform:scaleX(0)}55%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.4}}
+@keyframes instBtn{0%,100%{box-shadow:0 8px 18px #0005,0 0 0 0 #c9a15a55}50%{box-shadow:0 8px 18px #0005,0 0 0 6px #c9a15a00}}
+@keyframes instFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes instDot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes instCursor{0%{left:20%;top:38%}25%{left:60%;top:44%}45%{left:74%;top:66%}55%{left:74%;top:66%;transform:scale(.7)}70%{left:38%;top:80%;transform:scale(1)}100%{left:20%;top:38%}}
+
+/* keep loop card visible with the new institutional variant */
+.loopCaseCard a[href="/site-institucional"] .institutionalLiveFrame{width:100%;height:100%}
+@media(max-width:760px){
+  .instSite{width:96%;height:92%}
+  .instHero h5{font-size:18px}
+  .instHero h5 em{font-size:12px}
+  .instHero p{font-size:8.5px}
+}
