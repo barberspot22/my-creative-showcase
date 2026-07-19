@@ -449,7 +449,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .gbRobotHero .lumusTitleCanvas{z-index:1;top:49%;height:620px;opacity:.98}
 .gbHeroRobot{position:absolute;z-index:3;left:50%;bottom:-18px;width:min(465px,43vw);height:auto;transform:translateX(-38%);filter:drop-shadow(0 30px 34px rgba(0,0,0,.78));object-fit:contain}
 .gbRobotHero:after{content:"";position:absolute;z-index:4;left:50%;bottom:-42px;width:min(720px,72vw);height:240px;transform:translateX(-35%);background:linear-gradient(transparent,rgba(0,0,0,.72) 55%,#000 92%);filter:blur(24px);pointer-events:none}
-@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%;opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);transform:translateX(-38%)}.gbRobotHero:after{bottom:-20px;width:80vw;height:130px;transform:translateX(-42%)}}
+@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%;opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);transform:translateX(-38%)}.gbRobotHero:after{bottom:-28px;width:90vw;height:170px;transform:translateX(-42%);filter:blur(18px)}}
 
 /* Cases agora ficam logo acima de "O que fazemos". */
 .homeCasesFirst{padding-top:70px;padding-bottom:80px}.homeCasesFirst .showTitle{margin-top:0!important}
