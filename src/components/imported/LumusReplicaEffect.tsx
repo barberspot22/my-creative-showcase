@@ -1,8 +1,5 @@
 
 import { useEffect, useRef } from "react";
-// The official effect is built on this browser-only WebGL module.
-// @ts-expect-error vendored Three.js build has no local declaration file
-import * as ThreeModule from "../../vendor/three.module.js";
 
 export function LumusReplicaEffect() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -17,6 +14,9 @@ export function LumusReplicaEffect() {
     let onPointer = (_e: PointerEvent) => {};
 
     (async () => {
+      // Dynamic import so the vendored Three.js only loads in the browser (avoids SSR issues).
+      // @ts-expect-error vendored Three.js build has no local declaration file
+      const ThreeModule = await import("../../vendor/three.module.js");
       const THREE: any = ThreeModule;
       if (stopped) return;
       const nearDist = .1;
