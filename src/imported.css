@@ -685,5 +685,5 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .socialLightboxClose:hover{background:rgba(255,255,255,.12)}
 @keyframes socialLbFade{from{opacity:0}to{opacity:1}}
 
-.socialDesignPreviewImage{padding:0!important;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:4/5;width:100%;max-width:280px;align-self:center;box-shadow:0 20px 45px rgba(0,0,0,.35)}
+.socialDesignPreviewImage{padding:0!important;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:4/5;width:100%;max-width:280px;align-self:flex-start;box-shadow:0 20px 45px rgba(0,0,0,.35)}
 .socialDesignPreviewImage img{display:block;width:100%;height:100%;object-fit:cover}
