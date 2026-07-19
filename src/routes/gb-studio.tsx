@@ -78,7 +78,9 @@ function GBStudioPage() {
 
       <section id="briefing" className="briefingBlock">
         <div><p className="studioEyebrow">PRÓXIMO PASSO</p><h2>Conte o que você precisa fotografar.</h2><p>A equipe prepara o briefing com você.</p></div>
-        <button className="studioButton" onClick={() => setBriefing(true)}>Falar com a equipe <span>↗</span></button>
+        {ctaUrl
+          ? <a className="studioButton" href={ctaUrl} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
+          : <button className="studioButton" onClick={() => setBriefing(true)}>{ctaLabel} <span>↗</span></button>}
       </section>
     </main>
 
