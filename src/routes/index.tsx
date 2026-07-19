@@ -404,13 +404,6 @@ function HomePage() {
 
       <CircleGalleryCarousel cards={editableCaseCards} />
 
-      <section className="references light homeCasesFirst">
-        <h2 className="showTitle reveal">Serviços</h2>
-        <div className="showcases">
-          {editableCaseCards.map((card, index) => <LoopingCaseCard key={card.href} card={card} startIndex={index}/>)}
-        </div>
-      </section>
-
       <section id="leistungen" className="services light">
         <h2 className="reveal">O que fazemos</h2>
         <div className="serviceGrid">
