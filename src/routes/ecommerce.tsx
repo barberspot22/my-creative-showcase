@@ -30,7 +30,7 @@ const proof = [
 function EcommercePage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("ecommerce");
   return <div className="commercePage">
-    <header className="studioNav commerceNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav commerceNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="commerceHero">
         <p className="studioEyebrow">GB IA — E-COMMERCE</p>

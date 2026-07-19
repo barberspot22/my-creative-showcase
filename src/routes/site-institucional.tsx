@@ -21,7 +21,7 @@ const steps = [
 function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   return <div className="siteProductPage">
-    <header className="studioNav siteProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>

@@ -33,7 +33,7 @@ function GBStudioPage() {
 
   return <div className="studioPage">
     <header className="studioNav">
-      <a href="/" className="studioBrand" aria-label="GB IA — início">GB IA.</a>
+      <BrandLogo />
       <a className="studioNavCta" {...navCtaProps}>{ctaLabel} <span>↗</span></a>
     </header>
 

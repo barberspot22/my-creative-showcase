@@ -51,7 +51,7 @@ function PipelineDemo() {
 function CRMPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("crm");
   return <div className="crmPage">
-    <header className="studioNav crmNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav crmNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="crmHero">
         <p className="studioEyebrow">GB IA — CRM</p>

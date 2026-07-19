@@ -17,7 +17,7 @@ function GBSocialPage() {
       ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
       : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
-    <header className="studioNav"><a href="/" className="studioBrand">GB IA.</a>{ctaUrl
+    <header className="studioNav"><BrandLogo />{ctaUrl
       ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a>
       : <a href="#começar" className="studioNavCta">{ctaLabel} <span>↗</span></a>}</header>
     <main>
