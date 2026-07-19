@@ -454,3 +454,9 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 /* Cases agora ficam logo acima de "O que fazemos". */
 .homeCasesFirst{padding-top:70px;padding-bottom:80px}.homeCasesFirst .showTitle{margin-top:0!important}
 @media(max-width:760px){.homeCasesFirst{padding-top:55px;padding-bottom:60px}}
+
+/* GB IA header logo (chrome image) */
+.gbImageBrand{display:inline-flex;align-items:center;line-height:0}
+.gbImageBrand img{width:132px;height:auto;filter:drop-shadow(0 2px 8px rgba(120,180,255,.25)) drop-shadow(0 4px 18px rgba(0,0,0,.55))!important;transition:filter .3s ease,transform .3s ease}
+.gbImageBrand:hover img{filter:drop-shadow(0 2px 10px rgba(140,200,255,.5)) drop-shadow(0 6px 22px rgba(0,0,0,.6))!important;transform:translateY(-1px)}
+@media(max-width:760px){.gbImageBrand img{width:96px}}
