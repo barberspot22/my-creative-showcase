@@ -517,3 +517,17 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .instHero h5 em{font-size:12px}
   .instHero p{font-size:8.5px}
 }
+
+/* Admin - tabs and links editor */
+.adminTabs{display:flex;gap:8px;padding:4px;background:#ffffff08;border:1px solid #ffffff14;border-radius:14px}
+.adminTabs button{flex:1;padding:10px 12px;border:0;border-radius:10px;background:transparent;color:#b9b5c8;font:800 12px Manrope,sans-serif;cursor:pointer;transition:.2s}
+.adminTabs button.active{background:#6b4eff;color:#fff;box-shadow:0 8px 20px #6b4eff44}
+.adminLinksGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.adminLinkCard{border:1px solid #ffffff16;background:#ffffff08;border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.adminLinkCard header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.adminLinkCard header h3{margin:0;font-size:20px;color:#fff}
+.adminLinkCard header a{font:700 11px 'JetBrains Mono',monospace;color:#c8ff00;text-decoration:none;letter-spacing:.5px}
+.adminLinkCard label{display:grid;gap:8px;color:#d7d2e4;font-weight:800;font-size:12px}
+.adminLinkCard input{border:1px solid #ffffff1f;border-radius:12px;background:#07070b;color:#fff;padding:12px;outline:none;font-size:13px}
+.adminLinkCard input:focus{border-color:#6b4eff;box-shadow:0 0 0 4px #6b4eff24}
+.adminLinkCard small{color:#908aa4;line-height:1.5;font-size:11px}
