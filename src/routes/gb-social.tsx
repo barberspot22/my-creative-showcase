@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, ReactNode, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
@@ -16,7 +17,7 @@ function GBSocialPage() {
       ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
       : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
-    <header className="studioNav"><a href="/" className="studioBrand">GB IA.</a>{ctaUrl
+    <header className="studioNav"><BrandLogo />{ctaUrl
       ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a>
       : <a href="#começar" className="studioNavCta">{ctaLabel} <span>↗</span></a>}</header>
     <main>

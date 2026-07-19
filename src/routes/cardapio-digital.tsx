@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 
@@ -26,7 +27,7 @@ const proof = [
 function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
   return <div className="menuProductPage">
-    <header className="studioNav menuProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>

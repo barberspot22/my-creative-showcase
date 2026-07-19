@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, useState } from "react";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
 import { usePageLink } from "@/lib/adminLinks";
@@ -32,7 +33,7 @@ function GBStudioPage() {
 
   return <div className="studioPage">
     <header className="studioNav">
-      <a href="/" className="studioBrand" aria-label="GB IA — início">GB IA.</a>
+      <BrandLogo />
       <a className="studioNavCta" {...navCtaProps}>{ctaLabel} <span>↗</span></a>
     </header>
 
