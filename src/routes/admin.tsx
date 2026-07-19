@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { PAGE_META, defaultLinks, resetLinks, saveLinks, ADMIN_LINKS_KEY, type PageKey, type PageLinks } from "@/lib/adminLinks";
 
 type AdminCase = {
   href: string;
