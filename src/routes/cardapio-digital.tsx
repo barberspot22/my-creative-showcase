@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 
 const deliverables = [
@@ -21,17 +22,17 @@ const proof = [
   "Arquitetura reaproveitada e testada em mais de um cliente do setor de alimentação",
 ];
 
-const whatsapp = "https://wa.me/?text=Olá%2C%20quero%20conversar%20sobre%20cardápio%20digital%20e%20social%20media.";
 
 function CardapioDigitalPage() {
+  const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
   return <div className="menuProductPage">
-    <header className="studioNav menuProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">Falar no WhatsApp <span>↗</span></a></header>
+    <header className="studioNav menuProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>
         <h1>Seu cardápio parado no PDF.<br/>Suas redes sociais paradas também.<br/>A gente resolve os dois juntos.</h1>
         <p>Cardápio digital integrado ao WhatsApp e redes sociais rodando sozinhas — pro cliente decidir o que pedir e pro seu Instagram não ficar semanas sem postar.</p>
-        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">Falar no WhatsApp <span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
       </section>
 
       <section className="menuProductProblem"><div><p className="studioEyebrow">POR QUE OS DOIS PROBLEMAS SÃO O MESMO PROBLEMA</p><h2>Cardápio desatualizado e rede social parada afastam cliente do mesmo jeito.</h2></div><p>PDF de cardápio que ninguém atualiza, foto de prato antiga no Instagram, cliente perguntando preço no WhatsApp e esperando resposta. A gente integra cardápio e social media num sistema só, rodando de forma autônoma.</p></section>
@@ -44,7 +45,7 @@ function CardapioDigitalPage() {
 
       <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Arquitetura pensada para operação real.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
 
-      <section className="menuProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta como seu cardápio e suas redes funcionam hoje.<br/>A gente monta o sistema.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">Chamar no WhatsApp <span>↗</span></a></section>
+      <section className="menuProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta como seu cardápio e suas redes funcionam hoje.<br/>A gente monta o sistema.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Cardápio Digital + Social Media · Atendimento e conteúdo juntos</span></footer>
   </div>;

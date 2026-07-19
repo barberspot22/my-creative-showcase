@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { usePageLink } from "@/lib/adminLinks";
 import { PerspectiveTicker } from "@/components/imported/site-institucional/PerspectiveTicker";
 
 const deliverables = [
@@ -15,17 +16,17 @@ const steps = [
   ["Operação", "Site no ar, testado, caminho de contato funcionando."],
 ];
 
-const whatsapp = "https://wa.me/?text=Olá%2C%20quero%20conversar%20sobre%20um%20site%20institucional.";
 
 function SiteInstitucionalPage() {
+  const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   return <div className="siteProductPage">
-    <header className="studioNav siteProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">Falar no WhatsApp <span>↗</span></a></header>
+    <header className="studioNav siteProductNav"><a href="/" className="studioBrand">GB IA.</a><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
         <h1>Site institucional não é enfeite.<br/>É a primeira prova de que sua empresa é séria.</h1>
         <p>Construímos sites institucionais que passam autoridade em segundos e direcionam o visitante pro contato certo — sem página genérica, sem texto de agência que não diz nada.</p>
-        <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">Falar no WhatsApp <span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
       </section>
 
       <section className="siteProductProblem"><div><p className="studioEyebrow">POR QUE A MAIORIA FALHA</p><h2>Site bonito que ninguém entende o que a empresa faz em 5 segundos.</h2></div><p>Texto genérico de agência, seção decorativa sem função, contato escondido no rodapé. O visitante entra, não entende a proposta e sai sem falar com ninguém. A gente constrói o site pra provar capacidade rápido e levar direto pro WhatsApp ou formulário.</p></section>
@@ -36,7 +37,7 @@ function SiteInstitucionalPage() {
 
       <section className="siteProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Da mensagem central ao site no ar.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="siteProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que sua empresa faz.<br/>A gente constrói o site que prova isso.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">Chamar no WhatsApp <span>↗</span></a></section>
+      <section className="siteProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que sua empresa faz.<br/>A gente constrói o site que prova isso.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Site Institucional · Autoridade e contato sem desvio</span></footer>
   </div>;
