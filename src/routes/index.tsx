@@ -189,30 +189,38 @@ function CaseFramePreview({ frame }: { frame: CaseFrame }) {
   </div>;
   if (frame.variant === "institutional-relaunch") return <div className="caseUiFrame institutionalLiveFrame" aria-label={frame.label}>
     <div className="instSite">
+      <div className="instGrain" aria-hidden="true"/>
+      <div className="instGlow instGlow1" aria-hidden="true"/>
+      <div className="instGlow instGlow2" aria-hidden="true"/>
       <header className="instTop">
         <b>GB<i>.</i>studio</b>
         <nav><span>Home</span><span>Sobre</span><span>Cases</span><span>Contato</span></nav>
-        <small>Fale conosco</small>
+        <small>Fale conosco →</small>
       </header>
       <div className="instHero">
-        <span className="instTag">● Marca viva desde 2019</span>
+        <span className="instTag"><i/> Marca viva desde 2019</span>
         <h5>
           <em>Sua marca</em>
           <strong>merece um site</strong>
           <u>memorável.</u>
         </h5>
         <p>Design, código e conteúdo em um só ciclo — publicado em dias, não meses.</p>
-        <div className="instCta"><button className="primary">Começar projeto</button><button className="ghost">Ver cases →</button></div>
+        <div className="instCta"><button className="primary">Começar projeto</button><button className="ghost">Ver cases</button></div>
         <div className="instStats">
           <div><b>+120</b><small>marcas</small></div>
           <div><b>4.9</b><small>avaliação</small></div>
           <div><b>7d</b><small>entrega</small></div>
         </div>
       </div>
+      <div className="instShowcase" aria-hidden="true">
+        <div className="instShot instShotA"><i/><span/><span/></div>
+        <div className="instShot instShotB"><i/><span/><span/></div>
+      </div>
       <div className="instFloatCard"><i/><div><strong>Aprovado</strong><span>Nova identidade no ar</span></div></div>
       <div className="instCursor" aria-hidden="true"/>
     </div>
   </div>;
+
   return <div className={`caseUiFrame ${frame.variant}`} aria-label={frame.label}>
     <div className="caseChrome"><i/><i/><i/></div>
     <div className="caseUiContent">
