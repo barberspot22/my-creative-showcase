@@ -404,7 +404,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .circleProductSection{position:relative;min-height:820px;padding:76px 0 92px;background:#111;color:#fff;overflow:hidden;text-align:center;isolation:isolate}
 .circleProductSection:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 58%,#ffffff08,transparent 38%),linear-gradient(180deg,#000 0,#111 42%,#050505 100%);z-index:-2}
 .circleProductSection:after{content:"";position:absolute;left:0;right:0;bottom:0;height:190px;background:linear-gradient(transparent,#050505);pointer-events:none;z-index:5}
-.circleProductSection h2{font-size:clamp(58px,8vw,122px);line-height:.92;font-weight:800!important;letter-spacing:-4px;margin:0 auto 48px;max-width:1220px;background:linear-gradient(180deg,#ffffff 0%,#f5f6f8 18%,#c8ccd3 42%,#8a8f97 58%,#c8ccd3 74%,#f8f9fb 92%,#a8adb5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 0 rgba(255,255,255,.35)) drop-shadow(0 18px 30px rgba(0,0,0,.55)) drop-shadow(0 42px 45px rgba(0,0,0,.48))}
+.circleProductSection h2{font-size:clamp(58px,8vw,122px);line-height:1.2;font-weight:800!important;letter-spacing:-4px;margin:0 auto 48px;max-width:1220px;background:linear-gradient(180deg,#ffffff 0%,#f5f6f8 18%,#c8ccd3 42%,#8a8f97 58%,#c8ccd3 74%,#f8f9fb 92%,#a8adb5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 0 rgba(255,255,255,.35)) drop-shadow(0 18px 30px rgba(0,0,0,.55)) drop-shadow(0 42px 45px rgba(0,0,0,.48))}
 .circleProductCarousel{position:relative;height:520px;display:grid;place-items:center;perspective:1200px;touch-action:pan-y;user-select:none;cursor:grab;overflow:hidden}
 .circleProductCarousel:active{cursor:grabbing}.circleProductStage{position:absolute;left:50%;top:48%;width:1px;height:1px;transform-style:preserve-3d}
 .circleProductCard{position:absolute;left:0;top:0;width:300px;height:350px;margin:-175px 0 0 -150px;border-radius:24px;color:#fff;text-align:left;overflow:hidden;box-shadow:0 35px 85px #000a;transition:transform .62s cubic-bezier(.2,.82,.2,1),filter .62s ease,opacity .62s ease!important;transform-origin:center bottom;will-change:transform,filter,opacity}
@@ -413,7 +413,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .circleProductCard>strong{position:absolute;z-index:6;left:22px;right:22px;bottom:22px;font-size:32px;letter-spacing:-1px;text-shadow:0 4px 22px #000}.circleProductCard.active>strong{font-size:36px}.circleProductCard .caseUiContent small{display:none}.circleProductCard .socialCardChat{padding:18px!important}.circleProductCard .socialMiniPhone{width:94%;max-height:92%;transform:rotate(-1deg)}.circleProductCard .menuCatalogFrame{padding:18px!important}.circleProductCard .catalogPhone{width:88%;height:96%}
 .circleNav{position:absolute;z-index:8;top:50%;width:52px;height:52px;border:1px solid #ffffff4a;border-radius:50%;background:#080808c7;color:#fff;font-size:38px;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}.circlePrev{left:8%}.circleNext{right:8%}.circleNav:hover{background:#fff;color:#080808}.circleProductCarousel>p{position:absolute;z-index:8;bottom:24px;left:0;right:0;margin:0;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:2.1px;color:#777}
 @media(max-width:900px){.circleProductSection{min-height:760px}.circleProductCarousel{height:480px}.circleProductSection h2{font-size:clamp(54px,11vw,92px);letter-spacing:-2px}.circleProductCard{width:250px;height:310px;margin:-155px 0 0 -125px}.circlePrev{left:24px}.circleNext{right:24px}}
-@media(max-width:760px){.circleProductSection{min-height:690px;padding:52px 0 70px}.circleProductSection h2{font-size:40px;line-height:.98;letter-spacing:-1.5px;font-weight:800!important;padding:0 18px;margin-bottom:26px}.circleProductCarousel{height:430px}.circleProductCard{width:205px;height:270px;margin:-135px 0 0 -102.5px;border-radius:18px}.circleProductCard>strong,.circleProductCard.active>strong{font-size:26px}.circleProductVisual>.caseUiFrame{padding:16px}.circleNav{width:44px;height:44px;font-size:30px}.circlePrev{left:14px}.circleNext{right:14px}.circleProductCarousel>p{bottom:12px;font-size:8px;padding:0 60px;line-height:1.5}}
+@media(max-width:760px){.circleProductSection{min-height:690px;padding:52px 0 70px}.circleProductSection h2{font-size:40px;line-height:1.2;letter-spacing:-1.5px;font-weight:800!important;padding:0 18px;margin-bottom:26px}.circleProductCarousel{height:430px}.circleProductCard{width:205px;height:270px;margin:-135px 0 0 -102.5px;border-radius:18px}.circleProductCard>strong,.circleProductCard.active>strong{font-size:26px}.circleProductVisual>.caseUiFrame{padding:16px}.circleNav{width:44px;height:44px;font-size:30px}.circlePrev{left:14px}.circleNext{right:14px}.circleProductCarousel>p{bottom:12px;font-size:8px;padding:0 60px;line-height:1.5}}
 @media(prefers-reduced-motion:reduce){.circleProductCard{transition:opacity .2s ease,filter .2s ease!important}}
 @media(prefers-reduced-motion:reduce){.caseLoopFrame.active{animation:none!important;transform:none!important}.loopCaseCard:hover .caseLoopFrame.active{animation-play-state:running}}
 
@@ -448,8 +448,8 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .gbRobotHero{inset:58px 0 auto;height:560px;overflow:visible}
 .gbRobotHero .lumusTitleCanvas{z-index:1;top:49%;height:620px;opacity:.98}
 .gbHeroRobot{position:absolute;z-index:3;left:50%;bottom:-18px;width:min(465px,43vw);height:auto;transform:translateX(-38%);filter:drop-shadow(0 30px 34px rgba(0,0,0,.78));object-fit:contain}
-.gbRobotHero:after{content:"";position:absolute;z-index:4;left:50%;bottom:-32px;width:min(620px,62vw);height:190px;transform:translateX(-35%);background:linear-gradient(transparent,rgba(0,0,0,.86) 72%,#000);pointer-events:none}
-@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%;opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);transform:translateX(-38%)}.gbRobotHero:after{bottom:-20px;width:80vw;height:130px;transform:translateX(-42%)}}
+.gbRobotHero:after{content:"";position:absolute;z-index:4;left:50%;bottom:-42px;width:min(720px,72vw);height:240px;transform:translateX(-35%);background:linear-gradient(transparent,rgba(0,0,0,.72) 55%,#000 92%);filter:blur(24px);pointer-events:none}
+@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%;opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);transform:translateX(-38%)}.gbRobotHero:after{bottom:-28px;width:90vw;height:170px;transform:translateX(-42%);filter:blur(18px)}}
 
 /* Cases agora ficam logo acima de "O que fazemos". */
 .homeCasesFirst{padding-top:70px;padding-bottom:80px}.homeCasesFirst .showTitle{margin-top:0!important}
@@ -463,7 +463,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 
 /* ---- Circle carousel: tighter mobile line spacing + swipe hint ---- */
 @media(max-width:760px){
-  .circleProductSection h2{line-height:.84!important;letter-spacing:-2px!important;margin-bottom:18px!important}
+  .circleProductSection h2{line-height:1.2!important;letter-spacing:-2px!important;margin-bottom:18px!important}
   .circleProductCarousel{touch-action:pan-y}
 }
 
