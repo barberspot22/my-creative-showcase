@@ -283,17 +283,17 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    drag.current = { active: true, x: event.clientX, moved: false };
-    event.currentTarget.setPointerCapture(event.pointerId);
+    drag.current = { active: true, x: event.clientX, y: event.clientY, moved: false } as any;
     setPaused(true);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
-    const delta = event.clientX - drag.current.x;
-    if (Math.abs(delta) < 55) return;
-    drag.current = { active: true, x: event.clientX, moved: true };
-    moveTo(activeRef.current + (delta < 0 ? 1 : -1));
+    const dx = event.clientX - drag.current.x;
+    const dy = event.clientY - (drag.current as any).y;
+    if (Math.abs(dx) < 36 || Math.abs(dx) < Math.abs(dy)) return;
+    (drag.current as any) = { active: true, x: event.clientX, y: event.clientY, moved: true };
+    moveTo(activeRef.current + (dx < 0 ? 1 : -1));
   };
 
   const onPointerUp = () => {
