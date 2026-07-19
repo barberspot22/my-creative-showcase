@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FormEvent, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
+import { usePageLink } from "@/lib/adminLinks";
 
 const channels = ["Instagram", "Facebook", "Google Business Profile", "Outros canais da empresa"];
 const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao DNA da empresa", "Criação e adaptação", "Aprovação e publicação"];
