@@ -1,0 +1,211 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+type AdminCase = {
+  href: string;
+  title: string;
+  description: string;
+  badge: string;
+  frames: string[];
+};
+
+const ADMIN_CASES_KEY = "gbia.caseCards.v4";
+
+const defaultCases: AdminCase[] = [
+  {
+    href: "/gb-studio",
+    title: "Studio",
+    description: "Lookbook completo gerado por IA para marca têxtil",
+    badge: "LOOKBOOK",
+    frames: ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png"],
+  },
+  {
+    href: "/gb-social",
+    title: "Social",
+    description: "Seu Social Media de IA no WhatsApp",
+    badge: "DESIGNS",
+    frames: [
+      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=1800&q=94",
+      "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1800&q=94",
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=94",
+    ],
+  },
+  {
+    href: "/ecommerce",
+    title: "E-commerce",
+    description: "Loja, automação e IA vendedora em um sistema só",
+    badge: "LOJA",
+    frames: [
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2200&q=95",
+      "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=2200&q=95",
+    ],
+  },
+  {
+    href: "/crm",
+    title: "CRM",
+    description: "Comercial e produção em módulos separados",
+    badge: "DASHBOARD",
+    frames: [
+      "/crm-metrics-example.png",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2200&q=95",
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=2200&q=95",
+    ],
+  },
+  {
+    href: "/site-institucional",
+    title: "Site Institucional",
+    description: "Autoridade em segundos e contato sem desvio",
+    badge: "SITES",
+    frames: [
+      "/site-main-example-moon.png",
+      "/site-main-example-stairs.png",
+      "/site-main-example-orbit.png",
+    ],
+  },
+  {
+    href: "/cardapio-digital",
+    title: "Menu Digital",
+    description: "Cardápio e presença digital em um sistema só",
+    badge: "CARDÁPIO",
+    frames: [
+      "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=2200&q=95",
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=2200&q=95",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=95",
+    ],
+  },
+];
+
+function normalizeCases(value: unknown): AdminCase[] {
+  if (!Array.isArray(value)) return defaultCases;
+  return defaultCases.map((item) => {
+    const saved = value.find((entry) => entry?.href === item.href);
+    return {
+      ...item,
+      title: typeof saved?.title === "string" ? saved.title : item.title,
+      description: typeof saved?.description === "string" ? saved.description : item.description,
+      badge: typeof saved?.badge === "string" ? saved.badge : item.badge,
+      frames: Array.isArray(saved?.frames) ? saved.frames.filter((src: unknown) => typeof src === "string") : item.frames,
+    };
+  });
+}
+
+export default function AdminPage() {
+  const [cases, setCases] = useState<AdminCase[]>(defaultCases);
+  const [activeHref, setActiveHref] = useState(defaultCases[0].href);
+  const [status, setStatus] = useState("Pronto para editar.");
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(ADMIN_CASES_KEY);
+      if (raw) setCases(normalizeCases(JSON.parse(raw)));
+    } catch {
+      setStatus("Não consegui carregar edições antigas. Mantive o padrão.");
+    }
+  }, []);
+
+  const activeCase = useMemo(() => cases.find((item) => item.href === activeHref) || cases[0], [cases, activeHref]);
+
+  const updateCase = (patch: Partial<AdminCase>) => {
+    setCases((current) => current.map((item) => item.href === activeHref ? { ...item, ...patch } : item));
+    setStatus("Alteração ainda não salva.");
+  };
+
+  const updateFrame = (index: number, src: string) => {
+    updateCase({ frames: activeCase.frames.map((frame, frameIndex) => frameIndex === index ? src : frame) });
+  };
+
+  const addFrame = () => {
+    updateCase({ frames: [...activeCase.frames, ""] });
+  };
+
+  const removeFrame = (index: number) => {
+    updateCase({ frames: activeCase.frames.filter((_, frameIndex) => frameIndex !== index) });
+  };
+
+  const save = () => {
+    window.localStorage.setItem(ADMIN_CASES_KEY, JSON.stringify(cases));
+    window.dispatchEvent(new Event("storage"));
+    setStatus("Salvo. Volte para a home para ver o cardbox atualizado.");
+  };
+
+  const reset = () => {
+    window.localStorage.removeItem(ADMIN_CASES_KEY);
+    setCases(defaultCases);
+    setStatus("Voltou para o padrão original.");
+  };
+
+  return <main className="adminShell">
+    <aside className="adminSidebar">
+      <a className="adminBack" href="/">← Voltar para o site</a>
+      <div>
+        <p className="adminEyebrow">GB IA Admin</p>
+        <h1>Editar produtos e serviços</h1>
+        <p>Altere nome, descrição, selo e imagens do loop de capa dos cardboxes.</p>
+      </div>
+      <nav>
+        {cases.map((item) => <button className={item.href === activeHref ? "active" : ""} key={item.href} onClick={() => setActiveHref(item.href)}>{item.title}</button>)}
+      </nav>
+    </aside>
+
+    <section className="adminEditor">
+      <div className="adminTopbar">
+        <div><span>Status</span><strong>{status}</strong></div>
+        <div className="adminActions">
+          <button onClick={reset} type="button">Restaurar padrão</button>
+          <button onClick={save} type="button">Salvar alterações</button>
+        </div>
+      </div>
+
+      <div className="adminGrid">
+        <form className="adminForm" onSubmit={(event) => { event.preventDefault(); save(); }}>
+          <label>Título
+            <input value={activeCase.title} onChange={(event) => updateCase({ title: event.target.value })}/>
+          </label>
+          <label>Descrição
+            <textarea value={activeCase.description} onChange={(event) => updateCase({ description: event.target.value })}/>
+          </label>
+          <label>Selo do cardbox
+            <input value={activeCase.badge} onChange={(event) => updateCase({ badge: event.target.value })}/>
+          </label>
+          <label>Link da página
+            <input value={activeCase.href} readOnly/>
+          </label>
+          <div className="adminImageEditor">
+            <div className="adminFieldHead">
+              <div>
+                <strong>Imagens dentro do card da home</strong>
+                <small>Essas são as imagens que fazem loop na capa do cardbox.</small>
+              </div>
+              <button onClick={addFrame} type="button">+ Adicionar imagem</button>
+            </div>
+            {(activeCase.frames.length ? activeCase.frames : [""]).map((src, index) => <div className="adminImageRow" key={`${activeCase.href}-${index}`}>
+              <div className="adminThumb">{src ? <img src={src} alt=""/> : <span>Sem imagem</span>}</div>
+              <label>Imagem {index + 1}
+                <input value={src} placeholder="Cole a URL ou caminho da imagem" onChange={(event) => updateFrame(index, event.target.value)}/>
+              </label>
+              <button onClick={() => removeFrame(index)} type="button" aria-label={`Remover imagem ${index + 1}`}>Remover</button>
+            </div>)}
+            <small>Use caminhos do site, como /gb-studio/lookbook-01.png, ou URLs externas. Se tiver mais de uma imagem, o card da home faz loop entre elas.</small>
+          </div>
+          <button type="submit">Salvar este cardbox</button>
+        </form>
+
+        <div className="adminPreview">
+          <p className="adminEyebrow">Prévia do cardbox</p>
+          <div className="adminCardPreview">
+            <div className="adminImageStack">
+              {(activeCase.frames.length ? activeCase.frames : ["/crm-metrics-example.png"]).slice(0, 3).map((src, index) => <img src={src} alt="" key={`${src}-${index}`}/>)}
+              <span>{activeCase.badge}</span>
+            </div>
+            <h2>{activeCase.title}</h2>
+            <p>{activeCase.description}</p>
+          </div>
+          <div className="adminHint">
+            <strong>Importante:</strong> esta versão salva no navegador. Para edição pública com login e banco de dados, dá para evoluir esse admin depois.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>;
+}

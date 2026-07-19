@@ -1,0 +1,29 @@
+{
+  "assets": [
+    {
+      "contentType": "image/webp",
+      "id": "dbd3d69c0b1d1e09",
+      "kind": "image",
+      "name": "lumus.digitalagentur.webp",
+      "path": "/var/folders/m0/86s6r5xs1g50f220ysmh8n9w0000gn/T/browser-use/assets/95c86247-654c-45d8-98dc-655542d3e70e/dbd3d69c0b1d1e09.webp",
+      "url": "https://lumus.de/wp-content/uploads/sb-instagram-feed-images/lumus.digitalagentur.webp"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "83796ec94f296e3f",
+      "kind": "image",
+      "name": "ruettgers-jonas.jpg",
+      "path": "/var/folders/m0/86s6r5xs1g50f220ysmh8n9w0000gn/T/browser-use/assets/95c86247-654c-45d8-98dc-655542d3e70e/83796ec94f296e3f.jpg",
+      "url": "https://lumus.de/wp-content/uploads/2025/07/ruettgers-jonas.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "feeab864c5de9936",
+      "kind": "image",
+      "name": "sharon-cottone.jpg",
+      "path": "/var/folders/m0/86s6r5xs1g50f220ysmh8n9w0000gn/T/browser-use/assets/95c86247-654c-45d8-98dc-655542d3e70e/feeab864c5de9936.jpg",
+      "url": "https://lumus.de/wp-content/uploads/2025/07/sharon-cottone.jpg"
+    }
+  ],
+  "failures": []
+}
