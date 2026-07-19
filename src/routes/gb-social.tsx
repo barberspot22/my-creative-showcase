@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
+import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
 import { FormEvent, ReactNode, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
@@ -38,10 +39,8 @@ function GBSocialPage() {
             <p className="chatUser">Preciso de uma arte pro Instagram anunciando agenda aberta.</p>
             <p className="chatAgent"><b>GB Social</b>Perfeito. Vou seguir o DNA da marca e preparar uma peça com chamada direta para WhatsApp.</p>
             <p className="socialDesignerStatus"><i/><i/><i/> Designer montando layout</p>
-            <article className="socialDesignPreview" aria-label="Preview da arte criada pelo designer">
-              <span>AGENDA ABERTA</span>
-              <strong>Reserve seu horário</strong>
-              <em>Chamar no WhatsApp</em>
+            <article className="socialDesignPreview socialDesignPreviewImage" aria-label="Preview da arte criada pelo designer">
+              <img src={consumoConscienteAsset.url} alt="Design Consumo Consciente criado pelo GB Social" />
             </article>
             <p className="chatAgent"><b>GB Social</b>Criei essa versão. Posso adaptar para story e feed, mantendo o mesmo visual.</p>
             <p className="chatUser">Gostei. Faz uma versão com CTA mais forte.</p>
