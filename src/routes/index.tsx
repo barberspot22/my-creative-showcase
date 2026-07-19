@@ -312,7 +312,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
   return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
-    <h2>O futuro muda o seu<br/>produto</h2>
+    <h2>O futuro molda<br/>o seu negócio</h2>
     <div
       className="circleProductCarousel"
       onMouseEnter={() => setPaused(true)}
