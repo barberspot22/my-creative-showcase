@@ -410,6 +410,7 @@ function HomePage() {
           <article className="reveal"><div className="lineIcon automationIcon" aria-hidden="true"><svg viewBox="0 0 96 96" role="img"><path d="M48 18v9M48 69v9M27 27l6 6M63 63l6 6M18 48h9M69 48h9M27 69l6-6M63 33l6-6"/><circle cx="48" cy="48" r="21"/><circle className="iconAccent gearCore" cx="48" cy="48" r="7"/></svg></div><h3>Automação de Processos</h3><p>Tarefas manuais, aprovações e fluxos internos rodando sem depender de alguém lembrar de fazer.</p></article>
           <article className="reveal"><div className="lineIcon aiIcon" aria-hidden="true"><svg viewBox="0 0 96 96" role="img"><path d="M48 48 25 27M48 48l46 0M48 48 26 70M48 48 68 24M48 48l20 24"/><circle className="iconAccent coreNode" cx="48" cy="48" r="8"/><circle cx="25" cy="27" r="5"/><circle cx="26" cy="70" r="5"/><circle cx="68" cy="24" r="5"/><circle cx="68" cy="72" r="5"/><circle cx="79" cy="48" r="5"/></svg></div><h3>IA Autônoma</h3><p>Agentes que atendem, respondem e executam — com camadas de aprovação onde importa.</p></article>
         </div>
+        <p className="servicesHint" aria-hidden="true">Arraste para explorar →</p>
       </section>
 
       <section id="ueber-uns" className="why">
