@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FormEvent, useState } from "react";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
+import { usePageLink } from "@/lib/adminLinks";
 
 const differences = [
   "Qualidade visual equivalente a um estúdio convencional",
