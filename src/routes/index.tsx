@@ -302,23 +302,24 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active };
     setIsDragging(true);
     setDragDelta(0);
-  };
-
-  const capturePointer = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
-    (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId);
+    try { (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId); } catch {}
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.active) return;
+    if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
-    if (!drag.current.intent && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-      drag.current.intent = Math.abs(dx) > Math.abs(dy) * 1.2 ? "x" : "y";
+    if (!drag.current.intent) {
+      if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) drag.current.intent = "x";
+      else if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+        drag.current.intent = "y";
+        try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
+        drag.current.active = false;
+        setIsDragging(false);
+        return;
+      }
     }
     if (drag.current.intent !== "x") return;
-    if (!drag.current.moved) capturePointer(event);
-    event.preventDefault();
     drag.current.moved = true;
     setDragDelta(Math.max(-SWIPE_LIMIT, Math.min(SWIPE_LIMIT, dx)));
   };
