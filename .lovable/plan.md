@@ -1,29 +1,50 @@
-## Problema
+## Objetivo
+Trocar a seção atual "O que fazemos" (Sistemas & Sites / GB Social / etc.) por uma **trilha do processo** no estilo mapa do tesouro, mostrando como a GB IA conduz o cliente do problema até a solução entregue.
 
-Na tentativa anterior duas coisas quebraram:
+## Conceito visual: Mapa do tesouro
+Um caminho sinuoso (SVG) atravessa a seção verticalmente, com 4 marcos (pinos luminosos) posicionados alternadamente à esquerda e direita da trilha. O caminho tem traço pontilhado dourado/platinado (herda a paleta metálica do site), com brilho suave. Ao rolar a página, o traço "se desenha" progressivamente e cada marco aparece com fade + leve zoom quando entra na viewport (IntersectionObserver, sem lib externa). O tesouro final (X) é o CTA.
 
-1. **Sombra escura em cima do "GB IA"** — a light section seguinte (`.light` / "Sistemas & Sites" em creme) mostra o texto GB IA por trás porque a hero virou `position:sticky` e continua atrás de todo o resto do site. O efeito visual escuro em cima das letras é a hero vazando por baixo das seções seguintes que não são 100% opacas em toda extensão.
-2. **Hero sticky persiste eternamente** — como `.hero` é sticky no `<body>`, ela fica fixa atrás de TODAS as seções seguintes, não só da segunda dobra. Isso é errado: o usuário quer que a hero fique fixa apenas até a segunda dobra ("O futuro molda o seu negócio") cobri-la; depois o site deve rolar normal.
+## Etapas da trilha
+```text
+   ①  Diagnóstico       (ícone: lupa)
+        \
+         ②  Proposta sob medida   (ícone: pergaminho/blueprint)
+        /
+   ③  MVP / Prova de valor        (ícone: foguete)
+        \
+         ④  Entrega & evolução    (ícone: troféu)
+              ↓
+            [X] CTA — Começar minha trilha
+```
 
-## Solução
+Cada marco mostra:
+- Número da etapa (01–04) em tipografia display
+- Ícone temático (Lucide: `Search`, `ScrollText`, `Rocket`, `Trophy`)
+- Título curto
+- Mini descrição do que o cliente **recebe** naquela etapa:
+  1. **Diagnóstico** — "Sessão de escuta + relatório do gargalo e das oportunidades."
+  2. **Proposta sob medida** — "Escopo, stack e cronograma desenhados para o seu caso."
+  3. **MVP / Prova de valor** — "Protótipo navegável em dias, para validar antes de escalar."
+  4. **Entrega & evolução** — "Sistema em produção, acompanhamento e melhorias contínuas."
 
-Trocar a abordagem: em vez de `position:sticky` na hero (que persiste para sempre), voltar ao modelo de **overlap por margem negativa** (segunda dobra sobe por cima da hero no scroll), mas sem o gradiente escuro que criava a sombra em cima do "GB IA".
+## CTA final
+Ao fim da trilha, um marco "X" (tesouro) com botão pill futurista: **"Começar minha trilha →"** — usa o mesmo sistema de `adminLinks` (nova chave `trilhaCta`) para o admin poder editar destino e label.
 
-### Mudanças em `src/imported.css`
+## Implementação técnica
+- **Novo componente**: `src/components/imported/ProcessTrail.tsx`
+  - SVG path sinuoso responsivo (viewBox flexível, path diferente em mobile — mais vertical/reto — e desktop — zigue-zague).
+  - `IntersectionObserver` marca cada etapa como visível → CSS controla animação (fade-up + glow no pino).
+  - Progresso do path animado via `stroke-dasharray` + `stroke-dashoffset` interpolado pelo scroll (`window.scrollY` relativo ao offsetTop da seção, sem dependências).
+- **CSS**: adicionar bloco `.processTrail` em `src/imported.css` (paleta ouro/platina existente, sem novos tokens). Sem `overflow:hidden` no wrapper para não cortar glows.
+- **Rota `src/routes/index.tsx`**:
+  - Remover a seção atual "O que fazemos" (grid/carousel de Sistemas & Sites, GB Social, etc.) e o CSS órfão associado (`.whatWeDo*`).
+  - Renderizar `<ProcessTrail/>` no mesmo lugar, mantendo a ordem das dobras.
+- **AdminLinks**: adicionar chave `trilhaCta` em `src/lib/adminLinks.ts` (default: `/#briefing`, label "Começar minha trilha") e novo campo na aba "Links de botões" em `src/routes/admin.tsx`.
 
-1. **Remover o override sticky** adicionado no fim do arquivo (bloco `/* Sticky hero */`). A hero volta ao fluxo normal com sua altura fixa (720px desktop / 640px mobile).
-2. **Reintroduzir o overlap suave**: `.circleProductSection` recebe `margin-top: -140px` (desktop) / `-90px` (mobile) para entrar por cima da base do robô.
-3. **Fade de topo transparente → preto puro em curta distância** (0% transparente → 40px opaco), sem faixa cinza intermediária. Isso cria uma borda limpa que cobre só a base do robô, sem escurecer o "GB IA" que fica acima da linha de overlap.
-4. **Garantir opacidade total** de `.circleProductSection` (background sólido `#050505`) para que nada da hero apareça atrás dela depois que ela entra em cena.
+## Fora do escopo
+- Não altero hero, carrossel de produtos, site institucional, cardápio, rodapé.
+- Não crio nova rota — a trilha vive na home.
+- Sem novas libs (animação/scroll feitos com IntersectionObserver + CSS puro).
 
-### Resultado esperado
-
-- "GB IA" no topo aparece inteiro, sem faixa cinza escura por cima.
-- Ao rolar, a segunda dobra ("O futuro molda o seu negócio") entra por cima da base do robô com uma borda limpa.
-- Depois da segunda dobra, o site flui normal — a hero não fica mais atrás das seções seguintes.
-
-## Detalhes técnicos
-
-- Arquivo alterado: `src/imported.css` (remover bloco sticky no fim + ajustar `.circleProductSection` e seu `::before`).
-- Nenhum arquivo `.tsx` muda.
-- Sem mudanças em rotas ou lógica.
+## Resultado esperado
+Seção nova, com identidade GB IA (metálico + dourado), narrando visualmente o método da agência como uma jornada, terminando em CTA acionável e configurável pelo admin.
