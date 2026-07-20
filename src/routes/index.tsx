@@ -361,16 +361,25 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
           const y = abs * 34;
           const rotate = offset * -10;
           const scale = Math.max(.72, 1 - abs * .14);
+          const external = isExternalHref(card.href);
           return <a
             className={`circleProductCard ${offset === 0 ? "active" : ""}`}
             href={card.href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
             draggable={false}
-            key={card.href}
+            key={card.key}
             aria-label={`Abrir página de ${card.title}`}
             onClick={(event) => {
-              if (!shouldBlockDragClick()) return;
-              event.preventDefault();
-              drag.current.moved = false;
+              if (shouldBlockDragClick()) {
+                event.preventDefault();
+                drag.current.moved = false;
+                return;
+              }
+              if (offset !== 0) {
+                event.preventDefault();
+                moveTo(index);
+              }
             }}
             style={{
               transform: `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`,
