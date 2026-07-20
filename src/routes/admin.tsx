@@ -236,25 +236,29 @@ function AdminPage() {
           <label>Selo do cardbox
             <input value={activeCase.badge} onChange={(event) => updateCase({ badge: event.target.value })}/>
           </label>
-          <label>Link da página
-            <input value={activeCase.href} readOnly/>
+          <label>Link do card (para onde ele leva ao clicar)
+            <input value={activeCase.href} onChange={(event) => updateCase({ href: event.target.value })} placeholder="/gb-studio ou https://sua-url.com"/>
           </label>
+          <small className="adminHelp">Pode ser uma página interna (/gb-studio) ou uma URL externa (https://…). URLs externas abrem em nova aba.</small>
           <div className="adminImageEditor">
             <div className="adminFieldHead">
               <div>
                 <strong>Imagens dentro do card da home</strong>
-                <small>Essas são as imagens que fazem loop na capa do cardbox.</small>
+                <small>Essas são as imagens que fazem loop na capa do cardbox. Faça upload de fotos ou cole uma URL.</small>
               </div>
               <button onClick={addFrame} type="button">+ Adicionar imagem</button>
             </div>
-            {(activeCase.frames.length ? activeCase.frames : [""]).map((src, index) => <div className="adminImageRow" key={`${activeCase.href}-${index}`}>
+            {(activeCase.frames.length ? activeCase.frames : [""]).map((src, index) => <div className="adminImageRow" key={`${activeCase.key}-${index}`}>
               <div className="adminThumb">{src ? <img src={src} alt=""/> : <span>Sem imagem</span>}</div>
               <label>Imagem {index + 1}
-                <input value={src} placeholder="Cole a URL ou caminho da imagem" onChange={(event) => updateFrame(index, event.target.value)}/>
+                <input value={src.startsWith("data:") ? "" : src} placeholder={src.startsWith("data:") ? "Imagem carregada do seu dispositivo" : "Cole a URL ou caminho da imagem"} onChange={(event) => updateFrame(index, event.target.value)}/>
+              </label>
+              <label className="adminUpload">Enviar do dispositivo
+                <input type="file" accept="image/*" onChange={(event) => { const file = event.target.files?.[0]; if (file) uploadFrame(index, file); event.target.value = ""; }}/>
               </label>
               <button onClick={() => removeFrame(index)} type="button" aria-label={`Remover imagem ${index + 1}`}>Remover</button>
             </div>)}
-            <small>Use caminhos do site, como /gb-studio/lookbook-01.png, ou URLs externas. Se tiver mais de uma imagem, o card da home faz loop entre elas.</small>
+            <small>Use caminhos do site, URLs externas ou faça upload direto. Se tiver mais de uma imagem, o card da home faz loop entre elas.</small>
           </div>
           <button type="submit">Salvar este cardbox</button>
         </form>
