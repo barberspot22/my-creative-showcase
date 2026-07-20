@@ -1,97 +1,73 @@
+## Redesign do painel `/admin` — Papel & Tinta
 
-# Painel Admin completo + Tracking
+Trocar totalmente a linguagem visual e a arquitetura de navegação do admin, mantendo 100% da funcionalidade atual (Home Cards, Portfólios, Links, Textos, Rastreamento).
 
-Reformar o `/admin` em um painel real, com edições persistidas no Lovable Cloud (aparecem para todos os visitantes) e uma central de rastreamento (Meta Pixel, Meta Conversion API, GA4, GTM).
+### 1. Nova linguagem visual (paleta clara)
 
-> Observação de segurança: você escolheu deixar `/admin` público (sem login). Isso significa que qualquer pessoa que descobrir a URL poderá editar textos, imagens e IDs de tracking. Recomendo trocar para login com papel admin depois — deixo pronto pra plugar quando quiser.
+Tokens novos em `src/imported.css`, escopados em `.adminShell` para não vazar no site público:
 
-## 1. Backend (Lovable Cloud)
+- `--adm-bg: #f5f3ee` (papel)
+- `--adm-surface: #ffffff`
+- `--adm-surface-2: #ebe7df` (blocos secundários / hover)
+- `--adm-ink: #1a1a1a` (tipografia principal)
+- `--adm-ink-soft: #5a564f` (labels, meta)
+- `--adm-line: #d9d3c6` (bordas)
+- `--adm-gold: #c9a84c` (ação primária / estado ativo)
+- `--adm-gold-soft: #f0e4bd` (chips / hover suave)
+- `--adm-danger: #a3341f`
+- Tipografia: manter Manrope para corpo, adotar **Instrument Serif** só em títulos de página para dar tom editorial coerente com a marca GB IA.
+- Sombras suaves em vez de "vidro escuro" (`0 1px 2px rgba(0,0,0,.04), 0 8px 24px -12px rgba(0,0,0,.12)`).
 
-Ativar Lovable Cloud e criar as tabelas:
+### 2. Nova arquitetura de navegação
 
-- `site_content` — textos por página/seção (key/value JSON). Uma linha por `page_key` (ex.: `home`, `gb-social`, `site-institucional`, `ecommerce`, `cardapio-digital`, `gb-studio`, `crm`) contendo `{ hero, sections, ctas, meta }`.
-- `portfolio_items` — galerias/portfólio por página. Colunas: `id`, `page_key`, `title`, `description`, `image_url`, `link_url`, `position`, `visible`.
-- `home_cards` — cards do carrossel da home (migra o que hoje está no localStorage `gbia.caseCards.v4`): `id`, `key`, `title`, `description`, `badge`, `href`, `frames` (array), `position`.
-- `page_links` — CTAs por página (migra `gbia.pageLinks.v1`): `page_key`, `cta_label`, `cta_url`.
-- `tracking_settings` — linha única com: `meta_pixel_id`, `meta_capi_enabled`, `meta_test_event_code`, `ga4_measurement_id`, `gtm_container_id`, `google_ads_id`, `google_ads_conversion_label`.
-
-Bucket público de Storage `portfolio` para upload de imagens (substitui os base64 pesados de hoje).
-
-RLS: `SELECT` público em todas as tabelas de conteúdo; `INSERT/UPDATE/DELETE` liberado (por escolha sua de não usar auth) — deixo comentário na migration marcando o que trocar quando ligar login.
-
-Secret backend: `META_CAPI_ACCESS_TOKEN` (para Conversion API server-side).
-
-## 2. Painel `/admin` — nova estrutura
-
-Sidebar com abas:
-
-1. **Home** — edita cards do carrossel (o que já existe, agora persistido no Cloud). Upload de imagem vai para Storage, não base64.
-2. **Portfólio** — sub-abas por página (Social, Site Institucional, E-commerce, Cardápio, Studio, CRM). Em cada uma:
-   - Lista drag-to-reorder de itens do portfólio (thumb, título, descrição, link, visível on/off).
-   - Botões: adicionar item, upload de imagem, remover.
-3. **Textos** — sub-abas por página. Formulário estruturado (hero title, hero subtitle, bullets, seções, CTA). Prévia lado a lado.
-4. **Links dos botões** — o que já existe hoje, migrado.
-5. **Tracking** — formulário único com:
-   - Meta Pixel ID + toggle "ativar"
-   - Meta CAPI: toggle + Test Event Code + botão "Configurar Access Token" (abre fluxo do `add_secret`)
-   - GA4 Measurement ID
-   - GTM Container ID
-   - Google Ads ID + Conversion Label
-   - Botão "Enviar evento de teste" para cada integração ativa.
-6. **SEO** (bônus leve) — título/descrição por página, já que estamos mexendo em conteúdo.
-
-Topbar com Status + Salvar/Restaurar; toast quando salvar.
-
-## 3. Como o site consome tudo
-
-- Um `SiteContentProvider` no `__root.tsx` carrega `site_content`, `home_cards`, `page_links` e `tracking_settings` via server function (SSR-friendly, cacheado no TanStack Query).
-- Cada página lê os campos do provider e cai no default hardcoded se o Cloud estiver vazio (nada quebra durante a migração).
-- Componentes de galeria (`PerspectiveTicker` do gb-social, `LookbookGallery` do studio, `BentoMorphGallery` do ecommerce, `FanGallery` do cardápio, ticker do site-institucional) passam a receber os itens de `portfolio_items` — mantêm os defaults atuais como fallback.
-
-## 4. Tracking — implementação
-
-Em `__root.tsx`, um `<TrackingScripts />` client-side lê `tracking_settings` e injeta:
-
-- **Meta Pixel**: script fbq com `init(pixelId)` + `track('PageView')`. Hook `useMetaPixel().track(event, params)` disponibiliza `Lead`, `Contact`, `ViewContent`.
-- **GA4**: `gtag.js` com o measurement ID + `gtag('config', id)` + `gtag('event', name, params)`.
-- **GTM**: snippet padrão head + noscript no body.
-- **Google Ads**: reusa gtag; conversão via `gtag('event', 'conversion', { send_to: 'AW-.../label' })`.
-
-CTAs principais (Home "Falar com a equipe", WhatsApp de cada página, botões do portfólio) chamam um helper `trackConversion('lead', { source })` que dispara em todas as ferramentas ativas de uma vez.
-
-**Meta CAPI (server-side)**: server route `POST /api/public/meta-capi` com HMAC de proteção mínima (secret compartilhado no client via env pública + hash do evento, para não ser aberto totalmente). Envia para `graph.facebook.com/v19.0/{pixelId}/events` com hash SHA-256 de email/telefone quando disponível, `event_id` compartilhado com o pixel client (dedup), `test_event_code` quando configurado.
-
-## 5. Migração dos dados atuais
-
-Ao abrir `/admin` pela primeira vez após o deploy, um botão "Importar edições antigas do navegador" lê `localStorage` (`gbia.caseCards.v4`, `gbia.pageLinks.v1`) e faz upsert no Cloud. Uma vez importado, o localStorage vira apenas cache.
-
-## Detalhes técnicos
-
-- Tabelas com `updated_at` trigger; `home_cards`/`portfolio_items` com `position int` para ordenação.
-- Server functions em `src/lib/admin.functions.ts`: `getSiteContent`, `saveSiteContent`, `listPortfolioItems`, `upsertPortfolioItem`, `deletePortfolioItem`, `reorderPortfolioItems`, `saveHomeCards`, `savePageLinks`, `getTrackingSettings`, `saveTrackingSettings`, `sendCapiTestEvent`.
-- Upload: server function assina URL de upload no bucket `portfolio` (evita expor service role no client).
-- Provider client-side com TanStack Query (`staleTime: 60_000`) + `router.invalidate()` após salvar no admin.
-- SSR: `site_content` e `tracking_settings` no loader do `__root` para não haver flash sem pixel/GA no PageView inicial.
-- `og:image` e meta continuam nos `head()` das rotas, mas title/description passam a puxar do Cloud com fallback ao valor atual.
-
-## Estrutura de arquivos (novos/alterados)
+Estrutura adaptativa em `src/routes/admin.tsx`:
 
 ```text
-supabase/migrations/xxxx_admin_cms.sql
-src/lib/admin.functions.ts
-src/lib/tracking.ts                 (helpers trackConversion, useTracking)
-src/components/TrackingScripts.tsx
-src/components/SiteContentProvider.tsx
-src/routes/admin.tsx                (reescrito, com abas)
-src/routes/admin/-components/*      (HomeCardsPanel, PortfolioPanel, TextsPanel, LinksPanel, TrackingPanel)
-src/routes/api/public/meta-capi.ts
-src/routes/__root.tsx               (monta provider + TrackingScripts)
+┌──────────────────────────────────────────────────────┐
+│ TopBar: [← Site]  GB IA · Admin        [Salvar] [👁] │
+├──────────────┬───────────────────────────────────────┤
+│  Sidebar     │  Área do editor                       │
+│  (desktop)   │  ┌── breadcrumb ────────────────────┐│
+│  ▸ Home      │  │ Home · Cards / Studio            ││
+│  ▸ Portfólio │  ├──────────────────────────────────┤│
+│  ▸ Links     │  │ Cabeçalho da seção + ajuda curta ││
+│  ▸ Textos    │  │                                  ││
+│  ▸ Pixel     │  │ Split: [Form 60%] [Preview 40%]  ││
+│              │  └──────────────────────────────────┘│
+└──────────────┴───────────────────────────────────────┘
 ```
 
-## Fora do escopo desta rodada
+- **Desktop (≥1024px):** sidebar fixa 260px + topbar com salvar/preview persistentes; split editor+preview lado a lado.
+- **Tablet (768–1023px):** sidebar vira barra horizontal de tabs sticky no topo; preview colapsa para baixo do form.
+- **Mobile (<768px):** bottom nav fixa com 5 ícones (Home, Portfólio, Links, Textos, Pixel) + botão flutuante "Salvar" à direita. Preview vira aba interna (toggle "Editar / Ver") em cada seção.
 
-- Login/proteção do `/admin` (você optou por público agora; deixo TODO comentado).
-- Editor visual WYSIWYG das seções — usaremos formulário estruturado.
-- Multi-idioma.
+### 3. Melhorias de UX por aba
 
-Confirmando isso, sigo para build: ativo o Lovable Cloud, crio as tabelas, migro os dados do localStorage e entrego o painel + tracking numa única rodada.
+Sem mudar o modelo de dados nem o backend — só a forma de editar:
+
+- **Home · Cards:** lista de cards à esquerda com drag-handle e miniatura; ao selecionar, form à direita. Cada card mostra badge de status ("publicado", "sem imagem"). Botão "Duplicar" e "Ocultar da home".
+- **Portfólios:** filtro por página (chips no topo em vez de select), grid de itens em cards com thumb, título, link. Ação "Novo item" fixa como botão CTA dourado. Edição em drawer lateral (desktop) ou modal fullscreen (mobile) — evita perder scroll.
+- **Links / CTAs:** agrupados por página com accordion; cada linha tem preview do botão renderizado com o texto atual, ao lado do input. Ícone de link externo abre a página real em nova aba para testar.
+- **Textos:** editor chave/valor vira uma tabela com busca no topo (filtra por chave ou conteúdo) + edição inline. Adicionar textareas auto-resize.
+- **Rastreamento:** cada provedor (Meta, GA4, GTM, Google Ads) em um card independente com toggle liga/desliga, campo do ID e status "conectado / não configurado". Botão "Testar evento Lead" que dispara um evento fake e mostra ✔/✘ na hora.
+
+### 4. Feedback e estados
+
+- Toast discreto no canto superior direito para "Salvo" / "Erro" — substitui o `useStatus` textual atual.
+- Estado "não salvo" (dot dourado) aparece no botão Salvar assim que qualquer campo muda; Cmd/Ctrl+S atalho global dentro do admin.
+- Skeleton loaders em vez de "Carregando…" em texto.
+- Confirmação inline (não `window.confirm`) ao excluir item de portfólio.
+
+### 5. Detalhes técnicos
+
+- Todo o CSS novo entra em `src/imported.css` sob classes `adm*` novas; classes antigas `admin*` são substituídas na mesma edição. Nada muda em outras rotas.
+- `src/routes/admin.tsx` é reescrito mantendo os mesmos imports de `@/lib/cms` e `@/lib/adminLinks` — assinaturas de `fetchHomeCards`, `upsertHomeCards`, etc. não mudam.
+- Bottom nav mobile usa `position: fixed` com `env(safe-area-inset-bottom)`.
+- Sem novas dependências.
+
+### O que **não** muda
+
+- Modelo de dados no Cloud (tabelas `home_cards`, `portfolio_items`, `page_links`, `site_texts`, `tracking_settings`).
+- Comportamento de upload (segue base64 / URL como hoje).
+- Integração de tracking (`TrackingScripts`, rota `/api/public/meta-capi`).
+- Nada no site público.
