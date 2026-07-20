@@ -284,7 +284,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     setActive((next % count + count) % count);
   };
 
-  const STEP = 90;
+  const SWIPE_LIMIT = 170;
+
+  const shouldBlockDragClick = () => Date.now() < suppressClickUntil.current || drag.current.moved;
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
@@ -304,22 +306,16 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (drag.current.intent !== "x") return;
     event.preventDefault();
     drag.current.moved = true;
-    if (Math.abs(dx) >= STEP) {
-      const steps = Math.trunc(dx / STEP);
-      drag.current.x += steps * STEP;
-      setActive((prev) => ((prev - steps) % count + count) % count);
-      setDragDelta(dx - steps * STEP);
-    } else {
-      setDragDelta(dx);
-    }
+    setDragDelta(Math.max(-SWIPE_LIMIT, Math.min(SWIPE_LIMIT, dx)));
   };
 
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
     const dx = event.clientX - drag.current.x;
-    if (drag.current.intent === "x" && Math.abs(dx) > 30) {
+    const threshold = Math.min(92, Math.max(46, event.currentTarget.clientWidth * .1));
+    if (drag.current.intent === "x" && Math.abs(dx) > threshold) {
       suppressClickUntil.current = Date.now() + 450;
-      moveTo(active + (dx < 0 ? 1 : -1));
+      moveTo(drag.current.activeIndex + (dx < 0 ? 1 : -1));
     } else if (drag.current.moved) {
       suppressClickUntil.current = Date.now() + 450;
     }
@@ -340,7 +336,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       onPointerCancel={onPointerUp}
       onClickCapture={(event) => {
         if ((event.target as HTMLElement).closest(".circleNav")) return;
-        if (Date.now() < suppressClickUntil.current || drag.current.moved) {
+        if (shouldBlockDragClick()) {
           event.preventDefault();
           event.stopPropagation();
           drag.current.moved = false;
@@ -362,6 +358,11 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
             draggable={false}
             key={card.href}
             aria-label={`Abrir página de ${card.title}`}
+            onClick={(event) => {
+              if (!shouldBlockDragClick()) return;
+              event.preventDefault();
+              drag.current.moved = false;
+            }}
             style={{
               transform: `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`,
               opacity: hidden ? 0 : 1 - abs * .16,
