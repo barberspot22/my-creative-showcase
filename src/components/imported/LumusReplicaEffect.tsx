@@ -35,9 +35,10 @@ export function LumusReplicaEffect() {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, width / height, nearDist, farDist);
       camera.position.z = Math.round(farDist / 20);
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       renderer.setClearColor(0x000000, 0);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const isMobile = window.matchMedia("(max-width: 720px)").matches;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
       renderer.setSize(width, height);
       wrapper.appendChild(renderer.domElement);
 
