@@ -59,13 +59,14 @@ const benefits = [
 ];
 
 type CaseFrame = { kind: "image"; src: string; alt: string } | { kind: "ui"; variant: string; label: string };
-type CaseCard = { href: string; title: string; description: string; badge: string; frames: CaseFrame[] };
-type StoredCaseCard = { href: string; title?: string; description?: string; badge?: string; frames?: string[] };
+type CaseCard = { key: string; href: string; title: string; description: string; badge: string; frames: CaseFrame[] };
+type StoredCaseCard = { key?: string; href: string; title?: string; description?: string; badge?: string; frames?: string[] };
 
 const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
 const caseCards: CaseCard[] = [
   {
+    key: "studio",
     href: "/gb-studio",
     title: "Studio",
     description: "Lookbook completo gerado por IA para marca têxtil",
@@ -73,6 +74,7 @@ const caseCards: CaseCard[] = [
     frames: studioCoverImages.slice(0, 3).map((src, index) => ({ kind: "image", src, alt: `Capa Studio ${index + 1}` })),
   },
   {
+    key: "social",
     href: "/gb-social",
     title: "Social",
     description: "Seu Social Media de IA no WhatsApp",
@@ -82,6 +84,7 @@ const caseCards: CaseCard[] = [
     ],
   },
   {
+    key: "ecommerce",
     href: "/ecommerce",
     title: "E-commerce",
     description: "Loja, automação e IA vendedora em um sistema só",
@@ -93,6 +96,7 @@ const caseCards: CaseCard[] = [
     ],
   },
   {
+    key: "crm",
     href: "/crm",
     title: "CRM",
     description: "CRM, follow-up automatico e dashboard de vendas em um sistema so",
@@ -104,6 +108,7 @@ const caseCards: CaseCard[] = [
     ],
   },
   {
+    key: "site",
     href: "/site-institucional",
     title: "Site Institucional",
     description: "Autoridade em segundos e contato sem desvio",
@@ -113,6 +118,7 @@ const caseCards: CaseCard[] = [
     ],
   },
   {
+    key: "menu",
     href: "/cardapio-digital",
     title: "Menu Digital",
     description: "Cardápio e presença digital em um sistema só",
@@ -125,16 +131,17 @@ const caseCards: CaseCard[] = [
 
 function mergeAdminCaseCards(defaults: CaseCard[], stored: StoredCaseCard[]): CaseCard[] {
   return defaults.map((card) => {
-    const override = stored.find((item) => item.href === card.href);
+    const override = stored.find((item) => item.key === card.key) || stored.find((item) => item.href === card.href);
     if (!override) return card;
-    const imageFrames = override.frames?.map((src, index) => src.trim()).filter(Boolean).map((src, index) => ({
+    const imageFrames = override.frames?.map((src) => src.trim()).filter(Boolean).map((src, index) => ({
       kind: "image" as const,
       src,
       alt: `${override.title || card.title} capa ${index + 1}`,
     }));
-    const frames = card.href === "/crm" && imageFrames?.length ? [...imageFrames, ...card.frames] : (imageFrames?.length ? imageFrames : card.frames);
+    const frames = card.key === "crm" && imageFrames?.length ? [...imageFrames, ...card.frames] : (imageFrames?.length ? imageFrames : card.frames);
     return {
       ...card,
+      href: typeof override.href === "string" && override.href.trim() ? override.href.trim() : card.href,
       title: override.title?.trim() || card.title,
       description: override.description?.trim() || card.description,
       badge: override.badge?.trim() || card.badge,
@@ -153,6 +160,8 @@ function readAdminCaseCards(): CaseCard[] {
     return caseCards;
   }
 }
+
+const isExternalHref = (href: string) => /^https?:\/\//i.test(href);
 
 function CaseFramePreview({ frame }: { frame: CaseFrame }) {
   if (frame.kind === "image") return <img src={frame.src} alt={frame.alt} draggable={false}/>;
