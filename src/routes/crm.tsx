@@ -28,16 +28,6 @@ const comparison = [
 
 function PipelineDemo() {
   return <div className="crmDemo" aria-label="Demonstração dos módulos Comercial e Produção">
-    <section className="crmMetricsPanel" aria-label="Painel de métricas do CRM">
-      <header><b>Dashboard da operação</b><small>Visão em tempo real</small></header>
-      <div className="crmMetricGrid">
-        <article><small>Leads ativos</small><strong>128</strong><span>+18% na semana</span></article>
-        <article><small>Conversão</small><strong>32%</strong><span>pipeline comercial</span></article>
-        <article><small>Entregas no prazo</small><strong>91%</strong><span>produção</span></article>
-        <article><small>Tempo resposta</small><strong>4m</strong><span>WhatsApp + IA</span></article>
-      </div>
-      <div className="crmMetricChart"><i/><i/><i/><i/><i/><i/></div>
-    </section>
     <article className="crmModule commercialModule">
       <header><span>01</span><div><b>Comercial</b><small>Qualificação & pipeline</small></div></header>
       <div className="crmColumns"><div><small>NOVOS LEADS</small><p><i className="hot"/> Loja Aurora <b>Hoje</b></p><p><i className="warm"/> Forma Casa <b>Ontem</b></p></div><div><small>PROPOSTA</small><p><i className="hot"/> Studio Norte <b>R$ 18k</b></p></div><div><small>FECHADO</small><p><i className="cold"/> Nativa <b>Ganho</b></p></div></div>
