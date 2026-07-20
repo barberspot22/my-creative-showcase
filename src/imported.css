@@ -857,6 +857,7 @@ body{overflow-x:clip}
   .siteFooter .footerInner{padding:100px 22px 30px}
   .siteFooter .footerTop{grid-template-columns:1fr;gap:50px;padding-bottom:45px}
   .siteFooter .footerCols{grid-template-columns:1fr 1fr;gap:35px 20px}
+  .siteFooter .footerBrand .footerLogo{height:52px}
   .siteFooter .footerBrand .footerTag{font-size:19px}
   .siteFooter .footerBottom{flex-direction:column;align-items:flex-start;gap:10px}
 }
