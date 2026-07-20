@@ -324,6 +324,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
       className={`circleProductCarousel ${isDragging ? "dragging" : ""}`}
+      onDragStart={(event) => event.preventDefault()}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -348,6 +349,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
           return <a
             className={`circleProductCard ${offset === 0 ? "active" : ""}`}
             href={card.href}
+            draggable={false}
             key={card.href}
             aria-label={`Abrir página de ${card.title}`}
             style={{
