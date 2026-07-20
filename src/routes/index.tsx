@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { FormEvent, PointerEvent, ReactNode, WheelEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, PointerEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
