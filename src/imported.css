@@ -901,3 +901,29 @@ body{overflow-x:clip}
   .processTrail .trailStepN{font-size:12px}
 }
 
+/* ===== Contact section — Minimal Platinum ===== */
+.contact{background:transparent!important;margin:110px auto 130px!important;padding:0 24px!important;max-width:560px!important;min-height:0!important;display:block!important;grid-template-columns:none!important;gap:0!important;overflow:visible!important;position:relative}
+.contact:after{display:none!important}
+.contactInner{position:relative;background:#050505;border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:52px 44px 44px;overflow:hidden;isolation:isolate;transition:border-color .5s ease,box-shadow .5s ease}
+.contactInner:hover{border-color:rgba(201,168,76,.28);box-shadow:0 30px 90px -40px rgba(201,168,76,.15)}
+.contactGoldGlow{position:absolute;top:-96px;right:-96px;width:220px;height:220px;background:#c9a84c;opacity:.045;filter:blur(80px);border-radius:50%;pointer-events:none;z-index:0}
+.contactEdge{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,204,211,.35),transparent);pointer-events:none}
+.contact .contactHeading{position:relative;z-index:1;font-family:Melodrama,"Cormorant Garamond",serif!important;font-weight:500!important;font-size:clamp(56px,9vw,88px)!important;line-height:.92!important;letter-spacing:-1.5px!important;margin:0 0 44px!important;background:linear-gradient(180deg,#ffffff 0%,#c8ccd3 55%,#8a8f97 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.contact .contactCta{position:relative;z-index:1;display:flex!important;align-items:center;justify-content:space-between;gap:24px;width:100%!important;padding:18px 26px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.20)!important;background:transparent!important;color:#fff!important;cursor:pointer;transition:border-color .45s ease,background .45s ease,transform .45s ease;font-family:Manrope,inherit;margin:0 0 44px!important;text-align:left;text-decoration:none!important}
+.contact .contactCta>span{float:none!important;white-space:nowrap!important;flex:0 1 auto;font-size:11px!important;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.82);transition:color .35s ease}
+.contactCta:hover{border-color:#c9a84c;background:rgba(201,168,76,.04)}
+.contactCta:hover>span{color:#fff}
+.contactCta svg{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.contactCta:hover svg{transform:translateX(4px)}
+.contactCopy{position:relative;z-index:1;font-size:16px;line-height:1.65;margin:0;display:block}
+.contactCopy p{margin:0 0 18px}
+.contactLead{color:#c8ccd3;font-weight:300;font-size:17px}
+.contactSub{color:rgba(255,255,255,.42);font-size:13px;letter-spacing:.02em}
+@media(max-width:760px){
+  .contact{margin:70px auto 90px!important;padding:0 18px!important}
+  .contactInner{padding:40px 28px 34px;border-radius:20px}
+  .contact .contactHeading{font-size:46px!important;letter-spacing:-1.8px!important;margin-bottom:32px!important}
+  .contactCta{padding:16px 22px;margin-bottom:36px}
+  .contactLead{font-size:16px}
+}
+
