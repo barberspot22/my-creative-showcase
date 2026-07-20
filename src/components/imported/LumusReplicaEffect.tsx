@@ -94,10 +94,24 @@ export function LumusReplicaEffect() {
         camera.position.x += (mouseX * .38 - camera.position.x) * .05;
         camera.position.y += (mouseY * .38 - camera.position.y) * .05;
         camera.lookAt(scene.position);
-        const r = Date.now() * .0018;
-        const rot = Math.sin(r) * .12;
-        group.rotation.x = rot * 1.4;
-        group.rotation.y = rot;
+
+        // Smooth scroll progress with lerp so rotation never jitters between frames.
+        smoothProgress += (scrollProgress - smoothProgress) * 0.08;
+
+        // Subtle idle sway keeps the scene alive, scroll drives the main rotation.
+        const idle = Math.sin(Date.now() * .0012) * .06;
+        const scrollRotY = smoothProgress * 0.6; // ~34deg over one viewport of scroll
+        const scrollRotX = smoothProgress * 0.18;
+
+        group.rotation.x = idle * 0.6 + scrollRotX;
+        group.rotation.y = idle + scrollRotY;
+
+        if (robotRef.current) {
+          robotRef.current.style.transform =
+            `translate3d(0,0,0) rotate(${(scrollRotY * 0.5).toFixed(4)}rad) scale(${(1 - smoothProgress * 0.04).toFixed(4)})`;
+          robotRef.current.style.opacity = String(1 - smoothProgress * 0.15);
+        }
+
         renderer.render(scene, camera);
         frame = requestAnimationFrame(render);
       };
