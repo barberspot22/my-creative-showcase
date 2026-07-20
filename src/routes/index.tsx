@@ -459,12 +459,6 @@ function HomePage() {
           <h2 id="contactHeading" className="contactHeading">Vamos<br/>conversar.</h2>
           <button type="button" className="contactCta" onClick={() => setContact(true)}>
             <span className="contactCtaLabel">Falar com a equipe</span>
-            <span className="contactCtaArrow" aria-hidden="true">
-              <svg width="22" height="10" viewBox="0 0 22 10" fill="none">
-                <path d="M1 5H20" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
-                <path d="M16 1L20 5L16 9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
           </button>
           <div className="contactCopy">
             <p className="contactLead">Vamos descobrir juntos se e como podemos te ajudar.</p>
