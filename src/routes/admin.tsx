@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PAGE_META, defaultLinks, resetLinks, saveLinks, ADMIN_LINKS_KEY, type PageKey, type PageLinks } from "@/lib/adminLinks";
 
 type AdminCase = {
+  key: string;
   href: string;
   title: string;
   description: string;
@@ -14,6 +15,7 @@ const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
 const defaultCases: AdminCase[] = [
   {
+    key: "studio",
     href: "/gb-studio",
     title: "Studio",
     description: "Lookbook completo gerado por IA para marca têxtil",
@@ -21,6 +23,7 @@ const defaultCases: AdminCase[] = [
     frames: ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png"],
   },
   {
+    key: "social",
     href: "/gb-social",
     title: "Social",
     description: "Seu Social Media de IA no WhatsApp",
@@ -32,6 +35,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "ecommerce",
     href: "/ecommerce",
     title: "E-commerce",
     description: "Loja, automação e IA vendedora em um sistema só",
@@ -42,6 +46,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "crm",
     href: "/crm",
     title: "CRM",
     description: "Comercial e produção em módulos separados",
@@ -53,6 +58,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "site",
     href: "/site-institucional",
     title: "Site Institucional",
     description: "Autoridade em segundos e contato sem desvio",
@@ -64,6 +70,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "menu",
     href: "/cardapio-digital",
     title: "Menu Digital",
     description: "Cardápio e presença digital em um sistema só",
@@ -79,9 +86,10 @@ const defaultCases: AdminCase[] = [
 function normalizeCases(value: unknown): AdminCase[] {
   if (!Array.isArray(value)) return defaultCases;
   return defaultCases.map((item) => {
-    const saved = value.find((entry) => entry?.href === item.href);
+    const saved = value.find((entry) => entry?.key === item.key) || value.find((entry) => entry?.href === item.href);
     return {
       ...item,
+      href: typeof saved?.href === "string" && saved.href.trim() ? saved.href.trim() : item.href,
       title: typeof saved?.title === "string" ? saved.title : item.title,
       description: typeof saved?.description === "string" ? saved.description : item.description,
       badge: typeof saved?.badge === "string" ? saved.badge : item.badge,
@@ -92,7 +100,7 @@ function normalizeCases(value: unknown): AdminCase[] {
 
 function AdminPage() {
   const [cases, setCases] = useState<AdminCase[]>(defaultCases);
-  const [activeHref, setActiveHref] = useState(defaultCases[0].href);
+  const [activeKey, setActiveKey] = useState(defaultCases[0].key);
   const [status, setStatus] = useState("Pronto para editar.");
 
   useEffect(() => {
@@ -104,10 +112,10 @@ function AdminPage() {
     }
   }, []);
 
-  const activeCase = useMemo(() => cases.find((item) => item.href === activeHref) || cases[0], [cases, activeHref]);
+  const activeCase = useMemo(() => cases.find((item) => item.key === activeKey) || cases[0], [cases, activeKey]);
 
   const updateCase = (patch: Partial<AdminCase>) => {
-    setCases((current) => current.map((item) => item.href === activeHref ? { ...item, ...patch } : item));
+    setCases((current) => current.map((item) => item.key === activeKey ? { ...item, ...patch } : item));
     setStatus("Alteração ainda não salva.");
   };
 
@@ -121,6 +129,15 @@ function AdminPage() {
 
   const removeFrame = (index: number) => {
     updateCase({ frames: activeCase.frames.filter((_, frameIndex) => frameIndex !== index) });
+  };
+
+  const uploadFrame = (index: number, file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : "";
+      if (result) updateFrame(index, result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const save = () => {
@@ -169,7 +186,7 @@ function AdminPage() {
         <button className={tab === "links" ? "active" : ""} onClick={() => setTab("links")} type="button">Links de botões</button>
       </div>
       {tab === "cards" && <nav>
-        {cases.map((item) => <button className={item.href === activeHref ? "active" : ""} key={item.href} onClick={() => setActiveHref(item.href)}>{item.title}</button>)}
+        {cases.map((item) => <button className={item.key === activeKey ? "active" : ""} key={item.key} onClick={() => setActiveKey(item.key)}>{item.title}</button>)}
       </nav>}
     </aside>
 
@@ -219,25 +236,29 @@ function AdminPage() {
           <label>Selo do cardbox
             <input value={activeCase.badge} onChange={(event) => updateCase({ badge: event.target.value })}/>
           </label>
-          <label>Link da página
-            <input value={activeCase.href} readOnly/>
+          <label>Link do card (para onde ele leva ao clicar)
+            <input value={activeCase.href} onChange={(event) => updateCase({ href: event.target.value })} placeholder="/gb-studio ou https://sua-url.com"/>
           </label>
+          <small className="adminHelp">Pode ser uma página interna (/gb-studio) ou uma URL externa (https://…). URLs externas abrem em nova aba.</small>
           <div className="adminImageEditor">
             <div className="adminFieldHead">
               <div>
                 <strong>Imagens dentro do card da home</strong>
-                <small>Essas são as imagens que fazem loop na capa do cardbox.</small>
+                <small>Essas são as imagens que fazem loop na capa do cardbox. Faça upload de fotos ou cole uma URL.</small>
               </div>
               <button onClick={addFrame} type="button">+ Adicionar imagem</button>
             </div>
-            {(activeCase.frames.length ? activeCase.frames : [""]).map((src, index) => <div className="adminImageRow" key={`${activeCase.href}-${index}`}>
+            {(activeCase.frames.length ? activeCase.frames : [""]).map((src, index) => <div className="adminImageRow" key={`${activeCase.key}-${index}`}>
               <div className="adminThumb">{src ? <img src={src} alt=""/> : <span>Sem imagem</span>}</div>
               <label>Imagem {index + 1}
-                <input value={src} placeholder="Cole a URL ou caminho da imagem" onChange={(event) => updateFrame(index, event.target.value)}/>
+                <input value={src.startsWith("data:") ? "" : src} placeholder={src.startsWith("data:") ? "Imagem carregada do seu dispositivo" : "Cole a URL ou caminho da imagem"} onChange={(event) => updateFrame(index, event.target.value)}/>
+              </label>
+              <label className="adminUpload">Enviar do dispositivo
+                <input type="file" accept="image/*" onChange={(event) => { const file = event.target.files?.[0]; if (file) uploadFrame(index, file); event.target.value = ""; }}/>
               </label>
               <button onClick={() => removeFrame(index)} type="button" aria-label={`Remover imagem ${index + 1}`}>Remover</button>
             </div>)}
-            <small>Use caminhos do site, como /gb-studio/lookbook-01.png, ou URLs externas. Se tiver mais de uma imagem, o card da home faz loop entre elas.</small>
+            <small>Use caminhos do site, URLs externas ou faça upload direto. Se tiver mais de uma imagem, o card da home faz loop entre elas.</small>
           </div>
           <button type="submit">Salvar este cardbox</button>
         </form>
