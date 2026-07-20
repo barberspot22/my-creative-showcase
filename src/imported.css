@@ -835,8 +835,7 @@ body{overflow-x:clip}
 .siteFooter .footerOverlap{position:absolute;left:0;right:0;top:-120px;height:180px;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.55) 35%,rgba(5,5,5,.9) 70%,#050505 100%);z-index:1}
 .siteFooter .footerInner{position:relative;z-index:2;padding:120px 8% 40px;max-width:1400px;margin:0 auto}
 .siteFooter .footerTop{display:grid;grid-template-columns:1fr 2fr;gap:80px;padding-bottom:70px;border-bottom:1px solid rgba(255,255,255,.08)}
-.siteFooter .footerBrand .footerLogo{font-family:Manrope,sans-serif;font-weight:800;font-size:38px;letter-spacing:2px;margin:0 0 12px;background:linear-gradient(180deg,#fff 0%,#bfbfbf 60%,#7a7a7a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.siteFooter .footerBrand .footerAddr{margin:0 0 24px;color:#888;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+.siteFooter .footerBrand .footerLogo{height:42px;width:auto;display:block;margin:0 0 16px;filter:drop-shadow(0 6px 24px rgba(255,255,255,.15))}
 .siteFooter .footerBrand .footerTag{margin:0;color:#eaeaea;font-size:22px;line-height:1.25;font-family:Melodrama,serif;max-width:280px}
 .siteFooter .footerCols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
 .siteFooter .footerCols h5{font-size:11px;text-transform:uppercase;letter-spacing:2.2px;color:#666;margin:0 0 22px;font-weight:700}
