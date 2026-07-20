@@ -1,36 +1,17 @@
 
 import { useEffect, useRef } from "react";
 
-// Shared easing (easeInOutCubic) used for scroll-driven rotation
-const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
 export function LumusReplicaEffect() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const robotRef = useRef<HTMLImageElement>(null);
-  const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    const host = hostRef.current;
-    if (!wrapper || !host) return;
+    if (!wrapper) return;
     let stopped = false;
     let frame = 0;
     let renderer: any;
     let onResize = () => {};
     let onPointer = (_e: PointerEvent) => {};
-
-    // Scroll progress (0 → 1) smoothed with lerp for a jitter-free feel.
-    let scrollProgress = 0;
-    let smoothProgress = 0;
-    const updateScroll = () => {
-      const rect = host.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-      // 0 while hero fully in view, 1 once scrolled a full viewport past top
-      const raw = Math.min(1, Math.max(0, -rect.top / vh));
-      scrollProgress = easeInOutCubic(raw);
-    };
-    updateScroll();
-    window.addEventListener("scroll", updateScroll, { passive: true });
 
     (async () => {
       // Dynamic import so the vendored Three.js only loads in the browser (avoids SSR issues).
@@ -94,24 +75,10 @@ export function LumusReplicaEffect() {
         camera.position.x += (mouseX * .38 - camera.position.x) * .05;
         camera.position.y += (mouseY * .38 - camera.position.y) * .05;
         camera.lookAt(scene.position);
-
-        // Smooth scroll progress with lerp so rotation never jitters between frames.
-        smoothProgress += (scrollProgress - smoothProgress) * 0.08;
-
-        // Subtle idle sway keeps the scene alive, scroll drives the main rotation.
-        const idle = Math.sin(Date.now() * .0012) * .06;
-        const scrollRotY = smoothProgress * 0.6; // ~34deg over one viewport of scroll
-        const scrollRotX = smoothProgress * 0.18;
-
-        group.rotation.x = idle * 0.6 + scrollRotX;
-        group.rotation.y = idle + scrollRotY;
-
-        if (robotRef.current) {
-          robotRef.current.style.transform =
-            `translate3d(0,0,0) rotate(${(scrollRotY * 0.5).toFixed(4)}rad) scale(${(1 - smoothProgress * 0.04).toFixed(4)})`;
-          robotRef.current.style.opacity = String(1 - smoothProgress * 0.15);
-        }
-
+        const r = Date.now() * .0018;
+        const rot = Math.sin(r) * .12;
+        group.rotation.x = rot * 1.4;
+        group.rotation.y = rot;
         renderer.render(scene, camera);
         frame = requestAnimationFrame(render);
       };
@@ -133,15 +100,14 @@ export function LumusReplicaEffect() {
       cancelAnimationFrame(frame);
       document.removeEventListener("pointermove", onPointer);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", updateScroll);
       renderer?.dispose?.();
       wrapper.querySelector("canvas")?.remove();
     };
   }, []);
 
-  return <div ref={hostRef} className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
+  return <div className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
     <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
-    <img ref={robotRef} className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" />
+    <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" />
     <h1>GB IA</h1>
   </div>;
 }
