@@ -400,9 +400,10 @@ function HomePage() {
     </header>
 
     <main id="top">
-      <section className="hero"><ElasticGrid/><LumusReplicaEffect/></section>
-
-      <CircleGalleryCarousel cards={editableCaseCards} />
+      <div className="heroFoldScene">
+        <section className="hero"><ElasticGrid/><LumusReplicaEffect/></section>
+        <CircleGalleryCarousel cards={editableCaseCards} />
+      </div>
 
       <section id="leistungen" className="services light">
         <h2 className="reveal">O que fazemos</h2>
