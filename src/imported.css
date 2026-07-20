@@ -401,8 +401,8 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 @media(max-width:760px){.manifest{min-height:300px;padding-bottom:45px}.manifest h1{font-size:34px}}
 
 /* Home — Circle Gallery Carousel inspired by CreativeApe circle carousel */
-.circleProductSection{position:relative;min-height:820px;padding:120px 0 92px;margin-top:0;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:6}
-.circleProductSection:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 58%,#ffffff08,transparent 38%);z-index:-2}
+.circleProductSection{position:relative;min-height:820px;padding:170px 0 92px;margin-top:-140px;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:6}
+.circleProductSection:before{content:"";position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(180deg,transparent 0%,#050505 100%);z-index:-1;transform:translateY(-40px)}
 .circleProductSection:after{content:"";position:absolute;left:0;right:0;bottom:0;height:190px;background:linear-gradient(transparent,#050505);pointer-events:none;z-index:5}
 
 .circleProductSection h2{font-size:clamp(58px,8vw,122px);line-height:1.2;font-weight:800!important;letter-spacing:-4px;margin:0 auto 48px;max-width:1220px;background:linear-gradient(180deg,#ffffff 0%,#f5f6f8 18%,#c8ccd3 42%,#8a8f97 58%,#c8ccd3 74%,#f8f9fb 92%,#a8adb5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 0 rgba(255,255,255,.35)) drop-shadow(0 18px 30px rgba(0,0,0,.55)) drop-shadow(0 42px 45px rgba(0,0,0,.48))}
