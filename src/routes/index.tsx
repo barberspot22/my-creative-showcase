@@ -463,7 +463,7 @@ function HomePage() {
         <div className="contactInner">
           <div className="contactGoldGlow" aria-hidden="true" />
           <h2 id="contactHeading" className="contactHeading">Vamos<br/>conversar.</h2>
-          <button type="button" className="contactCta" onClick={() => setContact(true)}>
+          <button type="button" className="contactCta" onClick={() => { import("@/lib/tracking").then(({ trackLead }) => trackLead("home_contact_cta")); setContact(true); }}>
             <span className="contactCtaLabel">Falar com a equipe</span>
           </button>
           <div className="contactCopy">
