@@ -87,7 +87,7 @@ const caseCards: CaseCard[] = [
     key: "ecommerce",
     href: "/ecommerce",
     title: "E-commerce",
-    description: "Loja, automação e IA vendedora em um sistema só",
+    description: "Loja pronta pra vender no automático, com IA que atende e converte",
     badge: "LOJA",
     frames: [
       { kind: "image", src: webCoverImages.ecommerce[0], alt: "Loja virtual aberta em notebook" },
