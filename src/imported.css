@@ -911,10 +911,10 @@ body{overflow-x:clip}
 .contactEdge{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,204,211,.35),transparent);pointer-events:none}
 .contact .contactHeading{position:relative;z-index:1;font-family:Melodrama,"Cormorant Garamond",serif!important;font-weight:500!important;font-size:clamp(56px,9vw,88px)!important;line-height:.92!important;letter-spacing:-1.5px!important;margin:0 0 44px!important;background:linear-gradient(180deg,#ffffff 0%,#c8ccd3 55%,#8a8f97 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .contact .contactInner .contactCta.contactCta{position:relative;z-index:1;display:block;width:100%;max-width:100%;padding:18px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#e9ecf1;cursor:pointer;transition:border-color .4s ease,background .4s ease,color .4s ease;font-family:Manrope,inherit;margin:0 0 44px;text-align:center;text-decoration:none;overflow:visible}
-.contact .contactInner .contactCta.contactCta>.contactCtaLabel{display:inline;float:none;white-space:nowrap;font-size:12px!important;line-height:1!important;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:inherit;padding:0;margin:0}
-.contact .contactInner .contactCta.contactCta>.contactCtaLabel::before,
-.contact .contactInner .contactCta.contactCta>.contactCtaLabel::after{display:none!important;content:none!important}
-.contact .contactInner .contactCta.contactCta:hover{border-color:rgba(201,168,76,.75);background:rgba(201,168,76,.05);color:#fff}
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel{display:inline;float:none;white-space:nowrap;font-size:12px!important;line-height:1!important;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:inherit;padding:0;margin:0}
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel::before,
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel::after{display:none!important;content:none!important}
+#kontakt .contactInner .contactCta.contactCta:hover{border-color:rgba(201,168,76,.75);background:rgba(201,168,76,.05);color:#fff}
 .contactCopy{position:relative;z-index:1;font-size:16px;line-height:1.65;margin:0;display:block}
 .contactCopy p{margin:0 0 18px}
 .contactLead{color:#c8ccd3;font-weight:300;font-size:17px}
