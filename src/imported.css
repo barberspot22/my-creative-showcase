@@ -1177,6 +1177,20 @@ body{overflow-x:clip}
   .processTrail { padding: 110px 28px 130px; }
   .siteFooter .footerInner { padding: 120px 28px 40px; }
 
+  /* Home carousel + hero headline */
+  .circleProductSection { padding-left: 28px; padding-right: 28px; }
+  .circleProductSection h2 { max-width: none; }
+  .circlePrev { left: 28px; }
+  .circleNext { right: 28px; }
+
+  /* Home clients grid */
+  .references .logoGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .references .logoGrid > div { border-right: 1px solid #777; }
+  .references .logoGrid > div:nth-child(3n) { border-right: 0; }
+  .references .logoGrid > div:nth-child(4n) { border-right: 1px solid #777; }
+
   /* Product page navs + heroes */
   .studioNav, .commerceNav, .siteProductNav, .menuProductNav { padding: 0 28px; }
   .studioHero, .socialHero, .commerceHero, .siteProductHero, .menuProductHero { padding: 110px 28px 80px; }
