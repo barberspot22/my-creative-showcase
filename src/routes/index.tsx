@@ -462,7 +462,7 @@ function HomePage() {
         <div className="footerTop">
           <div className="footerBrand">
             <img className="footerLogo" src={gbLogo} alt="GB IA" />
-            <p className="footerTag">Sistemas, automação e IA autônoma.</p>
+            <p className="footerTag">Soluções sob medida, automação e IA autônoma.</p>
           </div>
           <div className="footerCols">
             <div>
