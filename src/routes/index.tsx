@@ -345,7 +345,8 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
     const dx = drag.current.delta;
-    const steps = Math.round(-dx / 180);
+    // Snap: qualquer arrasto acima de 40px avança exatamente 1 card na direção do gesto.
+    const steps = Math.abs(dx) > 40 ? (dx < 0 ? 1 : -1) : 0;
     if (drag.current.intent === "x" && steps !== 0) {
       suppressClickUntil.current = Date.now() + 450;
       moveTo(drag.current.activeIndex + steps);
