@@ -917,3 +917,7 @@ body{overflow-x:clip}
   .processTrail .trailStep.left .trailCardHead{justify-content:flex-start;flex-direction:row}
   .processTrail .trailTreasure{margin-top:60px;margin-left:-56px}
 }
+@media (max-width:820px){
+  .processTrail .trailPath{display:none}
+  .processTrail .trailMap:before{content:"";position:absolute;left:26px;top:0;bottom:80px;width:2px;background:linear-gradient(180deg,#f5e6b3 0%,#d4af37 50%,#8a6a1a 100%);box-shadow:0 0 12px rgba(212,175,55,.5);z-index:1}
+}
