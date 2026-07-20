@@ -1,73 +1,54 @@
-## Redesign do painel `/admin` — Papel & Tinta
+Ajuste de responsividade em tablet (768–1023px) para que todas as páginas ocupem a largura total da tela com um padding lateral fixo e confortável (respiro), sem margens percentuais excessivas.
 
-Trocar totalmente a linguagem visual e a arquitetura de navegação do admin, mantendo 100% da funcionalidade atual (Home Cards, Portfólios, Links, Textos, Rastreamento).
+### Diagnóstico confirmado
+- O projeto só possui media queries ativas em `max-width:760px` e `max-width:900px`. Não existe uma regra de transição para a faixa de tablet (768–1023px), então essa viewport herda os valores de desktop (paddings de 6% a 10% e grids de 2 colunas).
+- As páginas de produto (`/gb-studio`, `/gb-social`, `/ecommerce`, `/crm`, `/site-institucional`, `/cardapio-digital`) e a home (`/`) usam paddings percentuais que, em 768px, geram ~46–76px de espaço lateral — muito para tablet.
+- O admin já colapsa a sidebar em ≤1023px, mas o padding interno também pode ficar apertado demais nessa faixa.
 
-### 1. Nova linguagem visual (paleta clara)
+### O que será feito
 
-Tokens novos em `src/imported.css`, escopados em `.adminShell` para não vazar no site público:
+1. **Criar media query global de tablet** em `src/imported.css`:
+   ```text
+   @media (min-width: 761px) and (max-width: 1023px) { ... }
+   ```
+   Com padding lateral padrão de **28px** (pode ajustar para 24px em telas muito próximas de 768px e 32px em 1024px se necessário).
 
-- `--adm-bg: #f5f3ee` (papel)
-- `--adm-surface: #ffffff`
-- `--adm-surface-2: #ebe7df` (blocos secundários / hover)
-- `--adm-ink: #1a1a1a` (tipografia principal)
-- `--adm-ink-soft: #5a564f` (labels, meta)
-- `--adm-line: #d9d3c6` (bordas)
-- `--adm-gold: #c9a84c` (ação primária / estado ativo)
-- `--adm-gold-soft: #f0e4bd` (chips / hover suave)
-- `--adm-danger: #a3341f`
-- Tipografia: manter Manrope para corpo, adotar **Instrument Serif** só em títulos de página para dar tom editorial coerente com a marca GB IA.
-- Sombras suaves em vez de "vidro escuro" (`0 1px 2px rgba(0,0,0,.04), 0 8px 24px -12px rgba(0,0,0,.12)`).
+2. **Páginas de produto** — ajustar seções para 100% de largura com padding lateral:
+   - `.studioNav`, `.studioHero`, `.problemBlock`, `.processBlock`, `.audienceBlock`, `.briefingBlock`, `.studioFooter`
+   - `.socialHero`, `.socialProductPage` seções internas (`.whatsappBlock`, `.allChannels`, `.socialWorkShowcase`, `.autonomyBlock`, `.dnaBlock`, `.socialFlow`, `.socialFinal`)
+   - `.commerceHero`, `.commerceProblem`, `.commerceDeliverables`, `.commerceGallerySection`, `.commerceProcess`, `.commerceProof`, `.commerceFinal`
+   - `.crmHero`, `.crmAutoBlock`, `.crmSystemShowcase`, `.crmChatBlock`, `.crmStructure`, `.crmCompareBlock`, `.crmFinal`
+   - `.siteProductHero`, `.siteProductProblem`, `.siteProductDeliverables`, `.siteWorkShowcase`, `.siteProductProcess`, `.siteProductFinal`
+   - `.menuProductHero`, `.menuCatalogWidgetSection`, `.menuProductProblem`, `.menuProductDeliverables`, `.menuVisualShowcase`, `.menuProductProcess`, `.menuProductProof`, `.menuProductFinal`
 
-### 2. Nova arquitetura de navegação
+   Detalhes:
+   - Padding lateral fixo (28px) em vez de 6%–9%.
+   - Grids de 2 colunas (`problemBlock`, `processBlock`, `comparison`, `commerceDeliverables ol`, etc.) passam para 1 coluna para aproveitar a largura total.
+   - Blocos com margem lateral percentual (`briefingBlock`, `socialFinal`, `commerceFinal`) passam para margem fixa de 20px/28px e largura auto, ocupando a largura disponível.
 
-Estrutura adaptativa em `src/routes/admin.tsx`:
+3. **Home (`/`)** — ajustar seções com padding percentual:
+   - `.nav` (padding 22px 5.5% → 22px 28px)
+   - `.services` (70px 7% 95px → 70px 28px 95px)
+   - `.why` (90px 9% → 90px 28px)
+   - `.references` (85px 10% 90px → 85px 28px 90px)
+   - `.contact` (padding 0 24px já ok, mas verificar max-width)
+   - `.siteFooter .footerInner` (padding 120px 8% 40px → 120px 28px 40px)
+   - `.processTrail` (padding 140px 6% 160px → 140px 28px 160px)
+   - Manter `.heroFoldScene` e `.circleProductSection` com comportamento visual atual, mas garantir que o título e os cards não fiquem cortados nas laterais.
 
-```text
-┌──────────────────────────────────────────────────────┐
-│ TopBar: [← Site]  GB IA · Admin        [Salvar] [👁] │
-├──────────────┬───────────────────────────────────────┤
-│  Sidebar     │  Área do editor                       │
-│  (desktop)   │  ┌── breadcrumb ────────────────────┐│
-│  ▸ Home      │  │ Home · Cards / Studio            ││
-│  ▸ Portfólio │  ├──────────────────────────────────┤│
-│  ▸ Links     │  │ Cabeçalho da seção + ajuda curta ││
-│  ▸ Textos    │  │                                  ││
-│  ▸ Pixel     │  │ Split: [Form 60%] [Preview 40%]  ││
-│              │  └──────────────────────────────────┘│
-└──────────────┴───────────────────────────────────────┘
-```
+4. **Admin (`/admin`)** — ajustar layout para tablet:
+   - `.admX-section` e `.admX-topbar` já colapsam em ≤1023px, mas vou garantir que o padding seja 28px e que formulários/previews não fiquem menores que a tela.
+   - Em 768–1023px, preview de cards pode ser exibido abaixo do formulário com largura total, como já acontece em mobile.
+   - Verificar se bottom nav não esconde conteúdo (padding-bottom adequado).
 
-- **Desktop (≥1024px):** sidebar fixa 260px + topbar com salvar/preview persistentes; split editor+preview lado a lado.
-- **Tablet (768–1023px):** sidebar vira barra horizontal de tabs sticky no topo; preview colapsa para baixo do form.
-- **Mobile (<768px):** bottom nav fixa com 5 ícones (Home, Portfólio, Links, Textos, Pixel) + botão flutuante "Salvar" à direita. Preview vira aba interna (toggle "Editar / Ver") em cada seção.
+5. **Verificação**:
+   - Usar o preview nos viewports 768px e 1024px (tablet) para confirmar que não há scroll horizontal, conteúdo cortado ou espaços laterais desiguais.
+   - Validar que as mudanças não afetam o mobile existente (≤760px) nem o desktop (≥1024px).
 
-### 3. Melhorias de UX por aba
-
-Sem mudar o modelo de dados nem o backend — só a forma de editar:
-
-- **Home · Cards:** lista de cards à esquerda com drag-handle e miniatura; ao selecionar, form à direita. Cada card mostra badge de status ("publicado", "sem imagem"). Botão "Duplicar" e "Ocultar da home".
-- **Portfólios:** filtro por página (chips no topo em vez de select), grid de itens em cards com thumb, título, link. Ação "Novo item" fixa como botão CTA dourado. Edição em drawer lateral (desktop) ou modal fullscreen (mobile) — evita perder scroll.
-- **Links / CTAs:** agrupados por página com accordion; cada linha tem preview do botão renderizado com o texto atual, ao lado do input. Ícone de link externo abre a página real em nova aba para testar.
-- **Textos:** editor chave/valor vira uma tabela com busca no topo (filtra por chave ou conteúdo) + edição inline. Adicionar textareas auto-resize.
-- **Rastreamento:** cada provedor (Meta, GA4, GTM, Google Ads) em um card independente com toggle liga/desliga, campo do ID e status "conectado / não configurado". Botão "Testar evento Lead" que dispara um evento fake e mostra ✔/✘ na hora.
-
-### 4. Feedback e estados
-
-- Toast discreto no canto superior direito para "Salvo" / "Erro" — substitui o `useStatus` textual atual.
-- Estado "não salvo" (dot dourado) aparece no botão Salvar assim que qualquer campo muda; Cmd/Ctrl+S atalho global dentro do admin.
-- Skeleton loaders em vez de "Carregando…" em texto.
-- Confirmação inline (não `window.confirm`) ao excluir item de portfólio.
-
-### 5. Detalhes técnicos
-
-- Todo o CSS novo entra em `src/imported.css` sob classes `adm*` novas; classes antigas `admin*` são substituídas na mesma edição. Nada muda em outras rotas.
-- `src/routes/admin.tsx` é reescrito mantendo os mesmos imports de `@/lib/cms` e `@/lib/adminLinks` — assinaturas de `fetchHomeCards`, `upsertHomeCards`, etc. não mudam.
-- Bottom nav mobile usa `position: fixed` com `env(safe-area-inset-bottom)`.
+### O que não muda
+- Nenhuma alteração de conteúdo, copy ou funcionalidade.
 - Sem novas dependências.
+- Páginas legais (`/politica-de-privacidade`, `/termos-de-uso`) já têm padding fixo; só serão revisadas para garantir consistência.
 
-### O que **não** muda
-
-- Modelo de dados no Cloud (tabelas `home_cards`, `portfolio_items`, `page_links`, `site_texts`, `tracking_settings`).
-- Comportamento de upload (segue base64 / URL como hoje).
-- Integração de tracking (`TrackingScripts`, rota `/api/public/meta-capi`).
-- Nada no site público.
+### Entrega esperada
+Todas as páginas do site e do painel admin terão um layout confortável em tablet: conteúdo aproveitando a largura total da tela com padding lateral simétrico e sem elementos encostados ou “flutuando” no centro com margens excessivas.

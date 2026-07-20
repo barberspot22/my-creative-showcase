@@ -38,56 +38,57 @@ function AdminPage() {
   const current = TABS.find((t) => t.key === tab)!;
 
   return (
-    <div className="admX-shell">
-      <Toaster position="top-right" richColors closeButton theme="light"/>
+    <>
+      <div className="admX-shell">
+        {/* Desktop sidebar */}
+        <aside className="admX-side">
+          <div className="admX-brand">
+            <div className="admX-brand-mark">GB</div>
+            <div className="admX-brand-name">GB IA Admin<small>Painel de conteúdo</small></div>
+          </div>
+          <a href="/" className="admX-back">← Voltar para o site</a>
 
-      {/* Desktop sidebar */}
-      <aside className="admX-side">
-        <div className="admX-brand">
-          <div className="admX-brand-mark">GB</div>
-          <div className="admX-brand-name">GB IA Admin<small>Painel de conteúdo</small></div>
+          <div className="admX-nav">
+            <div className="admX-nav-label">Conteúdo</div>
+            {TABS.filter((t) => t.group === "Conteúdo").map((t) => (
+              <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)}>
+                <span className="ico">{t.icon}</span> {t.label}
+              </button>
+            ))}
+            <div className="admX-nav-label" style={{ marginTop: 8 }}>Rastreamento</div>
+            {TABS.filter((t) => t.group === "Rastreamento").map((t) => (
+              <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)}>
+                <span className="ico">{t.icon}</span> {t.label}
+              </button>
+            ))}
+          </div>
+        </aside>
+
+        <main className="admX-main">
+          <TopCrumb section={current.label} />
+          <section className="admX-section" key={tab}>
+            {tab === "home" && <HomeCardsTab />}
+            {tab === "portfolio" && <PortfolioTab />}
+            {tab === "links" && <LinksTab />}
+            {tab === "textos" && <TextsTab />}
+            {tab === "tracking" && <TrackingTab />}
+          </section>
+        </main>
+
+        {/* Mobile bottom nav */}
+        <div className="admX-bottom">
+          <nav>
+            {TABS.map((t) => (
+              <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)} aria-label={t.label}>
+                <span className="ico" style={{ fontSize: 18, lineHeight: 1 }}>{t.icon}</span>
+                {t.label}
+              </button>
+            ))}
+          </nav>
         </div>
-        <a href="/" className="admX-back">← Voltar para o site</a>
-
-        <div className="admX-nav">
-          <div className="admX-nav-label">Conteúdo</div>
-          {TABS.filter((t) => t.group === "Conteúdo").map((t) => (
-            <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)}>
-              <span className="ico">{t.icon}</span> {t.label}
-            </button>
-          ))}
-          <div className="admX-nav-label" style={{ marginTop: 8 }}>Rastreamento</div>
-          {TABS.filter((t) => t.group === "Rastreamento").map((t) => (
-            <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)}>
-              <span className="ico">{t.icon}</span> {t.label}
-            </button>
-          ))}
-        </div>
-      </aside>
-
-      <main className="admX-main">
-        <TopCrumb section={current.label} />
-        <section className="admX-section" key={tab}>
-          {tab === "home" && <HomeCardsTab />}
-          {tab === "portfolio" && <PortfolioTab />}
-          {tab === "links" && <LinksTab />}
-          {tab === "textos" && <TextsTab />}
-          {tab === "tracking" && <TrackingTab />}
-        </section>
-      </main>
-
-      {/* Mobile bottom nav */}
-      <div className="admX-bottom">
-        <nav>
-          {TABS.map((t) => (
-            <button key={t.key} className={tab === t.key ? "active" : ""} onClick={() => setTab(t.key)} aria-label={t.label}>
-              <span className="ico" style={{ fontSize: 18, lineHeight: 1 }}>{t.icon}</span>
-              {t.label}
-            </button>
-          ))}
-        </nav>
       </div>
-    </div>
+      <Toaster position="top-right" richColors closeButton theme="light"/>
+    </>
   );
 }
 
