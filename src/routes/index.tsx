@@ -302,6 +302,10 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active };
     setIsDragging(true);
     setDragDelta(0);
+  };
+
+  const capturePointer = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
     (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId);
   };
 
@@ -313,6 +317,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       drag.current.intent = Math.abs(dx) > Math.abs(dy) * 1.2 ? "x" : "y";
     }
     if (drag.current.intent !== "x") return;
+    if (!drag.current.moved) capturePointer(event);
     event.preventDefault();
     drag.current.moved = true;
     setDragDelta(Math.max(-SWIPE_LIMIT, Math.min(SWIPE_LIMIT, dx)));
