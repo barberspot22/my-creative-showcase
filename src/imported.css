@@ -689,87 +689,92 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .socialDesignPreviewImage img{display:block;width:100%;height:100%;object-fit:cover}
 
 /* ===== Catalog Widget (cardapio-digital) ===== */
-.menuCatalogWidgetSection { padding: 96px 24px; display: grid; gap: 48px; justify-items: center; background: radial-gradient(ellipse at top, rgba(255,180,80,.06), transparent 60%), #050505; }
-.menuCatalogIntro { max-width: 640px; text-align: center; display: grid; gap: 14px; }
+.menuCatalogWidgetSection { padding: 96px 24px; display: grid; gap: 48px; justify-items: center; background: radial-gradient(ellipse at top, rgba(212,181,122,.06), transparent 60%), #050505; }
+.menuCatalogIntro { max-width: 720px; text-align: center; display: grid; gap: 14px; }
 .menuCatalogIntro h2 { font-family: 'Melodrama', serif; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; color: #f5f5f5; margin: 0; }
 .menuCatalogIntro h2 em { font-style: italic; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .menuCatalogIntro p { color: rgba(240,240,240,.62); font-size: 15px; line-height: 1.5; margin: 0; }
 
-.menuCatalogFrame { width: min(420px, 100%); background: linear-gradient(180deg,#1a1a1a,#0a0a0a); border-radius: 44px; padding: 14px; box-shadow: 0 40px 120px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 1px rgba(255,255,255,.04); position: relative; }
-.menuCatalogNotch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 96px; height: 22px; background: #050505; border-radius: 14px; z-index: 3; display: flex; align-items: center; justify-content: center; }
-.menuCatalogNotch span { width: 8px; height: 8px; border-radius: 50%; background: #1a1a1a; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-.menuCatalogScreen { background: #f6f6f7; border-radius: 32px; overflow: hidden; padding: 44px 14px 14px; min-height: 640px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+.menuCatalogFrame { width: 100%; max-width: 100%; background: linear-gradient(180deg,#111114,#0a0a0c); border-radius: 24px; padding: 0; box-shadow: 0 40px 120px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 1px rgba(255,255,255,.03); position: relative; overflow: hidden; }
+.menuCatalogNotch { display: none !important; }
+.menuCatalogScreen { background: transparent; border-radius: 24px; overflow: hidden; padding: 22px; min-height: 640px; display: flex; flex-direction: column; gap: 18px; position: relative; }
 
-.menuCatalogTopbar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; gap: 8px; }
-.menuCatalogIconBtn { width: 40px; height: 40px; border-radius: 12px; background: #fff; border: 1px solid rgba(0,0,0,.06); display: flex; align-items: center; justify-content: center; color: #111; cursor: pointer; padding: 0; }
-.menuCatalogToggle { display: flex; background: #fff; border-radius: 999px; padding: 4px; border: 1px solid rgba(0,0,0,.06); }
-.menuCatalogToggle button { flex: 1; border: 0; background: transparent; padding: 8px 10px; border-radius: 999px; font-size: 11px; letter-spacing: .08em; font-weight: 700; color: #7a7a7a; cursor: pointer; }
-.menuCatalogToggle button.active { background: #0a0a0a; color: #fff; }
+.menuCatalogTopbar { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 10px; }
+.menuCatalogIconBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); cursor: pointer; padding: 0; transition: border-color .2s, background .2s; }
+.menuCatalogIconBtn:hover { border-color: rgba(212,181,122,.5); background: rgba(212,181,122,.06); }
+.menuCatalogToggle { display: flex; background: rgba(255,255,255,.04); border-radius: 999px; padding: 4px; border: 1px solid rgba(255,255,255,.08); }
+.menuCatalogToggle button { flex: 1; border: 0; background: transparent; padding: 10px 14px; border-radius: 999px; font-size: 11px; letter-spacing: .12em; font-weight: 700; color: rgba(255,255,255,.55); cursor: pointer; }
+.menuCatalogToggle button.active { background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; box-shadow: 0 4px 14px -4px rgba(212,181,122,.5); }
 
-.menuCatalogBanner { position: relative; border-radius: 20px; padding: 20px; background: linear-gradient(135deg,#3a5b7c,#7fa6c7); color: #fff; overflow: hidden; min-height: 168px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.menuCatalogBanner:before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,.2), transparent 60%); }
+.menuCatalogBanner { position: relative; border-radius: 18px; padding: 22px; background: linear-gradient(135deg,#1a1a1e,#0d0d10); border: 1px solid rgba(212,181,122,.18); color: #f5f5f5; overflow: hidden; min-height: 168px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.menuCatalogBanner:before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 85% 15%, rgba(212,181,122,.18), transparent 55%); }
 .menuCatalogBannerContent { position: relative; display: grid; gap: 6px; z-index: 1; }
-.menuCatalogBannerContent h4 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
-.menuCatalogBannerContent h5 { margin: 0 0 6px; font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
-.menuCatalogBannerCta { margin-top: 4px; background: #ff6a2b; color: #fff; border: 0; padding: 10px 16px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .06em; cursor: pointer; box-shadow: 0 8px 20px -6px rgba(255,106,43,.6); align-self: flex-start; }
-.menuCatalogBannerBrand { position: relative; z-index: 1; background: #d92e2e; border-radius: 14px; padding: 10px 12px; display: grid; justify-items: center; gap: 2px; min-width: 92px; }
-.menuCatalogBrandLogo { font-size: 22px; }
-.menuCatalogBannerBrand b { font-size: 12px; font-weight: 800; letter-spacing: .04em; }
-.menuCatalogBannerBrand em { font-size: 9px; font-style: normal; letter-spacing: .16em; opacity: .85; }
-.menuCatalogBannerEmoji { position: absolute; right: -10px; bottom: -14px; font-size: 84px; opacity: .28; transform: rotate(-14deg); }
+.menuCatalogBannerContent h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 22px; font-weight: 500; letter-spacing: -.01em; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.menuCatalogBannerContent h5 { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.menuCatalogBannerCta { margin-top: 4px; background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; border: 0; padding: 11px 18px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .1em; cursor: pointer; box-shadow: 0 8px 22px -8px rgba(212,181,122,.6); align-self: flex-start; }
+.menuCatalogBannerBrand { position: relative; z-index: 1; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px 14px; display: grid; justify-items: center; gap: 3px; min-width: 96px; }
+.menuCatalogBrandLogo { font-size: 22px; filter: grayscale(.2); }
+.menuCatalogBannerBrand b { font-size: 12px; font-weight: 800; letter-spacing: .04em; color: #f5f5f5; }
+.menuCatalogBannerBrand em { font-size: 9px; font-style: normal; letter-spacing: .18em; opacity: .6; color: #d4b57a; }
+.menuCatalogBannerEmoji { display: none; }
 
 .menuCatalogChips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
 .menuCatalogChips::-webkit-scrollbar { display: none; }
-.menuCatalogChip { border: 1px solid rgba(0,0,0,.08); background: #fff; padding: 10px 16px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #555; cursor: pointer; flex: 0 0 auto; }
-.menuCatalogChip.active { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+.menuCatalogChip { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); padding: 10px 16px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); cursor: pointer; flex: 0 0 auto; transition: all .2s; }
+.menuCatalogChip:hover { color: #f5f5f5; border-color: rgba(212,181,122,.4); }
+.menuCatalogChip.active { background: rgba(212,181,122,.1); color: #f8e6a8; border-color: rgba(212,181,122,.6); }
 
-.menuCatalogGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.menuCatalogCard { background: #fff; border: 1px solid rgba(0,0,0,.05); border-radius: 16px; padding: 8px; display: grid; gap: 8px; cursor: pointer; text-align: left; transition: transform .2s ease, box-shadow .2s ease; }
-.menuCatalogCard:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(0,0,0,.2); }
-.menuCatalogCardMedia { position: relative; aspect-ratio: 1; border-radius: 12px; background: linear-gradient(160deg,#ebebee,#d8d8dd); display: flex; align-items: center; justify-content: center; font-size: 56px; overflow: hidden; }
-.menuCatalogBadge { position: absolute; top: 8px; left: 8px; background: #ff6a2b; color: #fff; font-size: 9px; font-weight: 800; letter-spacing: .06em; padding: 4px 8px; border-radius: 8px; font-style: normal; }
-.menuCatalogBadge.promo { background: #9b6dff; }
+.menuCatalogGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.menuCatalogCard { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 8px; display: grid; gap: 8px; cursor: pointer; text-align: left; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.menuCatalogCard:hover { transform: translateY(-3px); border-color: rgba(212,181,122,.4); box-shadow: 0 18px 34px -18px rgba(212,181,122,.3); }
+.menuCatalogCardMedia { position: relative; aspect-ratio: 1; border-radius: 10px; background: linear-gradient(160deg,#1a1a1e,#0d0d10); display: flex; align-items: center; justify-content: center; font-size: 52px; overflow: hidden; border: 1px solid rgba(255,255,255,.04); }
+.menuCatalogBadge { position: absolute; top: 8px; left: 8px; background: linear-gradient(180deg,#f5f5f5,#b8b8b8); color: #0a0a0a; font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 4px 8px; border-radius: 6px; font-style: normal; }
+.menuCatalogBadge.promo { background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; }
 .menuCatalogCardInfo { display: grid; gap: 2px; padding: 2px 4px 6px; }
-.menuCatalogCardInfo strong { font-size: 14px; color: #111; }
-.menuCatalogCardInfo span { font-size: 12px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.menuCatalogCardInfo strong { font-size: 13px; color: #f8e6a8; font-weight: 700; }
+.menuCatalogCardInfo span { font-size: 12px; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.menuCatalogTabbar { margin-top: auto; background: #fff; border-radius: 18px; padding: 10px; display: flex; justify-content: space-around; border: 1px solid rgba(0,0,0,.05); }
-.menuCatalogTabbar button { background: transparent; border: 0; color: #999; padding: 8px; cursor: pointer; border-radius: 10px; }
-.menuCatalogTabbar button.active { color: #0a0a0a; }
+.menuCatalogTabbar { margin-top: auto; background: rgba(255,255,255,.03); border-radius: 14px; padding: 10px; display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,.08); }
+.menuCatalogTabbar button { background: transparent; border: 0; color: rgba(255,255,255,.4); padding: 8px; cursor: pointer; border-radius: 10px; }
+.menuCatalogTabbar button.active { color: #f8e6a8; }
 
-/* Detail view */
 .menuCatalogDetail { display: flex; flex-direction: column; gap: 14px; height: 100%; animation: menuCatalogFade .25s ease; }
 @keyframes menuCatalogFade { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
-.menuCatalogDetailTop { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; gap: 8px; }
-.menuCatalogDetailTop span { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .08em; color: #555; text-transform: uppercase; }
-.menuCatalogHero { position: relative; aspect-ratio: 1.15; background: linear-gradient(160deg,#ebebee,#c9c9d1); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 140px; overflow: hidden; }
+.menuCatalogDetailTop { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 8px; }
+.menuCatalogDetailTop span { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: rgba(255,255,255,.55); text-transform: uppercase; }
+.menuCatalogHero { position: relative; aspect-ratio: 1.4; background: linear-gradient(160deg,#1a1a1e,#0a0a0c); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 140px; overflow: hidden; }
 .menuCatalogThumbs { display: flex; gap: 8px; }
-.menuCatalogThumbs button { flex: 1; aspect-ratio: 1; border: 2px solid transparent; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; }
-.menuCatalogThumbs button.active { border-color: #0a0a0a; }
+.menuCatalogThumbs button { flex: 1; aspect-ratio: 1; border: 1.5px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; }
+.menuCatalogThumbs button.active { border-color: #d4b57a; background: rgba(212,181,122,.08); }
 .menuCatalogInfo { display: grid; gap: 10px; }
-.menuCatalogInfo h4 { margin: 0; font-size: 20px; font-weight: 800; color: #111; }
-.menuCatalogInfo p { margin: 0; font-size: 13px; color: #555; line-height: 1.4; }
+.menuCatalogInfo h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 24px; font-weight: 500; color: #f5f5f5; }
+.menuCatalogInfo p { margin: 0; font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
 .menuCatalogPriceRow { display: flex; align-items: baseline; gap: 8px; }
-.menuCatalogPriceRow s { color: #999; font-size: 13px; }
-.menuCatalogPriceRow strong { font-size: 22px; color: #ff6a2b; }
+.menuCatalogPriceRow s { color: rgba(255,255,255,.35); font-size: 13px; }
+.menuCatalogPriceRow strong { font-size: 24px; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .menuCatalogSection { display: grid; gap: 8px; }
-.menuCatalogSection label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #7a7a7a; font-weight: 700; }
+.menuCatalogSection label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 700; }
 .menuCatalogSizes { display: flex; gap: 8px; }
-.menuCatalogSizes button { flex: 1; background: #fff; border: 1.5px solid rgba(0,0,0,.08); border-radius: 12px; padding: 10px 6px; display: grid; gap: 2px; cursor: pointer; }
-.menuCatalogSizes button b { font-size: 13px; color: #111; }
-.menuCatalogSizes button em { font-size: 10px; color: #7a7a7a; font-style: normal; }
-.menuCatalogSizes button.active { border-color: #0a0a0a; background: #0a0a0a; }
-.menuCatalogSizes button.active b, .menuCatalogSizes button.active em { color: #fff; }
+.menuCatalogSizes button { flex: 1; background: rgba(255,255,255,.03); border: 1.5px solid rgba(255,255,255,.08); border-radius: 12px; padding: 10px 6px; display: grid; gap: 2px; cursor: pointer; transition: all .2s; }
+.menuCatalogSizes button b { font-size: 13px; color: #f5f5f5; }
+.menuCatalogSizes button em { font-size: 10px; color: rgba(255,255,255,.5); font-style: normal; }
+.menuCatalogSizes button.active { border-color: #d4b57a; background: rgba(212,181,122,.1); }
+.menuCatalogSizes button.active b { color: #f8e6a8; }
+.menuCatalogSizes button.active em { color: rgba(248,230,168,.7); }
 .menuCatalogQtyRow { display: flex; align-items: center; justify-content: space-between; }
-.menuCatalogQty { display: flex; align-items: center; gap: 4px; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 999px; padding: 4px; }
-.menuCatalogQty button { width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; font-size: 16px; cursor: pointer; color: #111; }
-.menuCatalogQty b { min-width: 22px; text-align: center; font-size: 14px; }
-.menuCatalogAdd { margin-top: auto; background: linear-gradient(180deg,#0a0a0a,#1c1c1c); color: #fff; border: 0; padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); }
-.menuCatalogToast { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #0a0a0a; color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 12px 30px -8px rgba(0,0,0,.5); animation: menuCatalogFade .2s ease; }
+.menuCatalogQty { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 4px; }
+.menuCatalogQty button { width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; font-size: 16px; cursor: pointer; color: #f5f5f5; }
+.menuCatalogQty b { min-width: 22px; text-align: center; font-size: 14px; color: #f5f5f5; }
+.menuCatalogAdd { margin-top: auto; background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; border: 0; padding: 16px; border-radius: 14px; font-size: 13px; font-weight: 800; letter-spacing: .06em; cursor: pointer; box-shadow: 0 14px 30px -12px rgba(212,181,122,.5); }
+.menuCatalogToast { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #0a0a0a; color: #f5f5f5; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 12px 30px -8px rgba(0,0,0,.6); border: 1px solid rgba(212,181,122,.4); animation: menuCatalogFade .2s ease; }
 
+@media (max-width: 960px) {
+  .menuCatalogGrid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 760px) {
   .menuCatalogWidgetSection { padding: 64px 16px; }
-  .menuCatalogFrame { border-radius: 36px; padding: 10px; }
-  .menuCatalogScreen { padding: 40px 12px 12px; border-radius: 28px; min-height: 620px; }
+  .menuCatalogScreen { padding: 16px; min-height: 580px; }
+  .menuCatalogBanner { padding: 18px; min-height: 148px; }
+  .menuCatalogBannerContent h4 { font-size: 18px; }
   .menuCatalogHero { font-size: 110px; }
 }
