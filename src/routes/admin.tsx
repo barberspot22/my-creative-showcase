@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PAGE_META, defaultLinks, resetLinks, saveLinks, ADMIN_LINKS_KEY, type PageKey, type PageLinks } from "@/lib/adminLinks";
 
 type AdminCase = {
+  key: string;
   href: string;
   title: string;
   description: string;
