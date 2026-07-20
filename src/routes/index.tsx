@@ -351,6 +351,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
         {cards.map((card, index) => {
           const offset = normalize(index);
           const abs = Math.abs(offset);
+          const hidden = abs >= count / 2;
           const x = offset * 270 + dragDelta;
           const y = abs * 34;
           const rotate = offset * -10;
@@ -363,9 +364,11 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
             aria-label={`Abrir página de ${card.title}`}
             style={{
               transform: `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`,
-              opacity: abs > 3 ? 0 : 1 - abs * .16,
+              opacity: hidden ? 0 : 1 - abs * .16,
               zIndex: 50 - abs,
               filter: `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs ? .7 : 0}) saturate(${abs ? .72 : 1.1})`,
+              pointerEvents: hidden ? "none" : undefined,
+              transition: isDragging ? "none" : undefined,
             }}
           >
             <div className="circleProductVisual">
