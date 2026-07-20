@@ -286,6 +286,8 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
 
   const SWIPE_LIMIT = 170;
 
+  const shouldBlockDragClick = () => Date.now() < suppressClickUntil.current || drag.current.moved;
+
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
     drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active };
@@ -334,7 +336,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       onPointerCancel={onPointerUp}
       onClickCapture={(event) => {
         if ((event.target as HTMLElement).closest(".circleNav")) return;
-        if (Date.now() < suppressClickUntil.current || drag.current.moved) {
+        if (shouldBlockDragClick()) {
           event.preventDefault();
           event.stopPropagation();
           drag.current.moved = false;
@@ -356,6 +358,11 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
             draggable={false}
             key={card.href}
             aria-label={`Abrir página de ${card.title}`}
+            onClick={(event) => {
+              if (!shouldBlockDragClick()) return;
+              event.preventDefault();
+              drag.current.moved = false;
+            }}
             style={{
               transform: `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`,
               opacity: hidden ? 0 : 1 - abs * .16,
