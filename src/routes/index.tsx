@@ -453,11 +453,13 @@ function HomePage() {
           <div className="contactGoldGlow" aria-hidden="true" />
           <h2 id="contactHeading" className="contactHeading">Vamos<br/>conversar.</h2>
           <button type="button" className="contactCta" onClick={() => setContact(true)}>
-            <span>Falar com a equipe</span>
-            <svg width="26" height="12" viewBox="0 0 26 12" fill="none" aria-hidden="true">
-              <path d="M19 1L25 6L19 11" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M1 6H25" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
+            <span className="contactCtaLabel">Falar com a equipe</span>
+            <span className="contactCtaArrow" aria-hidden="true">
+              <svg width="22" height="10" viewBox="0 0 22 10" fill="none">
+                <path d="M1 5H20" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
+                <path d="M16 1L20 5L16 9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
           </button>
           <div className="contactCopy">
             <p className="contactLead">Vamos descobrir juntos se e como podemos te ajudar.</p>
