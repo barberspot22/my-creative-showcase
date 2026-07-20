@@ -1,41 +1,29 @@
-## Objetivo
+## Problema
 
-Dois ajustes na primeira dobra da home (`/`):
+Na tentativa anterior duas coisas quebraram:
 
-1. **Parar de cortar o topo do "GB IA" 3D** enquanto o texto/robô giram.
-2. **Fazer a segunda dobra (carrossel de produtos) entrar por cima do robô** conforme o scroll — como se o robô fosse "engolido" pela seção seguinte, em vez de simplesmente sumir.
+1. **Sombra escura em cima do "GB IA"** — a light section seguinte (`.light` / "Sistemas & Sites" em creme) mostra o texto GB IA por trás porque a hero virou `position:sticky` e continua atrás de todo o resto do site. O efeito visual escuro em cima das letras é a hero vazando por baixo das seções seguintes que não são 100% opacas em toda extensão.
+2. **Hero sticky persiste eternamente** — como `.hero` é sticky no `<body>`, ela fica fixa atrás de TODAS as seções seguintes, não só da segunda dobra. Isso é errado: o usuário quer que a hero fique fixa apenas até a segunda dobra ("O futuro molda o seu negócio") cobri-la; depois o site deve rolar normal.
 
-Nenhuma mudança fora dessas duas seções.
+## Solução
 
----
+Trocar a abordagem: em vez de `position:sticky` na hero (que persiste para sempre), voltar ao modelo de **overlap por margem negativa** (segunda dobra sobe por cima da hero no scroll), mas sem o gradiente escuro que criava a sombra em cima do "GB IA".
 
-## Diagnóstico (o que causa o corte hoje)
+### Mudanças em `src/imported.css`
 
-- `.hero` está com `height:620px; overflow:hidden`.
-- Dentro dele, `.gbRobotHero` posiciona o canvas com `top:49%` e `height:620px`, que estoura pra cima do container.
-- Como `.hero` tem `overflow:hidden`, o topo do "GB IA" é cortado sempre que a animação empurra a geometria pra cima.
+1. **Remover o override sticky** adicionado no fim do arquivo (bloco `/* Sticky hero */`). A hero volta ao fluxo normal com sua altura fixa (720px desktop / 640px mobile).
+2. **Reintroduzir o overlap suave**: `.circleProductSection` recebe `margin-top: -140px` (desktop) / `-90px` (mobile) para entrar por cima da base do robô.
+3. **Fade de topo transparente → preto puro em curta distância** (0% transparente → 40px opaco), sem faixa cinza intermediária. Isso cria uma borda limpa que cobre só a base do robô, sem escurecer o "GB IA" que fica acima da linha de overlap.
+4. **Garantir opacidade total** de `.circleProductSection` (background sólido `#050505`) para que nada da hero apareça atrás dela depois que ela entra em cena.
 
-## O que vou mudar
+### Resultado esperado
 
-### 1. Corte do "GB IA" (em `src/imported.css`)
-- Trocar `.hero { overflow:hidden }` por `overflow:visible` e aumentar levemente a `height` do hero (desktop ~720px, mobile ~640px) pra dar folga vertical ao texto 3D.
-- Ajustar `.gbRobotHero .lumusTitleCanvas` reduzindo `top` (ex: `top:42%` desktop / `38%` mobile) e mantendo `height` — assim o baseline do texto sobe alguns px e o topo deixa de encostar no header/nav.
-- Garantir que `.lumusReplicaEffect` também fique com `overflow:visible` e sem clip.
+- "GB IA" no topo aparece inteiro, sem faixa cinza escura por cima.
+- Ao rolar, a segunda dobra ("O futuro molda o seu negócio") entra por cima da base do robô com uma borda limpa.
+- Depois da segunda dobra, o site flui normal — a hero não fica mais atrás das seções seguintes.
 
-### 2. Segunda dobra cobrindo o robô no scroll (em `src/imported.css`)
-- Aplicar na `.circleProductSection`:
-  - `margin-top: -180px` (mobile `-110px`) pra ela subir e sobrepor a base do hero.
-  - `position:relative; z-index:6` pra ficar acima do canvas 3D do hero.
-  - Um `::before` no topo com gradiente vertical `linear-gradient(180deg, transparent 0%, rgba(0,0,0,.55) 35%, #050505 100%)`, altura ~220px, `filter: blur(28px)`, posicionado em `top:-140px` — funciona como sombra/tampa que "come" o robô e amarra visualmente as duas dobras.
-  - Ajustar o `padding-top` da seção pra compensar a subida (o headline "O futuro molda seu negócio" não pode ficar coberto pelo overlay).
-- No `.hero` acrescentar `z-index:1` explícito pra ordem de empilhamento ficar previsível.
+## Detalhes técnicos
 
-### 3. Sem mudanças em JS/TSX
-- Nenhuma alteração em `LumusReplicaEffect.tsx`, `index.tsx` ou no carrossel — o efeito é puramente CSS (margem negativa + gradiente + z-index).
-
-## Verificação
-
-- Playwright em `http://localhost:8080/` em viewport mobile (390×844) e desktop (1280×1800):
-  - Screenshot da dobra hero → confirmar que o topo do "GB IA" aparece inteiro.
-  - Screenshot rolando ~500px → confirmar que o carrossel de produtos aparece sobrepondo a base do robô com sombra suave.
-- Comparar com o print enviado pra garantir que o corte no topo sumiu.
+- Arquivo alterado: `src/imported.css` (remover bloco sticky no fim + ajustar `.circleProductSection` e seu `::before`).
+- Nenhum arquivo `.tsx` muda.
+- Sem mudanças em rotas ou lógica.
