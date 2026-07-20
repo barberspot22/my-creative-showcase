@@ -427,7 +427,44 @@ function HomePage() {
       <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha o sistema.</p></div></section>
     </main>
 
-    <footer><div><p>GB IA<br/>Colatina, ES</p><nav><a href="#leistungen">O que fazemos</a><a href="#ueber-uns">Por que GB IA</a><a href="#referenzen">Clientes</a><a href="#kontakt">Contato</a></nav></div><div className="ticker"><span>FAZER EM VEZ DE FALAR · FAZER EM VEZ DE FALAR · </span><span>FAZER EM VEZ DE FALAR · FAZER EM VEZ DE FALAR · </span></div><small>© 2026 GB IA. Todos os direitos reservados. <span>GB Studio&nbsp;&nbsp; GB Social</span></small></footer>
+    <footer className="siteFooter">
+      <div className="footerOverlap" aria-hidden="true" />
+      <div className="footerInner">
+        <div className="footerTop">
+          <div className="footerBrand">
+            <p className="footerLogo">GB IA</p>
+            <p className="footerAddr">Colatina, ES · Brasil</p>
+            <p className="footerTag">Fazer em vez de falar.</p>
+          </div>
+          <div className="footerCols">
+            <div>
+              <h5>Navegar</h5>
+              <a href="#leistungen">O que fazemos</a>
+              <a href="#ueber-uns">Por que GB IA</a>
+              <a href="#referenzen">Clientes</a>
+              <a href="#kontakt">Contato</a>
+            </div>
+            <div>
+              <h5>Produtos</h5>
+              <Link to="/gb-studio">GB Studio</Link>
+              <Link to="/gb-social">GB Social</Link>
+              <Link to="/ecommerce">E-commerce</Link>
+              <Link to="/crm">CRM</Link>
+            </div>
+            <div>
+              <h5>Legal</h5>
+              <Link to="/politica-de-privacidade">Política de Privacidade</Link>
+              <Link to="/termos-de-uso">Termos de Uso</Link>
+              <a href="mailto:privacidade@gbia.com.br">Contato LGPD</a>
+            </div>
+          </div>
+        </div>
+        <div className="footerBottom">
+          <small>© 2026 GB IA. Todos os direitos reservados.</small>
+          <small>CNPJ em conformidade com a LGPD · Lei nº 13.709/2018</small>
+        </div>
+      </div>
+    </footer>
 
     {contact && <div className="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" onMouseDown={(e)=>e.target===e.currentTarget&&setContact(false)}><div className="modalBox"><button className="close" onClick={()=>setContact(false)} aria-label="Fechar">×</button>{sent?<div className="success"><b>✓</b><h2>Recebemos.</h2><p>A equipe da GB IA vai continuar o contato com você.</p><button onClick={()=>{setSent(false);setContact(false)}}>Fechar</button></div>:<><p className="eyebrow">PRIMEIRO PAPO</p><h2 id="contactTitle">Conta o problema.</h2><form onSubmit={submit}><label>Nome<input required name="name" placeholder="Seu nome"/></label><label>E-mail<input required type="email" name="email" placeholder="voce@empresa.com.br"/></label><label>WhatsApp<input type="tel" name="phone" placeholder="Opcional"/></label><label>Como podemos ajudar?<select name="service"><option>Sistemas &amp; Sites</option><option>Automação de Processos</option><option>IA Autônoma</option><option>GB Studio</option><option>GB Social</option></select></label><label>Mensagem<textarea required name="message" placeholder="Explique o processo, tarefa ou gargalo"/></label><label className="check"><input required type="checkbox"/> <span>Concordo com o uso dos meus dados para contato.</span></label><button type="submit">Enviar mensagem <span>↗</span></button></form></>}</div></div>}
   </>;
