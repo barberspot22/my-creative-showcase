@@ -374,11 +374,6 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
               if (shouldBlockDragClick()) {
                 event.preventDefault();
                 drag.current.moved = false;
-                return;
-              }
-              if (offset !== 0) {
-                event.preventDefault();
-                moveTo(index);
               }
             }}
             style={{
