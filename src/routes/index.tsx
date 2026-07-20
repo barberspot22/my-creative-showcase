@@ -51,9 +51,9 @@ const socialPostGrid = [
   "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=90",
 ];
 const benefits = [
-  ["Quem entende, quem constrói", "Sem terceirizar pra quem não conhece o seu processo. Quem desenha o sistema é quem também mantém no ar."],
+  ["Quem entende, quem constrói", "Sem terceirizar pra quem não conhece o seu processo. Quem desenha a solução é quem também mantém no ar."],
   ["Arquitetura em vez de ferramenta genérica", "Antes de qualquer n8n ou Zapier, checamos se existe uma solução melhor pro seu caso específico."],
-  ["Automação com aprovação", "Sistemas autônomos, mas com humano no controle onde o risco é alto."],
+  ["Automação com aprovação", "Automações autônomas, mas com humano no controle onde o risco é alto."],
   ["Honestidade radical", "Se não faz sentido, a gente fala. Você não recebe o que pediu — recebe o que precisa."],
   ["Em dias, não em meses", "O que demora semanas em outro lugar, a gente entrega com foco e clareza em poucos dias."],
 ];
@@ -87,7 +87,7 @@ const caseCards: CaseCard[] = [
     key: "ecommerce",
     href: "/ecommerce",
     title: "E-commerce",
-    description: "Loja, automação e IA vendedora em um sistema só",
+    description: "Loja pronta pra vender no automático, com IA que atende e converte",
     badge: "LOJA",
     frames: [
       { kind: "image", src: webCoverImages.ecommerce[0], alt: "Loja virtual aberta em notebook" },
@@ -99,7 +99,7 @@ const caseCards: CaseCard[] = [
     key: "crm",
     href: "/crm",
     title: "CRM",
-    description: "CRM, follow-up automatico e dashboard de vendas em um sistema so",
+    description: "Funil, follow-up e dashboard num só lugar — comercial que não perde lead",
     badge: "CRM + IA",
     frames: [
       { kind: "ui", variant: "crm-dashboard-plus", label: "Dashboard subindo mais um cliente" },
@@ -121,7 +121,7 @@ const caseCards: CaseCard[] = [
     key: "menu",
     href: "/cardapio-digital",
     title: "Menu Digital",
-    description: "Cardápio e presença digital em um sistema só",
+    description: "Cardápio, pedidos e presença digital que vendem por você",
     badge: "CATÁLOGO",
     frames: [
       { kind: "ui", variant: "menu-catalog", label: "Catálogo digital com produtos rolando" },
@@ -445,7 +445,7 @@ function HomePage() {
 
       <section id="ueber-uns" className="why hidden" style={{ display: "none" }} aria-hidden="true">
         <div className="whyIntro reveal"><h2>Por que<br/>GB IA</h2><button className="pill" onClick={() => setContact(true)}>Falar com a equipe <span>→</span></button></div>
-        <div className="whyPanel reveal"><div className="panelHero"><img src="/gb-network-map.png" alt="Mapa visual de conexões representando a arquitetura dos sistemas da GB IA"/><div><h3>Nosso jeito de construir</h3><p>Primeiro entendemos o gargalo. Depois desenhamos, construímos e acompanhamos o sistema em produção.</p></div></div><ol>{benefits.map((b,i)=><li key={b[0]}><span>{i+1}</span><div><strong>{b[0]}</strong><p>{b[1]}</p></div></li>)}</ol></div>
+        <div className="whyPanel reveal"><div className="panelHero"><img src="/gb-network-map.png" alt="Mapa visual de conexões representando a arquitetura das soluções da GB IA"/><div><h3>Nosso jeito de construir</h3><p>Primeiro entendemos o gargalo. Depois desenhamos, construímos e acompanhamos a solução em produção.</p></div></div><ol>{benefits.map((b,i)=><li key={b[0]}><span>{i+1}</span><div><strong>{b[0]}</strong><p>{b[1]}</p></div></li>)}</ol></div>
       </section>
 
       <section id="referenzen" className="references light">
@@ -453,7 +453,7 @@ function HomePage() {
         <div className="logoGrid clientNames reveal">{clients.map((name)=><div key={name}><strong>{name}</strong></div>)}</div>
       </section>
 
-      <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha o sistema.</p></div></section>
+      <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha a solução.</p></div></section>
     </main>
 
     <footer className="siteFooter">
@@ -462,7 +462,7 @@ function HomePage() {
         <div className="footerTop">
           <div className="footerBrand">
             <img className="footerLogo" src={gbLogo} alt="GB IA" />
-            <p className="footerTag">Sistemas, automação e IA autônoma.</p>
+            <p className="footerTag">Soluções sob medida, automação e IA autônoma.</p>
           </div>
           <div className="footerCols">
             <div>
