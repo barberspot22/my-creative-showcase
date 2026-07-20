@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import BrandLogo from "@/components/BrandLogo";
+import { BrandLogo } from "@/components/BrandLogo";
 
 function PrivacyPage() {
   return (

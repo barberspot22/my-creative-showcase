@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SiteInstitucionalRouteImport } from './routes/site-institucional'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as GbStudioRouteImport } from './routes/gb-studio'
@@ -19,6 +20,11 @@ import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SiteInstitucionalRoute = SiteInstitucionalRouteImport.update({
   id: '/site-institucional',
   path: '/site-institucional',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,10 +157,18 @@ export interface RootRouteChildren {
   GbStudioRoute: typeof GbStudioRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SiteInstitucionalRoute: typeof SiteInstitucionalRoute
+  TermosDeUsoRoute: typeof TermosDeUsoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/site-institucional': {
       id: '/site-institucional'
       path: '/site-institucional'
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   GbStudioRoute: GbStudioRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SiteInstitucionalRoute: SiteInstitucionalRoute,
+  TermosDeUsoRoute: TermosDeUsoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
