@@ -99,7 +99,7 @@ const caseCards: CaseCard[] = [
     key: "crm",
     href: "/crm",
     title: "CRM",
-    description: "CRM, follow-up automatico e dashboard de vendas em um sistema so",
+    description: "Funil, follow-up e dashboard num só lugar — comercial que não perde lead",
     badge: "CRM + IA",
     frames: [
       { kind: "ui", variant: "crm-dashboard-plus", label: "Dashboard subindo mais um cliente" },
