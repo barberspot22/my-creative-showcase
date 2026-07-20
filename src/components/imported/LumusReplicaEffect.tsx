@@ -133,10 +133,18 @@ export function LumusReplicaEffect() {
       cancelAnimationFrame(frame);
       document.removeEventListener("pointermove", onPointer);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", updateScroll);
       renderer?.dispose?.();
       wrapper.querySelector("canvas")?.remove();
     };
   }, []);
+
+  return <div ref={hostRef} className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
+    <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
+    <img ref={robotRef} className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" />
+    <h1>GB IA</h1>
+  </div>;
+}
 
   return <div className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
     <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
