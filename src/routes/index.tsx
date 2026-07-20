@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { FormEvent, PointerEvent, ReactNode, WheelEvent, useEffect, useRef, useState } from "react";
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
+import { ProcessTrail } from "@/components/imported/ProcessTrail";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
 const A = "/lumus-assets/";
