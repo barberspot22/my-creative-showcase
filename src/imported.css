@@ -832,3 +832,44 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .menuButton i { margin: 6px 9px; }
   .nav nav { right: 20px; left: 20px; min-width: 0; }
 }
+
+/* ===== Footer redesign (overlap effect + LGPD links) ===== */
+.siteFooter{position:relative;background:linear-gradient(180deg,#050505 0%,#000 100%);color:#eaeaea;padding:0;margin-top:-120px;z-index:20;overflow:visible}
+.siteFooter .footerOverlap{position:absolute;left:0;right:0;top:-120px;height:180px;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.55) 35%,rgba(5,5,5,.9) 70%,#050505 100%);z-index:1}
+.siteFooter .footerInner{position:relative;z-index:2;padding:120px 8% 40px;max-width:1400px;margin:0 auto}
+.siteFooter .footerTop{display:grid;grid-template-columns:1fr 2fr;gap:80px;padding-bottom:70px;border-bottom:1px solid rgba(255,255,255,.08)}
+.siteFooter .footerBrand .footerLogo{font-family:Manrope,sans-serif;font-weight:800;font-size:38px;letter-spacing:2px;margin:0 0 12px;background:linear-gradient(180deg,#fff 0%,#bfbfbf 60%,#7a7a7a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.siteFooter .footerBrand .footerAddr{margin:0 0 24px;color:#888;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+.siteFooter .footerBrand .footerTag{margin:0;color:#eaeaea;font-size:22px;line-height:1.25;font-family:Melodrama,serif;max-width:280px}
+.siteFooter .footerCols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.siteFooter .footerCols h5{font-size:11px;text-transform:uppercase;letter-spacing:2.2px;color:#666;margin:0 0 22px;font-weight:700}
+.siteFooter .footerCols a{display:block;color:#d4d4d4;font-size:14px;margin:0 0 14px;transition:color .25s,transform .25s;text-decoration:none}
+.siteFooter .footerCols a:hover{color:#fff;transform:translateX(4px)}
+.siteFooter .footerBottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;gap:20px;flex-wrap:wrap}
+.siteFooter .footerBottom small{color:#666;font-size:12px;letter-spacing:.5px}
+@media(max-width:760px){
+  .siteFooter{margin-top:-80px}
+  .siteFooter .footerOverlap{top:-80px;height:120px}
+  .siteFooter .footerInner{padding:100px 22px 30px}
+  .siteFooter .footerTop{grid-template-columns:1fr;gap:50px;padding-bottom:45px}
+  .siteFooter .footerCols{grid-template-columns:1fr 1fr;gap:35px 20px}
+  .siteFooter .footerBrand .footerTag{font-size:19px}
+  .siteFooter .footerBottom{flex-direction:column;align-items:flex-start;gap:10px}
+}
+
+/* ===== Legal pages ===== */
+.legalPage{background:#050505;color:#eaeaea;min-height:100vh}
+.legalNav{display:flex;align-items:center;justify-content:space-between;padding:26px 6%;border-bottom:1px solid rgba(255,255,255,.06)}
+.legalBack{color:#aaa;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;transition:color .25s}
+.legalBack:hover{color:#fff}
+.legalContent{max-width:780px;margin:0 auto;padding:80px 24px 120px}
+.legalEyebrow{font-size:11px;letter-spacing:2.8px;text-transform:uppercase;color:#888;margin:0 0 18px;font-weight:700}
+.legalContent h1{font-family:Melodrama,serif;font-size:clamp(42px,6vw,68px);line-height:1.05;margin:0 0 14px;background:linear-gradient(180deg,#fff 0%,#bfbfbf 60%,#7a7a7a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.legalUpdated{color:#666;font-size:13px;margin:0 0 60px;letter-spacing:.5px}
+.legalContent section{margin:0 0 42px}
+.legalContent h2{font-size:20px;font-weight:700;margin:0 0 14px;color:#fff;letter-spacing:.3px}
+.legalContent p,.legalContent li{color:#c8c8c8;font-size:15.5px;line-height:1.75;margin:0 0 12px}
+.legalContent ul{padding-left:22px;margin:0 0 14px}
+.legalContent li{margin-bottom:8px}
+.legalContent a{color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.35);transition:border-color .25s}
+.legalContent a:hover{border-color:#fff}
