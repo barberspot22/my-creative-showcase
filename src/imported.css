@@ -784,3 +784,59 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .nav nav { gap: 40px; align-items: center; }
   .nav nav a { white-space: nowrap; }
 }
+
+/* Bigger brand logo + hamburger on all breakpoints */
+.nav .brand img, .nav .brand.gbImageBrand img { width: 180px !important; height: auto; }
+.nav { gap: 24px; }
+.menuButton {
+  display: block !important;
+  margin-left: auto;
+  background: none;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  width: 52px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 30;
+  transition: border-color .25s, background .25s;
+}
+.menuButton:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.04); }
+.menuButton i {
+  display: block;
+  height: 1.5px;
+  background: #fff;
+  margin: 6px 10px;
+  transition: transform .3s, opacity .25s;
+}
+.menuButton.open i:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.menuButton.open i:nth-child(2) { opacity: 0; }
+.menuButton.open i:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+.nav nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 5.5%;
+  min-width: 280px;
+  background: rgba(8,8,10,.96);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 22px 26px;
+  flex-direction: column;
+  gap: 18px;
+  margin-left: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.nav nav.open { display: flex; animation: navDrop .22s ease-out; }
+.nav nav a { white-space: nowrap; font-size: 15px; }
+@keyframes navDrop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .nav .brand img, .nav .brand.gbImageBrand img { width: 140px !important; }
+  .menuButton { width: 46px; height: 40px; }
+  .menuButton i { margin: 6px 9px; }
+  .nav nav { right: 20px; left: 20px; min-width: 0; }
+}
