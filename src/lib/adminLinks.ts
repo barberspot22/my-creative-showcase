@@ -6,7 +6,8 @@ export type PageKey =
   | "ecommerce"
   | "crm"
   | "site-institucional"
-  | "cardapio-digital";
+  | "cardapio-digital"
+  | "trilha-cta";
 
 export type PageLink = { ctaUrl: string; ctaLabel: string };
 export type PageLinks = Record<PageKey, PageLink>;
@@ -18,6 +19,7 @@ export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; def
   { key: "crm", label: "CRM", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20CRM%20pr%C3%B3prio." },
   { key: "site-institucional", label: "Site Institucional", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20site%20institucional." },
   { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20card%C3%A1pio%20digital%20e%20social%20media." },
+  { key: "trilha-cta", label: "Home · Trilha (CTA final)", defaultLabel: "Começar minha trilha", defaultUrl: "#kontakt" },
 ];
 
 export const defaultLinks: PageLinks = PAGE_META.reduce((acc, item) => {
