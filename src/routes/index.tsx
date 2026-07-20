@@ -276,13 +276,15 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const count = cards.length;
 
   const normalize = (index: number) => {
-    const half = Math.floor(count / 2);
-    return ((index - active + count + half) % count) - half;
+    const raw = ((index - active) % count + count) % count;
+    return raw > count / 2 ? raw - count : raw;
   };
 
   const moveTo = (next: number) => {
-    setActive((next + count) % count);
+    setActive((next % count + count) % count);
   };
+
+  const STEP = 90;
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
@@ -299,20 +301,27 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (!drag.current.intent && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
       drag.current.intent = Math.abs(dx) > Math.abs(dy) * 1.2 ? "x" : "y";
     }
-    if (drag.current.intent === "y") return;
     if (drag.current.intent !== "x") return;
     event.preventDefault();
     drag.current.moved = true;
-    setDragDelta(Math.max(-170, Math.min(170, dx)));
+    if (Math.abs(dx) >= STEP) {
+      const steps = Math.trunc(dx / STEP);
+      drag.current.x += steps * STEP;
+      setActive((prev) => ((prev - steps) % count + count) % count);
+      setDragDelta(dx - steps * STEP);
+    } else {
+      setDragDelta(dx);
+    }
   };
 
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
     const dx = event.clientX - drag.current.x;
-    const shouldStep = drag.current.intent === "x" && Math.abs(dx) > 42;
-    if (shouldStep) {
+    if (drag.current.intent === "x" && Math.abs(dx) > 30) {
       suppressClickUntil.current = Date.now() + 450;
-      moveTo(drag.current.activeIndex + (dx < 0 ? 1 : -1));
+      moveTo(active + (dx < 0 ? 1 : -1));
+    } else if (drag.current.moved) {
+      suppressClickUntil.current = Date.now() + 450;
     }
     drag.current.active = false;
     setIsDragging(false);
@@ -342,6 +351,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
         {cards.map((card, index) => {
           const offset = normalize(index);
           const abs = Math.abs(offset);
+          const hidden = abs >= count / 2;
           const x = offset * 270 + dragDelta;
           const y = abs * 34;
           const rotate = offset * -10;
@@ -354,9 +364,11 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
             aria-label={`Abrir página de ${card.title}`}
             style={{
               transform: `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`,
-              opacity: abs > 3 ? 0 : 1 - abs * .16,
+              opacity: hidden ? 0 : 1 - abs * .16,
               zIndex: 50 - abs,
               filter: `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs ? .7 : 0}) saturate(${abs ? .72 : 1.1})`,
+              pointerEvents: hidden ? "none" : undefined,
+              transition: isDragging ? "none" : undefined,
             }}
           >
             <div className="circleProductVisual">
