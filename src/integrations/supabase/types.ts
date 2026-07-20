@@ -14,7 +14,159 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      home_cards: {
+        Row: {
+          badge: string
+          created_at: string
+          description: string
+          frames: Json
+          href: string
+          id: string
+          key: string
+          position: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          badge?: string
+          created_at?: string
+          description?: string
+          frames?: Json
+          href?: string
+          id?: string
+          key: string
+          position?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          badge?: string
+          created_at?: string
+          description?: string
+          frames?: Json
+          href?: string
+          id?: string
+          key?: string
+          position?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      page_links: {
+        Row: {
+          cta_label: string
+          cta_url: string
+          page_key: string
+          updated_at: string
+        }
+        Insert: {
+          cta_label?: string
+          cta_url?: string
+          page_key: string
+          updated_at?: string
+        }
+        Update: {
+          cta_label?: string
+          cta_url?: string
+          page_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      portfolio_items: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          link_url: string
+          page_key: string
+          position: number
+          title: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          link_url?: string
+          page_key: string
+          position?: number
+          title?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          link_url?: string
+          page_key?: string
+          position?: number
+          title?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      site_texts: {
+        Row: {
+          content: Json
+          page_key: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          page_key: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          page_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tracking_settings: {
+        Row: {
+          ga4_measurement_id: string
+          google_ads_conversion_label: string
+          google_ads_id: string
+          gtm_container_id: string
+          id: number
+          meta_capi_enabled: boolean
+          meta_pixel_id: string
+          meta_test_event_code: string
+          updated_at: string
+        }
+        Insert: {
+          ga4_measurement_id?: string
+          google_ads_conversion_label?: string
+          google_ads_id?: string
+          gtm_container_id?: string
+          id?: number
+          meta_capi_enabled?: boolean
+          meta_pixel_id?: string
+          meta_test_event_code?: string
+          updated_at?: string
+        }
+        Update: {
+          ga4_measurement_id?: string
+          google_ads_conversion_label?: string
+          google_ads_id?: string
+          gtm_container_id?: string
+          id?: number
+          meta_capi_enabled?: boolean
+          meta_pixel_id?: string
+          meta_test_event_code?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
