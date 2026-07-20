@@ -599,78 +599,70 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .homeCasesFirst::before{height:80px}
 }
 
-/* === Botões futuristas (sem emoji) === */
+/* === Botões minimalistas tech === */
 .studioButton,.studioNavCta,.menuProductPrimary,.menuProductSecondary,
 .crmPrimary,.crmSecondary,.siteProductPrimary,.siteProductSecondary,
 .commercePrimary,.commerceSecondary,.contact button,
 .studioModalBox form>button,.socialFinal .socialCta,.socialHero .socialCta{
-  position:relative;display:inline-flex;align-items:center;gap:18px;
-  padding:16px 26px;min-width:0;
-  background:linear-gradient(180deg,rgba(20,24,32,.85) 0%,rgba(6,8,12,.95) 100%)!important;
-  color:#eaf2ff!important;border:1px solid rgba(180,210,255,.35)!important;
-  border-radius:2px;text-transform:uppercase;letter-spacing:2px;font-weight:700;font-size:12px;
-  overflow:hidden;isolation:isolate;cursor:pointer;
-  transition:border-color .35s ease,box-shadow .35s ease,transform .35s ease,color .35s ease;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 0 1px rgba(120,160,220,.05),0 10px 30px -18px rgba(80,140,255,.35);
+  position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:22px;
+  padding:15px 22px;min-width:0;
+  background:transparent!important;
+  color:#e8ecf2!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:999px;
+  text-transform:uppercase;letter-spacing:1.6px;font-weight:600;font-size:11px;
+  cursor:pointer;overflow:hidden;
+  transition:border-color .3s ease,background .3s ease,color .3s ease,transform .3s ease;
 }
-/* Corner brackets */
-.studioButton:before,.studioButton:after,.studioNavCta:before,.studioNavCta:after,
-.menuProductPrimary:before,.menuProductPrimary:after,.crmPrimary:before,.crmPrimary:after,
-.siteProductPrimary:before,.siteProductPrimary:after,.commercePrimary:before,.commercePrimary:after,
-.contact button:before,.contact button:after,.studioModalBox form>button:before,.studioModalBox form>button:after{
-  content:"";position:absolute;width:10px;height:10px;border:1px solid rgba(180,210,255,.75);pointer-events:none;transition:inset .35s ease,border-color .35s ease
-}
-.studioButton:before,.studioNavCta:before,.menuProductPrimary:before,.crmPrimary:before,
-.siteProductPrimary:before,.commercePrimary:before,.contact button:before,.studioModalBox form>button:before{
-  top:-1px;left:-1px;border-right:0;border-bottom:0
-}
-.studioButton:after,.studioNavCta:after,.menuProductPrimary:after,.crmPrimary:after,
-.siteProductPrimary:after,.commercePrimary:after,.contact button:after,.studioModalBox form>button:after{
-  bottom:-1px;right:-1px;border-left:0;border-top:0
-}
-/* Sweep light on hover */
 .studioButton:hover,.studioNavCta:hover,.menuProductPrimary:hover,.crmPrimary:hover,
-.siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,.studioModalBox form>button:hover{
-  border-color:rgba(200,225,255,.9)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(140,180,240,.25),0 18px 45px -20px rgba(100,170,255,.55),0 0 32px -8px rgba(120,180,255,.4);
-  color:#fff!important;transform:translateY(-1px)
+.siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,
+.studioModalBox form>button:hover,.socialCta:hover,
+.menuProductSecondary:hover,.crmSecondary:hover,.siteProductSecondary:hover,.commerceSecondary:hover{
+  border-color:rgba(255,255,255,.7)!important;
+  background:rgba(255,255,255,.04)!important;
+  color:#fff!important;
 }
-.studioButton:hover:before,.studioNavCta:hover:before,.menuProductPrimary:hover:before,
-.crmPrimary:hover:before,.siteProductPrimary:hover:before,.commercePrimary:hover:before,
-.contact button:hover:before,.studioModalBox form>button:hover:before{top:-3px;left:-3px;border-color:#cfe1ff}
-.studioButton:hover:after,.studioNavCta:hover:after,.menuProductPrimary:hover:after,
-.crmPrimary:hover:after,.siteProductPrimary:hover:after,.commercePrimary:hover:after,
-.contact button:hover:after,.studioModalBox form>button:hover:after{bottom:-3px;right:-3px;border-color:#cfe1ff}
 
-/* Substitui o emoji ↗ por seta CSS futurista */
+/* Ícone da seta — SVG-like em CSS puro, robusto e consistente */
 .studioButton>span,.studioNavCta>span,.menuProductPrimary>span,.menuProductSecondary>span,
 .crmPrimary>span,.crmSecondary>span,.siteProductPrimary>span,.siteProductSecondary>span,
 .commercePrimary>span,.commerceSecondary>span,.contact button>span,.studioModalBox form>button>span,
 .socialCta>span{
-  font-size:0!important;line-height:0;margin:0!important;position:relative;
-  width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid rgba(180,210,255,.55);border-radius:1px;
-  background:linear-gradient(135deg,rgba(120,170,240,.15),rgba(20,30,50,.6));
-  transition:transform .35s ease,border-color .35s ease,background .35s ease
+  font-size:0!important;line-height:0;margin:0!important;
+  position:relative;width:22px;height:10px;flex:0 0 auto;display:inline-block;
+  transition:transform .3s ease;
 }
+/* Linha horizontal da seta */
+.studioButton>span:after,.studioNavCta>span:after,.menuProductPrimary>span:after,
+.menuProductSecondary>span:after,.crmPrimary>span:after,.crmSecondary>span:after,
+.siteProductPrimary>span:after,.siteProductSecondary>span:after,.commercePrimary>span:after,
+.commerceSecondary>span:after,.contact button>span:after,.studioModalBox form>button>span:after,
+.socialCta>span:after{
+  content:"";position:absolute;left:0;right:2px;top:50%;height:1px;background:currentColor;transform:translateY(-.5px);
+}
+/* Ponta da seta */
 .studioButton>span:before,.studioNavCta>span:before,.menuProductPrimary>span:before,
 .menuProductSecondary>span:before,.crmPrimary>span:before,.crmSecondary>span:before,
 .siteProductPrimary>span:before,.siteProductSecondary>span:before,.commercePrimary>span:before,
 .commerceSecondary>span:before,.contact button>span:before,.studioModalBox form>button>span:before,
 .socialCta>span:before{
-  content:"";width:8px;height:8px;border-top:1.5px solid #eaf2ff;border-right:1.5px solid #eaf2ff;
-  transform:rotate(45deg);margin:2px -2px -2px 0;transition:transform .35s ease
+  content:"";position:absolute;right:0;top:50%;width:7px;height:7px;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);
 }
 .studioButton:hover>span,.studioNavCta:hover>span,.menuProductPrimary:hover>span,
 .crmPrimary:hover>span,.siteProductPrimary:hover>span,.commercePrimary:hover>span,
-.contact button:hover>span,.studioModalBox form>button:hover>span,.socialCta:hover>span{
-  border-color:#cfe1ff;background:linear-gradient(135deg,rgba(150,200,255,.35),rgba(30,50,90,.7));transform:translate(2px,-2px)
-}
+.contact button:hover>span,.studioModalBox form>button:hover>span,.socialCta:hover>span,
+.menuProductSecondary:hover>span,.crmSecondary:hover>span,
+.siteProductSecondary:hover>span,.commerceSecondary:hover>span{transform:translateX(4px)}
+
 /* Setas ↓ dos secundários viram chevron para baixo */
 .menuProductSecondary>span:before,.crmSecondary>span:before,
-.siteProductSecondary>span:before,.commerceSecondary>span:before{transform:rotate(135deg);margin:-2px 0 2px 0}
+.siteProductSecondary>span:before,.commerceSecondary>span:before{transform:translateY(-70%) rotate(135deg)}
+.menuProductSecondary>span:after,.crmSecondary>span:after,
+.siteProductSecondary>span:after,.commerceSecondary>span:after{display:none}
 .menuProductSecondary,.crmSecondary,.siteProductSecondary,.commerceSecondary{
-  background:transparent!important;border-color:rgba(255,255,255,.25)!important;color:#cfd6e4!important
+  color:rgba(255,255,255,.7)!important;border-color:rgba(255,255,255,.14)!important
 }
 
 /* PerspectiveTicker: drag + lightbox */
