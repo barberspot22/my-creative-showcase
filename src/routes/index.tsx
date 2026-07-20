@@ -317,6 +317,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       drag.current.intent = Math.abs(dx) > Math.abs(dy) * 1.2 ? "x" : "y";
     }
     if (drag.current.intent !== "x") return;
+    if (!drag.current.moved) capturePointer(event);
     event.preventDefault();
     drag.current.moved = true;
     setDragDelta(Math.max(-SWIPE_LIMIT, Math.min(SWIPE_LIMIT, dx)));
