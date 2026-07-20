@@ -453,7 +453,7 @@ function HomePage() {
         <div className="logoGrid clientNames reveal">{clients.map((name)=><div key={name}><strong>{name}</strong></div>)}</div>
       </section>
 
-      <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha o sistema.</p></div></section>
+      <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha a solução.</p></div></section>
     </main>
 
     <footer className="siteFooter">
