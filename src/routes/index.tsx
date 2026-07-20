@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { FormEvent, PointerEvent, ReactNode, WheelEvent, useEffect, useRef, useState } from "react";
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
+import { ProcessTrail } from "@/components/imported/ProcessTrail";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
 const A = "/lumus-assets/";
@@ -405,15 +406,7 @@ function HomePage() {
         <CircleGalleryCarousel cards={editableCaseCards} />
       </div>
 
-      <section id="leistungen" className="services light">
-        <h2 className="reveal">O que fazemos</h2>
-        <div className="serviceGrid">
-          <article className="reveal"><div className="lineIcon systemIcon" aria-hidden="true"><svg viewBox="0 0 96 96" role="img"><rect x="18" y="22" width="60" height="48" rx="7"/><path d="M18 36h60"/><path d="M31 52h20"/><path className="iconAccent cursorCue" d="M57 48v18"/><circle className="iconAccent" cx="29" cy="29" r="2.5"/><circle cx="38" cy="29" r="2"/></svg></div><h3>Sistemas &amp; Sites</h3><p>Plataformas, painéis e sites sob medida para o processo real da sua empresa — não um template genérico adaptado à força.</p></article>
-          <article className="reveal"><div className="lineIcon automationIcon" aria-hidden="true"><svg viewBox="0 0 96 96" role="img"><path d="M48 18v9M48 69v9M27 27l6 6M63 63l6 6M18 48h9M69 48h9M27 69l6-6M63 33l6-6"/><circle cx="48" cy="48" r="21"/><circle className="iconAccent gearCore" cx="48" cy="48" r="7"/></svg></div><h3>Automação de Processos</h3><p>Tarefas manuais, aprovações e fluxos internos rodando sem depender de alguém lembrar de fazer.</p></article>
-          <article className="reveal"><div className="lineIcon aiIcon" aria-hidden="true"><svg viewBox="0 0 96 96" role="img"><path d="M48 48 25 27M48 48l46 0M48 48 26 70M48 48 68 24M48 48l20 24"/><circle className="iconAccent coreNode" cx="48" cy="48" r="8"/><circle cx="25" cy="27" r="5"/><circle cx="26" cy="70" r="5"/><circle cx="68" cy="24" r="5"/><circle cx="68" cy="72" r="5"/><circle cx="79" cy="48" r="5"/></svg></div><h3>IA Autônoma</h3><p>Agentes que atendem, respondem e executam — com camadas de aprovação onde importa.</p></article>
-        </div>
-        
-      </section>
+      <ProcessTrail />
 
       <section id="ueber-uns" className="why">
         <div className="whyIntro reveal"><h2>Por que<br/>GB IA</h2><button className="pill" onClick={() => setContact(true)}>Falar com a equipe <span>→</span></button></div>

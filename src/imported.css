@@ -871,3 +871,53 @@ body{overflow-x:clip}
 .legalContent a{color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.35);transition:border-color .25s}
 .legalContent a:hover{border-color:#fff}
 
+
+/* ===== Process Trail (Mapa do tesouro) ===== */
+.processTrail{position:relative;background:linear-gradient(180deg,#f6f2ea 0%,#efe8d7 100%);color:#1a1a1a;padding:120px 6% 160px;overflow:hidden}
+.processTrail:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 10%,rgba(212,175,55,.10),transparent 55%),radial-gradient(circle at 80% 90%,rgba(212,175,55,.08),transparent 60%);pointer-events:none}
+.processTrail .trailHead{position:relative;text-align:center;max-width:720px;margin:0 auto 80px}
+.processTrail .trailEyebrow{display:inline-block;font-size:11px;letter-spacing:3px;font-weight:700;color:#8a6a1a;margin-bottom:20px}
+.processTrail h2{font-family:Melodrama,serif;font-size:clamp(42px,6vw,72px);line-height:1.05;margin:0 0 18px;background:linear-gradient(180deg,#2a2418 0%,#7a6a3a 60%,#d4af37 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.processTrail .trailHead p{color:#5a5040;font-size:16px;line-height:1.6;margin:0}
+.processTrail .trailMap{position:relative;max-width:1100px;margin:0 auto}
+.processTrail .trailPath{position:absolute;left:50%;top:0;transform:translateX(-50%);width:80%;height:100%;pointer-events:none;z-index:1}
+.processTrail .trailSteps{list-style:none;padding:0;margin:0;position:relative;z-index:2;display:flex;flex-direction:column;gap:120px}
+.processTrail .trailStep{position:relative;display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:0;opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.processTrail .trailStep.in{opacity:1;transform:translateY(0)}
+.processTrail .trailPin{grid-column:2;justify-self:center;position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.processTrail .trailPinDot{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#d4af37 60%,#8a6a1a 100%);box-shadow:0 0 0 4px rgba(212,175,55,.25),0 0 24px rgba(212,175,55,.6)}
+.processTrail .trailPinRing{position:absolute;inset:0;border:1px dashed rgba(138,106,26,.5);border-radius:50%;animation:trailPinSpin 12s linear infinite}
+@keyframes trailPinSpin{to{transform:rotate(360deg)}}
+.processTrail .trailCard{background:linear-gradient(180deg,#fffdf8 0%,#f4ecd8 100%);border:1px solid rgba(138,106,26,.18);border-radius:18px;padding:26px 28px;box-shadow:0 20px 40px -20px rgba(80,60,20,.25),inset 0 1px 0 rgba(255,255,255,.8)}
+.processTrail .trailStep.left .trailCard{grid-column:1;text-align:right}
+.processTrail .trailStep.right .trailCard{grid-column:3;text-align:left}
+.processTrail .trailCardHead{display:flex;align-items:center;gap:14px;margin-bottom:12px;color:#8a6a1a}
+.processTrail .trailStep.left .trailCardHead{justify-content:flex-end;flex-direction:row-reverse}
+.processTrail .trailStepN{font-family:Melodrama,serif;font-size:28px;font-weight:600;color:#d4af37;letter-spacing:1px}
+.processTrail .trailCard h3{font-family:Melodrama,serif;font-size:26px;margin:0 0 10px;color:#1a1a1a;line-height:1.2}
+.processTrail .trailCard p{font-size:14.5px;line-height:1.6;color:#3a3428;margin:0 0 12px}
+.processTrail .trailCard small{display:block;font-size:12px;letter-spacing:.5px;color:#8a6a1a;font-weight:600;padding-top:10px;border-top:1px dashed rgba(138,106,26,.25)}
+.processTrail .trailTreasure{list-style:none;text-align:center;margin-top:100px;position:relative;z-index:2}
+.processTrail .trailTreasureMark{position:relative;display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;margin:0 auto 24px;color:#8a6a1a}
+.processTrail .trailTreasureMark:before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.4) 0%,transparent 70%);animation:trailPulse 2.4s ease-in-out infinite}
+@keyframes trailPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.3);opacity:.2}}
+.processTrail .trailTreasureMark span{position:absolute;font-family:Melodrama,serif;font-size:22px;font-weight:700;color:#d4af37;top:50%;left:50%;transform:translate(-50%,-40%)}
+.processTrail .trailTreasure h4{font-family:Melodrama,serif;font-size:clamp(26px,3.6vw,38px);margin:0 0 28px;background:linear-gradient(180deg,#2a2418 0%,#d4af37 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.processTrail .trailCta{display:inline-flex;align-items:center;gap:14px;padding:16px 30px;border-radius:999px;background:linear-gradient(180deg,#1a1a1a 0%,#000 100%);color:#f5e6b3;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:1px solid rgba(212,175,55,.45);box-shadow:0 12px 30px -10px rgba(212,175,55,.5);transition:transform .3s ease,box-shadow .3s ease}
+.processTrail .trailCta:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(212,175,55,.7)}
+.processTrail .trailCta i{width:8px;height:8px;border-top:1.5px solid #f5e6b3;border-right:1.5px solid #f5e6b3;transform:rotate(45deg)}
+@media (max-width:820px){
+  .processTrail{padding:80px 5% 100px}
+  .processTrail .trailHead{margin-bottom:56px}
+  .processTrail .trailPath{width:16px;left:26px;transform:none}
+  .processTrail .trailSteps{gap:56px;padding-left:56px}
+  .processTrail .trailStep{grid-template-columns:1fr;gap:0}
+  .processTrail .trailStep .trailPin{position:absolute;left:-46px;top:8px;grid-column:1}
+  .processTrail .trailStep.left .trailCard,.processTrail .trailStep.right .trailCard{grid-column:1;text-align:left}
+  .processTrail .trailStep.left .trailCardHead{justify-content:flex-start;flex-direction:row}
+  .processTrail .trailTreasure{margin-top:60px;margin-left:-56px}
+}
+@media (max-width:820px){
+  .processTrail .trailPath{display:none}
+  .processTrail .trailMap:before{content:"";position:absolute;left:26px;top:0;bottom:80px;width:2px;background:linear-gradient(180deg,#f5e6b3 0%,#d4af37 50%,#8a6a1a 100%);box-shadow:0 0 12px rgba(212,175,55,.5);z-index:1}
+}
