@@ -121,7 +121,7 @@ const caseCards: CaseCard[] = [
     key: "menu",
     href: "/cardapio-digital",
     title: "Menu Digital",
-    description: "Cardápio e presença digital em um sistema só",
+    description: "Cardápio, pedidos e presença digital que vendem por você",
     badge: "CATÁLOGO",
     frames: [
       { kind: "ui", variant: "menu-catalog", label: "Catálogo digital com produtos rolando" },
