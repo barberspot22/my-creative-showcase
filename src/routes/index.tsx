@@ -329,6 +329,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
       onClickCapture={(event) => {
+        if ((event.target as HTMLElement).closest(".circleNav")) return;
         if (Date.now() < suppressClickUntil.current || drag.current.moved) {
           event.preventDefault();
           event.stopPropagation();
