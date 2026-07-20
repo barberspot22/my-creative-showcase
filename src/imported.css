@@ -401,8 +401,8 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 @media(max-width:760px){.manifest{min-height:300px;padding-bottom:45px}.manifest h1{font-size:34px}}
 
 /* Home — Circle Gallery Carousel inspired by CreativeApe circle carousel */
-.circleProductSection{position:relative;min-height:820px;padding:120px 0 92px;margin-top:0;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:6}
-.circleProductSection:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 58%,#ffffff08,transparent 38%);z-index:-2}
+.circleProductSection{position:relative;min-height:820px;padding:170px 0 92px;margin-top:-140px;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:6}
+.circleProductSection:before{content:"";position:absolute;left:0;right:0;top:0;height:40px;background:linear-gradient(180deg,transparent 0%,#050505 100%);z-index:-1;transform:translateY(-40px)}
 .circleProductSection:after{content:"";position:absolute;left:0;right:0;bottom:0;height:190px;background:linear-gradient(transparent,#050505);pointer-events:none;z-index:5}
 
 .circleProductSection h2{font-size:clamp(58px,8vw,122px);line-height:1.2;font-weight:800!important;letter-spacing:-4px;margin:0 auto 48px;max-width:1220px;background:linear-gradient(180deg,#ffffff 0%,#f5f6f8 18%,#c8ccd3 42%,#8a8f97 58%,#c8ccd3 74%,#f8f9fb 92%,#a8adb5 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 0 rgba(255,255,255,.35)) drop-shadow(0 18px 30px rgba(0,0,0,.55)) drop-shadow(0 42px 45px rgba(0,0,0,.48))}
@@ -414,7 +414,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .circleProductCard>strong{position:absolute;z-index:6;left:22px;right:22px;bottom:22px;font-size:32px;letter-spacing:-1px;text-shadow:0 4px 22px #000}.circleProductCard.active>strong{font-size:36px}.circleProductCard .caseUiContent small{display:none}.circleProductCard .socialCardChat{padding:18px!important}.circleProductCard .socialMiniPhone{width:94%;max-height:92%;transform:rotate(-1deg)}.circleProductCard .menuCatalogFrame{padding:18px!important}.circleProductCard .catalogPhone{width:88%;height:96%}
 .circleNav{position:absolute;z-index:8;top:50%;width:52px;height:52px;border:1px solid #ffffff4a;border-radius:50%;background:#080808c7;color:#fff;font-size:38px;line-height:1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}.circlePrev{left:8%}.circleNext{right:8%}.circleNav:hover{background:#fff;color:#080808}.circleProductCarousel>p{position:absolute;z-index:8;bottom:24px;left:0;right:0;margin:0;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:2.1px;color:#777}
 @media(max-width:900px){.circleProductSection{min-height:760px}.circleProductCarousel{height:480px}.circleProductSection h2{font-size:clamp(54px,11vw,92px);letter-spacing:-2px}.circleProductCard{width:250px;height:310px;margin:-155px 0 0 -125px}.circlePrev{left:24px}.circleNext{right:24px}}
-@media(max-width:760px){.circleProductSection{min-height:690px;padding:80px 0 70px;margin-top:0}.circleProductSection h2{font-size:40px;line-height:1.2;letter-spacing:-1.5px;font-weight:800!important;padding:0 18px;margin-bottom:26px}.circleProductCarousel{height:430px}.circleProductCard{width:205px;height:270px;margin:-135px 0 0 -102.5px;border-radius:18px}.circleProductCard>strong,.circleProductCard.active>strong{font-size:26px}.circleProductVisual>.caseUiFrame{padding:16px}.circleNav{width:44px;height:44px;font-size:30px}.circlePrev{left:14px}.circleNext{right:14px}.circleProductCarousel>p{bottom:12px;font-size:8px;padding:0 60px;line-height:1.5}}
+@media(max-width:760px){.circleProductSection{min-height:690px;padding:110px 0 70px;margin-top:-90px}.circleProductSection h2{font-size:40px;line-height:1.2;letter-spacing:-1.5px;font-weight:800!important;padding:0 18px;margin-bottom:26px}.circleProductCarousel{height:430px}.circleProductCard{width:205px;height:270px;margin:-135px 0 0 -102.5px;border-radius:18px}.circleProductCard>strong,.circleProductCard.active>strong{font-size:26px}.circleProductVisual>.caseUiFrame{padding:16px}.circleNav{width:44px;height:44px;font-size:30px}.circlePrev{left:14px}.circleNext{right:14px}.circleProductCarousel>p{bottom:12px;font-size:8px;padding:0 60px;line-height:1.5}}
 @media(prefers-reduced-motion:reduce){.circleProductCard{transition:opacity .2s ease,filter .2s ease!important}}
 @media(prefers-reduced-motion:reduce){.caseLoopFrame.active{animation:none!important;transform:none!important}.loopCaseCard:hover .caseLoopFrame.active{animation-play-state:running}}
 
@@ -875,7 +875,3 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .legalContent a{color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.35);transition:border-color .25s}
 .legalContent a:hover{border-color:#fff}
 
-/* Sticky hero — segunda dobra entra por cima */
-.hero{position:sticky!important;top:0;height:100vh!important;max-height:820px}
-@media(max-width:760px){.hero{height:100vh!important;max-height:640px}}
-.circleProductSection{position:relative;z-index:6;box-shadow:0 -40px 80px -20px #000}
