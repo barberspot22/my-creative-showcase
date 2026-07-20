@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://gb-ia.lovable.app/sitemap.xml
