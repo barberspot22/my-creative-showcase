@@ -443,9 +443,8 @@ function HomePage() {
       <div className="footerInner">
         <div className="footerTop">
           <div className="footerBrand">
-            <p className="footerLogo">GB IA</p>
-            <p className="footerAddr">Colatina, ES · Brasil</p>
-            <p className="footerTag">Fazer em vez de falar.</p>
+            <img className="footerLogo" src={gbLogo} alt="GB IA" />
+            <p className="footerTag">Sistemas, automação e IA autônoma.</p>
           </div>
           <div className="footerCols">
             <div>
