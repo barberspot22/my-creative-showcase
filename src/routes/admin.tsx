@@ -86,9 +86,10 @@ const defaultCases: AdminCase[] = [
 function normalizeCases(value: unknown): AdminCase[] {
   if (!Array.isArray(value)) return defaultCases;
   return defaultCases.map((item) => {
-    const saved = value.find((entry) => entry?.href === item.href);
+    const saved = value.find((entry) => entry?.key === item.key) || value.find((entry) => entry?.href === item.href);
     return {
       ...item,
+      href: typeof saved?.href === "string" && saved.href.trim() ? saved.href.trim() : item.href,
       title: typeof saved?.title === "string" ? saved.title : item.title,
       description: typeof saved?.description === "string" ? saved.description : item.description,
       badge: typeof saved?.badge === "string" ? saved.badge : item.badge,
@@ -96,6 +97,27 @@ function normalizeCases(value: unknown): AdminCase[] {
     };
   });
 }
+
+function AdminPage() {
+  const [cases, setCases] = useState<AdminCase[]>(defaultCases);
+  const [activeKey, setActiveKey] = useState(defaultCases[0].key);
+  const [status, setStatus] = useState("Pronto para editar.");
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(ADMIN_CASES_KEY);
+      if (raw) setCases(normalizeCases(JSON.parse(raw)));
+    } catch {
+      setStatus("Não consegui carregar edições antigas. Mantive o padrão.");
+    }
+  }, []);
+
+  const activeCase = useMemo(() => cases.find((item) => item.key === activeKey) || cases[0], [cases, activeKey]);
+
+  const updateCase = (patch: Partial<AdminCase>) => {
+    setCases((current) => current.map((item) => item.key === activeKey ? { ...item, ...patch } : item));
+    setStatus("Alteração ainda não salva.");
+  };
 
 function AdminPage() {
   const [cases, setCases] = useState<AdminCase[]>(defaultCases);
