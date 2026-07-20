@@ -875,7 +875,3 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .legalContent a{color:#eaeaea;border-bottom:1px solid rgba(255,255,255,.35);transition:border-color .25s}
 .legalContent a:hover{border-color:#fff}
 
-/* Sticky hero — segunda dobra entra por cima */
-.hero{position:sticky!important;top:0;height:100vh!important;max-height:820px}
-@media(max-width:760px){.hero{height:100vh!important;max-height:640px}}
-.circleProductSection{position:relative;z-index:6;box-shadow:0 -40px 80px -20px #000}
