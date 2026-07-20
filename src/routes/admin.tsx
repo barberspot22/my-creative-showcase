@@ -186,7 +186,7 @@ function AdminPage() {
         <button className={tab === "links" ? "active" : ""} onClick={() => setTab("links")} type="button">Links de botões</button>
       </div>
       {tab === "cards" && <nav>
-        {cases.map((item) => <button className={item.href === activeHref ? "active" : ""} key={item.href} onClick={() => setActiveHref(item.href)}>{item.title}</button>)}
+        {cases.map((item) => <button className={item.key === activeKey ? "active" : ""} key={item.key} onClick={() => setActiveKey(item.key)}>{item.title}</button>)}
       </nav>}
     </aside>
 
