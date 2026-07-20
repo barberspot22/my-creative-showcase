@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SiteInstitucionalRouteImport } from './routes/site-institucional'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as GbStudioRouteImport } from './routes/gb-studio'
@@ -23,6 +24,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
   path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteInstitucionalRoute = SiteInstitucionalRouteImport.update({
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesById {
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/gb-studio': typeof GbStudioRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/sitemap.xml'
     | '/termos-de-uso'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/sitemap.xml'
     | '/termos-de-uso'
   id:
     | '__root__'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/gb-studio'
     | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/sitemap.xml'
     | '/termos-de-uso'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   GbStudioRoute: typeof GbStudioRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SiteInstitucionalRoute: typeof SiteInstitucionalRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
 }
 
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/termos-de-uso'
       fullPath: '/termos-de-uso'
       preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/site-institucional': {
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   GbStudioRoute: GbStudioRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SiteInstitucionalRoute: SiteInstitucionalRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
 }
 export const routeTree = rootRouteImport
