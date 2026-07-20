@@ -1,5 +1,13 @@
-
 import { useEffect, useRef } from "react";
+
+// Kick off heavy loads at module scope so they start in parallel with hydration,
+// not after the useEffect fires. This shaves noticeable time off the 3D appearing.
+const FONT_URL = "/lumus-effect/helvetiker_bold.typeface.json";
+// @ts-expect-error vendored Three.js build has no local declaration file
+const threePromise = typeof window !== "undefined" ? import("../../vendor/three.module.js") : null;
+const fontPromise = typeof window !== "undefined"
+  ? fetch(FONT_URL, { priority: "high" as any }).then((r) => r.json()).catch(() => null)
+  : null;
 
 export function LumusReplicaEffect() {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -14,9 +22,10 @@ export function LumusReplicaEffect() {
     let onPointer = (_e: PointerEvent) => {};
 
     (async () => {
-      // Dynamic import so the vendored Three.js only loads in the browser (avoids SSR issues).
-      // @ts-expect-error vendored Three.js build has no local declaration file
-      const ThreeModule = await import("../../vendor/three.module.js");
+      const [ThreeModule, fontJson] = await Promise.all([
+        threePromise ?? import("../../vendor/three.module.js" as any),
+        fontPromise ?? fetch(FONT_URL).then((r) => r.json()),
+      ]);
       const THREE: any = ThreeModule;
       if (stopped) return;
       const nearDist = .1;
@@ -40,7 +49,8 @@ export function LumusReplicaEffect() {
       scene.environment = envMap;
       const group = new THREE.Group();
       scene.add(group);
-      const loader = new THREE.FontLoader();
+
+      const font = fontJson ? new THREE.Font(fontJson) : null;
 
       const createTitle = (font: any) => {
         const viewportHeight = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
@@ -61,7 +71,13 @@ export function LumusReplicaEffect() {
         group.add(new THREE.Mesh(geometry, material));
         wrapper.classList.add("is-ready");
       };
-      loader.load("/lumus-effect/helvetiker_bold.typeface.json", createTitle);
+
+      if (font) {
+        createTitle(font);
+      } else {
+        const loader = new THREE.FontLoader();
+        loader.load(FONT_URL, createTitle);
+      }
 
       let mouseX = 0, mouseY = 0;
       onPointer = (e: PointerEvent) => {
@@ -91,7 +107,7 @@ export function LumusReplicaEffect() {
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        loader.load("/lumus-effect/helvetiker_bold.typeface.json", createTitle);
+        if (font) createTitle(font);
       };
       window.addEventListener("resize", onResize);
     })();
@@ -108,7 +124,7 @@ export function LumusReplicaEffect() {
 
   return <div className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
     <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
-    <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" />
+    <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" fetchPriority="high" decoding="async" />
     <h1>GB IA</h1>
   </div>;
 }
