@@ -924,7 +924,7 @@ body{overflow-x:clip}
   .contactInner{padding:40px 22px 34px;border-radius:20px}
   .contact .contactHeading{font-size:46px!important;letter-spacing:-1.8px!important;margin-bottom:32px!important}
   .contact .contactInner .contactCta.contactCta{padding:16px 14px}
-  .contact .contactInner .contactCta.contactCta>.contactCtaLabel{font-size:10.5px;letter-spacing:.04em}
+  .contact .contactInner .contactCta.contactCta>.contactCtaLabel{font-size:11px!important;letter-spacing:.06em}
   .contactLead{font-size:16px}
 }
 
