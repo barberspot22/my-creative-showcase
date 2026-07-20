@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SiteInstitucionalRouteImport } from './routes/site-institucional'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as GbStudioRouteImport } from './routes/gb-studio'
 import { Route as GbSocialRouteImport } from './routes/gb-social'
 import { Route as EcommerceRouteImport } from './routes/ecommerce'
@@ -18,9 +20,19 @@ import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
+  id: '/termos-de-uso',
+  path: '/termos-de-uso',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SiteInstitucionalRoute = SiteInstitucionalRouteImport.update({
   id: '/site-institucional',
   path: '/site-institucional',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GbStudioRoute = GbStudioRouteImport.update({
@@ -67,7 +79,9 @@ export interface FileRoutesByFullPath {
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
   '/gb-studio': typeof GbStudioRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +91,9 @@ export interface FileRoutesByTo {
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
   '/gb-studio': typeof GbStudioRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +104,9 @@ export interface FileRoutesById {
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
   '/gb-studio': typeof GbStudioRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/site-institucional': typeof SiteInstitucionalRoute
+  '/termos-de-uso': typeof TermosDeUsoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +118,9 @@ export interface FileRouteTypes {
     | '/ecommerce'
     | '/gb-social'
     | '/gb-studio'
+    | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +130,9 @@ export interface FileRouteTypes {
     | '/ecommerce'
     | '/gb-social'
     | '/gb-studio'
+    | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   id:
     | '__root__'
     | '/'
@@ -120,7 +142,9 @@ export interface FileRouteTypes {
     | '/ecommerce'
     | '/gb-social'
     | '/gb-studio'
+    | '/politica-de-privacidade'
     | '/site-institucional'
+    | '/termos-de-uso'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,16 +155,32 @@ export interface RootRouteChildren {
   EcommerceRoute: typeof EcommerceRoute
   GbSocialRoute: typeof GbSocialRoute
   GbStudioRoute: typeof GbStudioRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   SiteInstitucionalRoute: typeof SiteInstitucionalRoute
+  TermosDeUsoRoute: typeof TermosDeUsoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos-de-uso': {
+      id: '/termos-de-uso'
+      path: '/termos-de-uso'
+      fullPath: '/termos-de-uso'
+      preLoaderRoute: typeof TermosDeUsoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/site-institucional': {
       id: '/site-institucional'
       path: '/site-institucional'
       fullPath: '/site-institucional'
       preLoaderRoute: typeof SiteInstitucionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gb-studio': {
@@ -203,7 +243,9 @@ const rootRouteChildren: RootRouteChildren = {
   EcommerceRoute: EcommerceRoute,
   GbSocialRoute: GbSocialRoute,
   GbStudioRoute: GbStudioRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   SiteInstitucionalRoute: SiteInstitucionalRoute,
+  TermosDeUsoRoute: TermosDeUsoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
