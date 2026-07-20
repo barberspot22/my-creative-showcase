@@ -269,7 +269,10 @@ function LoopingCaseCard({ card, startIndex }: { card: CaseCard; startIndex: num
 
 function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const [active, setActive] = useState(0);
-  const drag = useRef({ active: false, x: 0, y: 0, moved: false, stepped: false });
+  const [dragDelta, setDragDelta] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const drag = useRef({ active: false, x: 0, y: 0, pointerId: -1, intent: "" as "" | "x" | "y", moved: false, activeIndex: 0 });
+  const suppressClickUntil = useRef(0);
   const count = cards.length;
 
   const normalize = (index: number) => {
@@ -282,42 +285,62 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    drag.current = { active: true, x: event.clientX, y: event.clientY, moved: false, stepped: false };
+    if ((event.target as HTMLElement).closest(".circleNav")) return;
+    drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active };
+    setIsDragging(true);
+    setDragDelta(0);
     (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.active || drag.current.stepped) return;
+    if (!drag.current.active) return;
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
-    if (Math.abs(dy) > Math.abs(dx)) return; // vertical gesture → let page scroll
-    if (Math.abs(dx) < 50) return;
-    drag.current.stepped = true;
+    if (!drag.current.intent && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      drag.current.intent = Math.abs(dx) > Math.abs(dy) * 1.2 ? "x" : "y";
+    }
+    if (drag.current.intent === "y") return;
+    if (drag.current.intent !== "x") return;
+    event.preventDefault();
     drag.current.moved = true;
-    moveTo(active + (dx < 0 ? 1 : -1));
+    setDragDelta(Math.max(-170, Math.min(170, dx)));
   };
 
-  const onPointerUp = () => {
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return;
+    const dx = event.clientX - drag.current.x;
+    const shouldStep = drag.current.intent === "x" && Math.abs(dx) > 42;
+    if (shouldStep) {
+      suppressClickUntil.current = Date.now() + 450;
+      moveTo(drag.current.activeIndex + (dx < 0 ? 1 : -1));
+    }
     drag.current.active = false;
+    setIsDragging(false);
+    setDragDelta(0);
+    (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId);
   };
 
   return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
-      className="circleProductCarousel"
+      className={`circleProductCarousel ${isDragging ? "dragging" : ""}`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
       onClickCapture={(event) => {
-        if (drag.current.moved) event.preventDefault();
+        if (Date.now() < suppressClickUntil.current || drag.current.moved) {
+          event.preventDefault();
+          event.stopPropagation();
+          drag.current.moved = false;
+        }
       }}
     >
       <div className="circleProductStage">
         {cards.map((card, index) => {
           const offset = normalize(index);
           const abs = Math.abs(offset);
-          const x = offset * 270;
+          const x = offset * 270 + dragDelta;
           const y = abs * 34;
           const rotate = offset * -10;
           const scale = Math.max(.72, 1 - abs * .14);
@@ -341,9 +364,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
           </a>;
         })}
       </div>
-      <button type="button" className="circleNav circlePrev" onClick={() => moveTo(active - 1)} aria-label="Produto anterior">‹</button>
-      <button type="button" className="circleNav circleNext" onClick={() => moveTo(active + 1)} aria-label="Próximo produto">›</button>
-      <p>Arraste ou role para explorar · clique para abrir</p>
+      <button type="button" className="circleNav circlePrev" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active - 1)} aria-label="Produto anterior">‹</button>
+      <button type="button" className="circleNav circleNext" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active + 1)} aria-label="Próximo produto">›</button>
+      <p>Arraste para explorar · clique para abrir</p>
     </div>
   </section>;
 }
