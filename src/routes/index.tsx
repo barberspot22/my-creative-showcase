@@ -278,9 +278,10 @@ function LoopingCaseCard({ card, startIndex }: { card: CaseCard; startIndex: num
 
 function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const [active, setActive] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
   const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const stageRef = useRef<HTMLDivElement | null>(null);
   const drag = useRef({ active: false, x: 0, y: 0, pointerId: -1, intent: "" as "" | "x" | "y", moved: false, activeIndex: 0, delta: 0 });
+  const rafPending = useRef(false);
   const suppressClickUntil = useRef(0);
   const count = cards.length;
 
@@ -290,8 +291,10 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
   const applyTransforms = (base: number, delta: number) => {
-    cardRefs.current.forEach((el, index) => {
-      if (!el) return;
+    const els = cardRefs.current;
+    for (let index = 0; index < els.length; index++) {
+      const el = els[index];
+      if (!el) continue;
       const offset = normalize(index, base) - delta / 270;
       const abs = Math.abs(offset);
       const hidden = abs >= count / 2;
@@ -299,21 +302,36 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       const y = abs * 34;
       const rotate = offset * -10;
       const scale = Math.max(.72, 1 - abs * .14);
-      el.style.transform = `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`;
-      el.style.opacity = hidden ? "0" : String(1 - abs * .16);
-      el.style.zIndex = String(50 - Math.round(abs));
-      el.style.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
-      el.style.pointerEvents = hidden ? "none" : "";
-    });
+      const s = el.style;
+      s.transform = `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`;
+      s.opacity = hidden ? "0" : String(1 - abs * .16);
+      s.zIndex = String(50 - Math.round(abs));
+      s.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
+      s.pointerEvents = hidden ? "none" : "";
+    }
   };
 
-  useEffect(() => { applyTransforms(active, 0); });
+  useEffect(() => { applyTransforms(active, 0); }, [active]);
 
   const moveTo = (next: number) => {
     setActive((next % count + count) % count);
   };
 
   const shouldBlockDragClick = () => Date.now() < suppressClickUntil.current || drag.current.moved;
+
+  const scheduleFrame = () => {
+    if (rafPending.current) return;
+    rafPending.current = true;
+    requestAnimationFrame(() => {
+      rafPending.current = false;
+      if (drag.current.intent === "x") applyTransforms(drag.current.activeIndex, drag.current.delta);
+    });
+  };
+
+  const setDraggingClass = (on: boolean) => {
+    const stage = stageRef.current?.parentElement;
+    if (stage) stage.classList.toggle("dragging", on);
+  };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
@@ -328,7 +346,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (!drag.current.intent) {
       if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) {
         drag.current.intent = "x";
-        setIsDragging(true);
+        setDraggingClass(true);
       } else if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
         drag.current.intent = "y";
         try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
@@ -339,13 +357,12 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (drag.current.intent !== "x") return;
     drag.current.moved = true;
     drag.current.delta = dx;
-    applyTransforms(drag.current.activeIndex, dx);
+    scheduleFrame();
   };
 
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
     const dx = drag.current.delta;
-    // Snap: qualquer arrasto acima de 40px avança exatamente 1 card na direção do gesto.
     const steps = Math.abs(dx) > 40 ? (dx < 0 ? 1 : -1) : 0;
     if (drag.current.intent === "x" && steps !== 0) {
       suppressClickUntil.current = Date.now() + 450;
@@ -355,14 +372,14 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       applyTransforms(drag.current.activeIndex, 0);
     }
     drag.current.active = false;
-    setIsDragging(false);
+    setDraggingClass(false);
     try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
   };
 
   return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
-      className={`circleProductCarousel ${isDragging ? "dragging" : ""}`}
+      className="circleProductCarousel"
       onDragStart={(event) => event.preventDefault()}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -377,7 +394,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
         }
       }}
     >
-      <div className="circleProductStage">
+      <div className="circleProductStage" ref={stageRef}>
         {cards.map((card, index) => {
           const external = isExternalHref(card.href);
           return <a
@@ -395,7 +412,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
                 drag.current.moved = false;
               }
             }}
-            style={{ transition: isDragging ? "none" : undefined }}
+            style={{ willChange: "transform, opacity, filter", backfaceVisibility: "hidden" }}
           >
             <div className="circleProductVisual">
               <CaseFramePreview frame={card.frames[0]}/>
