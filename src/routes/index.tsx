@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { FormEvent, PointerEvent, ReactNode, WheelEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, PointerEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
@@ -269,22 +269,8 @@ function LoopingCaseCard({ card, startIndex }: { card: CaseCard; startIndex: num
 
 function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const activeRef = useRef(0);
-  const drag = useRef({ active: false, x: 0, moved: false });
+  const drag = useRef({ active: false, x: 0, y: 0, moved: false, stepped: false });
   const count = cards.length;
-
-  useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
-
-  useEffect(() => {
-    if (paused || count < 2) return;
-    const timer = window.setInterval(() => {
-      setActive((current) => (current + 1) % count);
-    }, 2600);
-    return () => window.clearInterval(timer);
-  }, [paused, count]);
 
   const normalize = (index: number) => {
     const half = Math.floor(count / 2);
@@ -295,38 +281,30 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     setActive((next + count) % count);
   };
 
-  const onWheel = (event: WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    if (Math.abs(event.deltaY) + Math.abs(event.deltaX) < 8) return;
-    moveTo(activeRef.current + (event.deltaY + event.deltaX > 0 ? 1 : -1));
-  };
-
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    drag.current = { active: true, x: event.clientX, y: event.clientY, moved: false } as any;
-    setPaused(true);
+    drag.current = { active: true, x: event.clientX, y: event.clientY, moved: false, stepped: false };
+    (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.active) return;
+    if (!drag.current.active || drag.current.stepped) return;
     const dx = event.clientX - drag.current.x;
-    const dy = event.clientY - (drag.current as any).y;
-    if (Math.abs(dx) < 36 || Math.abs(dx) < Math.abs(dy)) return;
-    (drag.current as any) = { active: true, x: event.clientX, y: event.clientY, moved: true };
-    moveTo(activeRef.current + (dx < 0 ? 1 : -1));
+    const dy = event.clientY - drag.current.y;
+    if (Math.abs(dy) > Math.abs(dx)) return; // vertical gesture → let page scroll
+    if (Math.abs(dx) < 50) return;
+    drag.current.stepped = true;
+    drag.current.moved = true;
+    moveTo(active + (dx < 0 ? 1 : -1));
   };
 
   const onPointerUp = () => {
     drag.current.active = false;
-    window.setTimeout(() => setPaused(false), 900);
   };
 
   return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
       className="circleProductCarousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onWheel={onWheel}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
