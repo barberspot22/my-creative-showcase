@@ -59,6 +59,7 @@ export function LumusReplicaEffect() {
         const material = new THREE.MeshStandardMaterial({ color: "#aaaaaa", metalness: 1, roughness: .2, envMap, envMapIntensity: 1.5 });
         group.clear();
         group.add(new THREE.Mesh(geometry, material));
+        wrapper.classList.add("is-ready");
       };
       loader.load("/lumus-effect/helvetiker_bold.typeface.json", createTitle);
 
