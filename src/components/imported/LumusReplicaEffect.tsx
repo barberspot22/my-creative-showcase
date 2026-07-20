@@ -6,15 +6,31 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2
 
 export function LumusReplicaEffect() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const robotRef = useRef<HTMLImageElement>(null);
+  const hostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    if (!wrapper) return;
+    const host = hostRef.current;
+    if (!wrapper || !host) return;
     let stopped = false;
     let frame = 0;
     let renderer: any;
     let onResize = () => {};
     let onPointer = (_e: PointerEvent) => {};
+
+    // Scroll progress (0 → 1) smoothed with lerp for a jitter-free feel.
+    let scrollProgress = 0;
+    let smoothProgress = 0;
+    const updateScroll = () => {
+      const rect = host.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      // 0 while hero fully in view, 1 once scrolled a full viewport past top
+      const raw = Math.min(1, Math.max(0, -rect.top / vh));
+      scrollProgress = easeInOutCubic(raw);
+    };
+    updateScroll();
+    window.addEventListener("scroll", updateScroll, { passive: true });
 
     (async () => {
       // Dynamic import so the vendored Three.js only loads in the browser (avoids SSR issues).
