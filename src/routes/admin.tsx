@@ -15,6 +15,7 @@ const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
 const defaultCases: AdminCase[] = [
   {
+    key: "studio",
     href: "/gb-studio",
     title: "Studio",
     description: "Lookbook completo gerado por IA para marca têxtil",
@@ -22,6 +23,7 @@ const defaultCases: AdminCase[] = [
     frames: ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png"],
   },
   {
+    key: "social",
     href: "/gb-social",
     title: "Social",
     description: "Seu Social Media de IA no WhatsApp",
@@ -33,6 +35,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "ecommerce",
     href: "/ecommerce",
     title: "E-commerce",
     description: "Loja, automação e IA vendedora em um sistema só",
@@ -43,6 +46,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "crm",
     href: "/crm",
     title: "CRM",
     description: "Comercial e produção em módulos separados",
@@ -54,6 +58,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "site",
     href: "/site-institucional",
     title: "Site Institucional",
     description: "Autoridade em segundos e contato sem desvio",
@@ -65,6 +70,7 @@ const defaultCases: AdminCase[] = [
     ],
   },
   {
+    key: "menu",
     href: "/cardapio-digital",
     title: "Menu Digital",
     description: "Cardápio e presença digital em um sistema só",
