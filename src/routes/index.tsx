@@ -51,9 +51,9 @@ const socialPostGrid = [
   "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=90",
 ];
 const benefits = [
-  ["Quem entende, quem constrói", "Sem terceirizar pra quem não conhece o seu processo. Quem desenha o sistema é quem também mantém no ar."],
+  ["Quem entende, quem constrói", "Sem terceirizar pra quem não conhece o seu processo. Quem desenha a solução é quem também mantém no ar."],
   ["Arquitetura em vez de ferramenta genérica", "Antes de qualquer n8n ou Zapier, checamos se existe uma solução melhor pro seu caso específico."],
-  ["Automação com aprovação", "Sistemas autônomos, mas com humano no controle onde o risco é alto."],
+  ["Automação com aprovação", "Automações autônomas, mas com humano no controle onde o risco é alto."],
   ["Honestidade radical", "Se não faz sentido, a gente fala. Você não recebe o que pediu — recebe o que precisa."],
   ["Em dias, não em meses", "O que demora semanas em outro lugar, a gente entrega com foco e clareza em poucos dias."],
 ];
