@@ -843,7 +843,7 @@ body{overflow-x:clip}
 .siteFooter .footerOverlap{position:absolute;left:0;right:0;top:-120px;height:180px;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.55) 35%,rgba(5,5,5,.9) 70%,#050505 100%);z-index:1}
 .siteFooter .footerInner{position:relative;z-index:2;padding:120px 8% 40px;max-width:1400px;margin:0 auto}
 .siteFooter .footerTop{display:grid;grid-template-columns:1fr 2fr;gap:80px;padding-bottom:70px;border-bottom:1px solid rgba(255,255,255,.08)}
-.siteFooter .footerBrand .footerLogo{height:42px;width:auto;display:block;margin:0 0 16px;filter:drop-shadow(0 6px 24px rgba(255,255,255,.15))}
+.siteFooter .footerBrand .footerLogo{height:84px;width:auto;display:block;margin:0 0 18px;filter:drop-shadow(0 6px 24px rgba(255,255,255,.15))}
 .siteFooter .footerBrand .footerTag{margin:0;color:#eaeaea;font-size:22px;line-height:1.25;font-family:Melodrama,serif;max-width:280px}
 .siteFooter .footerCols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
 .siteFooter .footerCols h5{font-size:11px;text-transform:uppercase;letter-spacing:2.2px;color:#666;margin:0 0 22px;font-weight:700}
@@ -857,6 +857,7 @@ body{overflow-x:clip}
   .siteFooter .footerInner{padding:100px 22px 30px}
   .siteFooter .footerTop{grid-template-columns:1fr;gap:50px;padding-bottom:45px}
   .siteFooter .footerCols{grid-template-columns:1fr 1fr;gap:35px 20px}
+  .siteFooter .footerBrand .footerLogo{height:64px}
   .siteFooter .footerBrand .footerTag{font-size:19px}
   .siteFooter .footerBottom{flex-direction:column;align-items:flex-start;gap:10px}
 }
@@ -909,18 +910,21 @@ body{overflow-x:clip}
 .contactGoldGlow{position:absolute;top:-96px;right:-96px;width:220px;height:220px;background:#c9a84c;opacity:.045;filter:blur(80px);border-radius:50%;pointer-events:none;z-index:0}
 .contactEdge{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,204,211,.35),transparent);pointer-events:none}
 .contact .contactHeading{position:relative;z-index:1;font-family:Melodrama,"Cormorant Garamond",serif!important;font-weight:500!important;font-size:clamp(56px,9vw,88px)!important;line-height:.92!important;letter-spacing:-1.5px!important;margin:0 0 44px!important;background:linear-gradient(180deg,#ffffff 0%,#c8ccd3 55%,#8a8f97 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
-.contact .contactCta{position:relative;z-index:1;display:inline-flex!important;align-items:center;justify-content:center;gap:0;width:100%!important;max-width:420px;padding:20px 28px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.18)!important;background:transparent!important;color:#e9ecf1!important;cursor:pointer;transition:border-color .4s ease,background .4s ease,color .4s ease;font-family:Manrope,inherit;margin:0 0 44px!important;text-align:center;text-decoration:none!important;overflow:hidden}
-.contact .contactCta>.contactCtaLabel{float:none!important;flex:0 0 auto;min-width:0;white-space:nowrap;font-size:12px!important;line-height:1!important;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:inherit;padding:0!important;margin:0!important}
-.contact .contactCta:hover{border-color:rgba(201,168,76,.75);background:rgba(201,168,76,.05);color:#fff!important}
+#kontakt .contactInner .contactCta.contactCta{position:relative;z-index:1;display:block;width:100%;max-width:100%;padding:18px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#e9ecf1;cursor:pointer;transition:border-color .4s ease,background .4s ease,color .4s ease;font-family:Manrope,inherit;margin:0 0 44px;text-align:center;text-decoration:none;overflow:visible}
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel{display:inline;float:none;white-space:nowrap;font-size:12px!important;line-height:1!important;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:inherit;padding:0;margin:0}
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel::before,
+#kontakt .contactInner .contactCta.contactCta>.contactCtaLabel::after{display:none!important;content:none!important}
+#kontakt .contactInner .contactCta.contactCta:hover{border-color:rgba(201,168,76,.75);background:rgba(201,168,76,.05);color:#fff}
 .contactCopy{position:relative;z-index:1;font-size:16px;line-height:1.65;margin:0;display:block}
 .contactCopy p{margin:0 0 18px}
 .contactLead{color:#c8ccd3;font-weight:300;font-size:17px}
 .contactSub{color:rgba(255,255,255,.42);font-size:13px;letter-spacing:.02em}
 @media(max-width:760px){
-  .contact{margin:70px auto 90px!important;padding:0 18px!important}
-  .contactInner{padding:40px 28px 34px;border-radius:20px}
+  .contact{margin:70px auto 90px!important;padding:0 14px!important}
+  .contactInner{padding:40px 22px 34px;border-radius:20px}
   .contact .contactHeading{font-size:46px!important;letter-spacing:-1.8px!important;margin-bottom:32px!important}
-  .contactCta{padding:16px 22px;margin-bottom:36px}
+  #kontakt .contactInner .contactCta.contactCta{padding:16px 14px}
+  #kontakt .contactInner .contactCta.contactCta>.contactCtaLabel{font-size:11px!important;letter-spacing:.06em}
   .contactLead{font-size:16px}
 }
 
