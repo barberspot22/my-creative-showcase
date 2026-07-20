@@ -453,7 +453,24 @@ function HomePage() {
         <div className="logoGrid clientNames reveal">{clients.map((name)=><div key={name}><strong>{name}</strong></div>)}</div>
       </section>
 
-      <section id="kontakt" className="contact reveal"><div><h2>Vamos<br/>conver<br/>sar.</h2><button onClick={() => setContact(true)}>Falar com a equipe <span>↗</span></button></div><div className="contactCopy"><p>Vamos descobrir juntos se<br/>e como podemos te ajudar.</p><p>Conte o problema.<br/>A gente desenha a solução.</p></div></section>
+      <section id="kontakt" className="contact reveal" aria-labelledby="contactHeading">
+        <div className="contactInner">
+          <div className="contactGoldGlow" aria-hidden="true" />
+          <h2 id="contactHeading" className="contactHeading">Vamos<br/>conversar.</h2>
+          <button type="button" className="contactCta" onClick={() => setContact(true)}>
+            <span>Falar com a equipe</span>
+            <svg width="26" height="12" viewBox="0 0 26 12" fill="none" aria-hidden="true">
+              <path d="M19 1L25 6L19 11" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M1 6H25" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+          <div className="contactCopy">
+            <p className="contactLead">Vamos descobrir juntos se e como podemos te ajudar.</p>
+            <p className="contactSub">Conte o problema.<br/>A gente desenha a solução.</p>
+          </div>
+          <div className="contactEdge" aria-hidden="true" />
+        </div>
+      </section>
     </main>
 
     <footer className="siteFooter">
