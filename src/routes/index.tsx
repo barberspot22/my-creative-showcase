@@ -413,7 +413,7 @@ function HomePage() {
       <a href="#top" className="brand gbImageBrand"><img src={gbLogo} alt="GB IA" /></a>
       <button className={`menuButton ${menu ? "open" : ""}`} onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Abrir menu"><i/><i/><i/></button>
       <nav className={menu ? "open" : ""}>
-        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#ueber-uns">Por que GB IA</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
+        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
       </nav>
     </header>
 
@@ -425,7 +425,7 @@ function HomePage() {
 
       <ProcessTrail />
 
-      <section id="ueber-uns" className="why">
+      <section id="ueber-uns" className="why hidden" style={{ display: "none" }} aria-hidden="true">
         <div className="whyIntro reveal"><h2>Por que<br/>GB IA</h2><button className="pill" onClick={() => setContact(true)}>Falar com a equipe <span>→</span></button></div>
         <div className="whyPanel reveal"><div className="panelHero"><img src="/gb-network-map.png" alt="Mapa visual de conexões representando a arquitetura dos sistemas da GB IA"/><div><h3>Nosso jeito de construir</h3><p>Primeiro entendemos o gargalo. Depois desenhamos, construímos e acompanhamos o sistema em produção.</p></div></div><ol>{benefits.map((b,i)=><li key={b[0]}><span>{i+1}</span><div><strong>{b[0]}</strong><p>{b[1]}</p></div></li>)}</ol></div>
       </section>
@@ -450,10 +450,9 @@ function HomePage() {
           <div className="footerCols">
             <div>
               <h5>Navegar</h5>
-              <a href="#leistungen">O que fazemos</a>
-              <a href="#ueber-uns">Por que GB IA</a>
-              <a href="#referenzen">Clientes</a>
-              <a href="#kontakt">Contato</a>
+            <a href="#leistungen">O que fazemos</a>
+            <a href="#referenzen">Clientes</a>
+            <a href="#kontakt">Contato</a>
             </div>
             <div>
               <h5>Produtos</h5>
