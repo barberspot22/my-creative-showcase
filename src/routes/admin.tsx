@@ -119,27 +119,6 @@ function AdminPage() {
     setStatus("Alteração ainda não salva.");
   };
 
-function AdminPage() {
-  const [cases, setCases] = useState<AdminCase[]>(defaultCases);
-  const [activeHref, setActiveHref] = useState(defaultCases[0].href);
-  const [status, setStatus] = useState("Pronto para editar.");
-
-  useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem(ADMIN_CASES_KEY);
-      if (raw) setCases(normalizeCases(JSON.parse(raw)));
-    } catch {
-      setStatus("Não consegui carregar edições antigas. Mantive o padrão.");
-    }
-  }, []);
-
-  const activeCase = useMemo(() => cases.find((item) => item.href === activeHref) || cases[0], [cases, activeHref]);
-
-  const updateCase = (patch: Partial<AdminCase>) => {
-    setCases((current) => current.map((item) => item.href === activeHref ? { ...item, ...patch } : item));
-    setStatus("Alteração ainda não salva.");
-  };
-
   const updateFrame = (index: number, src: string) => {
     updateCase({ frames: activeCase.frames.map((frame, frameIndex) => frameIndex === index ? src : frame) });
   };
@@ -150,6 +129,15 @@ function AdminPage() {
 
   const removeFrame = (index: number) => {
     updateCase({ frames: activeCase.frames.filter((_, frameIndex) => frameIndex !== index) });
+  };
+
+  const uploadFrame = (index: number, file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = typeof reader.result === "string" ? reader.result : "";
+      if (result) updateFrame(index, result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const save = () => {
