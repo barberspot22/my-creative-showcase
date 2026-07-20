@@ -145,10 +145,3 @@ export function LumusReplicaEffect() {
     <h1>GB IA</h1>
   </div>;
 }
-
-  return <div className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
-    <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
-    <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" />
-    <h1>GB IA</h1>
-  </div>;
-}
