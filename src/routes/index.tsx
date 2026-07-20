@@ -501,7 +501,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     links: [
-      { rel: "preload", as: "image", href: "/lumus-effect/gb-ia-robot.png", fetchpriority: "high" } as any,
+      { rel: "preload", as: "image", href: "/lumus-effect/gb-ia-robot.webp", type: "image/webp", fetchpriority: "high" } as any,
       { rel: "preload", as: "fetch", href: "/lumus-effect/helvetiker_bold.typeface.json", crossOrigin: "anonymous" } as any,
       { rel: "preload", as: "image", href: "/lumus-effect/cube/posx.jpg" },
       { rel: "preload", as: "image", href: "/lumus-effect/cube/negx.jpg" },

@@ -35,9 +35,10 @@ export function LumusReplicaEffect() {
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, width / height, nearDist, farDist);
       camera.position.z = Math.round(farDist / 20);
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
       renderer.setClearColor(0x000000, 0);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const isMobile = window.matchMedia("(max-width: 720px)").matches;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
       renderer.setSize(width, height);
       wrapper.appendChild(renderer.domElement);
 
@@ -124,7 +125,10 @@ export function LumusReplicaEffect() {
 
   return <div className="lumusReplicaEffect gbRobotHero" aria-label="GB IA">
     <div ref={wrapperRef} className="lumusTitleCanvas" aria-hidden="true" />
-    <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" fetchPriority="high" decoding="async" />
+    <picture>
+      <source srcSet="/lumus-effect/gb-ia-robot.webp" type="image/webp" />
+      <img className="gbHeroRobot" src="/lumus-effect/gb-ia-robot.png" alt="" aria-hidden="true" fetchPriority="high" decoding="async" width={900} height={900} />
+    </picture>
     <h1>GB IA</h1>
   </div>;
 }
