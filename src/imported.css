@@ -1165,3 +1165,74 @@ body{overflow-x:clip}
   .admX-image-row{grid-template-columns:64px 1fr;grid-auto-flow:row}
   .admX-image-row .admX-upload,.admX-image-row .admX-btn{grid-column:1/-1}
 }
+
+/* Tablet adjustment (768–1023px): full width with lateral breathing room */
+@media (min-width: 761px) and (max-width: 1023px) {
+  .nav { padding: 22px 28px; }
+
+  /* Home */
+  .services { padding: 70px 28px 95px; }
+  .why { padding: 90px 28px; }
+  .references { padding: 85px 28px 90px; }
+  .processTrail { padding: 110px 28px 130px; }
+  .siteFooter .footerInner { padding: 120px 28px 40px; }
+
+  /* Product page navs + heroes */
+  .studioNav, .commerceNav, .siteProductNav, .menuProductNav { padding: 0 28px; }
+  .studioHero, .socialHero, .commerceHero, .siteProductHero, .menuProductHero { padding: 110px 28px 80px; }
+
+  /* Product page sections */
+  .problemBlock, .processBlock, .audienceBlock,
+  .whatsappBlock, .allChannels, .autonomyBlock, .dnaBlock, .socialFlow,
+  .commerceProblem, .commerceDeliverables, .commerceProcess, .commerceProof,
+  .crmHero, .crmAutoBlock, .crmSystemShowcase, .crmChatBlock, .crmStructure, .crmCompareBlock,
+  .siteProductProblem, .siteProductDeliverables, .siteProductProcess,
+  .menuProductProblem, .menuProductDeliverables, .menuProductProcess, .menuProductProof {
+    padding: 90px 28px;
+  }
+
+  /* Light sections with internal children padding */
+  .socialWorkShowcase, .siteWorkShowcase, .menuVisualShowcase { padding: 90px 0; }
+  .socialWorkShowcase > div:first-child,
+  .siteWorkShowcase > div:first-child,
+  .menuVisualShowcase > div:first-child { padding: 0 28px; margin: 0 0 50px; }
+  .commerceGallerySection { padding: 90px 28px; }
+  .commerceGallerySection > div:first-child { margin: 0 0 50px; padding: 0; }
+  .allChannels { padding: 90px 28px; text-align: left; }
+  .channelMap { margin: 45px 0 0; max-width: none; }
+
+  /* Single column grids on tablet */
+  .problemBlock, .processBlock, .whatsappBlock,
+  .commerceProblem, .commerceDeliverables, .commerceProcess,
+  .siteProductProblem, .siteProductDeliverables, .siteProductProcess,
+  .menuProductProblem, .menuProductDeliverables, .menuProductProcess,
+  .crmChatBlock, .crmStructure {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .comparison, .autonomyGrid, .dnaCards, .serviceGrid { grid-template-columns: 1fr; }
+
+  /* Sticky intros become static */
+  .commerceSectionIntro, .siteProductDeliverables > div, .menuProductDeliverables > div { position: static; }
+
+  /* Final blocks with margin */
+  .briefingBlock, .socialFinal, .siteProductFinal, .commerceFinal, .menuProductFinal {
+    margin: 20px 28px 70px;
+    padding: 65px 28px;
+  }
+
+  /* CRM specific */
+  .crmFinal { padding: 90px 28px; }
+  .crmSystemShowcase { padding: 90px 28px; }
+  .crmDemo { grid-template-columns: 1fr; }
+  .crmHandoff { justify-content: flex-start; }
+
+  /* Footer */
+  .studioFooter { padding: 28px; }
+  .siteFooter .footerTop { gap: 50px; }
+  .siteFooter .footerCols { grid-template-columns: repeat(3, 1fr); }
+
+  /* Admin */
+  .admX-topbar { padding: 14px 28px; }
+  .admX-section { padding: 24px 28px 100px; }
+}
