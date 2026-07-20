@@ -479,4 +479,18 @@ function HomePage() {
   </>;
 }
 
-export const Route = createFileRoute("/")({ component: HomePage });
+export const Route = createFileRoute("/")({
+  component: HomePage,
+  head: () => ({
+    links: [
+      { rel: "preload", as: "image", href: "/lumus-effect/gb-ia-robot.png", fetchpriority: "high" } as any,
+      { rel: "preload", as: "fetch", href: "/lumus-effect/helvetiker_bold.typeface.json", crossOrigin: "anonymous" } as any,
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/posx.jpg" },
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/negx.jpg" },
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/posy.jpg" },
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/negy.jpg" },
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/posz.jpg" },
+      { rel: "preload", as: "image", href: "/lumus-effect/cube/negz.jpg" },
+    ],
+  }),
+});

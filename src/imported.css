@@ -447,10 +447,14 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .hero .lumusReplicaEffect>h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .hero .lumusSphereVideo{display:none!important}
 .gbRobotHero{inset:58px 0 auto;height:560px;overflow:visible}
-.gbRobotHero .lumusTitleCanvas{z-index:1;top:49%;height:620px;opacity:.98}
-.gbHeroRobot{position:absolute;z-index:3;left:50%;bottom:-18px;width:min(465px,43vw);height:auto;transform:translateX(-38%);filter:drop-shadow(0 30px 34px rgba(0,0,0,.78));object-fit:contain}
+.gbRobotHero .lumusTitleCanvas{z-index:1;top:49%;height:620px;opacity:0;transform:translate(-50%,-46%) scale(.86);filter:blur(14px);transition:opacity .9s ease-out,transform 1.1s cubic-bezier(.2,.82,.2,1),filter .9s ease-out}
+.gbRobotHero .lumusTitleCanvas.is-ready,.gbRobotHero.is-ready .lumusTitleCanvas{opacity:.98;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+.gbHeroRobot{position:absolute;z-index:3;left:50%;bottom:-18px;width:min(465px,43vw);height:auto;transform:translateX(-38%) translateY(24px);opacity:0;filter:drop-shadow(0 30px 34px rgba(0,0,0,.78));object-fit:contain;animation:gbHeroRobotIn 1s cubic-bezier(.2,.82,.2,1) .15s forwards}
+@keyframes gbHeroRobotIn{to{opacity:1;transform:translateX(-38%) translateY(0)}}
 .gbRobotHero:after{content:"";position:absolute;z-index:4;left:50%;bottom:-42px;width:min(720px,72vw);height:240px;transform:translateX(-35%);background:linear-gradient(transparent,rgba(0,0,0,.72) 55%,#000 92%);filter:blur(24px);pointer-events:none}
-@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%;opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);transform:translateX(-38%)}.gbRobotHero:after{bottom:-28px;width:90vw;height:170px;transform:translateX(-42%);filter:blur(18px)}}
+@media(max-width:760px){.gbRobotHero{inset:92px 0 auto;height:430px}.gbRobotHero .lumusTitleCanvas{height:430px;top:43%}.gbRobotHero .lumusTitleCanvas.is-ready,.gbRobotHero.is-ready .lumusTitleCanvas{opacity:.92}.gbHeroRobot{bottom:6px;width:min(330px,73vw);animation-name:gbHeroRobotInMobile}.gbRobotHero:after{bottom:-28px;width:90vw;height:170px;transform:translateX(-42%);filter:blur(18px)}}
+@keyframes gbHeroRobotInMobile{from{opacity:0;transform:translateX(-38%) translateY(20px)}to{opacity:1;transform:translateX(-38%) translateY(0)}}
+@media(prefers-reduced-motion:reduce){.gbRobotHero .lumusTitleCanvas{transition:opacity .2s ease;transform:translate(-50%,-50%) scale(1);filter:none}.gbHeroRobot{animation:none;opacity:1;transform:translateX(-38%)}}
 
 /* Cases agora ficam logo acima de "O que fazemos". */
 .homeCasesFirst{padding-top:70px;padding-bottom:80px}.homeCasesFirst .showTitle{margin-top:0!important}
