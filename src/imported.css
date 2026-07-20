@@ -920,7 +920,8 @@ body{overflow-x:clip}
   .contact{margin:70px auto 90px!important;padding:0 18px!important}
   .contactInner{padding:40px 28px 34px;border-radius:20px}
   .contact .contactHeading{font-size:46px!important;letter-spacing:-1.8px!important;margin-bottom:32px!important}
-  .contactCta{padding:16px 22px;margin-bottom:36px}
+  .contact .contactCta{padding:18px 26px!important;max-width:100%}
+  .contact .contactCta>.contactCtaLabel{font-size:11px!important;letter-spacing:.14em}
   .contactLead{font-size:16px}
 }
 
