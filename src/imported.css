@@ -628,7 +628,7 @@ body{overflow-x:clip}
 .studioButton,.studioNavCta,.menuProductPrimary,.menuProductSecondary,
 .crmPrimary,.crmSecondary,.siteProductPrimary,.siteProductSecondary,
 .commercePrimary,.commerceSecondary,.contact button,
-.studioModalBox form>button,.socialHero .socialCta{
+.studioModalBox form>button{
   position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:22px;
   padding:15px 22px;min-width:0;
   background:transparent!important;
