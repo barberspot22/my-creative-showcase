@@ -142,7 +142,7 @@ function formatPrice(v: number) {
 
 export function CatalogWidget() {
   const [tab, setTab] = useState<"salgados" | "doces">("salgados");
-  const [chip, setChip] = useState("Novidades");
+  const [chip, setChip] = useState("Entradas");
   const [selected, setSelected] = useState<Product | null>(null);
   const [size, setSize] = useState(0);
   const [qty, setQty] = useState(1);
