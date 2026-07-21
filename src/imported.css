@@ -1541,8 +1541,8 @@ section[aria-label^="Notifications"] {
 .referenceGallery{position:relative}
 .referenceGalleryHint{margin:0 0 18px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
 .referenceScrollWrap{position:relative;padding:0 6%}
-.referenceScrollWrap{touch-action:pan-y}
-.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none}
+.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.referenceScrollTrack>*{scroll-snap-align:center;scroll-snap-stop:always}
 .referenceScrollTrack::-webkit-scrollbar{display:none}
 .referenceScrollTrack.isDragging{cursor:grabbing}
 .referenceScrollTrack img{-webkit-user-drag:none;user-select:none;pointer-events:none}
@@ -1598,7 +1598,7 @@ section[aria-label^="Notifications"] {
 .referenceScrollbar{position:absolute;top:8px;right:6px;bottom:8px;width:8px;border-radius:999px;background:#ffffff18;backdrop-filter:blur(6px);cursor:grab;touch-action:none;z-index:3;transition:background .2s,width .2s;border:1px solid #ffffff10}
 .referenceScrollbar:hover{background:#ffffff26;width:10px}
 .referenceScrollbar:active{cursor:grabbing}
-.referenceScrollbarThumb{position:absolute;left:0;right:0;border-radius:999px;background:linear-gradient(180deg,#d9ff61,#a7cc3d);box-shadow:0 2px 10px #d9ff6155,inset 0 1px 0 #ffffff40;transition:opacity .3s ease}
+.referenceScrollbarThumb{position:absolute;left:0;right:0;border-radius:999px;background:linear-gradient(180deg,#ffffff,#e6ecf2);box-shadow:0 2px 10px #ffffff33,inset 0 1px 0 #ffffff80;transition:opacity .3s ease}
 .referenceScrollHint{position:absolute;left:12px;bottom:10px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.4px;color:#ffffffcc;background:#000000a0;backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px;pointer-events:none;opacity:.95;border:1px solid #ffffff18}
 @media(max-width:760px){.referenceCardMediaTall{max-height:clamp(340px,72vw,460px)}.referenceScrollbar{width:6px}.referenceScrollHint{font-size:8px;padding:4px 7px}}
 

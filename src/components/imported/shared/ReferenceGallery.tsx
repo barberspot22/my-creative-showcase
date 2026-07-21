@@ -99,6 +99,8 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
+    // On touch, let the browser handle native horizontal scroll (smoother, momentum, snap).
+    if (e.pointerType === "touch") { state.current.pausedUntil = performance.now() + 3000; return; }
     setDragging(true);
     state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
     try { trackRef.current.setPointerCapture(e.pointerId); } catch { /* noop */ }
