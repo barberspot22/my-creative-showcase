@@ -1309,13 +1309,13 @@ body{overflow-x:clip}
     grid-template-columns: 1fr;
     gap: 45px;
   }
-  .comparison, .autonomyGrid, .dnaCards, .serviceGrid { grid-template-columns: 1fr; }
+  .comparison, .serviceGrid { grid-template-columns: 1fr; }
 
   /* Sticky intros become static */
   .commerceSectionIntro, .siteProductDeliverables > div, .menuProductDeliverables > div { position: static; }
 
   /* Final blocks with margin */
-  .briefingBlock, .socialFinal, .siteProductFinal, .commerceFinal, .menuProductFinal {
+  .briefingBlock, .siteProductFinal, .commerceFinal, .menuProductFinal {
     margin: 20px 28px 70px;
     padding: 65px 28px;
   }
