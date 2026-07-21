@@ -1504,7 +1504,7 @@ section[aria-label^="Notifications"] {
 .commerceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 44px;cursor:grab;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto}
 .commerceScrollTrack::-webkit-scrollbar{display:none}
 .commerceScrollTrack.isDragging{cursor:grabbing}
-.commerceSiteCard{flex:0 0 360px;min-height:480px;border-radius:24px;position:relative;overflow:hidden;border:1px solid #ffffff14;padding:18px;color:#fff;text-align:left;background:#111;box-shadow:0 24px 60px #00000050;transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.commerceSiteCard{flex:0 0 340px;min-height:460px;border-radius:24px;position:relative;overflow:hidden;border:1px solid #ffffff14;padding:18px;color:#fff;text-align:left;background:#111;box-shadow:0 24px 60px #00000050;transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
 .commerceSiteCard:hover{transform:translateY(-8px);box-shadow:0 32px 70px #00000066}
 .commerceSiteHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
 .commerceSiteDots{display:flex;gap:5px}.commerceSiteDots i{width:6px;height:6px;border-radius:50%;background:#ffffff60}
