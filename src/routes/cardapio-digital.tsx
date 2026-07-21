@@ -65,4 +65,17 @@ function CardapioDigitalPage() {
   </div>;
 }
 
-export const Route = createFileRoute("/cardapio-digital")({ component: CardapioDigitalPage });
+export const Route = createFileRoute("/cardapio-digital")({
+  component: CardapioDigitalPage,
+  head: () => ({
+    meta: [
+      { title: "Cardápio Digital — GB IA" },
+      { name: "description", content: "Cardápio digital integrado ao WhatsApp: seus clientes vem fotos, preços, variações e pedem sozinhos. Você só confirma e prepara." },
+      { property: "og:title", content: "Cardápio Digital — GB IA" },
+      { property: "og:description", content: "Cardápio digital integrado ao WhatsApp: seus clientes vem fotos, preços, variações e pedem sozinhos. Você só confirma e prepara." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/cardapio-digital" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/cardapio-digital" }],
+  }),
+});
