@@ -1,20 +1,55 @@
-# Ajuste de headline da página E-commerce
+# Refatorar carrossel de E-commerce
 
-## Contexto
-A headline atual ("O varejo não morreu. Ele só mudou de endereço.") não soou natural pro usuário. Foi escolhida a opção **"Seu cliente está online. Seu produto também?"** — mais curta, centrada no cliente, e que funciona como a abertura de um vendedor apresentando o produto.
+## Objetivo
+Reestilizar o `BentoMorphGallery` da página `/ecommerce` para que cada card pareça um preview de site real no ar (como na imagem enviada), mantendo os 5 templates de E-commerce existentes e a identidade GB IA (fundo escuro, acentos lime, tipografia melódica/mono).
 
-## O que será feito
-1. Atualizar o H1 do hero em `src/routes/ecommerce.tsx` para:
-   - Linha 1: "Seu cliente está online."
-   - Linha 2: "Seu produto também?" (em itálico, mantendo a classe `metallicTitle`)
-2. Atualizar o atributo `data-text` para refletir o novo texto.
-3. Ajustar o parágrafo seguinte para apoiar a nova abertura, mantendo o tom de vendedor apresentando o serviço.
-4. Revisar se meta title/description precisam ser alinhados (provavelmente sim, trocar "Loja, Catálogo, Marketplaces..." por algo mais direto).
-5. Rodar build para validar.
+## Contexto confirmado
+- O carrossel atual usa `BentoMorphGallery.tsx` com loop infinito, drag e auto-scroll (já implementados).
+- A página `/ecommerce` importa o componente na segunda dobra, com título "Modelos & Templates".
+- O usuário quer **manter os templates de E-commerce** (Atelier, Forma, Pulse, Nativa, Essencial) e aplicar o **layout da imagem**, com a **paleta GB IA** (lime + imagem).
 
-## Escopo
-- Apenas a página `/ecommerce` (arquivo `src/routes/ecommerce.tsx`).
-- Nenhuma mudança estrutural, visual ou de componente. Só copy.
+## Mudanças propostas
 
-## Resultado esperado
-Hero com uma frase que o cliente leia e pense "Opa, é verdade", sem soar como interesse do fornecedor.
+### 1. Estrutura dos cards (BentoMorphGallery.tsx)
+Cada card passa a ter:
+- **Moldura externa escura** (`#111` / `#181818`) com bordas arredondadas grandes e padding interno.
+- **Header com navegação**: logo do cliente (3 bolinhas) + 3 links de menu (ex: "Loja", "Catálogo", "Checkout") em chips cinza.
+- **Área de preview**: headline grande, subtítulo curto, botão de CTA arredondado preto/lime com texto "FALAR NO WHATSAPP".
+- **Meta abaixo do card**: nome do template e tipo/segmento.
+- Conteúdo por template adaptado ao E-commerce:
+  - Atelier → Moda: "Nova coleção no ar", "Drop exclusivo mobile"
+  - Forma → Casa: "Ambiente pronto", "Vitrine por cômodo"
+  - Pulse → Fitness: "Drop ativo", "Assinatura + upsell"
+  - Nativa → Beleza: "Rotina completa", "Kit de autocuidado"
+  - Essencial → Catálogo: "Linha essencial", "Compra rápida no WhatsApp"
+
+### 2. Comportamento
+- Manter **loop infinito**, **drag horizontal** e **auto-scroll suave** já implementados.
+- Cards maiores e mais visíveis, com aspecto de site em desktop/tablet.
+- Pausar auto-scroll ao interagir ou passar o mouse (já existe, mas validar).
+- Ajustar o `scrollLeft` inicial para centralizar a cópia do meio (já existe).
+
+### 3. Estilização CSS (src/imported.css)
+Adicionar classes novas para o carrossel no estilo da imagem:
+- `.commerceSiteCard` — moldura arredondada, fundo escuro, sombra suave, padding.
+- `.commerceSiteHeader` — linha com bolinhas e chips de menu.
+- `.commerceSitePreview` — área clara/cinza do site com headline, parágrafo, botão.
+- `.commerceSiteCta` — botão arredondado estilo "FALAR NO WHATSAPP".
+- `.commerceSiteMeta` — nome do template + tipo abaixo do card.
+- Cores: fundo do preview em variações de `#f5f1e8`, `#d4e3dc`, `#ffe75e`, `#f3c7cf`, `#ececec` (mantidas, mas adaptadas para melhor contraste).
+- Responsivo: cards com `min-width` para 1 card por viewport em mobile, 2-3 em desktop.
+- Garantir que o drag não conflite com cliques nos botões/CTAs.
+
+### 4. Ajustes na página `/ecommerce`
+- Manter a seção "Modelos & Templates" na segunda dobra.
+- Atualizar o texto introdutório, se necessário, para combinar com o novo visual: "Modelos que já viram loja no ar" → permanece.
+- Verificar se o texto "Loop infinito · arraste ou deixe rolar →" abaixo do carrossel ainda faz sentido ou pode ser melhorado.
+
+## Escopo fora desta entrega
+- Não alterar o conteúdo da página além do carrossel e do texto introdutório imediato.
+- Não mudar a seção de áudio, omni-channel ou CTA final.
+- Não adicionar novas rotas ou imagens externas (usar preview CSS puro).
+
+## Validação
+- Rodar `bun run build` para garantir que o TypeScript e os imports não quebram.
+- Verificar em preview mobile e desktop se o drag horizontal continua funcionando e se os cards renderizam como site previews.
