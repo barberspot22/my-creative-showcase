@@ -1,9 +1,12 @@
-import { PointerEvent, useEffect, useRef, useState } from "react";
+import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
+
+export type ReferenceType = "ecommerce" | "institucional" | "vendas" | "captura" | "cardapio";
 
 export interface Reference {
   image: string;
   segment: string;
   domain?: string;
+  type?: ReferenceType;
 }
 
 interface ReferenceGalleryProps {
@@ -12,9 +15,19 @@ interface ReferenceGalleryProps {
   title?: string;
   /** "tall" enables vertical scroll of full-page screenshots inside each card. */
   variant?: "default" | "tall";
+  /** Show search + type filter chips. Defaults true when items span >1 type. */
+  enableFilters?: boolean;
 }
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: ReferenceGalleryProps) {
+const TYPE_LABELS: Record<ReferenceType, string> = {
+  ecommerce: "E-commerce",
+  institucional: "Institucional",
+  vendas: "Página de vendas",
+  captura: "Página de captura",
+  cardapio: "Cardápio digital",
+};
+
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement | null>(null);
