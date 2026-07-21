@@ -75,6 +75,25 @@
 @media(max-width:760px){.menuCase{font-size:54px}.menuProductHero{min-height:auto;padding:40px 22px 60px}.menuProductHero h1{font-size:42px;letter-spacing:-1px}.menuProductHero>p:not(.studioEyebrow){font-size:16px}.menuProductActions{width:100%;flex-direction:column}.menuProductPrimary,.menuProductSecondary{width:100%}.menuHeroFan{margin-top:18px}.menuHeroFan .menuFanGallery{height:420px;transform:translateY(14px)}.menuProductProblem,.menuProductDeliverables,.menuProductProcess{padding:75px 22px;grid-template-columns:1fr;gap:45px}.menuProductProblem>p{font-size:16px}.menuProductDeliverables>div{position:static}.menuProductDeliverables li,.menuProductProcess li{grid-template-columns:50px 1fr}.menuVisualShowcase{padding:75px 0 90px}.menuVisualShowcase>div:first-child{padding:0 22px;margin:0}.menuFanGallery{height:515px;margin-top:35px;overflow:hidden}.menuFanStage{width:100%;height:430px}.menuFanCard{width:165px;height:330px;margin-left:-110px;border-radius:12px;transform:rotate(calc(var(--fan-distance) * 3deg)) translateZ(calc(abs(var(--fan-distance)) * -18px))}.menuFanCard:first-child{margin-left:0}.menuFanCard.active{width:245px;transform:translateY(-10px) translateZ(30px)}.menuFanMedia{padding:18px}.menuFanMedia i{width:135px;height:135px}.menuFanMedia b{font-size:29px}.menuProductProof{padding:75px 22px}.menuProductProof ul{margin-top:45px}.menuProductFinal{margin:10px 20px 65px;padding:55px 25px;min-height:610px}}
 @media(prefers-reduced-motion:reduce){.menuFanCard{transition:none;transform:none}.menuFanCard.active{transform:none}}
 
+/* ===== Light deliverables — cardápio second fold ===== */
+.menuValueDeliverables{padding:110px 8%;background:var(--cream);color:var(--ink);display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}
+.menuValueDeliverables>div{position:sticky;top:70px;align-self:start}
+.menuValueDeliverables .studioEyebrow{color:#6b6b6b}
+.menuValueDeliverables h2{font-size:clamp(48px,6vw,84px);line-height:.94;margin:18px 0 0;color:var(--ink)}
+.menuValueDeliverables ol{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.menuValueDeliverables li{display:grid;grid-template-columns:60px 1fr;gap:22px;padding:28px 28px 28px 24px;background:#fff;border:1px solid #0ea5e9;border-radius:18px;box-shadow:0 14px 40px rgba(14,165,233,.08)}
+.menuValueDeliverables li>span{font:30px Melodrama,serif;color:#0ea5e9}
+.menuValueDeliverables h3{font-size:24px;margin:0 0 8px;color:var(--ink)}
+.menuValueDeliverables li p{color:#51545c;line-height:1.6;margin:0}
+@media(max-width:760px){
+  .menuValueDeliverables{padding:75px 22px;grid-template-columns:1fr;gap:45px}
+  .menuValueDeliverables>div{position:static}
+  .menuValueDeliverables h2{font-size:42px;letter-spacing:-1px}
+  .menuValueDeliverables li{grid-template-columns:48px 1fr;padding:22px}
+  .menuValueDeliverables li>span{font-size:26px}
+  .menuValueDeliverables h3{font-size:21px}
+}
+
 /* Global neo-grotesk typography */
 html body,button,input,textarea,select,h1,h2,h3,h4,h5,h6,.manifest h1,.whyIntro h2,.panelHero h3,.ticker,.gbTextBrand,.clientNames strong,.caseVisual,.personInitial,.studioPage h1,.studioPage h2,.studioBrand,.studioHero h1,.problemBlock h2,.galleryCopy h2,.processIntro h2,.audienceBlock h2,.briefingBlock h2,.spiralCard,.socialProductPage h1,.socialProductPage h2,.socialDesignCard h3,.dnaNote,.commercePage h1,.commercePage h2,.crmPage h1,.crmPage h2,.siteProductPage h1,.siteProductPage h2,.siteWorkMock>b,.siteWorkMeta h3,.menuProductPage h1,.menuProductPage h2,.menuFanMedia b,.metallicTitle h1,.metallicTitle h1:before,.metallicTitle h1:after{font-family:Manrope,Arial,Helvetica,sans-serif!important}
 html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,h4,h5,h6,.manifest h1,.whyIntro h2,.panelHero h3,.ticker,.caseVisual,.personInitial,.studioHero h1,.problemBlock h2,.galleryCopy h2,.processIntro h2,.audienceBlock h2,.briefingBlock h2,.socialDesignCard h3,.dnaNote,.commercePage h1,.commercePage h2,.crmPage h1,.crmPage h2,.siteProductPage h1,.siteProductPage h2,.siteWorkMock>b,.siteWorkMeta h3,.menuProductPage h1,.menuProductPage h2,.menuFanMedia b,.metallicTitle h1,.metallicTitle h1:before,.metallicTitle h1:after{font-weight:800!important}
