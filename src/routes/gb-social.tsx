@@ -41,7 +41,7 @@ function GBSocialPage() {
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
         <h1 className="metallicTitle">Sua social midia<br/><em>Seu social media agora mora no WhatsApp.</em></h1>
-        <p>Um agente de social media que cria posts, agenda conteúdo, analisa métricas, estuda concorrentes e monta calendário editorial — tudo pelo WhatsApp, no tom da sua marca.</p>
+        <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
         <strong>30 dias de conteúdo em uma conversa.</strong>
         <CtaPrimary>CRIAR MEU CALENDÁRIO DE 30 DIAS<br/><span>↗</span></CtaPrimary>
         <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
