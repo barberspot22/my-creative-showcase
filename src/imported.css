@@ -1541,8 +1541,8 @@ section[aria-label^="Notifications"] {
 .referenceGallery{position:relative}
 .referenceGalleryHint{margin:0 0 18px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
 .referenceScrollWrap{position:relative;padding:0 6%}
-.referenceScrollWrap{touch-action:pan-y}
-.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none}
+.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
+.referenceScrollTrack>*{scroll-snap-align:center;scroll-snap-stop:always}
 .referenceScrollTrack::-webkit-scrollbar{display:none}
 .referenceScrollTrack.isDragging{cursor:grabbing}
 .referenceScrollTrack img{-webkit-user-drag:none;user-select:none;pointer-events:none}
