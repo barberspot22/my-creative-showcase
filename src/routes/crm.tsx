@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
+import { FinalCta } from "@/components/FinalCta";
 
 const automations = [
   ["01", "Conversa automática com IA", "IA treinada no seu negócio responde no WhatsApp, Instagram e site — qualifica o lead antes do time humano entrar."],
@@ -114,12 +115,7 @@ function CRMPage() {
       </section>
 
       {/* 8. Final */}
-      <section className="crmFinal">
-        <p className="studioEyebrow">VAMOS CONVERSAR</p>
-        <h2>Me mostra como seu comercial funciona hoje.<br/>Eu desenho o CRM certo.</h2>
-        <p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p>
-        <a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
-      </section>
+      <FinalCta pageKey="crm" productName="CRM" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>CRM · Comercial e produção em fluxos próprios</span></footer>
   </div>;

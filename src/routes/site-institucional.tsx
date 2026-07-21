@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { PerspectiveTicker } from "@/components/imported/site-institucional/PerspectiveTicker";
+import { FinalCta } from "@/components/FinalCta";
 
 const deliverables = [
   ["Posicionamento claro na primeira dobra", "O que a empresa faz, para quem e por quê, sem rolar a página."],
@@ -38,7 +39,7 @@ function SiteInstitucionalPage() {
 
       <section className="siteProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Da mensagem central ao site no ar.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="siteProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que sua empresa faz.<br/>A gente constrói o site que prova isso.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
+      <FinalCta pageKey="site-institucional" productName="Site Institucional" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Site Institucional · Autoridade e contato sem desvio</span></footer>
   </div>;

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { BentoMorphGallery } from "@/components/imported/ecommerce/BentoMorphGallery";
 import { usePageLink } from "@/lib/adminLinks";
+import { FinalCta } from "@/components/FinalCta";
 
 const deliverables = [
   ["Loja funcional", "E-commerce estruturado com catálogo, carrinho e checkout, já com a identidade visual da sua marca — pronto para escalar, não só para existir."],
@@ -67,7 +68,7 @@ function EcommercePage() {
         <blockquote>Critério de pronto: se o cliente consegue ver o produto, ser atendido pela IA, comprar e ainda ser impactado por anúncio depois — o sistema tá pronto.</blockquote>
       </section>
 
-      <section className="commerceFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta o que você vende.<br/>A gente desenha o sistema que vende por você.</h2><p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
+      <FinalCta pageKey="ecommerce" productName="E-commerce" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>E-commerce · Loja, automação e IA vendedora</span></footer>
   </div>;
