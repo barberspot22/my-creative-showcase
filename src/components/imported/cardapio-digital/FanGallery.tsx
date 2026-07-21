@@ -3,10 +3,10 @@ import { useState } from "react";
 
 const items = [
   { label: "Menu Executivo", type: "Cardápio digital", className: "menuFanCard0", lines: ["Entrada", "Prato do dia", "Sobremesa"], price: "R$ 49" },
-  { label: "Pizzaria", type: "Template WhatsApp", className: "menuFanCard1", lines: ["Tradicionais", "Especiais", "Bebidas"], price: "Peça agora" },
-  { label: "Instagram", type: "Social media", className: "menuFanCard2", lines: ["Post do dia", "Story oferta", "Reels curto"], price: "Aprovar" },
-  { label: "Reservas", type: "Atendimento", className: "menuFanCard3", lines: ["Mesa", "Horário", "Confirmação"], price: "18:30" },
-  { label: "Delivery", type: "Template de pedido", className: "menuFanCard4", lines: ["Combo", "Adicionais", "Pagamento"], price: "Enviar" },
+  { label: "Pizzaria", type: "Cardápio QR", className: "menuFanCard1", lines: ["Tradicionais", "Especiais", "Bebidas"], price: "Peça agora" },
+  { label: "Hamburgueria", type: "Cardápio delivery", className: "menuFanCard2", lines: ["Smash", "Combos", "Milk-shake"], price: "R$ 39" },
+  { label: "Sushi", type: "Rodízio & à la carte", className: "menuFanCard3", lines: ["Sashimi", "Uramaki", "Hot roll"], price: "Montar" },
+  { label: "Cafeteria", type: "Cardápio de mesa", className: "menuFanCard4", lines: ["Especiais", "Brunch", "Doces"], price: "Chamar" },
 ];
 
 export function FanGallery() {
