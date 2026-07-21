@@ -7,8 +7,21 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
-const channels = ["Instagram", "Facebook", "Google Business Profile", "Outros canais da empresa"];
-const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao DNA da empresa", "Criação e adaptação", "Aprovação e publicação"];
+const features = [
+  ["Criação de posts", "Feed, story e carrossel prontos para publicar."],
+  ["Agendamento", "Programa tudo: post único, semana ou campanha completa."],
+  ["Análise de perfil", "Métricas, engajamento e saúde da conta em uma conversa."],
+  ["Análise de concorrentes", "O que os concorrentes estão postando e como performam."],
+  ["Pesquisa de mercado", "Tendências, oportunidades e tom de voz do seu nicho."],
+  ["Calendário editorial", "7, 15 ou 30 dias de conteúdo organizado de uma vez."],
+];
+
+const steps = [
+  ["Você pede", "Post, calendário, análise de perfil ou de concorrente — tudo pelo WhatsApp."],
+  ["Ele consulta o DNA", "O agente já sabe sua marca, tom de voz e regras."],
+  ["Você ajusta", "Recebe opções, pede alterações e aprova na conversa."],
+  ["Publica sozinho", "Ele agenda ou publica nos canais configurados."],
+];
 
 function GBSocialPage() {
   const [open, setOpen] = useState(false);
@@ -27,56 +40,44 @@ function GBSocialPage() {
     <main>
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
-        <h1>Sua empresa ativa em todos os canais.<br/><em>Sem você cuidar de todos eles.</em></h1>
-        <p>Um Social Media de IA que trabalha pelo WhatsApp, aprende o DNA da sua empresa, cria conteúdo e mantém sua presença digital funcionando.</p>
-        <strong>Você manda uma mensagem. Ele trabalha.</strong>
-        <CtaPrimary>SOLICITAR ORÇAMENTO<br/><span>↗</span></CtaPrimary>
-        <small>100% pelo WhatsApp · Sem prompts complicados · Feito para toda a sua equipe</small>
+        <h1>Sua marca não pode sumir do feed.<br/><em>Agora ela não some mais.</em></h1>
+        <p>Um agente de social media que cria posts, agenda conteúdo, analisa métricas, estuda concorrentes e monta calendário editorial — tudo pelo WhatsApp, no tom da sua marca.</p>
+        <strong>30 dias de conteúdo em uma conversa.</strong>
+        <CtaPrimary>CRIAR MEU CALENDÁRIO DE 30 DIAS<br/><span>↗</span></CtaPrimary>
+        <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
       </section>
 
       <section className="whatsappBlock">
-        <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa aprender a usar IA.</h2><p>Você já sabe usar WhatsApp. Nada de plataformas cheias de menus, prompts gigantes ou cinco sistemas para fazer um post.</p></div>
+        <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe usar WhatsApp. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para fazer um post.</p></div>
         <div className="chatDemo socialDesignerChat">
           <header><span><i/>GB Social</span><small>designer online</small></header>
           <div className="socialChatBody">
-            <p className="chatUser">Preciso de uma arte pro Instagram anunciando agenda aberta.</p>
-            <p className="chatAgent"><b>GB Social</b>Perfeito. Vou seguir o DNA da marca e preparar uma peça com chamada direta para WhatsApp.</p>
+            <p className="chatUser">Preciso de 15 dias de posts para o Instagram da loja.</p>
+            <p className="chatAgent"><b>GB Social</b>Perfeito. Vou montar o calendário com posts de feed, stories e carrossel seguindo o DNA da marca.</p>
             <article className="socialDesignPreview socialDesignPreviewImage" aria-label="Preview da arte criada pelo designer">
-              <img src={consumoConscienteAsset.url} alt="Design Consumo Consciente criado pelo GB Social" />
+              <img src={consumoConscienteAsset.url} alt="Design criado pelo GB Social para campanha de Consumo Consciente" />
             </article>
-            <p className="chatAgent"><b>GB Social</b>Criei essa versão. Posso adaptar para story e feed, mantendo o mesmo visual.</p>
-            <p className="chatUser">Gostei. Faz uma versão com CTA mais forte.</p>
-            <p className="chatAgent"><b>Designer</b>Atualizei: destaquei o botão, aumentei contraste e mantive a identidade da marca.</p>
+            <p className="chatAgent"><b>GB Social</b>Primeira peça pronta. Posso também fazer análise de concorrentes e métricas do mês?</p>
+            <p className="chatUser">Faz. E agenda tudo para sair às 19h.</p>
+            <p className="chatAgent"><b>Designer</b>Agendado. Calendário, análise e publicação configuradas.</p>
             <p className="socialApproval">Aprovação recebida · pronto para publicar</p>
           </div>
         </div>
       </section>
 
-      <section className="allChannels">
-        <p className="studioEyebrow">UM AGENTE · TODOS OS CANAIS</p><h2>Um único ponto de comando:<br/>seu WhatsApp.</h2>
-        <div className="channelMap"><div>VOCÊ</div><i>→</i><div>WHATSAPP</div><i>→</i><div className="agentNode">GB SOCIAL</div><ul>{channels.map(c => <li key={c}>{c}</li>)}</ul></div>
-        <p>Você conversa com um agente. O agente trabalha nos canais da sua empresa.</p>
+      <section className="socialFeatures">
+        <div><p className="studioEyebrow">O QUE ELE FAZ</p><h2>Social media completo, numa conversa.</h2></div>
+        <div className="socialFeaturesGrid">{features.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </section>
 
       <section className="socialWorkShowcase">
-        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Uma conversa pode virar uma campanha inteira.</h2><p>Explore alguns dos designs que já estão sendo criados para marcas e campanhas reais.</p></div>
+        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
         <PerspectiveTicker />
       </section>
 
-      <section className="autonomyBlock">
-        <div><p className="studioEyebrow">NÃO É SÓ MAIS UM GERADOR</p><h2>Uma ferramenta espera ser usada.<br/><em>Um agente trabalha.</em></h2></div>
-        <div className="autonomyGrid"><article><span>01</span><h3>Pode trabalhar sozinho</h3><p>Prepara publicações, executa rotinas e mantém a frequência dentro das regras definidas.</p></article><article><span>02</span><h3>Você escolhe o controle</h3><p>Peça, aprove ou configure o nível de autonomia que faz sentido para sua empresa.</p></article><article><span>03</span><h3>O trabalho continua</h3><p>Enquanto você cuida da empresa, o agente continua cuidando da presença digital dela.</p></article></div>
-      </section>
+      <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="dnaBlock">
-        <div><p className="studioEyebrow">ELE APRENDE SUA EMPRESA UMA VEZ</p><h2>Depois, sua equipe só precisa conversar.</h2></div>
-        <div className="dnaCards"><article><span>DNA DA MARCA</span><h3>Identidade preservada.</h3><p>Logo, cores, estilo, tom de voz e regras do que pode ou não pode ser feito.</p></article><article><span>DNA DO NEGÓCIO</span><h3>Contexto que permanece.</h3><p>O que sua empresa faz, vende, para quem vende e como se posiciona.</p></article></div>
-        <p className="dnaNote">A IA pode criar ao redor da sua marca. Ela não precisa reinventar sua marca.</p>
-      </section>
-
-      <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA A INTERNET</p><h2>Uma mensagem. Uma operação inteira.</h2><ol>{flow.map((item, i) => <li key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b></li>)}</ol></section>
-
-      <FinalCta pageKey="gb-social" productName="GB Social" />
+      <FinalCta pageKey="gb-social" productName="GB Social" title="Quer 30 dias de conteúdo pronto sem abrir uma ferramenta?" subtitle="Me conta sua marca e seus canais. Devolvo calendário, escopo e valor." />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA no WhatsApp</span></footer>
 
@@ -84,4 +85,17 @@ function GBSocialPage() {
   </div>;
 }
 
-export const Route = createFileRoute("/gb-social")({ component: GBSocialPage });
+export const Route = createFileRoute("/gb-social")({
+  component: GBSocialPage,
+  head: () => ({
+    meta: [
+      { title: "GB Social — Social Media de IA pelo WhatsApp | GB IA" },
+      { name: "description", content: "GB Social cria posts, agenda conteúdo, analisa métricas, concorrentes e monta calendário editorial pelo WhatsApp. Sua marca ativa nas redes sem você cuidar de tudo." },
+      { property: "og:title", content: "GB Social — Social Media de IA pelo WhatsApp | GB IA" },
+      { property: "og:description", content: "GB Social cria posts, agenda conteúdo, analisa métricas, concorrentes e monta calendário editorial pelo WhatsApp." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/gb-social" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/gb-social" }],
+  }),
+});
