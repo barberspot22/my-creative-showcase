@@ -34,17 +34,17 @@ function CardapioDigitalPage() {
     <ProductSwitcher current="cardapio-digital" />
     <main>
       <section className="menuProductHero">
-        <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>
-        <h1>Seu cardápio parado no PDF.<br/>Suas redes sociais paradas também.<br/>A gente resolve os dois juntos.</h1>
-        <p>Cardápio digital integrado ao WhatsApp e redes sociais rodando sozinhas — pro cliente decidir o que pedir e pro seu Instagram não ficar semanas sem postar.</p>
-        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <p className="studioEyebrow">CARDÁPIO DIGITAL + VENDA AUTÔNOMA</p>
+        <h1>Seu cliente vê o cardápio. Escolhe. E pede sozinho.</h1>
+        <p>O cliente não precisa esperar resposta no WhatsApp. Navega pelos produtos, vê fotos, preços e variações, e finaliza o pedido no próprio ritmo — enquanto você atende quem realmente precisa de ajuda.</p>
+        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
       <section className="menuCatalogWidgetSection">
         <div className="menuCatalogIntro">
-          <p className="studioEyebrow">EXPERIMENTE</p>
-          <h2>Sinta como seria ter <em>seu próprio catálogo</em>.</h2>
-          <p>Toque em qualquer produto para abrir os detalhes — imagens, tamanhos e valores, exatamente como o seu cliente veria.</p>
+          <p className="studioEyebrow">EXPERIMENTE AGORA</p>
+          <h2>Sinta como seria o site do seu negócio.</h2>
+          <p>Toque em qualquer produto. Veja fotos, tamanhos, preços e o botão de pedir — exatamente como seu cliente veria. Essa prévia é o mesmo fluxo que entregamos.</p>
         </div>
         <CatalogWidget />
       </section>
