@@ -150,7 +150,16 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
           >
             ×
           </button>
-          <img src={lightbox} alt="Referência ampliada" onClick={(e) => e.stopPropagation()} />
+          <div className="referenceLightboxFrame" onClick={(e) => e.stopPropagation()}>
+            <div className="referenceLightboxTop">
+              <span className="referenceLightboxDots"><i /><i /><i /></span>
+              <span className="referenceLightboxUrl">preview.gb-ia.com</span>
+              <span className="referenceLightboxSpacer" />
+            </div>
+            <div className="referenceLightboxViewport">
+              <img src={lightbox} alt="Referência ampliada" />
+            </div>
+          </div>
         </div>
       )}
     </div>
