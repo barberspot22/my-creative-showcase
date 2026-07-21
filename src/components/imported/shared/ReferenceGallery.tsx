@@ -60,17 +60,17 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
     setStart();
     const ro = new ResizeObserver(setStart);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [items.length]);
+  }, [filtered.length]);
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     const onScroll = () => {
       const third = el.scrollWidth / 3;
       if (el.scrollLeft < third * 0.5) el.scrollLeft += third;
@@ -78,11 +78,11 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
-  }, [items.length]);
+  }, [filtered.length]);
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     let raf = 0;
     let last = performance.now();
     const speed = 26;
@@ -95,7 +95,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [dragging, items.length]);
+  }, [dragging, filtered.length]);
 
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
