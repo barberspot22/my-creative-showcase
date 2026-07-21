@@ -106,6 +106,7 @@ export function ReferenceGallery({ items, ctaUrl, title }: ReferenceGalleryProps
             <article
               key={`${ref.segment}-${i}`}
               className="referenceCard"
+              onClickCapture={(e) => { if (state.current.moved) { e.preventDefault(); e.stopPropagation(); } }}
             >
               <button
                 type="button"
@@ -129,6 +130,7 @@ export function ReferenceGallery({ items, ctaUrl, title }: ReferenceGalleryProps
                     href={ctaUrl}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={(e) => { if (state.current.moved) e.preventDefault(); }}
                   >
                     Falar no WhatsApp
                   </a>
@@ -136,6 +138,7 @@ export function ReferenceGallery({ items, ctaUrl, title }: ReferenceGalleryProps
               </span>
             </article>
           ))}
+
 
         </div>
       </div>
