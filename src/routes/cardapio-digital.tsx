@@ -43,7 +43,7 @@ function CardapioDigitalPage() {
       <section className="menuCatalogWidgetSection">
         <div className="menuCatalogIntro">
           <p className="studioEyebrow">EXPERIMENTE AGORA</p>
-          <h2>Assim seu cliente pede sozinho.</h2>
+          <h2>Assim seu cliente acessa, escolhe e pede sozinho.</h2>
           <p>Toque em qualquer prato. Veja fotos, tamanhos, preço e o botão de pedir o mesmo fluxo que entregamos, aberto na mesa ou no celular do cliente.</p>
         </div>
         <CatalogWidget />
