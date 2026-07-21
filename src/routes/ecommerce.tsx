@@ -117,7 +117,7 @@ function EcommercePage() {
         <div className="commerceTrackingCopy">
           <p className="studioEyebrow">CONVERSÃO É ENGENHARIA</p>
           <h2>A gente vê onde <em>o cliente desiste.</em></h2>
-          <p>Heatmap, replay de sessão, funil de checkout e eventos de conversão instalados desde o primeiro dia. Cada abandono vira dado, cada dado vira ajuste, cada ajuste vira venda a mais no fim do mês.</p>
+          <p>Heatmap, replay, funil e pixel instalados desde o dia um. Cada abandono vira dado, cada dado vira ajuste, cada ajuste vira venda a mais.</p>
           <ul>
             <li><b>Heatmap</b> — onde o cliente clica, onde ele para de rolar.</li>
             <li><b>Replay</b> — assiste sessões reais de quem não comprou.</li>
