@@ -1,36 +1,20 @@
 ## Ajustes na página Site Institucional
 
-### 1. Headline mais curta e impactante (1ª dobra)
+**1. Hero (primeira dobra)**
+- Reduzir espaçamento superior (padding-top) para o conteúdo subir.
+- Reescrever subtítulo mais curto, aceitando o enquadramento de "cartão de visita":
+  - De: *"Um site institucional não é cartão de visita. É um funil 24h que apresenta o que você faz, prova que pode confiar e direciona o visitante para o contato — sem depender de algoritmo."*
+  - Para: *"Seu cartão de visita digital, aberto 24h. Apresenta, prova autoridade e leva ao contato."*
 
-Trocar a headline atual:
+**2. Segunda dobra (Showcase de sites)**
+- Encurtar o título atual para algo direto, ex.: *"Sites que já entregamos."* (eyebrow: "PORTFÓLIO")
+- Remover subtítulo longo se houver.
 
-> "Seu negócio existe. Só falta ser encontrado com autoridade."
+**3. Remover seção "Problema"**
+- Apagar completamente o bloco *"Sem site profissional, você perde gente boa"* e seus itens.
 
-Por uma versão mais curta e direta. Sugestões (escolho a 1ª se não houver preferência):
+**Arquivos afetados**
+- `src/routes/site-institucional.tsx` — textos e remoção da seção problema.
+- `src/imported.css` — reduzir `padding-top` do hero desta rota (mobile e desktop).
 
-- **"Só Existir não basta. Precisa ser encontrado." - > quero essa**
-- "Seu negócio merece ser visto."
-- "Invisível no Google é invisível no mercado."
-
-O subtítulo abaixo mantém o contexto de funil 24h, então a headline pode ficar bem enxuta.
-
-### 2. Reordenar dobras
-
-Mover a seção `**siteWorkShowcase**` (cards em scroll com sites já feitos — `PerspectiveTicker`) para logo depois do hero, virando a **2ª dobra**.
-
-Nova ordem da página:
-
-1. Hero (headline curta)
-2. **Showcase — "Já entregamos" (cards em scroll)** ← subiu
-3. Problema — "Sem site profissional, você perde antes de conversar"
-4. Valor — "Site institucional é vendedor que não dorme"
-5. Entregáveis — "O que entregamos"
-6. Processo — "Como funciona"
-7. FinalCta
-8. Footer
-
-### Detalhes técnicos
-
-- Editar `src/routes/site-institucional.tsx`: trocar texto do `<h1>` e reordenar as `<section>`.
-- Nenhum CSS novo necessário — `.siteWorkShowcase` já tem estilo próprio e funciona em qualquer posição.
-- O eyebrow "JÁ ENTREGAMOS" pode virar "NOSSO PORTFÓLIO" ou permanecer — mantenho "JÁ ENTREGAMOS" salvo indicação contrária.
+Sem mudanças em lógica ou outras páginas.
