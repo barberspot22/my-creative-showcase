@@ -84,7 +84,6 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
               key={p.key}
               to={p.href}
               className="productSwitcherItem"
-              ref={undefined}
               onClick={onLinkClick}
               draggable={false}
             >
