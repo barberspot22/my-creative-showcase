@@ -13,10 +13,11 @@ const deliverables = [
 ];
 
 const steps = [
-  ["Briefing", "Entendemos o que você vende e o que precisa provar."],
-  ["Arquitetura", "Mensagem central, estrutura e tom definidos antes do visual."],
-  ["Implementação", "Site construído com stack moderna, sem plugin."],
-  ["Operação", "No ar, testado e com caminho de contato funcionando."],
+  ["Briefing", "Entendemos o que você vende, o que oferece e qual é a proposta da marca."],
+  ["Estrutura", "Definimos a organização das páginas, mensagens e caminhos que o visitante vai percorrer."],
+  ["Protótipo", "Apresentamos o framework visual do site para você ver como vai ficar antes de produzir."],
+  ["Validação", "Ajustamos com base no seu feedback e só então partimos para a versão final."],
+  ["Entrega", "Site no ar, testado, e acompanhado para ver se está gerando resultado."],
 ];
 
 
