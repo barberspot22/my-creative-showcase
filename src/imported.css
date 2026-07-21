@@ -1528,3 +1528,13 @@ section[aria-label^="Notifications"] {
 .siteProductValue .siteProductPrimary{margin-top:10px}
 .siteProblemCta{display:inline-block;margin-top:28px}
 @media(max-width:760px){.siteProductValue{padding:75px 22px;grid-template-columns:1fr;gap:45px}.siteProductValue h2{font-size:clamp(36px,5vw,54px)}.siteProductValue li{font-size:16px}}
+
+/* Horizontal draggable templates gallery */
+.commerceScrollWrap{position:relative;padding:0 6%}
+.commerceScrollTrack{display:flex;gap:22px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:20px 0 40px;cursor:grab;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.commerceScrollTrack::-webkit-scrollbar{display:none}
+.commerceScrollTrack.isDragging{cursor:grabbing;scroll-snap-type:none}
+.commerceScrollTrack .commerceTemplate{flex:0 0 320px;min-height:440px;scroll-snap-align:start;border-radius:16px;position:relative;overflow:hidden;border:0;padding:0;color:#fff;text-align:left;box-shadow:0 20px 45px #1b211d33;transition:transform .35s}
+.commerceScrollTrack .commerceTemplate:hover{transform:translateY(-6px)}
+.commerceScrollWrap>p{margin:0 0 0 2px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#6b756e}
+@media(max-width:760px){.commerceScrollWrap{padding:0 22px}.commerceScrollTrack .commerceTemplate{flex-basis:78vw;min-height:400px}}
