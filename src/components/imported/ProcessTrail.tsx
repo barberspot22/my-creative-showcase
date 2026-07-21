@@ -61,7 +61,7 @@ export function ProcessTrail() {
     <section ref={sectionRef} id="leistungen" className="processTrail" aria-label="Nosso processo">
       <div className="trailHead">
         <span className="trailEyebrow">NOSSO PROCESSO</span>
-        <h2>Do problema ao<br />sistema no ar.</h2>
+        <h2>Inteligência&nbsp;<br /><br />artificial aplicada.</h2>
         <p>Quatro passos. Sem enrolação.</p>
       </div>
 
