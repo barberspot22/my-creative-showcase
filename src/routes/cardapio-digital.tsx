@@ -30,7 +30,7 @@ const proof = [
 function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
   return <div className="menuProductPage">
-    <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="cardapio-digital" />
     <main>
       <section className="menuProductHero">
