@@ -1,17 +1,57 @@
 import { PointerEvent, useEffect, useRef, useState } from "react";
 
 const templates = [
-  { name: "Atelier", type: "Moda & editorial", className: "commerceTemplateFashion", headline: "Nova coleção", metric: "Checkout em 2 etapas", products: ["Look 01", "Look 02", "Look 03"] },
-  { name: "Forma", type: "Casa & design", className: "commerceTemplateHome", headline: "Casa pronta", metric: "Vitrine por ambiente", products: ["Sala", "Cozinha", "Quarto"] },
-  { name: "Pulse", type: "Fitness & wellness", className: "commerceTemplateWellness", headline: "Drop ativo", metric: "Carrinho lateral", products: ["Kit", "Acessório", "Plano"] },
-  { name: "Nativa", type: "Beleza & autocuidado", className: "commerceTemplateBeauty", headline: "Rotina completa", metric: "Upsell no checkout", products: ["Sérum", "Creme", "Kit"] },
-  { name: "Essencial", type: "Catálogo minimalista", className: "commerceTemplateMinimal", headline: "Linha essencial", metric: "Compra rápida", products: ["Produto A", "Produto B", "Produto C"] },
+  {
+    name: "Atelier",
+    type: "Moda & editorial",
+    className: "commerceSiteFashion",
+    headline: "Nova coleção\nno ar",
+    subline: "Drop exclusivo mobile",
+    ctaLabel: "QUERO ESSE MODELO",
+    nav: ["Loja", "Coleção", "Checkout"],
+  },
+  {
+    name: "Forma",
+    type: "Casa & design",
+    className: "commerceSiteHome",
+    headline: "Ambiente\npronto",
+    subline: "Vitrine por cômodo",
+    ctaLabel: "VER MODELO",
+    nav: ["Ambientes", "Produtos", "Orçamento"],
+  },
+  {
+    name: "Pulse",
+    type: "Fitness & wellness",
+    className: "commerceSiteWellness",
+    headline: "Drop\nativo",
+    subline: "Assinatura + upsell",
+    ctaLabel: "QUERO PULSE",
+    nav: ["Planos", "Suplementos", "Comprar"],
+  },
+  {
+    name: "Nativa",
+    type: "Beleza & autocuidado",
+    className: "commerceSiteBeauty",
+    headline: "Rotina\ncompleta",
+    subline: "Kit de autocuidado",
+    ctaLabel: "VER NATIVA",
+    nav: ["Skincare", "Rituais", "Checkout"],
+  },
+  {
+    name: "Essencial",
+    type: "Catálogo minimalista",
+    className: "commerceSiteMinimal",
+    headline: "Linha\nessencial",
+    subline: "Compra rápida no WhatsApp",
+    ctaLabel: "QUERO ESSENCIAL",
+    nav: ["Catálogo", "Pedido", "Contato"],
+  },
 ];
 
 // Triplicate for seamless infinite scroll (drag freely + auto-loop)
 const loop = [...templates, ...templates, ...templates];
 
-export function BentoMorphGallery() {
+export function BentoMorphGallery({ ctaUrl }: { ctaUrl: string }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState(false);
   const state = useRef({ startX: 0, startScroll: 0, moved: false, pausedUntil: 0 });
@@ -20,7 +60,10 @@ export function BentoMorphGallery() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
+    const setStart = () => {
+      const third = el.scrollWidth / 3;
+      el.scrollLeft = third;
+    };
     setStart();
     const ro = new ResizeObserver(setStart);
     ro.observe(el);
@@ -46,7 +89,7 @@ export function BentoMorphGallery() {
     if (!el) return;
     let raf = 0;
     let last = performance.now();
-    const speed = 30; // px/s
+    const speed = 28; // px/s
     const tick = (now: number) => {
       const dt = (now - last) / 1000; last = now;
       if (!dragging && performance.now() > state.current.pausedUntil) {
@@ -76,33 +119,51 @@ export function BentoMorphGallery() {
     try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
   };
 
-  return <div className="commerceScrollWrap"
-    onMouseEnter={() => { state.current.pausedUntil = performance.now() + 2000; }}
-  >
-    <div
-      ref={trackRef}
-      className={`commerceScrollTrack ${dragging ? "isDragging" : ""}`}
-      onPointerDown={onDown}
-      onPointerMove={onMove}
-      onPointerUp={onUp}
-      onPointerCancel={onUp}
-    >
-      {loop.map((template, i) => <article
-        key={`${template.name}-${i}`}
-        className={`commerceTemplate ${template.className}`}
-        onClickCapture={e => { if (state.current.moved) { e.preventDefault(); e.stopPropagation(); } }}
+  return (
+    <div className="commerceScrollWrap" onMouseEnter={() => { state.current.pausedUntil = performance.now() + 2000; }}>
+      <div
+        ref={trackRef}
+        className={`commerceScrollTrack ${dragging ? "isDragging" : ""}`}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerCancel={onUp}
       >
-        <span className="templateChrome"><i/><i/><i/></span>
-        <span className="templateMock commerceTemplateImage">
-          <span className="commerceTemplateNav"><i/><i/><i/></span>
-          <b>{template.headline}</b>
-          <em>{template.metric}</em>
-          <span className="commerceTemplateProducts">{template.products.map(product => <i key={product}>{product}</i>)}</span>
-          <strong>Comprar agora</strong>
-        </span>
-        <span className="templateMeta"><b>{template.name}</b><small>{template.type}</small></span>
-      </article>)}
+        {loop.map((template, i) => (
+          <article
+            key={`${template.name}-${i}`}
+            className={`commerceSiteCard ${template.className}`}
+            onClickCapture={(e) => { if (state.current.moved) { e.preventDefault(); e.stopPropagation(); } }}
+          >
+            <span className="commerceSiteHeader">
+              <span className="commerceSiteDots">
+                <i /><i /><i />
+              </span>
+              <span className="commerceSiteNav">
+                {template.nav.map((item) => <b key={item}>{item}</b>)}
+              </span>
+            </span>
+            <span className="commerceSitePreview">
+              <b>{template.headline}</b>
+              <em>{template.subline}</em>
+              <a
+                className="commerceSiteCta"
+                href={ctaUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => { if (state.current.moved) e.preventDefault(); }}
+              >
+                FALAR NO WHATSAPP
+              </a>
+            </span>
+            <span className="commerceSiteMeta">
+              <b>{template.name}</b>
+              <small>{template.type}</small>
+            </span>
+          </article>
+        ))}
+      </div>
+      <p>Loop infinito · arraste ou deixe rolar →</p>
     </div>
-    <p>Loop infinito · arraste ou deixe rolar →</p>
-  </div>;
+  );
 }

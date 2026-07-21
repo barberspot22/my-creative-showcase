@@ -45,8 +45,8 @@ function EcommercePage() {
       </section>
 
       <section className="commerceGallerySection">
-        <div><p className="studioEyebrow">MODELOS & TEMPLATES</p><h2>Modelos que já <em>viraram loja no ar.</em></h2><p>Direções visuais que adaptamos à identidade, ao catálogo e à operação da sua marca.</p></div>
-        <BentoMorphGallery />
+        <div><p className="studioEyebrow">MODELOS & TEMPLATES</p><h2>Modelos que já <em>viraram loja no ar.</em></h2><p>Direções visuais que adaptamos à identidade, ao catálogo e à operação da sua marca. Arraste para ver todos.</p></div>
+        <BentoMorphGallery ctaUrl={whatsapp} />
       </section>
 
 
