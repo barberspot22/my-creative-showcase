@@ -1,4 +1,4 @@
-import { PointerEvent, useRef, useState } from "react";
+import { PointerEvent, useEffect, useRef, useState } from "react";
 
 const templates = [
   { name: "Atelier", type: "Moda & editorial", className: "commerceTemplateFashion", headline: "Nova coleção", metric: "Checkout em 2 etapas", products: ["Look 01", "Look 02", "Look 03"] },
@@ -8,15 +8,60 @@ const templates = [
   { name: "Essencial", type: "Catálogo minimalista", className: "commerceTemplateMinimal", headline: "Linha essencial", metric: "Compra rápida", products: ["Produto A", "Produto B", "Produto C"] },
 ];
 
+// Triplicate for seamless infinite scroll (drag freely + auto-loop)
+const loop = [...templates, ...templates, ...templates];
+
 export function BentoMorphGallery() {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState(false);
-  const state = useRef({ startX: 0, startScroll: 0, moved: false });
+  const state = useRef({ startX: 0, startScroll: 0, moved: false, pausedUntil: 0 });
+
+  // Center on middle copy for symmetric infinite scroll
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
+    setStart();
+    const ro = new ResizeObserver(setStart);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Wrap scroll position to fake infinity
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const third = el.scrollWidth / 3;
+      if (el.scrollLeft < third * 0.5) el.scrollLeft += third;
+      else if (el.scrollLeft > third * 1.5) el.scrollLeft -= third;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Auto-marquee (pauses on interaction)
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let raf = 0;
+    let last = performance.now();
+    const speed = 30; // px/s
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000; last = now;
+      if (!dragging && performance.now() > state.current.pausedUntil) {
+        el.scrollLeft += speed * dt;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [dragging]);
 
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
     setDragging(true);
-    state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false };
+    state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
     trackRef.current.setPointerCapture(e.pointerId);
   };
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -27,10 +72,13 @@ export function BentoMorphGallery() {
   };
   const onUp = (e: PointerEvent<HTMLDivElement>) => {
     setDragging(false);
+    state.current.pausedUntil = performance.now() + 1500;
     try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
   };
 
-  return <div className="commerceScrollWrap">
+  return <div className="commerceScrollWrap"
+    onMouseEnter={() => { state.current.pausedUntil = performance.now() + 2000; }}
+  >
     <div
       ref={trackRef}
       className={`commerceScrollTrack ${dragging ? "isDragging" : ""}`}
@@ -39,8 +87,8 @@ export function BentoMorphGallery() {
       onPointerUp={onUp}
       onPointerCancel={onUp}
     >
-      {templates.map(template => <article
-        key={template.name}
+      {loop.map((template, i) => <article
+        key={`${template.name}-${i}`}
         className={`commerceTemplate ${template.className}`}
         onClickCapture={e => { if (state.current.moved) { e.preventDefault(); e.stopPropagation(); } }}
       >
@@ -55,6 +103,6 @@ export function BentoMorphGallery() {
         <span className="templateMeta"><b>{template.name}</b><small>{template.type}</small></span>
       </article>)}
     </div>
-    <p>Arraste para o lado para ver mais modelos →</p>
+    <p>Loop infinito · arraste ou deixe rolar →</p>
   </div>;
 }
