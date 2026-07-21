@@ -1541,6 +1541,12 @@ section[aria-label^="Notifications"] {
 .referenceGallery{position:relative}
 .referenceGalleryHint{margin:0 0 18px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
 .referenceScrollWrap{position:relative;padding:0 6%}
+.referenceNavArrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(20,22,26,.85),rgba(10,12,14,.85));border:1px solid rgba(255,255,255,.14);color:#f2f5f9;cursor:pointer;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .25s ease,background .25s ease,border-color .25s ease}
+.referenceNavArrow:hover{background:linear-gradient(135deg,rgba(30,32,36,.95),rgba(14,16,18,.95));border-color:rgba(255,255,255,.28);transform:translateY(-50%) scale(1.06)}
+.referenceNavArrow:active{transform:translateY(-50%) scale(.96)}
+.referenceNavArrowLeft{left:10px}
+.referenceNavArrowRight{right:10px}
+@media(max-width:760px){.referenceNavArrow{width:40px;height:40px}.referenceNavArrowLeft{left:6px}.referenceNavArrowRight{right:6px}}
 .referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
 .referenceScrollTrack>*{scroll-snap-align:center;scroll-snap-stop:always}
 .referenceScrollTrack::-webkit-scrollbar{display:none}

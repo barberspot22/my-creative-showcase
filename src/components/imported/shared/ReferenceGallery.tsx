@@ -182,6 +182,18 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
       ) : (
       <>
       <div className="referenceScrollWrap">
+        <button
+          type="button"
+          className="referenceNavArrow referenceNavArrowLeft"
+          aria-label="Ver anteriores"
+          onClick={() => {
+            const el = trackRef.current; if (!el) return;
+            state.current.pausedUntil = performance.now() + 4000;
+            el.scrollBy({ left: -Math.round(el.clientWidth * 0.85), behavior: "smooth" });
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
         <div
           ref={trackRef}
           className={`referenceScrollTrack ${dragging ? "isDragging" : ""}`}
@@ -217,9 +229,21 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
             </article>
           ))}
         </div>
+        <button
+          type="button"
+          className="referenceNavArrow referenceNavArrowRight"
+          aria-label="Ver próximos"
+          onClick={() => {
+            const el = trackRef.current; if (!el) return;
+            state.current.pausedUntil = performance.now() + 4000;
+            el.scrollBy({ left: Math.round(el.clientWidth * 0.85), behavior: "smooth" });
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 6l6 6-6 6"/></svg>
+        </button>
       </div>
       <p className="referenceDragHint">
-        {variant === "tall" ? "Arraste lateral · role dentro do card para ver o site completo" : "Arraste para explorar · clique para ampliar"}
+        {variant === "tall" ? "Use as setas · arraste lateral · role dentro do card para ver o site completo" : "Use as setas ou arraste · clique para ampliar"}
       </p>
       </>
       )}
