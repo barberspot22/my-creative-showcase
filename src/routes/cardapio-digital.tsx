@@ -3,6 +3,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWidget";
+import { FinalCta } from "@/components/FinalCta";
 
 const deliverables = [
   ["Cardápio digital via WhatsApp", "O cliente pede e recebe na hora, com formato definido caso a caso — arquivo direto ou navegação interativa por categoria."],
@@ -56,7 +57,7 @@ function CardapioDigitalPage() {
 
       <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Arquitetura pensada para operação real.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
 
-      <section className="menuProductFinal"><p className="studioEyebrow">VAMOS CONVERSAR</p><h2>Me conta como seu cardápio e suas redes funcionam hoje.<br/>A gente monta o sistema.</h2><p>Sem proposta engessada — o primeiro papo é pra entender se faz sentido.</p><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a></section>
+      <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital + Social" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Cardápio Digital + Social Media · Atendimento e conteúdo juntos</span></footer>
   </div>;

@@ -114,12 +114,7 @@ function CRMPage() {
       </section>
 
       {/* 8. Final */}
-      <section className="crmFinal">
-        <p className="studioEyebrow">VAMOS CONVERSAR</p>
-        <h2>Me mostra como seu comercial funciona hoje.<br/>Eu desenho o CRM certo.</h2>
-        <p>Sem proposta engessada — o primeiro papo é para entender se faz sentido.</p>
-        <a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
-      </section>
+      <FinalCta pageKey="crm" productName="CRM" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>CRM · Comercial e produção em fluxos próprios</span></footer>
   </div>;
