@@ -83,7 +83,7 @@
 .menuValueDeliverables ol{list-style:none;margin:0;padding:0;display:grid}
 .menuValueDeliverables li{display:grid;grid-template-columns:70px 1fr;gap:28px;padding:38px 0;border-top:1px solid rgba(16,21,38,.16);background:transparent;border-radius:0;box-shadow:none}
 .menuValueDeliverables li:first-child{border-top:0}
-.menuValueDeliverables li>span{font:38px Melodrama,serif;color:#9a9a9a}
+.menuValueDeliverables li>span{font:700 38px Montserrat,Arial,sans-serif;color:#9a9a9a}
 .menuValueDeliverables h3{font-size:26px;margin:0 0 8px;color:var(--ink)}
 .menuValueDeliverables li p{color:#5a5a5a;line-height:1.55;margin:0;font-size:16px}
 @media(max-width:760px){
