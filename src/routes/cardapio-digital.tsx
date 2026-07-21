@@ -49,17 +49,17 @@ function CardapioDigitalPage() {
         <CatalogWidget />
       </section>
 
-      <section className="menuProductProblem"><div><p className="studioEyebrow">POR QUE OS DOIS PROBLEMAS SÃO O MESMO PROBLEMA</p><h2>Cardápio desatualizado e rede social parada afastam cliente do mesmo jeito.</h2></div><p>PDF de cardápio que ninguém atualiza, foto de prato antiga no Instagram, cliente perguntando preço no WhatsApp e esperando resposta. A gente integra cardápio e social media num sistema só, rodando de forma autônoma.</p></section>
+      <section className="menuProductProblem"><div><p className="studioEyebrow">O CUSTO DE ESCONDER O CARDÁPIO</p><h2>Cardápio escondido é cliente perdido.</h2></div><p>Cliente pergunta preço no WhatsApp e espera. Quer ver opções e não encontra. Desiste e pede no concorrente. Quando o cardápio é claro, visual e fácil de comprar, a venda acontece sem atrito.</p></section>
 
-      <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE ENTREGAMOS</p><h2>Pedido e presença digital no mesmo fluxo.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+      <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE VOCÊ RECEBE</p><h2>Uma vitrine que vende sozinha.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VITRINE DE PRATOS E CONTEÚDO</p><h2>O que o cliente vê.<br/>O que faz ele pedir.</h2></div><FanGallery/></section>
+      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VEJA NA PRÁTICA</p><h2>O cliente toca e pede. Simples assim.</h2></div><FanGallery/></section>
 
-      <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do cardápio atual ao sistema rodando.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+      <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do cardápio atual ao cliente pedindo sozinho.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Arquitetura pensada para operação real.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
+      <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Autonomia para o cliente, tempo de volta para você.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
 
-      <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital + Social" />
+      <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital" title="Quer que seus clientes vejam tudo e peçam sozinhos?" subtitle="Me conta como funciona seu cardápio hoje. Devolvemos escopo, prazo e valor." />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Cardápio Digital + Social Media · Atendimento e conteúdo juntos</span></footer>
   </div>;
