@@ -3,6 +3,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, useState } from "react";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
 import { usePageLink } from "@/lib/adminLinks";
+import { FinalCta } from "@/components/FinalCta";
 
 const differences = [
   "Qualidade visual equivalente a um estúdio convencional",
@@ -78,12 +79,7 @@ function GBStudioPage() {
         <p>Para catálogo, e-commerce e redes sociais — sem o custo e o tempo de um estúdio físico.</p>
       </section>
 
-      <section id="briefing" className="briefingBlock">
-        <div><p className="studioEyebrow">PRÓXIMO PASSO</p><h2>Conte o que você precisa fotografar.</h2><p>A equipe prepara o briefing com você.</p></div>
-        {ctaUrl
-          ? <a className="studioButton" href={ctaUrl} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a>
-          : <button className="studioButton" onClick={() => setBriefing(true)}>{ctaLabel} <span>↗</span></button>}
-      </section>
+      <FinalCta pageKey="gb-studio" productName="GB Studio" />
     </main>
 
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Studio · Fotografia de moda com IA</span></footer>
