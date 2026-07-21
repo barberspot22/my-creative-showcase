@@ -14,7 +14,6 @@ const deliverables = [
   ["Cadastro por áudio", "Manda um áudio. A IA cria título, descrição SEO e publica em todos os canais."],
   ["Marketplaces integrados", "Mercado Livre, Shopee, Amazon e Instagram sincronizados num painel só."],
   ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho e fecha venda sem você online."],
-  ["Comportamento rastreado", "Heatmap, replay e funil. A gente vê onde trava e ajusta até vender mais."],
 ];
 
 const channels = [
