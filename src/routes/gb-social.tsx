@@ -21,8 +21,8 @@ function GBSocialPage() {
       : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
-      ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a>
-      : <a href="#começar" className="studioNavCta">{ctaLabel} <span>↗</span></a>}</header>
+      ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a>
+      : <a href="#começar" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a>}</header>
     <ProductSwitcher current="gb-social" />
     <main>
       <section className="socialHero">
@@ -30,7 +30,7 @@ function GBSocialPage() {
         <h1>Sua empresa ativa em todos os canais.<br/><em>Sem você cuidar de todos eles.</em></h1>
         <p>Um Social Media de IA que trabalha pelo WhatsApp, aprende o DNA da sua empresa, cria conteúdo e mantém sua presença digital funcionando.</p>
         <strong>Você manda uma mensagem. Ele trabalha.</strong>
-        <CtaPrimary>{ctaLabel} <span>↗</span></CtaPrimary>
+        <CtaPrimary>SOLICITAR ORÇAMENTO<br/><span>↗</span></CtaPrimary>
         <small>100% pelo WhatsApp · Sem prompts complicados · Feito para toda a sua equipe</small>
       </section>
 
