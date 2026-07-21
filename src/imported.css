@@ -618,6 +618,7 @@ body{overflow-x:clip}
   text-transform:uppercase;letter-spacing:1.6px;font-weight:600;font-size:11px;
   cursor:pointer;overflow:hidden;
   transition:border-color .3s ease,background .3s ease,color .3s ease,transform .3s ease;
+  white-space:pre-line;text-align:right;
 }
 .studioButton:hover,.studioNavCta:hover,.menuProductPrimary:hover,.crmPrimary:hover,
 .siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,
