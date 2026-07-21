@@ -289,7 +289,7 @@ export function CatalogWidget() {
             </div>
 
             <button className="menuCatalogAdd" onClick={addToCart}>
-              Adicionar ao carrinho · R$ {formatPrice(selected.price * qty)}
+              Adicionar ao pedido · R$ {formatPrice(selected.price * qty)}
             </button>
 
             {toast && <div className="menuCatalogToast" role="status">Adicionado ✓</div>}
