@@ -60,14 +60,6 @@
 @media(prefers-reduced-motion:reduce){.commerceBento{transform:none!important}.commerceTemplate{transition:none}}
 
 /* E-commerce new sections: market, audio, omni, tracking */
-.commerceMarket{padding:110px 9%;background:#0a0f0c;border-top:1px solid #1a221d;border-bottom:1px solid #1a221d;text-align:center}
-.commerceMarket h2{font-size:clamp(44px,5.5vw,74px);line-height:1.02;margin:14px auto 55px;max-width:900px}
-.commerceMarketGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1180px;margin:0 auto}
-.commerceMarketGrid article{padding:44px 28px;border:1px solid #1e2823;border-radius:14px;background:linear-gradient(180deg,#0e1512,#080b09);transition:border-color .3s,transform .3s}
-.commerceMarketGrid article:hover{border-color:#3a5a48;transform:translateY(-4px)}
-.commerceMarketGrid b{display:block;font:800 clamp(38px,4.5vw,62px)/1 Manrope,sans-serif;background:linear-gradient(180deg,#f5f8f6 0%,#c6cec9 45%,#7a847d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-1.5px;margin-bottom:14px}
-.commerceMarketGrid p{color:#8b968f;font-size:14px;line-height:1.55;margin:0}
-.commerceMarketNote{max-width:720px;margin:55px auto 0;font-size:16px;line-height:1.65;color:#98a29b}
 
 .commerceAudio{padding:120px 9%;display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center;background:radial-gradient(circle at 15% 50%,#173225 0,transparent 45%)}
 .commerceAudioCopy h2{font-size:clamp(44px,5.5vw,78px);line-height:.98;margin:14px 0 22px}
@@ -137,10 +129,6 @@
 @keyframes heatPulse{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(.94)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 
 @media(max-width:760px){
-  .commerceMarket{padding:70px 22px}
-  .commerceMarketGrid{grid-template-columns:1fr;gap:14px}
-  .commerceMarketGrid article{padding:32px 22px}
-  .commerceMarketNote{margin-top:36px;font-size:15px}
   .commerceAudio,.commerceOmni,.commerceTracking{padding:70px 22px;grid-template-columns:1fr;gap:45px}
   .commerceOmniDiagram{max-width:340px;aspect-ratio:1}
   .commerceOmniCore{width:100px;height:100px}
