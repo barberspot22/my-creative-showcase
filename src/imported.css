@@ -1586,9 +1586,9 @@ section[aria-label^="Notifications"] {
 /* Site institucional — reference tabs (Institucional / Vendas / Captura) */
 .siteRefHint{margin:14px 0 0;font:11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.6px;color:#7b7b7b}
 .siteRefTabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 9%;margin:36px 0 8px}
-.siteRefTab{appearance:none;border:1px solid #2a2a2a;background:transparent;color:#bdbdbd;padding:12px 20px;border-radius:999px;font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.4px;cursor:pointer;transition:all .2s ease}
-.siteRefTab:hover{border-color:#555;color:#fff}
-.siteRefTab.isActive{background:#fff;color:#080808;border-color:#fff;box-shadow:0 6px 18px #ffffff20}
+.siteRefTab{appearance:none;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#e8e8e8;padding:12px 20px;border-radius:999px;font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.4px;cursor:pointer;transition:all .2s ease}
+.siteRefTab:hover{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.08)}
+.siteRefTab.isActive{background:#fff;color:#080808;border-color:#fff;box-shadow:0 8px 24px rgba(255,255,255,.18)}
 @media(max-width:760px){.siteRefTabs{padding:0 22px;margin:26px 0 4px}.siteRefTab{padding:10px 14px;font-size:9.5px;letter-spacing:1.1px}}
 
 /* Tall scrolling media inside reference cards (site preview scroll) */
