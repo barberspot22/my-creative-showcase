@@ -1,10 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
-import { institucionalReferences } from "@/lib/references";
+import { institucionalReferences, vendasReferences, capturaReferences } from "@/lib/references";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+
+type RefTab = "institucional" | "vendas" | "captura";
+const REF_TABS: { key: RefTab; label: string; hint: string }[] = [
+  { key: "institucional", label: "Institucional", hint: "Autoridade & apresentação" },
+  { key: "vendas", label: "Página de vendas", hint: "Long-form focada em conversão" },
+  { key: "captura", label: "Página de captura", hint: "Opt-in / lead magnet" },
+];
+
 
 const deliverables = [
   ["Proposta clara na primeira dobra", "O que você faz, para quem e por quê — sem rolar a página."],
