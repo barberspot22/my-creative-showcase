@@ -110,12 +110,12 @@
 
 
 @media(max-width:760px){
-  .commerceAudio,.commerceOmni{padding:70px 22px;grid-template-columns:1fr;gap:45px}
-
-  .commerceOmniDiagram{max-width:340px;aspect-ratio:1}
-  .commerceOmniCore{width:100px;height:100px}
-  .commerceOmniCore b{font-size:20px}
-  .commerceOmniNode{padding:7px 11px;font-size:9px;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 115px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 115px))}
+  .commerceAudio,.commerceOmni{padding:70px 22px;grid-template-columns:1fr;gap:45px;overflow-x:clip}
+  .commerceOmni>div:first-child>p:last-child{max-width:100%}
+  .commerceOmniDiagram{max-width:min(320px,100%);aspect-ratio:1;overflow:visible}
+  .commerceOmniCore{width:96px;height:96px}
+  .commerceOmniCore b{font-size:19px}
+  .commerceOmniNode{padding:6px 9px;font-size:8.5px;letter-spacing:.5px;max-width:110px;white-space:normal;text-align:center;line-height:1.15;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 100px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 100px))}
   .commerceHeatmap{max-width:100%}
   .commerceHeatmapPage{min-height:280px;padding:18px}
   .commerceHeatmapImg{height:90px}
