@@ -142,17 +142,8 @@ function EcommercePage() {
         </div>
       </section>
 
-      <section className="commerceGallerySection">
-        <div><p className="studioEyebrow">MODELOS & TEMPLATES</p><h2>Modelos que já <em>viraram loja no ar.</em></h2><p>Direções visuais que adaptamos à identidade, ao catálogo e à operação da sua marca.</p></div>
-        <BentoMorphGallery />
-      </section>
-
-      <section className="commerceProcess">
-        <div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do briefing ao ar, <em>sem enrolação.</em></h2></div>
-        <ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
-      </section>
-
       <FinalCta pageKey="ecommerce" productName="E-commerce" title="Pronto para entrar no mercado que só cresce?" subtitle="Me conta seu produto e onde você quer vender. Devolvo escopo de loja, catálogo, marketplaces e IA vendedora." />
+
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>E-commerce · Loja, catálogo, marketplaces e IA vendedora</span></footer>
   </div>;
