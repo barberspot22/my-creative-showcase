@@ -690,96 +690,159 @@ body{overflow-x:clip}
 .socialDesignPreviewImage{padding:0!important;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:4/5;width:100%;max-width:280px;align-self:flex-start;box-shadow:0 20px 45px rgba(0,0,0,.35)}
 .socialDesignPreviewImage img{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ===== Catalog Widget (cardapio-digital) ===== */
-.menuCatalogWidgetSection { padding: 96px 24px; display: grid; gap: 48px; justify-items: center; background: radial-gradient(ellipse at top, rgba(212,181,122,.06), transparent 60%), #050505; }
+/* ===== Catalog Widget (cardapio-digital) — Phone Mockup ===== */
+.menuCatalogWidgetSection { padding: 96px 24px; display: grid; gap: 48px; justify-items: center; background: radial-gradient(ellipse at top, rgba(212,140,60,.08), transparent 55%), radial-gradient(ellipse at bottom, rgba(120,40,20,.12), transparent 60%), #050505; }
 .menuCatalogIntro { max-width: 720px; text-align: center; display: grid; gap: 14px; }
 .menuCatalogIntro h2 { font-family: 'Melodrama', serif; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; color: #f5f5f5; margin: 0; }
 .menuCatalogIntro h2 em { font-style: italic; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .menuCatalogIntro p { color: rgba(240,240,240,.62); font-size: 15px; line-height: 1.5; margin: 0; }
 
-.menuCatalogFrame { width: 100%; max-width: 100%; background: linear-gradient(180deg,#111114,#0a0a0c); border-radius: 24px; padding: 0; box-shadow: 0 40px 120px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.06), inset 0 0 0 1px rgba(255,255,255,.03); position: relative; overflow: hidden; }
-.menuCatalogNotch { display: none !important; }
-.menuCatalogScreen { background: transparent; border-radius: 24px; overflow: hidden; padding: 22px; min-height: 640px; display: flex; flex-direction: column; gap: 18px; position: relative; }
+/* Outer phone bezel */
+.menuCatalogFrame {
+  width: 100%;
+  max-width: 380px;
+  background: linear-gradient(155deg,#2a2a2e 0%,#0a0a0c 45%,#1a1a1e 100%);
+  border-radius: 52px;
+  padding: 14px;
+  box-shadow:
+    0 60px 140px -30px rgba(0,0,0,.95),
+    0 0 0 2px rgba(255,255,255,.04),
+    0 0 0 6px #1a1a1e,
+    0 0 0 7px rgba(255,255,255,.08),
+    inset 0 2px 4px rgba(255,255,255,.06);
+  position: relative;
+  overflow: visible;
+}
+/* Side buttons */
+.menuCatalogFrame:before {
+  content: ''; position: absolute; left: -3px; top: 110px; width: 3px; height: 34px;
+  background: linear-gradient(90deg,#0a0a0c,#2a2a2e); border-radius: 2px 0 0 2px;
+  box-shadow: 0 60px 0 #2a2a2e, 0 108px 0 #2a2a2e;
+}
+.menuCatalogFrame:after {
+  content: ''; position: absolute; right: -3px; top: 140px; width: 3px; height: 56px;
+  background: linear-gradient(270deg,#0a0a0c,#2a2a2e); border-radius: 0 2px 2px 0;
+}
 
-.menuCatalogTopbar { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 10px; }
-.menuCatalogIconBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); cursor: pointer; padding: 0; transition: border-color .2s, background .2s; }
-.menuCatalogIconBtn:hover { border-color: rgba(212,181,122,.5); background: rgba(212,181,122,.06); }
+/* Screen */
+.menuCatalogScreen {
+  background: linear-gradient(180deg,#0d0906 0%,#0a0a0c 40%);
+  border-radius: 40px;
+  overflow: hidden;
+  padding: 44px 16px 18px;
+  min-height: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+/* Status bar */
+.menuCatalogScreen:before {
+  content: '20:47';
+  position: absolute; top: 14px; left: 26px;
+  font: 700 13px 'Manrope','SF Pro Display',sans-serif; color: #f5f5f5;
+  letter-spacing: -.01em; z-index: 6;
+}
+.menuCatalogScreen:after {
+  content: '􀋤 􀛨 􀛩';
+  position: absolute; top: 14px; right: 26px;
+  font: 600 12px 'Manrope',sans-serif; color: #f5f5f5;
+  letter-spacing: 4px; z-index: 6;
+  background: linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,.7));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* Dynamic island */
+.menuCatalogNotch {
+  display: block !important;
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  width: 108px; height: 30px; border-radius: 999px;
+  background: #000; z-index: 5;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.menuCatalogNotch span { display: none; }
+/* Home indicator */
+.menuCatalogScreen > *:last-child ~ *, .menuCatalogFrame > .menuCatalogHomeBar { display: none; }
+
+.menuCatalogTopbar { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; gap: 10px; margin-top: 4px; }
+.menuCatalogIconBtn { width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.85); cursor: pointer; padding: 0; transition: border-color .2s, background .2s; }
+.menuCatalogIconBtn:hover { border-color: rgba(212,140,60,.5); background: rgba(212,140,60,.08); }
 .menuCatalogToggle { display: flex; background: rgba(255,255,255,.04); border-radius: 999px; padding: 4px; border: 1px solid rgba(255,255,255,.08); }
-.menuCatalogToggle button { flex: 1; border: 0; background: transparent; padding: 10px 14px; border-radius: 999px; font-size: 11px; letter-spacing: .12em; font-weight: 700; color: rgba(255,255,255,.55); cursor: pointer; }
-.menuCatalogToggle button.active { background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; box-shadow: 0 4px 14px -4px rgba(212,181,122,.5); }
+.menuCatalogToggle button { flex: 1; border: 0; background: transparent; padding: 9px 12px; border-radius: 999px; font-size: 10px; letter-spacing: .12em; font-weight: 700; color: rgba(255,255,255,.55); cursor: pointer; }
+.menuCatalogToggle button.active { background: linear-gradient(180deg,#f5c060,#c8791a); color: #1a0d05; box-shadow: 0 4px 14px -4px rgba(212,140,60,.6); }
 
-.menuCatalogBanner { position: relative; border-radius: 18px; padding: 22px; background: linear-gradient(135deg,#1a1a1e,#0d0d10); border: 1px solid rgba(212,181,122,.18); color: #f5f5f5; overflow: hidden; min-height: 168px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.menuCatalogBanner:before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 85% 15%, rgba(212,181,122,.18), transparent 55%); }
+/* Restaurant hero banner */
+.menuCatalogBanner { position: relative; border-radius: 18px; padding: 20px; background: linear-gradient(135deg,#3a1810 0%,#1a0906 60%,#0d0503 100%); border: 1px solid rgba(212,140,60,.25); color: #f5f5f5; overflow: hidden; min-height: 150px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.menuCatalogBanner:before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(245,192,96,.22), transparent 55%), radial-gradient(circle at 20% 100%, rgba(200,60,30,.15), transparent 50%); }
 .menuCatalogBannerContent { position: relative; display: grid; gap: 6px; z-index: 1; }
-.menuCatalogBannerContent h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 22px; font-weight: 500; letter-spacing: -.01em; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.menuCatalogBannerContent h5 { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); }
-.menuCatalogBannerCta { margin-top: 4px; background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; border: 0; padding: 11px 18px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .1em; cursor: pointer; box-shadow: 0 8px 22px -8px rgba(212,181,122,.6); align-self: flex-start; }
-.menuCatalogBannerBrand { position: relative; z-index: 1; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px 14px; display: grid; justify-items: center; gap: 3px; min-width: 96px; }
-.menuCatalogBrandLogo { font-size: 22px; filter: grayscale(.2); }
-.menuCatalogBannerBrand b { font-size: 12px; font-weight: 800; letter-spacing: .04em; color: #f5f5f5; }
-.menuCatalogBannerBrand em { font-size: 9px; font-style: normal; letter-spacing: .18em; opacity: .6; color: #d4b57a; }
+.menuCatalogBannerContent h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 24px; font-weight: 500; letter-spacing: -.01em; background: linear-gradient(180deg,#f8e0a8,#e8a038); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.menuCatalogBannerContent h5 { margin: 0 0 8px; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+.menuCatalogBannerCta { margin-top: 4px; background: linear-gradient(180deg,#f5c060,#c8791a); color: #1a0d05; border: 0; padding: 10px 16px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .1em; cursor: pointer; box-shadow: 0 8px 22px -8px rgba(212,140,60,.7); align-self: flex-start; }
+.menuCatalogBannerBrand { position: relative; z-index: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(245,192,96,.18); border-radius: 12px; padding: 10px 12px; display: grid; justify-items: center; gap: 3px; min-width: 88px; backdrop-filter: blur(6px); }
+.menuCatalogBrandLogo { font-size: 22px; }
+.menuCatalogBannerBrand b { font-size: 11px; font-weight: 800; letter-spacing: .04em; color: #f5f5f5; }
+.menuCatalogBannerBrand em { font-size: 8px; font-style: normal; letter-spacing: .18em; opacity: .75; color: #f5c060; text-transform: uppercase; }
 .menuCatalogBannerEmoji { display: none; }
 
-.menuCatalogChips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.menuCatalogChips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px; margin: 0 -4px; }
 .menuCatalogChips::-webkit-scrollbar { display: none; }
-.menuCatalogChip { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); padding: 10px 16px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); cursor: pointer; flex: 0 0 auto; transition: all .2s; }
-.menuCatalogChip:hover { color: #f5f5f5; border-color: rgba(212,181,122,.4); }
-.menuCatalogChip.active { background: rgba(212,181,122,.1); color: #f8e6a8; border-color: rgba(212,181,122,.6); }
+.menuCatalogChip { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); padding: 9px 14px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); cursor: pointer; flex: 0 0 auto; transition: all .2s; white-space: nowrap; }
+.menuCatalogChip:hover { color: #f5f5f5; border-color: rgba(245,192,96,.4); }
+.menuCatalogChip.active { background: rgba(245,192,96,.12); color: #f5c060; border-color: rgba(245,192,96,.6); }
 
-.menuCatalogGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.menuCatalogGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .menuCatalogCard { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 8px; display: grid; gap: 8px; cursor: pointer; text-align: left; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-.menuCatalogCard:hover { transform: translateY(-3px); border-color: rgba(212,181,122,.4); box-shadow: 0 18px 34px -18px rgba(212,181,122,.3); }
-.menuCatalogCardMedia { position: relative; aspect-ratio: 1; border-radius: 10px; background: linear-gradient(160deg,#1a1a1e,#0d0d10); display: flex; align-items: center; justify-content: center; font-size: 52px; overflow: hidden; border: 1px solid rgba(255,255,255,.04); }
-.menuCatalogBadge { position: absolute; top: 8px; left: 8px; background: linear-gradient(180deg,#f5f5f5,#b8b8b8); color: #0a0a0a; font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 4px 8px; border-radius: 6px; font-style: normal; }
-.menuCatalogBadge.promo { background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; }
+.menuCatalogCard:hover { transform: translateY(-3px); border-color: rgba(245,192,96,.45); box-shadow: 0 18px 34px -18px rgba(245,192,96,.35); }
+.menuCatalogCardMedia { position: relative; aspect-ratio: 1; border-radius: 10px; background: radial-gradient(circle at 30% 20%, rgba(245,192,96,.15), transparent 50%), linear-gradient(160deg,#2a1a12,#0d0806); display: flex; align-items: center; justify-content: center; font-size: 52px; overflow: hidden; border: 1px solid rgba(255,255,255,.04); }
+.menuCatalogBadge { position: absolute; top: 6px; left: 6px; background: linear-gradient(180deg,#f5f5f5,#c8c8c8); color: #0a0a0a; font-size: 8px; font-weight: 800; letter-spacing: .08em; padding: 3px 6px; border-radius: 5px; font-style: normal; }
+.menuCatalogBadge.promo { background: linear-gradient(180deg,#f5c060,#c8791a); color: #1a0d05; }
 .menuCatalogCardInfo { display: grid; gap: 2px; padding: 2px 4px 6px; }
-.menuCatalogCardInfo strong { font-size: 13px; color: #f8e6a8; font-weight: 700; }
-.menuCatalogCardInfo span { font-size: 12px; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.menuCatalogCardInfo strong { font-size: 13px; color: #f5c060; font-weight: 700; }
+.menuCatalogCardInfo span { font-size: 11px; color: rgba(255,255,255,.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.menuCatalogTabbar { margin-top: auto; background: rgba(255,255,255,.03); border-radius: 14px; padding: 10px; display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,.08); }
+.menuCatalogTabbar { margin-top: auto; background: rgba(255,255,255,.03); border-radius: 14px; padding: 8px; display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,.08); }
 .menuCatalogTabbar button { background: transparent; border: 0; color: rgba(255,255,255,.4); padding: 8px; cursor: pointer; border-radius: 10px; }
-.menuCatalogTabbar button.active { color: #f8e6a8; }
+.menuCatalogTabbar button.active { color: #f5c060; }
 
-.menuCatalogDetail { display: flex; flex-direction: column; gap: 14px; height: 100%; animation: menuCatalogFade .25s ease; }
+.menuCatalogDetail { display: flex; flex-direction: column; gap: 12px; height: 100%; animation: menuCatalogFade .25s ease; }
 @keyframes menuCatalogFade { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
-.menuCatalogDetailTop { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: 8px; }
-.menuCatalogDetailTop span { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: rgba(255,255,255,.55); text-transform: uppercase; }
-.menuCatalogHero { position: relative; aspect-ratio: 1.4; background: linear-gradient(160deg,#1a1a1e,#0a0a0c); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 140px; overflow: hidden; }
+.menuCatalogDetailTop { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; gap: 8px; }
+.menuCatalogDetailTop span { text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .14em; color: rgba(255,255,255,.55); text-transform: uppercase; }
+.menuCatalogHero { position: relative; aspect-ratio: 1.5; background: radial-gradient(circle at 40% 30%, rgba(245,192,96,.18), transparent 55%), linear-gradient(160deg,#2a1a12,#0a0503); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 120px; overflow: hidden; }
 .menuCatalogThumbs { display: flex; gap: 8px; }
-.menuCatalogThumbs button { flex: 1; aspect-ratio: 1; border: 1.5px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; cursor: pointer; }
-.menuCatalogThumbs button.active { border-color: #d4b57a; background: rgba(212,181,122,.08); }
-.menuCatalogInfo { display: grid; gap: 10px; }
-.menuCatalogInfo h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 24px; font-weight: 500; color: #f5f5f5; }
-.menuCatalogInfo p { margin: 0; font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+.menuCatalogThumbs button { flex: 1; aspect-ratio: 1; border: 1.5px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; }
+.menuCatalogThumbs button.active { border-color: #f5c060; background: rgba(245,192,96,.1); }
+.menuCatalogInfo { display: grid; gap: 8px; }
+.menuCatalogInfo h4 { margin: 0; font-family: 'Melodrama', serif; font-size: 22px; font-weight: 500; color: #f5f5f5; }
+.menuCatalogInfo p { margin: 0; font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.5; }
 .menuCatalogPriceRow { display: flex; align-items: baseline; gap: 8px; }
-.menuCatalogPriceRow s { color: rgba(255,255,255,.35); font-size: 13px; }
-.menuCatalogPriceRow strong { font-size: 24px; background: linear-gradient(180deg,#f8e6a8,#c89a3d); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.menuCatalogPriceRow s { color: rgba(255,255,255,.35); font-size: 12px; }
+.menuCatalogPriceRow strong { font-size: 22px; background: linear-gradient(180deg,#f5c060,#c8791a); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .menuCatalogSection { display: grid; gap: 8px; }
-.menuCatalogSection label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 700; }
-.menuCatalogSizes { display: flex; gap: 8px; }
-.menuCatalogSizes button { flex: 1; background: rgba(255,255,255,.03); border: 1.5px solid rgba(255,255,255,.08); border-radius: 12px; padding: 10px 6px; display: grid; gap: 2px; cursor: pointer; transition: all .2s; }
-.menuCatalogSizes button b { font-size: 13px; color: #f5f5f5; }
-.menuCatalogSizes button em { font-size: 10px; color: rgba(255,255,255,.5); font-style: normal; }
-.menuCatalogSizes button.active { border-color: #d4b57a; background: rgba(212,181,122,.1); }
-.menuCatalogSizes button.active b { color: #f8e6a8; }
-.menuCatalogSizes button.active em { color: rgba(248,230,168,.7); }
+.menuCatalogSection label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 700; }
+.menuCatalogSizes { display: flex; gap: 6px; }
+.menuCatalogSizes button { flex: 1; background: rgba(255,255,255,.03); border: 1.5px solid rgba(255,255,255,.08); border-radius: 12px; padding: 9px 4px; display: grid; gap: 2px; cursor: pointer; transition: all .2s; }
+.menuCatalogSizes button b { font-size: 12px; color: #f5f5f5; }
+.menuCatalogSizes button em { font-size: 9px; color: rgba(255,255,255,.5); font-style: normal; }
+.menuCatalogSizes button.active { border-color: #f5c060; background: rgba(245,192,96,.12); }
+.menuCatalogSizes button.active b { color: #f5c060; }
+.menuCatalogSizes button.active em { color: rgba(245,192,96,.75); }
 .menuCatalogQtyRow { display: flex; align-items: center; justify-content: space-between; }
 .menuCatalogQty { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 4px; }
-.menuCatalogQty button { width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; font-size: 16px; cursor: pointer; color: #f5f5f5; }
-.menuCatalogQty b { min-width: 22px; text-align: center; font-size: 14px; color: #f5f5f5; }
-.menuCatalogAdd { margin-top: auto; background: linear-gradient(180deg,#f8e6a8,#c89a3d); color: #0a0a0a; border: 0; padding: 16px; border-radius: 14px; font-size: 13px; font-weight: 800; letter-spacing: .06em; cursor: pointer; box-shadow: 0 14px 30px -12px rgba(212,181,122,.5); }
-.menuCatalogToast { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #0a0a0a; color: #f5f5f5; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 12px 30px -8px rgba(0,0,0,.6); border: 1px solid rgba(212,181,122,.4); animation: menuCatalogFade .2s ease; }
+.menuCatalogQty button { width: 28px; height: 28px; border-radius: 50%; border: 0; background: transparent; font-size: 15px; cursor: pointer; color: #f5f5f5; }
+.menuCatalogQty b { min-width: 20px; text-align: center; font-size: 13px; color: #f5f5f5; }
+.menuCatalogAdd { margin-top: auto; background: linear-gradient(180deg,#f5c060,#c8791a); color: #1a0d05; border: 0; padding: 15px; border-radius: 14px; font-size: 12px; font-weight: 800; letter-spacing: .06em; cursor: pointer; box-shadow: 0 14px 30px -12px rgba(245,192,96,.55); }
+.menuCatalogToast { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: #0a0a0a; color: #f5f5f5; padding: 10px 18px; border-radius: 999px; font-size: 12px; font-weight: 600; box-shadow: 0 12px 30px -8px rgba(0,0,0,.6); border: 1px solid rgba(245,192,96,.45); animation: menuCatalogFade .2s ease; }
 
-@media (max-width: 960px) {
-  .menuCatalogGrid { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 760px) {
   .menuCatalogWidgetSection { padding: 64px 16px; }
-  .menuCatalogScreen { padding: 16px; min-height: 580px; }
-  .menuCatalogBanner { padding: 18px; min-height: 148px; }
-  .menuCatalogBannerContent h4 { font-size: 18px; }
-  .menuCatalogHero { font-size: 110px; }
+  .menuCatalogFrame { max-width: 340px; padding: 10px; border-radius: 44px; }
+  .menuCatalogScreen { padding: 40px 12px 14px; min-height: 600px; border-radius: 34px; }
+  .menuCatalogNotch { width: 96px; height: 26px; top: 8px; }
+  .menuCatalogBanner { padding: 16px; min-height: 132px; }
+  .menuCatalogBannerContent h4 { font-size: 20px; }
+  .menuCatalogHero { font-size: 100px; }
 }
+
 
 /* Desktop nav fix — prevent link wrapping */
 @media (min-width: 761px) {
