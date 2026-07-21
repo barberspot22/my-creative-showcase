@@ -49,7 +49,6 @@ function CardapioDigitalPage() {
         <CatalogWidget />
       </section>
 
-      <section className="menuProductProblem"><div><p className="studioEyebrow">O CUSTO DE ESCONDER O CARDÁPIO</p><h2>Cardápio escondido custa venda.</h2></div><p>Cliente pergunta preço no WhatsApp e espera. Não sabe o que tem hoje. Não entende o combo. Desiste. Quando o cardápio é visual, atualizado e fácil de pedir, a venda acontece sem atrito — na mesa ou no delivery.</p></section>
 
 
       <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE VOCÊ RECEBE</p><h2>Um cardápio que atende e vende sozinho.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
