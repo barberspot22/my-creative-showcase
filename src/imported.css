@@ -503,9 +503,9 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   display: block;
 }
 .socialHero .metallicTitle h1 {
-  font-size: clamp(48px, 6.5vw, 92px);
+  font-size: clamp(44px, 6vw, 84px);
   white-space: normal;
-  line-height: 0.95;
+  line-height: 1.05;
   filter: drop-shadow(0 12px 3px #000);
 }
 .socialHero .metallicTitle h1 em {
@@ -532,7 +532,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
     padding-bottom: 40px !important;
   }
   .socialHero .metallicTitle h1 {
-    font-size: 38px;
+    font-size: 34px;
     letter-spacing: -1px;
   }
   .socialHero .metallicTitle h1 em {
