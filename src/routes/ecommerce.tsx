@@ -55,15 +55,6 @@ function EcommercePage() {
       </section>
 
 
-      <section className="commerceMarket">
-        <p className="studioEyebrow">POR QUE AGORA</p>
-        <h2>O futuro do varejo <em>já começou.</em></h2>
-        <div className="commerceMarketGrid">
-          {marketStats.map(([n, copy]) => <article key={n}><b>{n}</b><p>{copy}</p></article>)}
-        </div>
-        <p className="commerceMarketNote">Estar no digital deixou de ser diferencial — virou ponto de partida.</p>
-      </section>
-
       <section id="entregamos" className="commerceDeliverables">
         <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
