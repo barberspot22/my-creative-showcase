@@ -45,6 +45,15 @@ function GBStudioPage() {
         <a className="studioButton" {...heroCtaProps}>{ctaLabel} <span>↗</span></a>
       </section>
 
+      <section className="galleryBlock">
+        <div className="galleryCopy">
+          <p className="studioEyebrow">QUALIDADE QUE VOCÊ PODE EXPLORAR</p>
+          <h2>Veja o resultado de perto.</h2>
+          <p>Cada card mostra um case diferente, com três imagens próprias em loop suave.</p>
+        </div>
+        <LookbookGallery />
+      </section>
+
       <section className="problemBlock">
         <div>
           <p className="studioEyebrow">O PROBLEMA QUE RESOLVE</p>
@@ -57,14 +66,6 @@ function GBStudioPage() {
         <ul>{differences.map((item) => <li key={item}>{item}</li>)}</ul>
       </section>
 
-      <section className="galleryBlock">
-        <div className="galleryCopy">
-          <p className="studioEyebrow">QUALIDADE QUE VOCÊ PODE EXPLORAR</p>
-          <h2>Veja o resultado de perto.</h2>
-          <p>Cada card mostra um case diferente, com três imagens próprias em loop suave.</p>
-        </div>
-        <LookbookGallery />
-      </section>
 
       <section className="processBlock">
         <div className="processIntro"><p className="studioEyebrow">COMO FUNCIONA</p><h2>Da peça ao lookbook em quatro etapas.</h2></div>
