@@ -1,72 +1,55 @@
-Objetivo: alinhar a copy de `/cardapio-digital` com a narrativa de autonomia do cliente — o cliente visualiza o cardápio/produtos, navega as opções e compra/faz o pedido com agilidade, sem depender do atendente. A página também deve mostrar, de forma tangível, como seria o site real do cliente.
+## Objetivo
 
-Aplicação da skill Revenue-Centric Design (conversion-and-landing-pages):
-- 5-second test: o hero abre com o problema do cliente (atendimento lento, cardápio escondido) e a promessa de autonomia.
-- Specificity: transformação concreta — "seu cliente vê tudo, escolhe e pede" em vez de "solução completa".
-- CTA microcopy: os botões respondem o que acontece, quanto tempo leva e o custo/risco (orçamento via WhatsApp, sem compromisso).
-- Compress decision window: a prévia do catálogo aparece cedo, logo após o hero, para que o visitante "sinta" o produto antes de pedir orçamento.
-- Value first, ask later: a seção de entregáveis e o widget de catálogo vêm antes do CTA final, provando o valor antes de pedir o contato.
+Reescrever a página `/cardapio-digital` separando-a de **Catálogo/E-commerce** e ampliando o público-alvo: restaurantes presenciais, delivery, dark kitchens, autônomos de comida (confeiteiras, marmiteiras, hamburguerias caseiras) e marcas que querem exibir o cardápio online. Foco: **autonomia do cliente** para ver, escolher e pedir — presencial ou remoto.
 
-Escopo da mudança:
-1. Reescrever o hero de `src/routes/cardapio-digital.tsx` para focar na autonomia do cliente.
-2. Reordenar / reescrever a seção "Experimente" (menuCatalogWidgetSection) para destacar que a prévia é uma simulação do site real do cliente.
-3. Reescrever a seção "Por que os dois problemas são o mesmo problema" para focar no custo de esconder o cardápio e nas perdas de venda.
-4. Reescrever os 4 entregáveis para a narrativa de autonomia + agilidade.
-5. Reescrever os 4 passos do processo para enfatizar "seu catálogo no ar, seu cliente pedindo sozinho".
-6. Ajustar a seção "Vitrine de pratos e conteúdo" (FanGallery) para uma legenda que remete à experiência real do cliente.
-7. Ajustar o `FinalCta` e a mensagem padrão do WhatsApp em `src/lib/adminLinks.ts` para manter a coerência da narrativa.
-8. Atualizar o `head()` de `src/routes/cardapio-digital.tsx` para title/description/og alinhados com a nova copy.
-9. Não alterar componentes visuais (CatalogWidget, FanGallery) — apenas a copy ao redor deles.
-10. Verificar no preview se nenhum bloco de texto quebra o layout em mobile/tablet.
+## Nova narrativa (público ampliado)
 
-Copy proposta para aprovação:
+Ângulo central: "Seu cardápio, aberto o tempo todo, em qualquer lugar." O cliente vê fotos, preços e detalhes, monta o pedido e envia — na mesa via QR ou de casa via link/WhatsApp. Sem depender de garçom, sem depender de você responder mensagem.
 
----
+### Blocos e copy
 
-Hero
-- eyebrow: CARDÁPIO DIGITAL + VENDA AUTÔNOMA
-- h1: Seu cliente vê o cardápio. Escolhe. E pede sozinho.
-- p: O cliente não precisa esperar resposta no WhatsApp. Navega pelos produtos, vê fotos, preços e variações, e finaliza o pedido no próprio ritmo — enquanto você atende quem realmente precisa de ajuda.
-- CTA primário: SOLICITAR ORÇAMENTO
-- CTA secundário: Ver como funciona
+1. **Hero**
+   - Eyebrow: "CARDÁPIO DIGITAL"
+   - H1: "Seu cardápio aberto 24h. Na mesa, no delivery, no perfil."
+   - Sub: "O cliente vê as fotos, escolhe e envia o pedido sozinho. Você recebe pronto para preparar."
 
-Seção "Experimente" (acima do widget)
-- eyebrow: EXPERIMENTE AGORA
-- h2: Sinta como seria o site do seu negócio.
-- p: Toque em qualquer produto. Veja fotos, tamanhos, preços e o botão de pedir — exatamente como seu cliente veria. Essa prévia é o mesmo fluxo que entregamos.
+2. **Problema** (substitui o bloco atual)
+   - Título: "Cardápio escondido custa venda."
+   - Texto: "Cliente pergunta preço no WhatsApp e espera. Não sabe o que tem hoje. Não entende o combo. Desiste. Quando o cardápio é visual, atualizado e fácil de pedir, a venda acontece sem atrito — na mesa ou no delivery."
 
-Seção de problema
-- eyebrow: O CUSTO DE ESCONDER O CARDÁPIO
-- h2: Cardápio escondido é cliente perdido.
-- p: Cliente pergunta preço no WhatsApp e espera. Quer ver opções e não encontra. Desiste e pede no concorrente. Quando o cardápio é claro, visual e fácil de comprar, a venda acontece sem atrito.
+3. **Para quem é** (bloco novo, curto — 4 chips/linhas)
+   - Restaurantes e bares (QR na mesa)
+   - Delivery próprio e dark kitchen
+   - Autônomos de comida (confeitaria, marmita, hamburgueria caseira)
+   - Marcas de alimentos que querem exibir o portfólio
 
-Entregáveis
-- eyebrow: O QUE VOCÊ RECEBE
-- h2: Uma vitrine que vende sozinha.
-1. Cardápio digital visual — fotos, preços, descrições e variações organizadas por categoria.
-2. Pedido integrado ao WhatsApp — cliente escolhe, monta o pedido e envia pronto para você confirmar.
-3. Atendimento apenas quando importa — o agente responde dúvidas, direciona reservas e finaliza pedidos.
-4. Painel único — cardápio, pedidos, conversas e postagens em um só lugar.
+4. **Widget interativo** (mantém `CatalogWidget`, re-tematizado para comida)
+   - Título: "Assim seu cliente pede sozinho"
+   - Categorias: Entradas · Pratos · Bebidas · Sobremesas
+   - Itens em R$ com nomes reais de prato
+   - Botão do card: "Adicionar ao pedido"
 
-Como funciona
-- eyebrow: COMO FUNCIONA
-- h2: Do cardápio atual ao cliente pedindo sozinho.
-1. Briefing — entendemos seu cardápio, preços e as dúvidas mais frequentes dos clientes.
-2. Arquitetura — montamos a navegação por categorias, variações e o fluxo de pedido.
-3. Implementação — subimos o cardápio digital e conectamos ao seu WhatsApp.
-4. Operação — cliente vê, escolhe e pede. Você só confirma e prepara.
+5. **O que entrega** (4 bullets)
+   - Cardápio visual por categoria (fotos, preços, adicionais, variações)
+   - QR Code na mesa **e** link único para bio/WhatsApp/delivery
+   - Pedido enviado direto ao WhatsApp ou cozinha (KDS/impressão quando faz sentido)
+   - Pagamento integrado (Pix e cartão) — na mesa ou online
 
-Vitrine de pratos e conteúdo
-- eyebrow: VEJA NA PRÁTICA
-- h2: O cliente toca e pede. Simples assim.
+6. **Como funciona** (trilha em 4 passos)
+   - Cardápio e categorias → Canais (mesa, link, WhatsApp) → Teste com equipe → Vai ao ar
 
-Já entregamos
-- mantém os cases atuais, com ênfase na autonomia do cliente e redução de tempo de resposta.
+7. **FinalCta**
+   - Título: "Quer seu cardápio pedindo por você?"
+   - Sub: "Me conta como você vende hoje — mesa, delivery ou os dois. Devolvo escopo, prazo e valor."
 
-FinalCta / WhatsApp
-- Mensagem padrão: Olá! Quero um orçamento de Cardápio Digital. Quero que meus clientes vejam os produtos e consigam pedir com mais autonomia.
-- FinalCta title: Quer que seus clientes vejam tudo e peçam sozinhos?
+## Ajustes fora da página
 
----
+- `src/lib/adminLinks.ts`: mensagem padrão de `cardapio-digital` → *"Olá! Quero um orçamento de Cardápio Digital. Vendo por [mesa/delivery/WhatsApp] e quero que meus clientes vejam e peçam sozinhos."*
+- SEO da rota: `title` "Cardápio Digital — Mesa, delivery e WhatsApp | GB IA"; `description` "Cardápio digital com fotos, pedido no WhatsApp/mesa e pagamento integrado. Para restaurantes, delivery, autônomos e marcas de comida." Atualiza OG e canonical para self-reference.
+- `ProductSwitcher` e `/ecommerce`: sem mudança — Catálogo/loja segue no e-commerce.
 
-Critério de aceite: copy aprovada, aplicada sem quebrar layout, e preview validado em mobile e desktop.
+## Fora de escopo
+
+- Não crio rota nova.
+- Sem mudanças de layout, header, footer ou design system — apenas conteúdo textual, tema do widget e SEO da rota.
+- Sem integrações reais de pagamento/KDS (segue como demonstração).
