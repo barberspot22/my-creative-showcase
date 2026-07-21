@@ -340,8 +340,8 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .loopCaseCard a[href="/cardapio-digital"] .caseBoxCover:after{background:linear-gradient(180deg,#00000005 0,#00000010 38%,#000000db 100%)!important}
 .loopCaseCard a[href="/cardapio-digital"] .caseLoopFrame,.loopCaseCard a[href="/cardapio-digital"] .caseLoopFrame.active{opacity:1!important;transform:none!important}
 .loopCaseCard a[href="/cardapio-digital"]:hover .caseLoopFrame.active{transform:none!important}
-.menuCatalogFrame{display:grid;place-items:center;padding:28px!important;background:transparent!important}
-.menuCatalogFrame:before{display:none!important}
+.loopCaseCard a[href="/cardapio-digital"] .menuCatalogFrame{display:grid;place-items:center;padding:28px!important;background:transparent!important}
+.loopCaseCard a[href="/cardapio-digital"] .menuCatalogFrame:before{display:none!important}
 .catalogPhone{position:relative;width:min(320px,74%);height:92%;padding:16px 14px 18px;border-radius:8px;background:#f7f5f0;color:#161616;box-shadow:0 34px 90px #000b,0 0 0 1px #ffffff55;overflow:hidden;transform:rotate(-1deg)}
 .catalogPhone:before{content:"";position:absolute;inset:0;background:linear-gradient(#f7f5f0 0 64px,transparent 118px,transparent calc(100% - 96px),#f7f5f0 100%);z-index:3;pointer-events:none}
 .catalogPhone header{position:relative;z-index:4;display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;padding:0 2px 12px;border-bottom:1px solid #d8d2c8;font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.2px;color:#555}
