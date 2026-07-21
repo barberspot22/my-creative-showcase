@@ -98,7 +98,7 @@ function EcommercePage() {
 
 
       <section className="commerceOmni">
-        <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja GB IA no centro. Cada canal puxando produto, estoque e pedido do mesmo lugar. Sem duplicar cadastro, sem estoque furado, sem pedido perdido.</p></div>
+        <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja no centro. Todos os canais puxando produto, estoque e pedido do mesmo lugar.</p></div>
         <div className="commerceOmniDiagram">
           <div className="commerceOmniCore"><b>GB IA</b><small>Loja + Painel</small></div>
           {channels.map((c, i) => <span key={c} className="commerceOmniNode" style={{ ["--i" as string]: i, ["--total" as string]: channels.length } as React.CSSProperties}>{c}</span>)}
