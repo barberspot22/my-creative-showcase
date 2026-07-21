@@ -87,11 +87,8 @@ function EcommercePage() {
                 <div className="commerceAudioTags"><span>R$ 129,90</span><span>Vestuário</span><span>SEO ✓</span></div>
               </div>
             </article>
-            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Publicar em quais canais?</span></p>
-            <div className="commerceAudioChannels">
-              <span>✓ Site</span><span>✓ Mercado Livre</span><span>✓ Shopee</span><span>✓ Instagram</span>
-            </div>
-            <p className="commerceAudioApproved">Publicado em 4 canais · estoque sincronizado</p>
+            <p className="chatUser commerceAudioUserMsg"><span>Publica no site, Mercado Livre, Shopee e Instagram.</span><small>10:24</small></p>
+            <p className="chatAgent commerceAudioAgent commerceAudioTyping"><b>GB Commerce</b><span className="commerceTypingDots"><i/><i/><i/></span></p>
           </div>
         </div>
       </section>
