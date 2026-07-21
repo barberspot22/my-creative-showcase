@@ -6,12 +6,6 @@ import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWid
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
-const audiences = [
-  ["Restaurantes e bares", "QR na mesa, pedido direto na cozinha, conta paga sem chamar o garçom."],
-  ["Delivery próprio e dark kitchen", "Link único que substitui o print de cardápio no WhatsApp."],
-  ["Autônomos de comida", "Confeitaria, marmita, hamburgueria caseira — cardápio profissional sem depender de app de terceiros."],
-  ["Marcas de alimentos", "Portfólio de produtos apresentado com fotos, preços e onde comprar."],
-];
 
 const deliverables = [
   ["Cardápio visual por categoria", "Fotos, preços, adicionais e variações — o cliente vê tudo antes de pedir."],
@@ -53,7 +47,6 @@ function CardapioDigitalPage() {
 
       <section className="menuProductProblem"><div><p className="studioEyebrow">O CUSTO DE ESCONDER O CARDÁPIO</p><h2>Cardápio escondido custa venda.</h2></div><p>Cliente pergunta preço no WhatsApp e espera. Não sabe o que tem hoje. Não entende o combo. Desiste. Quando o cardápio é visual, atualizado e fácil de pedir, a venda acontece sem atrito — na mesa ou no delivery.</p></section>
 
-      <section className="menuProductProof"><div><p className="studioEyebrow">PARA QUEM É</p><h2>Serve para quem vende comida.</h2></div><ul>{audiences.map(([title, copy]) => <li key={title}><b>{title}.</b> {copy}</li>)}</ul></section>
 
       <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE VOCÊ RECEBE</p><h2>Um cardápio que atende e vende sozinho.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
