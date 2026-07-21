@@ -134,7 +134,7 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-const CHIPS = ["Novidades", "Pratos", "Bebidas", "Sobremesas"];
+const CHIPS = ["Entradas", "Pratos", "Bebidas", "Sobremesas"];
 
 function formatPrice(v: number) {
   return v.toFixed(2).replace(".", ",");
