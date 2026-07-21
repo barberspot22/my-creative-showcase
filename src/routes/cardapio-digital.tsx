@@ -42,7 +42,7 @@ function CardapioDigitalPage() {
     <main>
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL</p>
-        <h1>Seu cardápio aberto 24h. Na mesa, no delivery, no perfil.</h1>
+        <h1>Um cardápio que atende e vende sozinho</h1>
         <p>O cliente vê as fotos, escolhe e envia o pedido sozinho — presencial ou de casa. Você recebe pronto para preparar.</p>
         <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
