@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
+import { FinalCta } from "@/components/FinalCta";
 
 const automations = [
   ["01", "Conversa automática com IA", "IA treinada no seu negócio responde no WhatsApp, Instagram e site — qualifica o lead antes do time humano entrar."],
