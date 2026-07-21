@@ -1,5 +1,4 @@
-
-import { PointerEvent, useEffect, useState } from "react";
+import { PointerEvent, useRef, useState } from "react";
 
 const templates = [
   { name: "Atelier", type: "Moda & editorial", className: "commerceTemplateFashion", headline: "Nova coleção", metric: "Checkout em 2 etapas", products: ["Look 01", "Look 02", "Look 03"] },
@@ -10,49 +9,52 @@ const templates = [
 ];
 
 export function BentoMorphGallery() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const state = useRef({ startX: 0, startScroll: 0, moved: false });
 
-  useEffect(() => {
-    if (paused) return;
-    const timer = window.setInterval(() => setActive(current => (current + 1) % templates.length), 2500);
-    return () => window.clearInterval(timer);
-  }, [paused]);
-
-  const move = (event: PointerEvent<HTMLDivElement>) => {
-    const box = event.currentTarget.getBoundingClientRect();
-    event.currentTarget.style.setProperty("--commerce-x", `${((event.clientX - box.left) / box.width - .5) * 12}deg`);
-    event.currentTarget.style.setProperty("--commerce-y", `${((event.clientY - box.top) / box.height - .5) * -10}deg`);
+  const onDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (!trackRef.current) return;
+    setDragging(true);
+    state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false };
+    trackRef.current.setPointerCapture(e.pointerId);
+  };
+  const onMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!dragging || !trackRef.current) return;
+    const dx = e.clientX - state.current.startX;
+    if (Math.abs(dx) > 4) state.current.moved = true;
+    trackRef.current.scrollLeft = state.current.startScroll - dx;
+  };
+  const onUp = (e: PointerEvent<HTMLDivElement>) => {
+    setDragging(false);
+    try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
   };
 
-  return <div
-    className="commerceBento commerceTemplateLoop"
-    onPointerMove={move}
-    onPointerEnter={() => setPaused(true)}
-    onPointerLeave={event => {
-      setPaused(false);
-      event.currentTarget.style.setProperty("--commerce-x", "0deg");
-      event.currentTarget.style.setProperty("--commerce-y", "0deg");
-    }}
-  >
-    {templates.map((template, index) => <button
-      key={template.name}
-      type="button"
-      className={`commerceTemplate ${template.className} ${active === index ? "active" : ""}`}
-      onClick={() => setActive(index)}
-      aria-pressed={active === index}
-      aria-label={`Ver template ${template.name}, ${template.type}`}
+  return <div className="commerceScrollWrap">
+    <div
+      ref={trackRef}
+      className={`commerceScrollTrack ${dragging ? "isDragging" : ""}`}
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
     >
-      <span className="templateChrome"><i/><i/><i/></span>
-      <span className="templateMock commerceTemplateImage">
-        <span className="commerceTemplateNav"><i/><i/><i/></span>
-        <b>{template.headline}</b>
-        <em>{template.metric}</em>
-        <span className="commerceTemplateProducts">{template.products.map(product => <i key={product}>{product}</i>)}</span>
-        <strong>Comprar agora</strong>
-      </span>
-      <span className="templateMeta"><b>{template.name}</b><small>{template.type}</small></span>
-    </button>)}
-    <p>Loop automático de templates · pause ao passar o cursor</p>
+      {templates.map(template => <article
+        key={template.name}
+        className={`commerceTemplate ${template.className}`}
+        onClickCapture={e => { if (state.current.moved) { e.preventDefault(); e.stopPropagation(); } }}
+      >
+        <span className="templateChrome"><i/><i/><i/></span>
+        <span className="templateMock commerceTemplateImage">
+          <span className="commerceTemplateNav"><i/><i/><i/></span>
+          <b>{template.headline}</b>
+          <em>{template.metric}</em>
+          <span className="commerceTemplateProducts">{template.products.map(product => <i key={product}>{product}</i>)}</span>
+          <strong>Comprar agora</strong>
+        </span>
+        <span className="templateMeta"><b>{template.name}</b><small>{template.type}</small></span>
+      </article>)}
+    </div>
+    <p>Arraste para o lado para ver mais modelos →</p>
   </div>;
 }
