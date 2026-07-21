@@ -48,7 +48,7 @@ function EcommercePage() {
         <div className="metallicTitle" data-text="O varejo migrou.">
           <h1>O varejo migrou.<br/><em>Sua marca já está lá?</em></h1>
         </div>
-        <p>Enquanto o físico estagna, o digital cresce em dois dígitos por ano. Grandes marcas já migraram — o mercado que sobra é online, rastreável e 24/7. A gente entrega o sistema completo para você entrar dentro dessa curva.</p>
+        <p>O físico estagna, o digital cresce em dois dígitos por ano. A gente entrega o sistema completo pra você entrar nessa curva.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
@@ -59,11 +59,11 @@ function EcommercePage() {
         <div className="commerceMarketGrid">
           {marketStats.map(([n, copy]) => <article key={n}><b>{n}</b><p>{copy}</p></article>)}
         </div>
-        <p className="commerceMarketNote">Todo mundo que enxergou primeiro está capturando o cliente antes de você. Estar no digital deixou de ser diferencial — virou ponto de partida.</p>
+        <p className="commerceMarketNote">Estar no digital deixou de ser diferencial — virou ponto de partida.</p>
       </section>
 
       <section id="entregamos" className="commerceDeliverables">
-        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema completo <em>de venda.</em></h2></div>
+        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
 
@@ -71,23 +71,23 @@ function EcommercePage() {
         <div className="commerceAudioCopy">
           <p className="studioEyebrow">CADASTRO POR ÁUDIO</p>
           <h2>Manda um áudio. <em>Sobe em 4 canais.</em></h2>
-          <p>Grava um áudio no WhatsApp descrevendo o produto. A IA transcreve, escreve título e descrição otimizados para SEO, categoriza, sugere preço e publica na sua loja e nos marketplaces integrados. Sem planilha, sem cadastro manual, sem dor.</p>
+          <p>Grava o áudio no WhatsApp. A IA transcreve, escreve título, descrição SEO e publica na loja e nos marketplaces. Sem planilha, sem dor.</p>
         </div>
         <div className="chatDemo commerceAudioChat">
-          <header><span><i/>GB Commerce</span><small>catálogo online</small></header>
+          <header className="commerceAudioHeader"><span><i/>GB Commerce</span><small>catálogo online</small></header>
           <div className="commerceAudioBody">
             <p className="chatUser commerceAudioMsg"><span className="commerceAudioWave"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></span><small>0:22</small></p>
-            <p className="chatAgent"><b>GB Commerce</b>Entendi. Vou criar o cadastro do produto agora.</p>
+            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Entendi. Criando o cadastro agora.</span></p>
             <article className="commerceAudioCard">
-              <div className="commerceAudioCardImg"/>
-              <div>
+              <img className="commerceAudioCardImg" src={tshirtImg} alt="Camiseta oversized off-white" loading="lazy" width={768} height={768} />
+              <div className="commerceAudioCardBody">
                 <small>PRODUTO GERADO</small>
-                <b>Camiseta Oversized Off-White · Algodão Pima</b>
-                <p>Caimento oversized, gola reforçada, 100% algodão Pima. Peça leve, ideal para o verão e para looks casuais com camadas.</p>
+                <b>Camiseta Oversized Off-White</b>
+                <p>Caimento oversized, gola reforçada, 100% algodão Pima.</p>
                 <div className="commerceAudioTags"><span>R$ 129,90</span><span>Vestuário</span><span>SEO ✓</span></div>
               </div>
             </article>
-            <p className="chatAgent"><b>GB Commerce</b>Publicar em quais canais?</p>
+            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Publicar em quais canais?</span></p>
             <div className="commerceAudioChannels">
               <span>✓ Site</span><span>✓ Mercado Livre</span><span>✓ Shopee</span><span>✓ Instagram</span>
             </div>
@@ -95,6 +95,7 @@ function EcommercePage() {
           </div>
         </div>
       </section>
+
 
       <section className="commerceOmni">
         <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja GB IA no centro. Cada canal puxando produto, estoque e pedido do mesmo lugar. Sem duplicar cadastro, sem estoque furado, sem pedido perdido.</p></div>
