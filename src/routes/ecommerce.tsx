@@ -44,9 +44,7 @@ function EcommercePage() {
     <main>
       <section className="commerceHero">
         <p className="studioEyebrow">GB IA · E-COMMERCE INTELIGENTE</p>
-        <div className="metallicTitle" data-text="O varejo migrou.">
-          <h1>O varejo migrou.<br/><em>Sua marca já está lá?</em></h1>
-        </div>
+        <h1>O varejo migrou.<br/><em>Sua marca <span className="commerceAccent">já está lá?</span></em></h1>
         <p>Enquanto o físico estagna, o digital cresce em dois dígitos por ano. Grandes marcas já migraram — o mercado que sobra é online, rastreável e 24/7. A gente entrega o sistema completo para você entrar dentro dessa curva.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
@@ -99,7 +97,7 @@ function EcommercePage() {
         <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja GB IA no centro. Cada canal puxando produto, estoque e pedido do mesmo lugar. Sem duplicar cadastro, sem estoque furado, sem pedido perdido.</p></div>
         <div className="commerceOmniDiagram">
           <div className="commerceOmniCore"><b>GB IA</b><small>Loja + Painel</small></div>
-          {channels.map((c, i) => <span key={c} className="commerceOmniNode" style={{ ["--i" as string]: i, ["--total" as string]: channels.length } as React.CSSProperties}>{c}</span>)}
+          {channels.map((c) => <span key={c} className="commerceOmniNode">{c}</span>)}
           <svg className="commerceOmniLines" viewBox="0 0 400 400" aria-hidden="true">
             {channels.map((_, i) => {
               const angle = (i / channels.length) * Math.PI * 2 - Math.PI / 2;
