@@ -57,7 +57,6 @@ function CardapioDigitalPage() {
 
 
 
-      <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE VOCÊ RECEBE</p><h2>Um cardápio que atende e vende sozinho.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
       <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Autonomia para o cliente e tempo de volta para você!</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
