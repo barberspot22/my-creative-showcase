@@ -6,11 +6,6 @@ import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
 
-const marketStats = [
-  ["+R$ 234 bi", "Movimentados em e-commerce no Brasil em 2024."],
-  ["9 em 10", "Brasileiros já compraram online pelo menos uma vez."],
-  ["73%", "Das jornadas de compra começam no digital."],
-];
 
 const deliverables = [
   ["E-commerce que converte", "Loja própria com checkout otimizado e mobile-first. Máquina de conversão, não vitrine."],
