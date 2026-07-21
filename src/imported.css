@@ -1674,3 +1674,26 @@ section[aria-label^="Notifications"] {
   .menuCatalogRowMedia { width: 84px; height: 84px; }
   .menuCatalogHeroV2 h4 { font-size: 20px; }
 }
+
+/* ===== Reference Gallery — filters + search ===== */
+.referenceFilterBar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:0 32px;margin:-8px 0 20px}
+.referenceSearch{position:relative;display:flex;align-items:center;gap:8px;flex:1;min-width:240px;max-width:420px;padding:10px 14px;border-radius:12px;background:#ffffff05;border:1px solid #ffffff12;color:#ffffff90;transition:border-color .2s,background .2s}
+.referenceSearch:focus-within{border-color:#c9a84c80;background:#ffffff08}
+.referenceSearch svg{flex-shrink:0;color:#ffffff60}
+.referenceSearch input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#f5f5f5;font:500 13px 'Manrope',sans-serif;letter-spacing:.01em}
+.referenceSearch input::placeholder{color:#ffffff45}
+.referenceSearchClear{background:transparent;border:0;color:#ffffff60;font-size:20px;line-height:1;cursor:pointer;padding:0 4px;border-radius:4px}
+.referenceSearchClear:hover{color:#f5f5f5}
+.referenceChips{display:flex;flex-wrap:wrap;gap:6px}
+.referenceChip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid #ffffff12;background:#ffffff03;color:#ffffff70;font:700 11px 'Manrope',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .18s;white-space:nowrap}
+.referenceChip:hover{color:#f5f5f5;border-color:#c9a84c60}
+.referenceChip.active{background:linear-gradient(180deg,#f0d78c,#c9a84c);color:#1a0d05;border-color:transparent;box-shadow:0 6px 16px -6px #c9a84c99}
+.referenceChip em{font-style:normal;font-size:10px;font-weight:800;padding:2px 6px;border-radius:999px;background:#00000030}
+.referenceChip.active em{background:#1a0d0525;color:#1a0d05}
+.referenceResultCount{margin-left:auto;font:600 11px 'Manrope',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#ffffff55}
+.referenceEmpty{display:grid;place-items:center;gap:12px;padding:60px 20px;text-align:center;color:#ffffff70}
+.referenceEmpty p{margin:0;font-size:14px}
+.referenceEmpty button{padding:10px 18px;border-radius:999px;border:1px solid #c9a84c60;background:transparent;color:#f0d78c;font:700 11px 'Manrope',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.referenceEmpty button:hover{background:#c9a84c15}
+.referenceCardType{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#c9a84c20;color:#f0d78c;border:1px solid #c9a84c40;margin-left:8px}
+@media(max-width:760px){.referenceFilterBar{padding:0 22px;gap:10px}.referenceSearch{min-width:100%}.referenceResultCount{margin-left:0}}
