@@ -344,10 +344,10 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
     if (!drag.current.intent) {
-      if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) {
+      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
         drag.current.intent = "x";
         setDraggingClass(true);
-      } else if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+      } else if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
         drag.current.intent = "y";
         try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
         drag.current.active = false;
@@ -355,23 +355,33 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       } else return;
     }
     if (drag.current.intent !== "x") return;
-    drag.current.moved = true;
-    drag.current.delta = dx;
+    if (Math.abs(dx) > 10) drag.current.moved = true;
+    // Clamp so the visual never skips past the neighboring card during drag.
+    const clamped = Math.max(-220, Math.min(220, dx));
+    drag.current.delta = clamped;
     scheduleFrame();
   };
 
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active) return;
     const dx = drag.current.delta;
-    const steps = Math.abs(dx) > 40 ? (dx < 0 ? 1 : -1) : 0;
+    const THRESHOLD = 60;
+    // Always advance/retreat exactly one card per gesture.
+    const steps = Math.abs(dx) >= THRESHOLD ? (dx < 0 ? 1 : -1) : 0;
     if (drag.current.intent === "x" && steps !== 0) {
-      suppressClickUntil.current = Date.now() + 450;
+      suppressClickUntil.current = Date.now() + 400;
       moveTo(drag.current.activeIndex + steps);
     } else if (drag.current.moved) {
-      suppressClickUntil.current = Date.now() + 450;
+      // Small drag → snap back and swallow the click.
+      suppressClickUntil.current = Date.now() + 250;
+      applyTransforms(drag.current.activeIndex, 0);
+    } else {
+      // Genuine click → make sure nothing blocks navigation.
+      suppressClickUntil.current = 0;
       applyTransforms(drag.current.activeIndex, 0);
     }
     drag.current.active = false;
+    drag.current.delta = 0;
     setDraggingClass(false);
     try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
   };
