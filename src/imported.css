@@ -1581,7 +1581,7 @@ section[aria-label^="Notifications"] {
 .menuReferenceSection{padding:110px 6%;background:var(--black);color:#fff;overflow:hidden}
 .menuReferenceSection>div:first-child{max-width:900px;margin:0 3% 65px}
 .menuReferenceSection>div:first-child>p:last-child{max-width:600px;line-height:1.65;color:#9ba69f}
-@media(max-width:760px){.referenceScrollWrap{padding:0 22px}.referenceCard{flex-basis:82vw}.referenceCardFrame{padding:13px 13px 0 13px;border-radius:20px}.referenceCardMedia{border-radius:10px 10px 0 0}.referenceLightbox img{max-width:96vw;max-height:84vh}.menuReferenceSection{padding:75px 22px 95px}.menuReferenceSection>div:first-child{margin:0 0 40px}}
+@media(max-width:760px){.referenceScrollWrap{padding:0 22px}.referenceCard{flex-basis:82vw}.referenceCardFrame{padding:13px 13px 0 13px;border-radius:20px}.referenceCardMedia{border-radius:10px 10px 0 0}.referenceLightbox{padding:12px}.referenceLightboxFrame{height:94vh;border-radius:10px}.referenceLightboxUrl{font-size:10px;max-width:180px}.referenceLightboxClose{top:16px;right:16px;width:40px;height:40px;font-size:22px}.menuReferenceSection{padding:75px 22px 95px}.menuReferenceSection>div:first-child{margin:0 0 40px}}
 
 /* Site institucional — reference tabs (Institucional / Vendas / Captura) */
 .siteRefHint{margin:14px 0 0;font:11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.6px;color:#7b7b7b}
