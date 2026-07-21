@@ -110,9 +110,10 @@ export function ReferenceGallery({ items, ctaUrl, title }: ReferenceGalleryProps
               <button
                 type="button"
                 className="referenceCardFrame"
-                onClick={() => { console.log("BUTTON CLICK", ref.segment); handleClick(ref.image); }}
+                onClick={() => handleClick(ref.image)}
                 aria-label={`Ampliar referência ${ref.segment}`}
               >
+
                 <span className="referenceCardTop">
                   <span className="referenceCardDots"><i /><i /><i /></span>
                   <span className="referenceCardUrl">{ref.domain || ref.segment}</span>
