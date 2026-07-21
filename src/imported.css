@@ -1567,7 +1567,7 @@ section[aria-label^="Notifications"] {
 @media(max-width:760px){.siteRefTabs{padding:0 22px;margin:26px 0 4px}.siteRefTab{padding:10px 14px;font-size:9.5px;letter-spacing:1.1px}}
 
 /* Tall scrolling media inside reference cards (site preview scroll) */
-.referenceCardMediaTall{position:relative;aspect-ratio:unset;max-height:clamp(320px,42vw,520px);cursor:ns-resize;touch-action:none;user-select:none;background:#0e0e0e;overflow:hidden}
+.referenceCardMediaTall{position:relative;aspect-ratio:unset;min-height:220px;max-height:clamp(320px,42vw,520px);cursor:ns-resize;touch-action:none;user-select:none;background:#0e0e0e;overflow:hidden}
 .referenceCardMediaTall img{width:100%;height:auto;object-fit:cover;object-position:top center;display:block;transition:none;will-change:transform;pointer-events:none}
 .referenceCardFrame:hover .referenceCardMediaTall img{transform:none}
 .referenceScrollbar{position:absolute;top:8px;right:6px;bottom:8px;width:8px;border-radius:999px;background:#ffffff18;backdrop-filter:blur(6px);cursor:grab;touch-action:none;z-index:3;transition:background .2s,width .2s;border:1px solid #ffffff10}
