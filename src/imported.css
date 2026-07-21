@@ -89,7 +89,7 @@
 @media(max-width:760px){
   .menuValueDeliverables{padding:75px 22px;grid-template-columns:1fr;gap:45px}
   .menuValueDeliverables>div{position:static}
-  .menuValueDeliverables h2{font-size:42px;letter-spacing:-1px}
+  .menuValueDeliverables h2{font-size:36px;letter-spacing:-1px}
   .menuValueDeliverables li{grid-template-columns:52px 1fr;gap:20px;padding:32px 0}
   .menuValueDeliverables li>span{font:700 32px Montserrat,Arial,sans-serif}
   .menuValueDeliverables h3{font-size:22px}
