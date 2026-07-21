@@ -59,7 +59,6 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
   };
 
   return (
-    <>
     <nav className="productSwitcher" aria-label="Nossos produtos">
       <div
         className="productSwitcherTrack"
@@ -94,7 +93,5 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
         })}
       </div>
     </nav>
-    <div className="productSwitcherSpacer" aria-hidden="true" />
-    </>
   );
 }
