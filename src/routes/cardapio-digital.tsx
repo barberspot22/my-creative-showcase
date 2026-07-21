@@ -32,7 +32,7 @@ function CardapioDigitalPage() {
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL</p>
         <h1>Um cardápio que atende e vende sozinho</h1>
-        <p>O cliente vê as fotos, escolhe e envia o pedido sozinho — presencial ou de casa. Você recebe pronto para preparar.</p>
+        <p>O cliente vê as fotos, escolhe e envia o pedido sozinho presencial ou de casa. Você recebe pronto para preparar.</p>
         <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
         <div className="menuHeroFan"><FanGallery/></div>
       </section>
@@ -44,7 +44,7 @@ function CardapioDigitalPage() {
         <div className="menuCatalogIntro">
           <p className="studioEyebrow">EXPERIMENTE AGORA</p>
           <h2>Assim seu cliente pede sozinho.</h2>
-          <p>Toque em qualquer prato. Veja fotos, tamanhos, preço e o botão de pedir — o mesmo fluxo que entregamos, aberto na mesa ou no celular do cliente.</p>
+          <p>Toque em qualquer prato. Veja fotos, tamanhos, preço e o botão de pedir o mesmo fluxo que entregamos, aberto na mesa ou no celular do cliente.</p>
         </div>
         <CatalogWidget />
       </section>
