@@ -53,6 +53,12 @@ function EcommercePage() {
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
 
+      <section className="commerceGallerySection">
+        <div><p className="studioEyebrow">MODELOS & TEMPLATES</p><h2>Modelos que já <em>viraram loja no ar.</em></h2><p>Direções visuais que adaptamos à identidade, ao catálogo e à operação da sua marca.</p></div>
+        <BentoMorphGallery />
+      </section>
+
+
       <section className="commerceMarket">
         <p className="studioEyebrow">POR QUE AGORA</p>
         <h2>O futuro do varejo <em>já começou.</em></h2>
