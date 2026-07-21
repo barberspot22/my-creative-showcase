@@ -2,10 +2,10 @@
 import { PointerEvent, useEffect, useRef } from "react";
 
 const cases = [
-  { category: "Site institucional", name: "Vivence Pharma", className: "siteWorkVivence", headline: "Saúde com presença", sections: ["Especialidades", "Equipe", "Contato"] },
-  { category: "Portfólio institucional", name: "GB Studio", className: "siteWorkStudio", headline: "Estúdio e produção", sections: ["Lookbook", "Cases", "Agenda"] },
-  { category: "Reconstrução digital", name: "United Safety Net", className: "siteWorkUnited", headline: "Segurança em rede", sections: ["Soluções", "Impacto", "Suporte"] },
-  { category: "Site de marca", name: "Kongfy", className: "siteWorkKongfy", headline: "Marca pronta pra vender", sections: ["Produto", "Prova", "Compra"] },
+  { category: "Restaurante", name: "Casa GB", className: "siteWorkVivence", headline: "Cardápio que aparece", sections: ["Menu", "Reserva", "Delivery"] },
+  { category: "Clínica", name: "Beleza & Cia", className: "siteWorkStudio", headline: "Autoridade que agenda", sections: ["Tratamentos", "Equipe", "Agendar"] },
+  { category: "Serviço B2B", name: "United Safety Net", className: "siteWorkUnited", headline: "Credibilidade que vende", sections: ["Soluções", "Cases", "Contato"] },
+  { category: "Marca de moda", name: "Kongfy", className: "siteWorkKongfy", headline: "Marca pronta pra vender", sections: ["Produto", "Prova", "Compra"] },
 ];
 
 export function PerspectiveTicker() {
