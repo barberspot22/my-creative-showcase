@@ -1300,9 +1300,6 @@ body{overflow-x:clip}
   .menuVisualShowcase > div:first-child { padding: 0 28px; margin: 0 0 50px; }
   .commerceGallerySection { padding: 90px 28px; }
   .commerceGallerySection > div:first-child { margin: 0 0 50px; padding: 0; }
-  .allChannels { padding: 90px 28px; text-align: left; }
-  .channelMap { margin: 45px 0 0; max-width: none; }
-
   /* Single column grids on tablet */
   .problemBlock, .processBlock, .whatsappBlock,
   .commerceProblem, .commerceDeliverables, .commerceProcess,
