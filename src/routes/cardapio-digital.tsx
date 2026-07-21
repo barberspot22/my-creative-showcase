@@ -3,6 +3,8 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWidget";
+import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { cardapioReferences } from "@/lib/references";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
@@ -42,6 +44,11 @@ function CardapioDigitalPage() {
           <h2>Um cardápio que atende e vende sozinho.</h2>
         </div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
+      </section>
+
+      <section className="menuReferenceSection">
+        <div><p className="studioEyebrow">REFERÊNCIAS</p><h2>Cardápios de restaurantes reais <em>e interfaces que a gente replica.</em></h2><p>Pequenos negócios brasileiros e designs premium. Clique para ampliar e imagine o seu cardápio nesse visual.</p></div>
+        <ReferenceGallery items={cardapioReferences} ctaUrl={whatsapp} />
       </section>
 
 

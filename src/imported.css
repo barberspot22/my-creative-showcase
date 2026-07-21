@@ -1526,3 +1526,34 @@ section[aria-label^="Notifications"] {
 .commerceSiteMinimal{background:#141414}.commerceSiteMinimal .commerceSitePreview{background:#ececec}
 .commerceScrollWrap>p{margin:0 0 0 2px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#6b756e}
 @media(max-width:760px){.commerceScrollWrap{padding:0 22px}.commerceSiteCard{flex-basis:78vw;min-height:420px;padding:14px;border-radius:20px}.commerceSitePreview{padding:22px 18px}.commerceSitePreview b{font-size:34px}.commerceSiteNav b{padding:6px 9px;font-size:8px}.commerceSiteCta{padding:12px 18px;font-size:10px}}
+
+/* ReferenceGallery — real sites + AI mockups in browser-frame cards */
+.referenceGallery{position:relative}
+.referenceGalleryHint{margin:0 0 18px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
+.referenceScrollWrap{position:relative;padding:0 6%}
+.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto}
+.referenceScrollTrack::-webkit-scrollbar{display:none}
+.referenceScrollTrack.isDragging{cursor:grabbing}
+.referenceCard{flex:0 0 360px;position:relative;display:flex;flex-direction:column;gap:12px}
+.referenceCardFrame{width:100%;border:0;border-radius:24px;overflow:hidden;background:#111;padding:16px 16px 0 16px;text-align:left;box-shadow:0 24px 60px #00000050;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
+.referenceCardFrame:hover{transform:translateY(-8px);box-shadow:0 32px 70px #00000066}
+.referenceCardTop{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.referenceCardDots{display:flex;gap:5px}.referenceCardDots i{width:7px;height:7px;border-radius:50%;background:#ffffff50}
+.referenceCardDots i:first-child{background:#ff5f57}.referenceCardDots i:nth-child(2){background:#febc2e}.referenceCardDots i:nth-child(3){background:#28c840}
+.referenceCardUrl{flex:1 1 auto;font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.6px;color:#ffffff99;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.referenceCardMedia{display:block;aspect-ratio:16/10;border-radius:14px 14px 0 0;overflow:hidden;background:#181818}
+.referenceCardMedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.referenceCardFrame:hover .referenceCardMedia img{transform:scale(1.03)}
+.referenceCardMeta{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
+.referenceCardMeta small{font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:#ffffff99}
+.referenceCardMeta a{font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.6px;color:#d9ff61;transition:color .2s}
+.referenceCardMeta a:hover{color:#fff}
+.referenceDragHint{margin:0 0 0 2px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
+.referenceLightbox{position:fixed;z-index:200;inset:0;background:#000000e8;backdrop-filter:blur(14px);display:grid;place-items:center;padding:20px}
+.referenceLightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 30px 80px #00000080}
+.referenceLightboxClose{position:absolute;top:24px;right:24px;width:48px;height:48px;border:1px solid #ffffff30;border-radius:50%;background:#00000060;color:#fff;font-size:28px;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.referenceLightboxClose:hover{background:#ffffff20}
+.menuReferenceSection{padding:110px 6%;background:var(--black);color:#fff;overflow:hidden}
+.menuReferenceSection>div:first-child{max-width:900px;margin:0 3% 65px}
+.menuReferenceSection>div:first-child>p:last-child{max-width:600px;line-height:1.65;color:#9ba69f}
+@media(max-width:760px){.referenceScrollWrap{padding:0 22px}.referenceCard{flex-basis:82vw}.referenceCardFrame{padding:13px 13px 0 13px;border-radius:20px}.referenceCardMedia{border-radius:10px 10px 0 0}.referenceLightbox img{max-width:96vw;max-height:84vh}.menuReferenceSection{padding:75px 22px 95px}.menuReferenceSection>div:first-child{margin:0 0 40px}}

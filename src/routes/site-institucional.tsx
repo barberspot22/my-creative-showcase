@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
-import { PerspectiveTicker } from "@/components/imported/site-institucional/PerspectiveTicker";
+import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { institucionalReferences } from "@/lib/references";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
@@ -35,7 +36,7 @@ function SiteInstitucionalPage() {
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
-      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Sites que já entregamos.</h2></div><PerspectiveTicker/></section>
+      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Referências que a gente transforma no seu site.</h2></div><ReferenceGallery items={institucionalReferences} ctaUrl={whatsapp} /></section>
 
 
       <section className="siteProductValue">
