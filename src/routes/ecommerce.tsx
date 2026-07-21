@@ -36,10 +36,10 @@ function EcommercePage() {
     <main>
       <section className="commerceHero">
         <p className="studioEyebrow">GB IA · E-COMMERCE INTELIGENTE</p>
-        <div className="metallicTitle" data-text="O varejo não morreu.">
-          <h1>O varejo não morreu.<br/><em>Ele só mudou de endereço.</em></h1>
+        <div className="metallicTitle" data-text="Seu cliente está online.">
+          <h1>Seu cliente está online.<br/><em>Seu produto também?</em></h1>
         </div>
-        <p>Seu produto precisa estar onde o cliente está comprando. A gente monta essa loja, catálogo e IA vendedora pra você não perder mais nenhuma venda.</p>
+        <p>A gente coloca sua loja, catálogo e IA vendedora nos canais onde o cliente já compra. Você cadastra uma vez e vende em todo lugar.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
@@ -110,8 +110,8 @@ export const Route = createFileRoute("/ecommerce")({
   component: EcommercePage,
   head: () => ({
     meta: [
-      { title: "E-commerce Inteligente — Loja, Catálogo, Marketplaces e IA Vendedora | GB IA" },
-      { name: "description", content: "E-commerce e catálogo digital com cadastro por áudio no WhatsApp, integração com Mercado Livre, Shopee, Amazon e Instagram, IA vendedora 24/7 e rastreamento de comportamento. O sistema completo para vender no digital." },
+      { title: "Seu cliente está online. Seu produto também? | GB IA E-commerce" },
+      { name: "description", content: "Loja, catálogo digital, marketplaces, WhatsApp e IA vendedora num só sistema. Cadastre por áudio e venda em todos os canais onde seu cliente já está." },
       { property: "og:title", content: "E-commerce Inteligente — Loja + Marketplaces + IA Vendedora | GB IA" },
       { property: "og:description", content: "Loja, catálogo, marketplaces, WhatsApp e IA vendedora num sistema só. Cadastre por áudio, publique em todos os canais, rastreie e otimize a conversão." },
       { property: "og:type", content: "product" },
