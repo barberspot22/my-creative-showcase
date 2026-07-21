@@ -40,7 +40,7 @@ function GBSocialPage() {
     <main>
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
-        <h1>Sua marca não pode sumir do feed.<br/><em>Agora ela não some mais.</em></h1>
+        <h1>Sua social midia<br/><em>Seu social media agora mora no WhatsApp.</em></h1>
         <p>Um agente de social media que cria posts, agenda conteúdo, analisa métricas, estuda concorrentes e monta calendário editorial — tudo pelo WhatsApp, no tom da sua marca.</p>
         <strong>30 dias de conteúdo em uma conversa.</strong>
         <CtaPrimary>CRIAR MEU CALENDÁRIO DE 30 DIAS<br/><span>↗</span></CtaPrimary>
