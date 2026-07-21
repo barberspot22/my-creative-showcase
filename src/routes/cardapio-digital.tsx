@@ -27,11 +27,6 @@ const steps = [
   ["No ar", "Cliente vê, escolhe e pede sozinho. Você recebe pronto para preparar."],
 ];
 
-const proof = [
-  "Proposta de agente de atendimento com cardápio integrado — Fontana di Trevi Colatina, restaurante e boliche",
-  "GB Social configurado como assistente de marketing autônomo — Instagram, Facebook, TikTok, LinkedIn e Google Meu Negócio",
-  "Arquitetura reaproveitada e testada em mais de um cliente do setor de alimentação",
-];
 
 
 function CardapioDigitalPage() {
@@ -66,7 +61,7 @@ function CardapioDigitalPage() {
 
       <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Autonomia para o cliente, tempo de volta para você.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Autonomia para o cliente, tempo de volta para você.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
+      
 
       <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital" title="Quer seu cardápio pedindo por você?" subtitle="Me conta como você vende hoje — mesa, delivery ou os dois. Devolvo escopo, prazo e valor." />
     </main>
