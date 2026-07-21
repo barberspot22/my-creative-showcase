@@ -29,10 +29,12 @@ function SiteInstitucionalPage() {
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
-        <h1>Seu negócio existe.<br/>Só falta ser encontrado com autoridade.</h1>
+        <h1>Só existir<br/>não basta.</h1>
         <p>Um site institucional não é cartão de visita. É um funil 24h que apresenta o que você faz, prova que pode confiar e direciona o visitante para o contato — sem depender de algoritmo.</p>
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
+
+      <section className="siteWorkShowcase"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Sites que viraram cartão de visita e viraram porta de entrada.</h2></div><PerspectiveTicker/></section>
 
       <section className="siteProductProblem"><div><p className="studioEyebrow">POR QUE A MAIORIA FALHA</p><h2>Sem site profissional, você perde antes de conversar.</h2></div><p>O cliente pesquisa no Google, vê a concorrência e não te encontra. Ou encontra um site lento, genérico e sem rosto. Em 5 segundos ele decide: “não parece confiável”. E some.<br/><a className="siteProductPrimary siteProblemCta" href={whatsapp} target="_blank" rel="noreferrer">NÃO DEIXAR ISSO ACONTECER<br/><span>↗</span></a></p></section>
 
@@ -49,8 +51,6 @@ function SiteInstitucionalPage() {
       </section>
 
       <section id="entregamos" className="siteProductDeliverables"><div><p className="studioEyebrow">O QUE ENTREGAMOS</p><h2>Do que você precisa para vender sozinho.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
-
-      <section className="siteWorkShowcase"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Sites que viraram cartão de visita e viraram porta de entrada.</h2></div><PerspectiveTicker/></section>
 
       <section className="siteProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do briefing ao ar em 4 passos.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
