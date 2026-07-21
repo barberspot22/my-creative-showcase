@@ -1285,11 +1285,11 @@ body{overflow-x:clip}
 
   /* Product page sections */
   .problemBlock, .processBlock, .audienceBlock,
-  .whatsappBlock, .allChannels, .autonomyBlock, .dnaBlock, .socialFlow,
+  .whatsappBlock, .socialFeatures, .socialFlow,
   .commerceProblem, .commerceDeliverables, .commerceProcess, .commerceProof,
   .crmHero, .crmAutoBlock, .crmSystemShowcase, .crmChatBlock, .crmStructure, .crmCompareBlock,
-  .siteProductProblem, .siteProductDeliverables, .siteProductProcess,
-  .menuProductProblem, .menuProductDeliverables, .menuProductProcess, .menuProductProof {
+  .siteProductDeliverables, .siteProductProcess,
+  .menuProductDeliverables, .menuProductProcess, .menuProductProof {
     padding: 90px 28px;
   }
 
