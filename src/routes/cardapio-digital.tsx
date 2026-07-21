@@ -30,14 +30,14 @@ const proof = [
 function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
   return <div className="menuProductPage">
-    <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="cardapio-digital" />
     <main>
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>
         <h1>Seu cardápio parado no PDF.<br/>Suas redes sociais paradas também.<br/>A gente resolve os dois juntos.</h1>
         <p>Cardápio digital integrado ao WhatsApp e redes sociais rodando sozinhas — pro cliente decidir o que pedir e pro seu Instagram não ficar semanas sem postar.</p>
-        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
       </section>
 
       <section className="menuCatalogWidgetSection">

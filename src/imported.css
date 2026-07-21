@@ -618,6 +618,7 @@ body{overflow-x:clip}
   text-transform:uppercase;letter-spacing:1.6px;font-weight:600;font-size:11px;
   cursor:pointer;overflow:hidden;
   transition:border-color .3s ease,background .3s ease,color .3s ease,transform .3s ease;
+  white-space:pre-line;text-align:right;
 }
 .studioButton:hover,.studioNavCta:hover,.menuProductPrimary:hover,.crmPrimary:hover,
 .siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,
@@ -636,6 +637,10 @@ body{overflow-x:clip}
   font-size:0!important;line-height:0;margin:0!important;
   position:relative;width:22px;height:10px;flex:0 0 auto;display:inline-block;
   transition:transform .3s ease;
+}
+@media(max-width:760px){
+  .studioNavCta{padding:12px 18px;font-size:9px;gap:12px}
+  .studioNavCta>span{width:16px}
 }
 /* Linha horizontal da seta */
 .studioButton>span:after,.studioNavCta>span:after,.menuProductPrimary>span:after,

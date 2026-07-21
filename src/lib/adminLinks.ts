@@ -12,7 +12,7 @@ export type PageKey =
 export type PageLink = { ctaUrl: string; ctaLabel: string };
 export type PageLinks = Record<PageKey, PageLink>;
 
-const orcamentoLabel = "Solicitar orçamento no WhatsApp";
+const orcamentoLabel = "SOLICITAR ORÇAMENTO";
 const wa = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
 
 export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; defaultUrl: string }[] = [

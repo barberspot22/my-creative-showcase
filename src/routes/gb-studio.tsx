@@ -36,7 +36,7 @@ function GBStudioPage() {
   return <div className="studioPage">
     <header className="studioNav">
       <BrandLogo />
-      <a className="studioNavCta" {...navCtaProps}>{ctaLabel} <span>↗</span></a>
+      <a className="studioNavCta" {...navCtaProps}>SOLICITAR ORÇAMENTO<br/><span>↗</span></a>
     </header>
     <ProductSwitcher current="gb-studio" />
 
@@ -46,7 +46,7 @@ function GBStudioPage() {
         <p className="studioEyebrow">GB STUDIO · FOTOGRAFIA DE MODA COM IA</p>
         <h1>Lookbooks completos.<br/>Sem montar um estúdio.</h1>
         <p>Imagens hiper-realistas de modelos para marcas de varejo e confecção têxtil no Brasil.</p>
-        <a className="studioButton" {...heroCtaProps}>{ctaLabel} <span>↗</span></a>
+        <a className="studioButton" {...heroCtaProps}>SOLICITAR ORÇAMENTO<br/><span>↗</span></a>
       </section>
 
       <section className="galleryBlock">

@@ -23,14 +23,14 @@ const steps = [
 function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   return <div className="siteProductPage">
-    <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="site-institucional" />
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
         <h1>Site institucional não é enfeite.<br/>É a primeira prova de que sua empresa é séria.</h1>
         <p>Construímos sites institucionais que passam autoridade em segundos e direcionam o visitante pro contato certo — sem página genérica, sem texto de agência que não diz nada.</p>
-        <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">{ctaLabel} <span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
       </section>
 
       <section className="siteProductProblem"><div><p className="studioEyebrow">POR QUE A MAIORIA FALHA</p><h2>Site bonito que ninguém entende o que a empresa faz em 5 segundos.</h2></div><p>Texto genérico de agência, seção decorativa sem função, contato escondido no rodapé. O visitante entra, não entende a proposta e sai sem falar com ninguém. A gente constrói o site pra provar capacidade rápido e levar direto pro WhatsApp ou formulário.</p></section>
