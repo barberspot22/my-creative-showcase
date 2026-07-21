@@ -1,9 +1,12 @@
-import { PointerEvent, useEffect, useRef, useState } from "react";
+import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
+
+export type ReferenceType = "ecommerce" | "institucional" | "vendas" | "captura" | "cardapio";
 
 export interface Reference {
   image: string;
   segment: string;
   domain?: string;
+  type?: ReferenceType;
 }
 
 interface ReferenceGalleryProps {
@@ -12,29 +15,62 @@ interface ReferenceGalleryProps {
   title?: string;
   /** "tall" enables vertical scroll of full-page screenshots inside each card. */
   variant?: "default" | "tall";
+  /** Show search + type filter chips. Defaults true when items span >1 type. */
+  enableFilters?: boolean;
 }
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: ReferenceGalleryProps) {
+const TYPE_LABELS: Record<ReferenceType, string> = {
+  ecommerce: "E-commerce",
+  institucional: "Institucional",
+  vendas: "Página de vendas",
+  captura: "Página de captura",
+  cardapio: "Cardápio digital",
+};
+
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [query, setQuery] = useState("");
+  const [activeType, setActiveType] = useState<ReferenceType | "all">("all");
   const trackRef = useRef<HTMLDivElement | null>(null);
   const state = useRef({ startX: 0, startScroll: 0, moved: false, pausedUntil: 0 });
 
-  const loop = items.length > 1 ? [...items, ...items, ...items] : items;
+  const availableTypes = useMemo(() => {
+    const set = new Set<ReferenceType>();
+    for (const r of items) if (r.type) set.add(r.type);
+    return Array.from(set);
+  }, [items]);
+
+  const showFilters = enableFilters ?? (availableTypes.length > 1 || items.length > 6);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return items.filter((r) => {
+      if (activeType !== "all" && r.type !== activeType) return false;
+      if (!q) return true;
+      return (
+        r.segment.toLowerCase().includes(q) ||
+        (r.domain?.toLowerCase().includes(q) ?? false) ||
+        (r.type ? TYPE_LABELS[r.type].toLowerCase().includes(q) : false)
+      );
+    });
+  }, [items, query, activeType]);
+
+  const loop = filtered.length > 1 ? [...filtered, ...filtered, ...filtered] : filtered;
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
     setStart();
     const ro = new ResizeObserver(setStart);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [items.length]);
+  }, [filtered.length]);
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     const onScroll = () => {
       const third = el.scrollWidth / 3;
       if (el.scrollLeft < third * 0.5) el.scrollLeft += third;
@@ -42,11 +78,11 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
-  }, [items.length]);
+  }, [filtered.length]);
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || items.length <= 1) return;
+    if (!el || filtered.length <= 1) return;
     let raf = 0;
     let last = performance.now();
     const speed = 26;
@@ -59,7 +95,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [dragging, items.length]);
+  }, [dragging, filtered.length]);
 
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
@@ -89,6 +125,59 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
   return (
     <div className={`referenceGallery ${variant === "tall" ? "referenceGalleryTall" : ""}`}>
       {title && <p className="referenceGalleryHint">{title}</p>}
+      {showFilters && (
+        <div className="referenceFilterBar">
+          <label className="referenceSearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar por segmento, domínio ou tipo…"
+              aria-label="Buscar referências"
+            />
+            {query && (
+              <button type="button" className="referenceSearchClear" onClick={() => setQuery("")} aria-label="Limpar busca">×</button>
+            )}
+          </label>
+          {availableTypes.length > 1 && (
+            <div className="referenceChips" role="tablist">
+              <button
+                role="tab"
+                aria-selected={activeType === "all"}
+                className={`referenceChip ${activeType === "all" ? "active" : ""}`}
+                onClick={() => setActiveType("all")}
+              >
+                Todos <em>{items.length}</em>
+              </button>
+              {availableTypes.map((t) => {
+                const count = items.filter((r) => r.type === t).length;
+                return (
+                  <button
+                    key={t}
+                    role="tab"
+                    aria-selected={activeType === t}
+                    className={`referenceChip ${activeType === t ? "active" : ""}`}
+                    onClick={() => setActiveType(t)}
+                  >
+                    {TYPE_LABELS[t]} <em>{count}</em>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          <span className="referenceResultCount" aria-live="polite">
+            {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
+          </span>
+        </div>
+      )}
+      {filtered.length === 0 ? (
+        <div className="referenceEmpty">
+          <p>Nenhuma referência encontrada.</p>
+          <button type="button" onClick={() => { setQuery(""); setActiveType("all"); }}>Limpar filtros</button>
+        </div>
+      ) : (
+      <>
       <div className="referenceScrollWrap">
         <div
           ref={trackRef}
@@ -121,6 +210,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
               </button>
               <span className="referenceCardMeta">
                 <small>{ref.segment}</small>
+                {ref.type && <span className="referenceCardType">{TYPE_LABELS[ref.type]}</span>}
                 {ctaUrl && (
                   <a
                     href={ctaUrl}
@@ -139,6 +229,9 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
       <p className="referenceDragHint">
         {variant === "tall" ? "Arraste lateral · role dentro do card para ver o site completo" : "Arraste para explorar · clique para ampliar"}
       </p>
+      </>
+      )}
+
 
       {lightbox && (
         <div className="referenceLightbox" onClick={() => setLightbox(null)}>
