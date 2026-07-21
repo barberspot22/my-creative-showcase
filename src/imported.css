@@ -110,7 +110,8 @@
 
 
 @media(max-width:760px){
-  .commerceAudio,.commerceOmni,.commerceTracking{padding:70px 22px;grid-template-columns:1fr;gap:45px}
+  .commerceAudio,.commerceOmni{padding:70px 22px;grid-template-columns:1fr;gap:45px}
+
   .commerceOmniDiagram{max-width:340px;aspect-ratio:1}
   .commerceOmniCore{width:100px;height:100px}
   .commerceOmniCore b{font-size:20px}
