@@ -12,13 +12,16 @@ export type PageKey =
 export type PageLink = { ctaUrl: string; ctaLabel: string };
 export type PageLinks = Record<PageKey, PageLink>;
 
+const orcamentoLabel = "Solicitar orçamento no WhatsApp";
+const wa = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
+
 export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; defaultUrl: string }[] = [
-  { key: "gb-studio", label: "GB Studio", defaultLabel: "Solicitar briefing", defaultUrl: "" },
-  { key: "gb-social", label: "GB Social", defaultLabel: "Conhecer o GB Social", defaultUrl: "" },
-  { key: "ecommerce", label: "E-commerce", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20e-commerce%20completo." },
-  { key: "crm", label: "CRM", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20CRM%20pr%C3%B3prio." },
-  { key: "site-institucional", label: "Site Institucional", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20site%20institucional." },
-  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: "Falar no WhatsApp", defaultUrl: "https://wa.me/?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20card%C3%A1pio%20digital%20e%20social%20media." },
+  { key: "gb-studio", label: "GB Studio", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento do GB Studio (fotografia com IA).") },
+  { key: "gb-social", label: "GB Social", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento do GB Social (social media de IA).") },
+  { key: "ecommerce", label: "E-commerce", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de E-commerce completo (loja + automação + IA).") },
+  { key: "crm", label: "CRM", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de CRM sob medida.") },
+  { key: "site-institucional", label: "Site Institucional", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Site Institucional.") },
+  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Cardápio Digital + Social Media.") },
   { key: "trilha-cta", label: "Home · Trilha (CTA final)", defaultLabel: "Começar minha trilha", defaultUrl: "#kontakt" },
 ];
 

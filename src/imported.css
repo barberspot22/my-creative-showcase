@@ -1260,3 +1260,14 @@ section[aria-label^="Notifications"] {
   pointer-events: none !important;
   z-index: 9999 !important;
 }
+
+.finalCta{padding:120px 24px;background:#050505;border-top:1px solid #ffffff10;border-bottom:1px solid #ffffff10}
+.finalCtaInner{max-width:720px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+.finalCtaEyebrow{margin:0;color:#8a8a8a;font:400 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase}
+.finalCtaTitle{margin:0;font:300 clamp(28px,4vw,44px)/1.25 'Inter','Helvetica Neue',Arial,sans-serif;letter-spacing:-.01em;background:linear-gradient(180deg,#f5f5f5 0%,#c8c8c8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.finalCtaSub{margin:0;max-width:520px;color:#9a9a9a;font:400 15px/1.6 'Inter',Arial,sans-serif}
+.finalCtaButton{margin-top:14px;display:inline-flex;align-items:center;gap:14px;padding:16px 28px;border:1px solid #ffffff26;border-radius:999px;background:#0a0a0a;color:#f0f0f0;font:500 13px/1 'Inter',Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease,background .25s ease}
+.finalCtaButton i{font-style:normal;font-size:15px;color:#c8c8c8;transition:transform .25s ease,color .25s ease}
+.finalCtaButton:hover{border-color:#c9a84c;background:#0d0d0d;box-shadow:0 0 0 1px #c9a84c22,0 8px 40px -12px #c9a84c40;transform:translateY(-1px)}
+.finalCtaButton:hover i{color:#e6c976;transform:translateX(4px)}
+@media(max-width:760px){.finalCta{padding:84px 22px}.finalCtaButton{width:100%;justify-content:center}}
