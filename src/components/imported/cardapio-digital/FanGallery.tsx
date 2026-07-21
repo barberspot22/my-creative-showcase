@@ -1,12 +1,16 @@
-
 import { useState } from "react";
+import executivo from "@/assets/menu-card-executivo.jpg";
+import pizza from "@/assets/menu-card-pizza.jpg";
+import burger from "@/assets/menu-card-burger.jpg";
+import sushi from "@/assets/menu-card-sushi.jpg";
+import frango from "@/assets/menu-card-frango.jpg";
 
 const items = [
-  { label: "Menu Executivo", type: "Cardápio digital", className: "menuFanCard0", lines: ["Entrada", "Prato do dia", "Sobremesa"], price: "R$ 49" },
-  { label: "Pizzaria", type: "Cardápio QR", className: "menuFanCard1", lines: ["Tradicionais", "Especiais", "Bebidas"], price: "Peça agora" },
-  { label: "Hamburgueria", type: "Cardápio delivery", className: "menuFanCard2", lines: ["Smash", "Combos", "Milk-shake"], price: "R$ 39" },
-  { label: "Sushi", type: "Rodízio & à la carte", className: "menuFanCard3", lines: ["Sashimi", "Uramaki", "Hot roll"], price: "Montar" },
-  { label: "Cafeteria", type: "Cardápio de mesa", className: "menuFanCard4", lines: ["Especiais", "Brunch", "Doces"], price: "Chamar" },
+  { label: "Executivo do Chef", type: "Prato do dia", className: "menuFanCard0", image: executivo, price: "R$ 49,90", cta: "Adicionar" },
+  { label: "Pizza Pepperoni", type: "Pizzaria", className: "menuFanCard1", image: pizza, price: "R$ 59,90", cta: "Peça agora" },
+  { label: "Smash Duplo", type: "Hamburgueria", className: "menuFanCard2", image: burger, price: "R$ 39,90", cta: "Adicionar" },
+  { label: "Combo Sushi 20pç", type: "Japonês delivery", className: "menuFanCard3", image: sushi, price: "R$ 89,90", cta: "Montar combo" },
+  { label: "Balde Crispy", type: "Frango & sides", className: "menuFanCard4", image: frango, price: "R$ 49,90", cta: "Peça agora" },
 ];
 
 export function FanGallery() {
@@ -23,14 +27,18 @@ export function FanGallery() {
       aria-pressed={active === index}
       aria-label={`Destacar ${item.label}`}
     >
-      <span className="menuFanMedia menuTemplateMedia">
-        <i className="menuTemplatePlate"/>
-        <b>{item.label}</b>
-        <small>{item.type}</small>
-        <span className="menuTemplateList">{item.lines.map(line => <em key={line}>{line}</em>)}</span>
-        <strong>{item.price}</strong>
+      <span className="menuFanMedia menuPhotoMedia">
+        <img src={item.image} alt={item.label} loading="lazy" draggable={false} />
+        <span className="menuPhotoInfo">
+          <small>{item.type}</small>
+          <b>{item.label}</b>
+          <span className="menuPhotoRow">
+            <em>{item.price}</em>
+            <strong>{item.cta}</strong>
+          </span>
+        </span>
       </span>
     </button>)}</div>
-    <p>Cardápios e templates · toque para explorar</p>
+    <p>Cardápios reais · toque para explorar</p>
   </div>;
 }
