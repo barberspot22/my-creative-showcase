@@ -101,7 +101,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     if (!trackRef.current) return;
     setDragging(true);
     state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
-    trackRef.current.setPointerCapture(e.pointerId);
+    try { trackRef.current.setPointerCapture(e.pointerId); } catch { /* noop */ }
   };
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -109,6 +109,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     const dx = e.clientX - state.current.startX;
     if (Math.abs(dx) > 4) state.current.moved = true;
     trackRef.current.scrollLeft = state.current.startScroll - dx;
+    if (state.current.moved && e.cancelable) e.preventDefault();
   };
 
   const onUp = (e: PointerEvent<HTMLDivElement>) => {
@@ -210,17 +211,6 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
               </button>
               <span className="referenceCardMeta">
                 <small>{ref.segment}</small>
-                {ref.type && <span className="referenceCardType">{TYPE_LABELS[ref.type]}</span>}
-                {ctaUrl && (
-                  <a
-                    href={ctaUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => { if (state.current.moved) e.preventDefault(); }}
-                  >
-                    Falar no WhatsApp
-                  </a>
-                )}
               </span>
             </article>
           ))}

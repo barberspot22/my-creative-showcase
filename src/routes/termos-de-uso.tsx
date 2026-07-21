@@ -58,7 +58,12 @@ function TermsPage() {
         </section>
 
         <section>
-          <h2>9. Contato</h2>
+          <h2>9. Sites e marcas de terceiros exibidos como referência</h2>
+          <p>As imagens e sites mostrados nas seções de referência/portfólio deste site têm finalidade meramente ilustrativa e inspiracional. Parte desses trabalhos é de autoria da GB IA e parte pertence a marcas de terceiros, exibidos apenas para contextualizar o segmento apresentado. A GB IA não reivindica autoria, titularidade ou qualquer direito de propriedade intelectual sobre criações de terceiros. Todas as marcas, logotipos, layouts e conteúdos permanecem de propriedade de seus respectivos titulares. Caso você seja titular de algum material exibido e deseje sua remoção, escreva para <a href="mailto:contato@gbia.com.br">contato@gbia.com.br</a> e providenciaremos a retirada.</p>
+        </section>
+
+        <section>
+          <h2>10. Contato</h2>
           <p>Dúvidas sobre estes termos podem ser enviadas para <a href="mailto:contato@gbia.com.br">contato@gbia.com.br</a>.</p>
         </section>
       </main>

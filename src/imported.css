@@ -1541,9 +1541,11 @@ section[aria-label^="Notifications"] {
 .referenceGallery{position:relative}
 .referenceGalleryHint{margin:0 0 18px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
 .referenceScrollWrap{position:relative;padding:0 6%}
-.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto}
+.referenceScrollWrap{touch-action:pan-y}
+.referenceScrollTrack{display:flex;gap:28px;overflow-x:auto;overflow-y:hidden;padding:20px 0 36px;cursor:grab;touch-action:pan-x;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:auto;-webkit-user-select:none;user-select:none}
 .referenceScrollTrack::-webkit-scrollbar{display:none}
 .referenceScrollTrack.isDragging{cursor:grabbing}
+.referenceScrollTrack img{-webkit-user-drag:none;user-select:none;pointer-events:none}
 .referenceCard{flex:0 0 360px;position:relative;display:flex;flex-direction:column;gap:12px}
 .referenceCardFrame{width:100%;border:0;border-radius:24px;overflow:hidden;background:#111;padding:16px 16px 0 16px;text-align:left;box-shadow:0 24px 60px #00000050;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
 .referenceCardFrame:hover{transform:translateY(-8px);box-shadow:0 32px 70px #00000066}
@@ -1554,10 +1556,8 @@ section[aria-label^="Notifications"] {
 .referenceCardMedia{display:block;aspect-ratio:16/10;border-radius:14px 14px 0 0;overflow:hidden;background:#181818}
 .referenceCardMedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
 .referenceCardFrame:hover .referenceCardMedia img{transform:scale(1.03)}
-.referenceCardMeta{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
-.referenceCardMeta small{font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:#ffffff99}
-.referenceCardMeta a{font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.6px;color:#d9ff61;transition:color .2s}
-.referenceCardMeta a:hover{color:#fff}
+.referenceCardMeta{display:flex;justify-content:center;align-items:center;padding:0 4px}
+.referenceCardMeta small{font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px;color:#ffffff99;text-align:center}
 .referenceDragHint{margin:0 0 0 2px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#7b7b7b}
 .referenceLightbox{position:fixed;z-index:200;inset:0;background:#000000ee;backdrop-filter:blur(16px);display:grid;place-items:center;padding:24px;animation:refLbFade .18s ease}
 @keyframes refLbFade{from{opacity:0}to{opacity:1}}
