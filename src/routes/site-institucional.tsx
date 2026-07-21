@@ -30,13 +30,12 @@ function SiteInstitucionalPage() {
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
         <h1>Só existir<br/>não basta.</h1>
-        <p>Um site institucional não é cartão de visita. É um funil 24h que apresenta o que você faz, prova que pode confiar e direciona o visitante para o contato — sem depender de algoritmo.</p>
+        <p>Seu cartão de visita digital, aberto 24h. Apresenta, prova autoridade e leva ao contato.</p>
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
-      <section className="siteWorkShowcase"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Sites que viraram cartão de visita e viraram porta de entrada.</h2></div><PerspectiveTicker/></section>
+      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Sites que já entregamos.</h2></div><PerspectiveTicker/></section>
 
-      <section className="siteProductProblem"><div><p className="studioEyebrow">POR QUE A MAIORIA FALHA</p><h2>Sem site profissional, você perde antes de conversar.</h2></div><p>O cliente pesquisa no Google, vê a concorrência e não te encontra. Ou encontra um site lento, genérico e sem rosto. Em 5 segundos ele decide: “não parece confiável”. E some.<br/><a className="siteProductPrimary siteProblemCta" href={whatsapp} target="_blank" rel="noreferrer">NÃO DEIXAR ISSO ACONTECER<br/><span>↗</span></a></p></section>
 
       <section className="siteProductValue">
         <div><p className="studioEyebrow">O QUE ELE FAZ</p><h2>Site institucional é vendedor que não dorme.</h2></div>
