@@ -59,28 +59,13 @@
 @media(max-width:760px){.ecommerceCase{font-size:48px}.commerceHero{min-height:760px;padding:105px 22px 70px}.commerceHero h1{font-size:49px;letter-spacing:-1px}.commerceHero>p:not(.studioEyebrow){font-size:16px}.commerceHeroActions{width:100%;flex-direction:column}.commercePrimary,.commerceSecondary{width:100%}.commerceProblem,.commerceDeliverables,.commerceProcess{padding:75px 22px;grid-template-columns:1fr;gap:45px}.commerceProblem .studioEyebrow{grid-column:auto}.commerceProblem>p:last-child{font-size:16px}.commerceSectionIntro{position:static}.commerceGallerySection{padding:75px 20px 95px}.commerceGallerySection>div:first-child{margin:0 0 40px}.commerceBento{min-height:720px;grid-template-columns:1fr 1fr;grid-template-rows:1.25fr 1fr 1fr;gap:10px;perspective:none;transform:none!important}.commerceTemplate:first-child{grid-row:auto;grid-column:1/-1}.commerceTemplate{min-height:190px;border-radius:12px}.templateMock{inset:38px 12px 58px;padding:15px}.templateMock b{font-size:31px}.templateMeta{left:14px;right:14px;bottom:14px}.templateMeta small{display:none}.commerceProcess li{grid-template-columns:50px 1fr}.commerceProof{padding:75px 22px}.commerceProof ul{grid-template-columns:1fr;margin-top:45px}.commerceProof blockquote{font-size:25px;margin-top:50px}.commerceFinal{margin:10px 20px 65px;padding:55px 25px;min-height:560px}}
 @media(prefers-reduced-motion:reduce){.commerceBento{transform:none!important}.commerceTemplate{transition:none}}
 
-/* Ecommerce yellow accent + hero overrides */
-.commercePage{--gold:#ffd23f;--gold-soft:#ffe58a}
-.commerceAccent{color:var(--gold);font-style:normal;background:linear-gradient(180deg,#ffe58a 0%,#ffd23f 55%,#c99a15 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px rgba(255,210,63,.25)}
-.commerceHero{background:radial-gradient(circle at 82% 34%,#254f3b 0,transparent 30%),radial-gradient(circle at 15% 85%,rgba(255,210,63,.10) 0,transparent 45%)}
-.commerceHero .studioEyebrow{color:var(--gold-soft)}
-.commercePrimary{background:linear-gradient(180deg,var(--gold-soft),var(--gold));color:#1a1200;box-shadow:0 10px 30px rgba(255,210,63,.25)}
-.commercePrimary:hover{box-shadow:0 14px 40px rgba(255,210,63,.4)}
-.commerceMarketGrid b{background:linear-gradient(180deg,#ffe58a 0%,#ffd23f 55%,#c99a15 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.commerceAudioChannels span{background:var(--gold);color:#1a1200}
-.commerceTrackingCopy li:before{background:var(--gold)}
-.commerceHeatSpot{background:radial-gradient(circle,rgba(255,210,63,.7) 0%,rgba(255,210,63,0) 70%)}
-.commerceAudioMsg{background:linear-gradient(180deg,var(--gold-soft),var(--gold))!important;color:#1a1200!important;border-radius:14px}
-.commerceAudioMsg small{color:#1a1200!important}
-.commerceAudioWave i{background:#1a1200!important}
-
 /* E-commerce new sections: market, audio, omni, tracking */
 .commerceMarket{padding:110px 9%;background:#0a0f0c;border-top:1px solid #1a221d;border-bottom:1px solid #1a221d;text-align:center}
 .commerceMarket h2{font-size:clamp(44px,5.5vw,74px);line-height:1.02;margin:14px auto 55px;max-width:900px}
 .commerceMarketGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1180px;margin:0 auto}
 .commerceMarketGrid article{padding:44px 28px;border:1px solid #1e2823;border-radius:14px;background:linear-gradient(180deg,#0e1512,#080b09);transition:border-color .3s,transform .3s}
 .commerceMarketGrid article:hover{border-color:#3a5a48;transform:translateY(-4px)}
-.commerceMarketGrid b{display:block;font:800 clamp(38px,4.5vw,62px)/1 Manrope,sans-serif;letter-spacing:-1.5px;margin-bottom:14px}
+.commerceMarketGrid b{display:block;font:800 clamp(38px,4.5vw,62px)/1 Manrope,sans-serif;background:linear-gradient(180deg,#f5f8f6 0%,#c6cec9 45%,#7a847d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-1.5px;margin-bottom:14px}
 .commerceMarketGrid p{color:#8b968f;font-size:14px;line-height:1.55;margin:0}
 .commerceMarketNote{max-width:720px;margin:55px auto 0;font-size:16px;line-height:1.65;color:#98a29b}
 
@@ -91,11 +76,11 @@
 .commerceAudioBody{padding:22px 18px;display:flex;flex-direction:column;gap:12px}
 .commerceAudioMsg{display:flex;align-items:center;gap:12px;padding:14px 18px!important}
 .commerceAudioWave{display:flex;align-items:center;gap:3px;flex:1}
-.commerceAudioWave i{display:block;width:3px;height:14px;border-radius:2px;opacity:.55}
+.commerceAudioWave i{display:block;width:3px;height:14px;background:#0b100d;border-radius:2px;opacity:.55}
 .commerceAudioWave i:nth-child(2n){height:22px}
 .commerceAudioWave i:nth-child(3n){height:9px;opacity:.35}
 .commerceAudioWave i:nth-child(4n){height:26px}
-.commerceAudioMsg small{font:11px 'JetBrains Mono',monospace}
+.commerceAudioMsg small{font:11px 'JetBrains Mono',monospace;color:#0b100d}
 .commerceAudioCard{background:#fff;color:#0b100d;border-radius:14px;padding:14px;display:grid;grid-template-columns:80px 1fr;gap:14px;box-shadow:0 8px 24px #00000030}
 .commerceAudioCardImg{background:linear-gradient(135deg,#e8ede9,#c4cec8);border-radius:10px;min-height:80px}
 .commerceAudioCard small{font:10px 'JetBrains Mono',monospace;letter-spacing:1px;color:#7a847d;text-transform:uppercase}
@@ -104,7 +89,7 @@
 .commerceAudioTags{display:flex;gap:6px;flex-wrap:wrap}
 .commerceAudioTags span{font:10px 'JetBrains Mono',monospace;padding:4px 8px;background:#eef2ef;border-radius:6px;letter-spacing:.5px}
 .commerceAudioChannels{display:flex;flex-wrap:wrap;gap:6px;padding:0 4px}
-.commerceAudioChannels span{font:10px 'JetBrains Mono',monospace;padding:6px 10px;border-radius:6px;letter-spacing:.5px;font-weight:700}
+.commerceAudioChannels span{font:10px 'JetBrains Mono',monospace;padding:6px 10px;background:#d9ff61;color:#0b100d;border-radius:6px;letter-spacing:.5px;font-weight:700}
 .commerceAudioApproved{font:11px 'JetBrains Mono',monospace!important;text-align:center;color:#7a847d;padding:8px 0 0!important;letter-spacing:.8px;text-transform:uppercase;background:none!important}
 
 .commerceOmni{padding:120px 9%;display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:center;background:var(--cream);color:var(--ink)}
@@ -112,24 +97,18 @@
 .commerceOmni em{color:#5a6b60}
 .commerceOmni>div:first-child>p:last-child{font-size:17px;line-height:1.7;color:#4e5b53;max-width:480px}
 .commerceOmniDiagram{position:relative;width:100%;max-width:520px;aspect-ratio:1;margin:0 auto}
-.commerceOmniCore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#1a2b22,#0b1510);color:#f5f8f6;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 50px #1b211d40,0 0 0 4px rgba(255,210,63,.15);z-index:2}
-.commerceOmniCore b{font:800 26px Manrope,sans-serif;background:linear-gradient(180deg,#ffe58a,#c99a15);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.5px}
+.commerceOmniCore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#1a2b22,#0b1510);color:#f5f8f6;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 50px #1b211d40;z-index:2}
+.commerceOmniCore b{font:800 26px Manrope,sans-serif;background:linear-gradient(180deg,#f5f8f6,#7a847d);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.5px}
 .commerceOmniCore small{font:10px 'JetBrains Mono',monospace;color:#8b968f;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
 .commerceOmniLines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.commerceOmniNode{position:absolute;top:50%;left:50%;padding:10px 16px;background:#fff;border:1px solid #d4dcd6;border-radius:24px;font:11px 'JetBrains Mono',monospace;color:#1a2b22;text-transform:uppercase;letter-spacing:.8px;font-weight:600;box-shadow:0 6px 18px #1b211d15;white-space:nowrap}
-.commerceOmniNode:nth-child(2){transform:translate(-50%,-220%)}
-.commerceOmniNode:nth-child(3){transform:translate(90%,-140%)}
-.commerceOmniNode:nth-child(4){transform:translate(120%,60%)}
-.commerceOmniNode:nth-child(5){transform:translate(-50%,180%)}
-.commerceOmniNode:nth-child(6){transform:translate(-220%,60%)}
-.commerceOmniNode:nth-child(7){transform:translate(-190%,-140%)}
+.commerceOmniNode{position:absolute;top:50%;left:50%;padding:10px 16px;background:#fff;border:1px solid #d4dcd6;border-radius:24px;font:11px 'JetBrains Mono',monospace;color:#1a2b22;text-transform:uppercase;letter-spacing:.8px;font-weight:600;box-shadow:0 6px 18px #1b211d15;white-space:nowrap;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px))}
 
 .commerceTracking{padding:120px 9%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:#050706}
 .commerceTrackingCopy h2{font-size:clamp(44px,5.5vw,78px);line-height:.98;margin:14px 0 22px}
 .commerceTrackingCopy>p{font-size:17px;line-height:1.7;color:#a8b2ac;margin:0 0 28px;max-width:520px}
 .commerceTrackingCopy ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
 .commerceTrackingCopy li{font-size:14px;color:#9ba69f;padding-left:20px;position:relative;line-height:1.55}
-.commerceTrackingCopy li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-radius:2px}
+.commerceTrackingCopy li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:#d9ff61;border-radius:2px}
 .commerceTrackingCopy li b{color:#f5f8f6;font-weight:700;margin-right:4px}
 .commerceHeatmap{position:relative;background:#0e1512;border:1px solid #1e2823;border-radius:14px;padding:16px;box-shadow:0 30px 70px #00000060;max-width:520px;margin:0 auto;width:100%}
 .commerceHeatmapChrome{display:flex;gap:6px;margin-bottom:14px}
@@ -139,9 +118,9 @@
 .commerceHeatmapText{display:grid;gap:8px;margin-bottom:20px}
 .commerceHeatmapText i{display:block;height:10px;background:#0b100d;opacity:.15;border-radius:3px}
 .commerceHeatmapCta{width:140px;height:38px;background:#0b100d;border-radius:6px}
-.commerceHeatSpot{position:absolute;width:56px;height:56px;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;animation:heatPulse 2.8s ease-in-out infinite}
-.commerceHeatSpotWarm{background:radial-gradient(circle,rgba(255,180,60,.6) 0%,rgba(255,180,60,0) 70%)!important;width:70px;height:70px}
-.commerceHeatSpotHot{background:radial-gradient(circle,rgba(255,80,60,.75) 0%,rgba(255,80,60,0) 70%)!important;width:96px;height:96px}
+.commerceHeatSpot{position:absolute;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,rgba(217,255,97,.7) 0%,rgba(217,255,97,0) 70%);transform:translate(-50%,-50%);pointer-events:none;animation:heatPulse 2.8s ease-in-out infinite}
+.commerceHeatSpotWarm{background:radial-gradient(circle,rgba(255,180,60,.6) 0%,rgba(255,180,60,0) 70%);width:70px;height:70px}
+.commerceHeatSpotHot{background:radial-gradient(circle,rgba(255,80,60,.75) 0%,rgba(255,80,60,0) 70%);width:96px;height:96px}
 @keyframes heatPulse{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(.94)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 
 @media(max-width:760px){
@@ -150,16 +129,10 @@
   .commerceMarketGrid article{padding:32px 22px}
   .commerceMarketNote{margin-top:36px;font-size:15px}
   .commerceAudio,.commerceOmni,.commerceTracking{padding:70px 22px;grid-template-columns:1fr;gap:45px}
-  .commerceOmniDiagram{max-width:320px;aspect-ratio:1}
+  .commerceOmniDiagram{max-width:340px;aspect-ratio:1}
   .commerceOmniCore{width:100px;height:100px}
   .commerceOmniCore b{font-size:20px}
-  .commerceOmniNode{padding:7px 11px;font-size:9px}
-  .commerceOmniNode:nth-child(2){transform:translate(-50%,-190%)}
-  .commerceOmniNode:nth-child(3){transform:translate(50%,-120%)}
-  .commerceOmniNode:nth-child(4){transform:translate(80%,50%)}
-  .commerceOmniNode:nth-child(5){transform:translate(-50%,160%)}
-  .commerceOmniNode:nth-child(6){transform:translate(-150%,50%)}
-  .commerceOmniNode:nth-child(7){transform:translate(-150%,-120%)}
+  .commerceOmniNode{padding:7px 11px;font-size:9px;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 115px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 115px))}
   .commerceHeatmap{max-width:100%}
   .commerceHeatmapPage{min-height:280px;padding:18px}
   .commerceHeatmapImg{height:90px}
