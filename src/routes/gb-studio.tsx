@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
+import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const differences = [
   "Qualidade visual equivalente a um estúdio convencional",
@@ -37,6 +38,8 @@ function GBStudioPage() {
       <BrandLogo />
       <a className="studioNavCta" {...navCtaProps}>{ctaLabel} <span>↗</span></a>
     </header>
+    <ProductSwitcher current="gb-studio" />
+
 
     <main>
       <section className="studioHero">
