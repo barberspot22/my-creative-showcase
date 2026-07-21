@@ -62,7 +62,7 @@ export function ProcessTrail() {
       <div className="trailHead">
         <span className="trailEyebrow">NOSSO PROCESSO</span>
         <h2>Inteligência&nbsp;<br />artificial aplicada.</h2>
-        <p><br /></p>
+        
       </div>
 
       <ol className="trailSteps">
