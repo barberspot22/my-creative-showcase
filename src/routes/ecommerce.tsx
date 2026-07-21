@@ -4,20 +4,21 @@ import { BentoMorphGallery } from "@/components/imported/ecommerce/BentoMorphGal
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
 
 const marketStats = [
-  ["+R$ 234 bi", "Movimentados em e-commerce no Brasil em 2024. E não para de crescer."],
-  ["9 em 10", "Brasileiros conectados já compraram online pelo menos uma vez."],
-  ["73%", "Das jornadas de compra começam numa busca no digital, não na loja física."],
+  ["+R$ 234 bi", "Movimentados em e-commerce no Brasil em 2024."],
+  ["9 em 10", "Brasileiros já compraram online pelo menos uma vez."],
+  ["73%", "Das jornadas de compra começam no digital."],
 ];
 
 const deliverables = [
-  ["E-commerce que converte", "Loja própria com checkout otimizado, UX pensado para venda e performance mobile-first. Não é vitrine bonita — é máquina de conversão."],
-  ["Catálogo digital integrado", "Modalidade enxuta: sua vitrine online conectada ao WhatsApp para negócios que ainda não querem checkout, mas precisam vender pelo digital hoje."],
-  ["Cadastro por WhatsApp — texto, foto e áudio", "Manda um áudio descrevendo o produto. A IA cria título, descrição SEO, categoriza e sobe pronto para venda em todos os canais."],
-  ["Integração com marketplaces", "Mesma loja publicando em Mercado Livre, Shopee, Amazon e Instagram Shopping. Cadastro único, estoque sincronizado, pedidos num painel só."],
-  ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho abandonado e fecha venda no WhatsApp e Instagram sem você estar online."],
-  ["Rastreamento de comportamento", "Heatmap, replay de sessão e eventos configurados. A gente enxerga onde o cliente trava e ajusta até parar de perder venda."],
+  ["E-commerce que converte", "Loja própria com checkout otimizado e mobile-first. Máquina de conversão, não vitrine."],
+  ["Catálogo digital integrado", "Vitrine online conectada ao WhatsApp, sem checkout, pra vender no digital hoje."],
+  ["Cadastro por áudio", "Manda um áudio. A IA cria título, descrição SEO e publica em todos os canais."],
+  ["Marketplaces integrados", "Mercado Livre, Shopee, Amazon e Instagram sincronizados num painel só."],
+  ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho e fecha venda sem você online."],
+  ["Comportamento rastreado", "Heatmap, replay e funil. A gente vê onde trava e ajusta até vender mais."],
 ];
 
 const channels = [
@@ -30,10 +31,10 @@ const channels = [
 ];
 
 const steps = [
-  ["Briefing", "Entendemos seu produto, seu público, seus canais e onde as vendas estão travando hoje."],
-  ["Arquitetura", "Desenhamos loja, catálogo, marketplaces, automação e IA como um sistema único — não peças soltas."],
-  ["Implementação", "Construímos, integramos os canais, treinamos a IA no seu produto e testamos ponta a ponta."],
-  ["Operação", "Sistema entra no ar vendendo. A gente acompanha, mede, ajusta e escala junto."],
+  ["Briefing", "Entendemos seu produto, público e onde as vendas travam."],
+  ["Arquitetura", "Desenhamos loja, marketplaces e IA como um sistema único."],
+  ["Implementação", "Construímos, integramos os canais e treinamos a IA no seu produto."],
+  ["Operação", "Entra no ar vendendo. A gente acompanha, mede e escala junto."],
 ];
 
 function EcommercePage() {
