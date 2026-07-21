@@ -34,9 +34,11 @@ function CardapioDigitalPage() {
         <h1>Um cardápio que atende e vende sozinho</h1>
         <p>O cliente vê as fotos, escolhe e envia o pedido sozinho — presencial ou de casa. Você recebe pronto para preparar.</p>
         <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
+        <div className="menuHeroFan"><FanGallery/></div>
       </section>
 
-      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VEJA NA PRÁTICA</p><h2>O cliente toca e pede. Simples assim.</h2><p style={{marginTop:18,color:"#51545c",fontSize:17,lineHeight:1.6,maxWidth:640}}>Ele vê os produtos, abre a foto, lê o que tem dentro — ingredientes, tamanhos, adicionais — e compra na hora, sem precisar perguntar nada.</p></div><FanGallery/></section>
+      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VEJA NA PRÁTICA</p><h2>O cliente toca e pede. Simples assim.</h2><p style={{marginTop:18,color:"#51545c",fontSize:17,lineHeight:1.6,maxWidth:640}}>Ele vê os produtos, abre a foto, lê o que tem dentro — ingredientes, tamanhos, adicionais — e compra na hora, sem precisar perguntar nada.</p></div></section>
+
 
       <section className="menuCatalogWidgetSection">
         <div className="menuCatalogIntro">
