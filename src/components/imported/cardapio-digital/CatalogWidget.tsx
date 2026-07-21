@@ -1,300 +1,172 @@
-import { useState, useRef, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
+import imgBurger from "@/assets/menu-card-burger.jpg";
+import imgPizza from "@/assets/menu-card-pizza.jpg";
+import imgExecutivo from "@/assets/menu-card-executivo.jpg";
+import imgSushi from "@/assets/menu-card-sushi.jpg";
+import imgFrango from "@/assets/menu-card-frango.jpg";
+
+type Category = "Todos" | "Executivos" | "Burgers" | "Pizzas" | "Sushi" | "Frango" | "Bebidas" | "Sobremesas";
 
 type Product = {
   id: string;
   name: string;
-  short: string;
   desc: string;
   price: number;
   oldPrice?: number;
-  badge?: { label: string; tone: "novo" | "promo" };
-  emoji: string;
-  gallery: string[];
-  sizes: { label: string; sub?: string }[];
-  category: "salgados" | "doces";
-  chip: string;
+  image: string;
+  category: Exclude<Category, "Todos">;
+  tag?: "MAIS PEDIDO" | "NOVO" | "PROMO" | "CHEF";
+  rating?: number;
+  time?: string;
 };
 
 const PRODUCTS: Product[] = [
-  {
-    id: "burguer-trufado",
-    name: "Burguer Trufado",
-    short: "Blend 180g · pão brioche",
-    desc: "Blend 180g maturado, cheddar inglês, maionese trufada e pão brioche tostado na manteiga.",
-    price: 42.9,
-    badge: { label: "NOVO", tone: "novo" },
-    emoji: "🍔",
-    gallery: ["🍔", "🧀", "🍟", "🥤"],
-    sizes: [{ label: "Solo" }, { label: "Duplo", sub: "+R$ 8" }, { label: "Combo", sub: "+R$ 14" }],
-    category: "salgados",
-    chip: "Novidades",
-  },
-  {
-    id: "pizza-napoletana",
-    name: "Pizza Napoletana",
-    short: "Massa 48h · muçarela de búfala",
-    desc: "Massa de fermentação natural 48h, molho de tomate San Marzano, muçarela de búfala e manjericão.",
-    price: 68.0,
-    oldPrice: 84.9,
-    badge: { label: "PROMO -20%", tone: "promo" },
-    emoji: "🍕",
-    gallery: ["🍕", "🧑‍🍳", "🌿", "🔥"],
-    sizes: [
-      { label: "P", sub: "25cm" },
-      { label: "M", sub: "30cm" },
-      { label: "G", sub: "35cm" },
-    ],
-    category: "salgados",
-    chip: "Pratos",
-  },
-  {
-    id: "acai-premium",
-    name: "Açaí Premium",
-    short: "Cremoso · frutas frescas",
-    desc: "Açaí puro batido na hora com banana, granola artesanal, leite condensado e frutas frescas.",
-    price: 24.9,
-    badge: { label: "NOVO", tone: "novo" },
-    emoji: "🍧",
-    gallery: ["🍧", "🍌", "🍓", "🥥"],
-    sizes: [
-      { label: "300ml" },
-      { label: "500ml", sub: "+R$ 6" },
-      { label: "700ml", sub: "+R$ 12" },
-    ],
-    category: "doces",
-    chip: "Sobremesas",
-  },
-  {
-    id: "suco-detox",
-    name: "Suco Detox",
-    short: "Couve · limão · gengibre",
-    desc: "Couve orgânica, limão siciliano, gengibre e maçã verde, prensados a frio no dia.",
-    price: 18.0,
-    oldPrice: 22.0,
-    badge: { label: "PROMO -20%", tone: "promo" },
-    emoji: "🥤",
-    gallery: ["🥤", "🥬", "🍋", "🫚"],
-    sizes: [{ label: "300ml" }, { label: "500ml", sub: "+R$ 4" }, { label: "1L", sub: "+R$ 9" }],
-    category: "doces",
-    chip: "Bebidas",
-  },
-  {
-    id: "parmegiana-trufada",
-    name: "Parmegiana Trufada",
-    short: "Filé mignon · molho pomodoro",
-    desc: "Filé mignon empanado, molho pomodoro artesanal, muçarela de búfala e um toque de óleo trufado.",
-    price: 78.0,
-    badge: { label: "NOVO", tone: "novo" },
-    emoji: "🥩",
-    gallery: ["🥩", "🍅", "🧀", "🌿"],
-    sizes: [{ label: "Individual" }, { label: "Dupla", sub: "+R$ 22" }, { label: "Família", sub: "+R$ 48" }],
-    category: "salgados",
-    chip: "Pratos",
-  },
-  {
-    id: "ravioli-costela",
-    name: "Ravioli de Costela",
-    short: "Massa fresca · manteiga de sálvia",
-    desc: "Ravioli recheado com costela desfiada 12h, finalizado com manteiga noisette e sálvia crocante.",
-    price: 62.0,
-    oldPrice: 74.0,
-    badge: { label: "PROMO -15%", tone: "promo" },
-    emoji: "🍝",
-    gallery: ["🍝", "🥩", "🧈", "🌿"],
-    sizes: [{ label: "6 un" }, { label: "10 un", sub: "+R$ 14" }, { label: "16 un", sub: "+R$ 28" }],
-    category: "salgados",
-    chip: "Pratos",
-  },
-  {
-    id: "petit-gateau",
-    name: "Petit Gateau",
-    short: "Chocolate 70% · sorvete de creme",
-    desc: "Bolo quente de chocolate belga 70% com centro cremoso, acompanha sorvete de creme francês.",
-    price: 32.0,
-    badge: { label: "NOVO", tone: "novo" },
-    emoji: "🍫",
-    gallery: ["🍫", "🍨", "🍓", "☕"],
-    sizes: [{ label: "Solo" }, { label: "Duplo", sub: "+R$ 10" }],
-    category: "doces",
-    chip: "Sobremesas",
-  },
-  {
-    id: "cheesecake-frutas",
-    name: "Cheesecake Vermelho",
-    short: "Cream cheese · frutas vermelhas",
-    desc: "Cheesecake cremoso com base de biscoito amanteigado e calda de frutas vermelhas do dia.",
-    price: 28.0,
-    oldPrice: 34.0,
-    badge: { label: "PROMO -17%", tone: "promo" },
-    emoji: "🍰",
-    gallery: ["🍰", "🍓", "🫐", "🥧"],
-    sizes: [{ label: "Fatia" }, { label: "1/4", sub: "+R$ 22" }, { label: "Inteiro", sub: "+R$ 62" }],
-    category: "doces",
-    chip: "Sobremesas",
-  },
+  { id: "exec-mignon", name: "Executivo Filé Mignon", desc: "Arroz, feijão, salada e mignon ao molho madeira.", price: 38.9, image: imgExecutivo, category: "Executivos", tag: "MAIS PEDIDO", rating: 4.9, time: "25–35 min" },
+  { id: "exec-frango", name: "Executivo Frango Grelhado", desc: "Peito grelhado, arroz, feijão e legumes salteados.", price: 29.9, oldPrice: 34.9, image: imgFrango, category: "Executivos", tag: "PROMO", rating: 4.8, time: "20–30 min" },
+  { id: "burg-classic", name: "Smash Burger Duplo", desc: "Blend 180g, cheddar, cebola caramelizada e molho da casa.", price: 34.9, image: imgBurger, category: "Burgers", tag: "MAIS PEDIDO", rating: 4.9, time: "20–30 min" },
+  { id: "burg-bacon", name: "Bacon Trufado", desc: "Blend 160g, bacon crocante, cheddar e maionese trufada.", price: 39.9, image: imgBurger, category: "Burgers", tag: "CHEF", rating: 4.9, time: "20–30 min" },
+  { id: "pizza-pepperoni", name: "Pizza Pepperoni", desc: "Massa 48h, muçarela, pepperoni curado e orégano.", price: 68.0, oldPrice: 84.9, image: imgPizza, category: "Pizzas", tag: "PROMO", rating: 4.8, time: "35–45 min" },
+  { id: "pizza-margherita", name: "Pizza Margherita", desc: "Molho San Marzano, muçarela de búfala e manjericão fresco.", price: 62.0, image: imgPizza, category: "Pizzas", rating: 4.7, time: "35–45 min" },
+  { id: "sushi-combo", name: "Combo Sushi 20 peças", desc: "Sashimi, uramaki filadélfia, niguiris e hot roll.", price: 89.9, image: imgSushi, category: "Sushi", tag: "MAIS PEDIDO", rating: 4.9, time: "40–50 min" },
+  { id: "sushi-temaki", name: "Temaki Salmão", desc: "Cone de nori com arroz temperado, salmão fresco e cream cheese.", price: 32.0, image: imgSushi, category: "Sushi", rating: 4.8, time: "20–30 min" },
+  { id: "frango-balde", name: "Balde Crispy 8 peças", desc: "Frango crocante empanado na hora, molhos à parte.", price: 54.9, image: imgFrango, category: "Frango", tag: "NOVO", rating: 4.8, time: "25–35 min" },
+  { id: "frango-tenders", name: "Tenders + Fritas", desc: "6 tiras de peito crocante, fritas rústicas e barbecue.", price: 32.9, image: imgFrango, category: "Frango", rating: 4.7, time: "20–30 min" },
+  { id: "beb-suco", name: "Suco Detox 500ml", desc: "Couve, limão, gengibre e maçã verde prensados a frio.", price: 16.0, image: imgExecutivo, category: "Bebidas", rating: 4.6, time: "5–10 min" },
+  { id: "beb-refri", name: "Refrigerante Lata", desc: "Coca-Cola, Guaraná ou Sprite 350ml, sempre gelado.", price: 7.0, image: imgExecutivo, category: "Bebidas", rating: 4.5, time: "5 min" },
+  { id: "sob-petit", name: "Petit Gateau", desc: "Bolo quente de chocolate belga com sorvete de creme.", price: 26.0, image: imgExecutivo, category: "Sobremesas", tag: "CHEF", rating: 4.9, time: "10–15 min" },
+  { id: "sob-cheese", name: "Cheesecake Vermelho", desc: "Cream cheese cremoso com calda de frutas vermelhas.", price: 22.0, oldPrice: 28.0, image: imgExecutivo, category: "Sobremesas", tag: "PROMO", rating: 4.8, time: "5–10 min" },
 ];
 
-const CHIPS = ["Entradas", "Pratos", "Bebidas", "Sobremesas"];
+const CATEGORIES: Category[] = ["Todos", "Executivos", "Burgers", "Pizzas", "Sushi", "Frango", "Bebidas", "Sobremesas"];
 
-function formatPrice(v: number) {
-  return v.toFixed(2).replace(".", ",");
-}
+const fmt = (v: number) => v.toFixed(2).replace(".", ",");
 
 export function CatalogWidget() {
-  const [tab, setTab] = useState<"salgados" | "doces">("salgados");
-  const [chip, setChip] = useState("Entradas");
-  const [selected, setSelected] = useState<Product | null>(null);
-  const [size, setSize] = useState(0);
-  const [qty, setQty] = useState(1);
-  const [image, setImage] = useState(0);
-  const [toast, setToast] = useState(false);
-  const toastRef = useRef<number | null>(null);
+  const [cat, setCat] = useState<Category>("Todos");
+  const [cart, setCart] = useState<Record<string, number>>({});
+  const [pulse, setPulse] = useState<string | null>(null);
+  const pulseRef = useRef<number | null>(null);
 
-  useEffect(() => () => { if (toastRef.current) window.clearTimeout(toastRef.current); }, []);
+  useEffect(() => () => { if (pulseRef.current) window.clearTimeout(pulseRef.current); }, []);
 
-  function openProduct(p: Product) {
-    setSelected(p);
-    setSize(0);
-    setQty(1);
-    setImage(0);
+  const list = useMemo(() => cat === "Todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === cat), [cat]);
+  const grouped = useMemo(() => {
+    if (cat !== "Todos") return [{ cat, items: list }];
+    const map = new Map<string, Product[]>();
+    for (const p of PRODUCTS) {
+      if (!map.has(p.category)) map.set(p.category, []);
+      map.get(p.category)!.push(p);
+    }
+    return Array.from(map.entries()).map(([cat, items]) => ({ cat, items }));
+  }, [cat, list]);
+
+  const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
+  const totalPrice = Object.entries(cart).reduce((sum, [id, q]) => {
+    const p = PRODUCTS.find(x => x.id === id);
+    return sum + (p ? p.price * q : 0);
+  }, 0);
+
+  function add(id: string) {
+    setCart(c => ({ ...c, [id]: (c[id] || 0) + 1 }));
+    setPulse(id);
+    if (pulseRef.current) window.clearTimeout(pulseRef.current);
+    pulseRef.current = window.setTimeout(() => setPulse(null), 380);
   }
-  function back() { setSelected(null); }
-  function addToCart() {
-    setToast(true);
-    if (toastRef.current) window.clearTimeout(toastRef.current);
-    toastRef.current = window.setTimeout(() => {
-      setToast(false);
-      setSelected(null);
-    }, 1200);
+  function remove(id: string) {
+    setCart(c => {
+      const n = { ...c };
+      if (!n[id]) return c;
+      if (n[id] <= 1) delete n[id]; else n[id] -= 1;
+      return n;
+    });
   }
-
-  const visible = PRODUCTS.filter(p => p.category === tab);
 
   return (
-    <div className="menuCatalogFrame" role="group" aria-label="Prévia do catálogo digital">
+    <div className="menuCatalogFrame" role="group" aria-label="Prévia do cardápio digital">
       <div className="menuCatalogNotch" aria-hidden="true"><span/></div>
-      <div className="menuCatalogScreen">
-        {!selected && (
-          <>
-            <div className="menuCatalogTopbar">
-              <button className="menuCatalogIconBtn" aria-label="Loja">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg>
-              </button>
-              <div className="menuCatalogToggle" role="tablist">
-                <button role="tab" aria-selected={tab === "salgados"} className={tab === "salgados" ? "active" : ""} onClick={() => setTab("salgados")}>SALGADOS</button>
-                <button role="tab" aria-selected={tab === "doces"} className={tab === "doces" ? "active" : ""} onClick={() => setTab("doces")}>DOCES</button>
-              </div>
-              <button className="menuCatalogIconBtn" aria-label="Buscar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-              </button>
+      <div className="menuCatalogScreen menuCatalogScreenV2">
+
+        <div className="menuCatalogHeaderV2">
+          <div className="menuCatalogBrandV2">
+            <span className="menuCatalogBrandMark">GB</span>
+            <div>
+              <b>Casa GB</b>
+              <em>Aberto agora · Entrega em 30 min</em>
             </div>
-
-            <div className="menuCatalogBanner">
-              <div className="menuCatalogBannerContent">
-                <h4>Bom apetite!</h4>
-                <h5>DIRETO DA COZINHA</h5>
-                <button className="menuCatalogBannerCta">VER CARDÁPIO</button>
-              </div>
-              <div className="menuCatalogBannerBrand">
-                <span className="menuCatalogBrandLogo">🍽️</span>
-                <b>Casa GB</b>
-                <em>Restaurante</em>
-              </div>
-              <span className="menuCatalogBannerEmoji" aria-hidden="true">🔥</span>
-            </div>
-
-            <div className="menuCatalogChips">
-              {CHIPS.map(c => (
-                <button key={c} className={`menuCatalogChip ${chip === c ? "active" : ""}`} onClick={() => setChip(c)}>{c}</button>
-              ))}
-            </div>
-
-            <div className="menuCatalogGrid">
-              {visible.map(p => (
-                <button key={p.id} className="menuCatalogCard" onClick={() => openProduct(p)} aria-label={`Ver ${p.name}`}>
-                  <div className="menuCatalogCardMedia">
-                    <span aria-hidden="true">{p.emoji}</span>
-                    {p.badge && <em className={`menuCatalogBadge ${p.badge.tone}`}>{p.badge.label}</em>}
-                  </div>
-                  <div className="menuCatalogCardInfo">
-                    <strong>R$ {formatPrice(p.price)}</strong>
-                    <span>{p.name}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <div className="menuCatalogTabbar">
-              <button aria-label="Loja" className="active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/></svg></button>
-              <button aria-label="Mensagens"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M4 5h16v11H8l-4 4z"/></svg></button>
-              <button aria-label="Pedidos"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16"/></svg></button>
-              <button aria-label="Perfil"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></button>
-            </div>
-          </>
-        )}
-
-        {selected && (
-          <div className="menuCatalogDetail" role="dialog" aria-label={selected.name}>
-            <div className="menuCatalogDetailTop">
-              <button className="menuCatalogIconBtn" aria-label="Voltar" onClick={back}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 5l-7 7 7 7"/></svg>
-              </button>
-              <span>Detalhes do produto</span>
-              <button className="menuCatalogIconBtn" aria-label="Favoritar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.7A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg>
-              </button>
-            </div>
-
-            <div className="menuCatalogHero">
-              <span aria-hidden="true">{selected.gallery[image]}</span>
-              {selected.badge && <em className={`menuCatalogBadge ${selected.badge.tone}`}>{selected.badge.label}</em>}
-            </div>
-
-            <div className="menuCatalogThumbs">
-              {selected.gallery.map((g, i) => (
-                <button key={i} className={i === image ? "active" : ""} onClick={() => setImage(i)} aria-label={`Imagem ${i + 1}`}>
-                  <span aria-hidden="true">{g}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="menuCatalogInfo">
-              <h4>{selected.name}</h4>
-              <p>{selected.desc}</p>
-              <div className="menuCatalogPriceRow">
-                {selected.oldPrice && <s>R$ {formatPrice(selected.oldPrice)}</s>}
-                <strong>R$ {formatPrice(selected.price)}</strong>
-              </div>
-
-              <div className="menuCatalogSection">
-                <label>Tamanho</label>
-                <div className="menuCatalogSizes">
-                  {selected.sizes.map((s, i) => (
-                    <button key={s.label} className={i === size ? "active" : ""} onClick={() => setSize(i)}>
-                      <b>{s.label}</b>
-                      {s.sub && <em>{s.sub}</em>}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="menuCatalogSection menuCatalogQtyRow">
-                <label>Quantidade</label>
-                <div className="menuCatalogQty">
-                  <button onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Diminuir">−</button>
-                  <b>{qty}</b>
-                  <button onClick={() => setQty(qty + 1)} aria-label="Aumentar">+</button>
-                </div>
-              </div>
-            </div>
-
-            <button className="menuCatalogAdd" onClick={addToCart}>
-              Adicionar ao pedido · R$ {formatPrice(selected.price * qty)}
-            </button>
-
-            {toast && <div className="menuCatalogToast" role="status">Adicionado ✓</div>}
           </div>
-        )}
+          <button className="menuCatalogSearchV2" aria-label="Buscar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </button>
+        </div>
+
+        <div className="menuCatalogHeroV2">
+          <div>
+            <span className="menuCatalogHeroTag">FRETE GRÁTIS ACIMA DE R$ 60</span>
+            <h4>Bom apetite</h4>
+            <p>Escolha, personalize e receba em casa ou peça direto na mesa.</p>
+          </div>
+          <span className="menuCatalogHeroBadge">🔥</span>
+        </div>
+
+        <div className="menuCatalogChipsV2" role="tablist">
+          {CATEGORIES.map(c => (
+            <button key={c} role="tab" aria-selected={cat === c} className={`menuCatalogChipV2 ${cat === c ? "active" : ""}`} onClick={() => setCat(c)}>{c}</button>
+          ))}
+        </div>
+
+        <div className="menuCatalogListV2">
+          {grouped.map(g => (
+            <div key={g.cat} className="menuCatalogGroupV2">
+              <h5 className="menuCatalogGroupTitle">{g.cat}</h5>
+              <ul>
+                {g.items.map(p => (
+                  <li key={p.id} className={`menuCatalogRowV2 ${pulse === p.id ? "pulse" : ""}`}>
+                    <div className="menuCatalogRowInfo">
+                      <div className="menuCatalogRowTop">
+                        <strong>{p.name}</strong>
+                        {p.tag && <em className={`menuCatalogTagV2 tag-${p.tag.toLowerCase().replace(/[^a-z]/g,"")}`}>{p.tag}</em>}
+                      </div>
+                      <p>{p.desc}</p>
+                      <div className="menuCatalogRowMeta">
+                        <span>★ {p.rating?.toFixed(1)}</span>
+                        <span>·</span>
+                        <span>{p.time}</span>
+                      </div>
+                      <div className="menuCatalogRowPrice">
+                        {p.oldPrice && <s>R$ {fmt(p.oldPrice)}</s>}
+                        <b>R$ {fmt(p.price)}</b>
+                      </div>
+                    </div>
+                    <div className="menuCatalogRowMedia">
+                      <img src={p.image} alt={p.name} loading="lazy" />
+                      {cart[p.id] ? (
+                        <div className="menuCatalogQtyV2">
+                          <button onClick={() => remove(p.id)} aria-label="Remover">−</button>
+                          <b>{cart[p.id]}</b>
+                          <button onClick={() => add(p.id)} aria-label="Adicionar">+</button>
+                        </div>
+                      ) : (
+                        <button className="menuCatalogAddV2" onClick={() => add(p.id)} aria-label={`Adicionar ${p.name}`}>+</button>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className={`menuCatalogCartV2 ${totalItems ? "visible" : ""}`} aria-live="polite">
+          <div className="menuCatalogCartInfo">
+            <b>{totalItems} {totalItems === 1 ? "item" : "itens"}</b>
+            <span>Retirada ou entrega</span>
+          </div>
+          <button className="menuCatalogCartCta">
+            <span>Ver pedido</span>
+            <strong>R$ {fmt(totalPrice)}</strong>
+          </button>
+        </div>
+
       </div>
     </div>
   );
