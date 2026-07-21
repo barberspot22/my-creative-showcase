@@ -39,7 +39,7 @@ function EcommercePage() {
         <div className="metallicTitle" data-text="O varejo migrou.">
           <h1>O varejo migrou.<br/><em>Sua marca já está lá?</em></h1>
         </div>
-        <p>O físico estagna, o digital cresce em dois dígitos por ano. A gente entrega o sistema completo pra você entrar nessa curva.</p>
+        <p>O físico estagna, o digital cresce em dois dígitos por ano. Entregamos o sistema completo pra você entrar nessa curva.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
