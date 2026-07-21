@@ -1371,7 +1371,7 @@ section[aria-label^="Notifications"] {
 
 /* Site institucional — value section + problem CTA */
 .siteProductValue{padding:110px 9%;background:var(--black);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:95px;align-items:center}
-.siteProductValue h2{color:#fff}
+.siteProductValue h2{color:#fff;font-size:clamp(48px,6vw,84px);line-height:.94;margin:18px 0 0}
 .siteProductValue ul{list-style:none;margin:0;padding:0;display:grid;gap:24px}
 .siteProductValue li{font-size:18px;line-height:1.55;color:#bbb;border-left:2px solid #444;padding-left:22px}
 .siteProductValue li strong{color:#fff;font-weight:700}
