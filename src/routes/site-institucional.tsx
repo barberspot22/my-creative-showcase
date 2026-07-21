@@ -44,7 +44,7 @@ function SiteInstitucionalPage() {
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
-        <h1>Só existir<br/>não basta.</h1>
+        <h1>Presença digital que<br/>transforma visita em cliente.</h1>
         <p>Seu cartão de visita digital, aberto 24h. Apresenta, prova autoridade e leva ao contato.</p>
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
