@@ -7,17 +7,17 @@ import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const deliverables = [
-  ["Cardápio digital via WhatsApp", "O cliente pede e recebe na hora, com formato definido caso a caso — arquivo direto ou navegação interativa por categoria."],
-  ["Atendimento integrado", "O mesmo agente já responde dúvida, direciona pra reserva ou pedido."],
-  ["Social media autônomo (GB Social)", "Agente que cria e publica conteúdo, com aprovação sua antes de qualquer post."],
-  ["Painel único", "Cardápio, conversas e postagens agendadas num só lugar."],
+  ["Cardápio digital visual", "Fotos, preços, descrições e variações organizadas por categoria — o cliente vê tudo antes de pedir."],
+  ["Pedido integrado ao WhatsApp", "Cliente escolhe, monta o pedido e envia pronto para você confirmar."],
+  ["Atendimento apenas quando importa", "O agente responde dúvidas, direciona reservas e finaliza pedidos — sem segurar quem já quer comprar."],
+  ["Painel único", "Cardápio, pedidos, conversas e postagens agendadas num só lugar."],
 ];
 
 const steps = [
-  ["Briefing", "Entendemos o cardápio atual, o volume de pedido e como as redes estão hoje."],
-  ["Arquitetura", "Definimos o formato do cardápio e o fluxo de conteúdo social."],
-  ["Implementação", "Configuramos o agente de WhatsApp e o GB Social com aprovação humana antes de publicar."],
-  ["Operação", "Cardápio respondendo sozinho, redes postando com aval do cliente."],
+  ["Briefing", "Entendemos seu cardápio, preços e as dúvidas mais frequentes dos clientes."],
+  ["Arquitetura", "Montamos a navegação por categorias, variações e o fluxo de pedido."],
+  ["Implementação", "Subimos o cardápio digital e conectamos ao seu WhatsApp."],
+  ["Operação", "Cliente vê, escolhe e pede. Você só confirma e prepara."],
 ];
 
 const proof = [
@@ -34,35 +34,48 @@ function CardapioDigitalPage() {
     <ProductSwitcher current="cardapio-digital" />
     <main>
       <section className="menuProductHero">
-        <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>
-        <h1>Seu cardápio parado no PDF.<br/>Suas redes sociais paradas também.<br/>A gente resolve os dois juntos.</h1>
-        <p>Cardápio digital integrado ao WhatsApp e redes sociais rodando sozinhas — pro cliente decidir o que pedir e pro seu Instagram não ficar semanas sem postar.</p>
-        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <p className="studioEyebrow">CARDÁPIO DIGITAL + VENDA AUTÔNOMA</p>
+        <h1>Seu cliente vê o cardápio. Escolhe. E pede sozinho.</h1>
+        <p>O cliente não precisa esperar resposta no WhatsApp. Navega pelos produtos, vê fotos, preços e variações, e finaliza o pedido no próprio ritmo — enquanto você atende quem realmente precisa de ajuda.</p>
+        <div className="menuProductActions"><a className="menuProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="menuProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
       <section className="menuCatalogWidgetSection">
         <div className="menuCatalogIntro">
-          <p className="studioEyebrow">EXPERIMENTE</p>
-          <h2>Sinta como seria ter <em>seu próprio catálogo</em>.</h2>
-          <p>Toque em qualquer produto para abrir os detalhes — imagens, tamanhos e valores, exatamente como o seu cliente veria.</p>
+          <p className="studioEyebrow">EXPERIMENTE AGORA</p>
+          <h2>Sinta como seria o site do seu negócio.</h2>
+          <p>Toque em qualquer produto. Veja fotos, tamanhos, preços e o botão de pedir — exatamente como seu cliente veria. Essa prévia é o mesmo fluxo que entregamos.</p>
         </div>
         <CatalogWidget />
       </section>
 
-      <section className="menuProductProblem"><div><p className="studioEyebrow">POR QUE OS DOIS PROBLEMAS SÃO O MESMO PROBLEMA</p><h2>Cardápio desatualizado e rede social parada afastam cliente do mesmo jeito.</h2></div><p>PDF de cardápio que ninguém atualiza, foto de prato antiga no Instagram, cliente perguntando preço no WhatsApp e esperando resposta. A gente integra cardápio e social media num sistema só, rodando de forma autônoma.</p></section>
+      <section className="menuProductProblem"><div><p className="studioEyebrow">O CUSTO DE ESCONDER O CARDÁPIO</p><h2>Cardápio escondido é cliente perdido.</h2></div><p>Cliente pergunta preço no WhatsApp e espera. Quer ver opções e não encontra. Desiste e pede no concorrente. Quando o cardápio é claro, visual e fácil de comprar, a venda acontece sem atrito.</p></section>
 
-      <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE ENTREGAMOS</p><h2>Pedido e presença digital no mesmo fluxo.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+      <section id="entregamos" className="menuProductDeliverables"><div><p className="studioEyebrow">O QUE VOCÊ RECEBE</p><h2>Uma vitrine que vende sozinha.</h2></div><ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VITRINE DE PRATOS E CONTEÚDO</p><h2>O que o cliente vê.<br/>O que faz ele pedir.</h2></div><FanGallery/></section>
+      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VEJA NA PRÁTICA</p><h2>O cliente toca e pede. Simples assim.</h2></div><FanGallery/></section>
 
-      <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do cardápio atual ao sistema rodando.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+      <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do cardápio atual ao cliente pedindo sozinho.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
 
-      <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Arquitetura pensada para operação real.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
+      <section className="menuProductProof"><div><p className="studioEyebrow">JÁ ENTREGAMOS</p><h2>Autonomia para o cliente, tempo de volta para você.</h2></div><ul>{proof.map(item => <li key={item}>{item}</li>)}</ul></section>
 
-      <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital + Social" />
+      <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital" title="Quer que seus clientes vejam tudo e peçam sozinhos?" subtitle="Me conta como funciona seu cardápio hoje. Devolvemos escopo, prazo e valor." />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>Cardápio Digital + Social Media · Atendimento e conteúdo juntos</span></footer>
   </div>;
 }
 
-export const Route = createFileRoute("/cardapio-digital")({ component: CardapioDigitalPage });
+export const Route = createFileRoute("/cardapio-digital")({
+  component: CardapioDigitalPage,
+  head: () => ({
+    meta: [
+      { title: "Cardápio Digital — GB IA" },
+      { name: "description", content: "Cardápio digital integrado ao WhatsApp: seus clientes veem fotos, preços, variações e pedem sozinhos. Você só confirma e prepara." },
+      { property: "og:title", content: "Cardápio Digital — GB IA" },
+      { property: "og:description", content: "Cardápio digital integrado ao WhatsApp: seus clientes veem fotos, preços, variações e pedem sozinhos. Você só confirma e prepara." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/cardapio-digital" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/cardapio-digital" }],
+  }),
+});
