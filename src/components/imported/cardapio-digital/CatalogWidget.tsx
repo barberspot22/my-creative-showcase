@@ -191,14 +191,14 @@ export function CatalogWidget() {
 
             <div className="menuCatalogBanner">
               <div className="menuCatalogBannerContent">
-                <h4>PEÇA AGORA!</h4>
-                <h5>SABOR NA PORTA</h5>
-                <button className="menuCatalogBannerCta">PEDIR AGORA</button>
+                <h4>Bom apetite!</h4>
+                <h5>DIRETO DA COZINHA</h5>
+                <button className="menuCatalogBannerCta">VER CARDÁPIO</button>
               </div>
               <div className="menuCatalogBannerBrand">
                 <span className="menuCatalogBrandLogo">🍽️</span>
                 <b>Casa GB</b>
-                <em>Delivery</em>
+                <em>Restaurante</em>
               </div>
               <span className="menuCatalogBannerEmoji" aria-hidden="true">🔥</span>
             </div>
