@@ -177,6 +177,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
           <button type="button" onClick={() => { setQuery(""); setActiveType("all"); }}>Limpar filtros</button>
         </div>
       ) : (
+      <>
       <div className="referenceScrollWrap">
         <div
           ref={trackRef}
@@ -209,6 +210,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
               </button>
               <span className="referenceCardMeta">
                 <small>{ref.segment}</small>
+                {ref.type && <span className="referenceCardType">{TYPE_LABELS[ref.type]}</span>}
                 {ctaUrl && (
                   <a
                     href={ctaUrl}
@@ -227,6 +229,9 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
       <p className="referenceDragHint">
         {variant === "tall" ? "Arraste lateral · role dentro do card para ver o site completo" : "Arraste para explorar · clique para ampliar"}
       </p>
+      </>
+      )}
+
 
       {lightbox && (
         <div className="referenceLightbox" onClick={() => setLightbox(null)}>
