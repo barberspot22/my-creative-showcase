@@ -134,7 +134,7 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-const CHIPS = ["Novidades", "Pratos", "Bebidas", "Sobremesas"];
+const CHIPS = ["Entradas", "Pratos", "Bebidas", "Sobremesas"];
 
 function formatPrice(v: number) {
   return v.toFixed(2).replace(".", ",");
@@ -142,7 +142,7 @@ function formatPrice(v: number) {
 
 export function CatalogWidget() {
   const [tab, setTab] = useState<"salgados" | "doces">("salgados");
-  const [chip, setChip] = useState("Novidades");
+  const [chip, setChip] = useState("Entradas");
   const [selected, setSelected] = useState<Product | null>(null);
   const [size, setSize] = useState(0);
   const [qty, setQty] = useState(1);
@@ -289,7 +289,7 @@ export function CatalogWidget() {
             </div>
 
             <button className="menuCatalogAdd" onClick={addToCart}>
-              Adicionar ao carrinho · R$ {formatPrice(selected.price * qty)}
+              Adicionar ao pedido · R$ {formatPrice(selected.price * qty)}
             </button>
 
             {toast && <div className="menuCatalogToast" role="status">Adicionado ✓</div>}
