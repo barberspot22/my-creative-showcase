@@ -270,21 +270,25 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
         style={{ transform: `translateY(${translate}px)` }}
         draggable={false}
       />
-      <span
-        ref={barRef}
-        className="referenceScrollbar"
-        onPointerDown={onBarDown}
-        onPointerMove={onBarMove}
-        onPointerUp={onUp}
-        onPointerCancel={onUp}
-        aria-hidden
-      >
-        <span
-          className="referenceScrollbarThumb"
-          style={{ top: `${thumbTop}px`, height: `${thumbH}px`, opacity: ready ? 1 : 0 }}
-        />
-      </span>
-      <span className="referenceScrollHint" aria-hidden>↕ role para ver o site</span>
+      {range > 0 && (
+        <>
+          <span
+            ref={barRef}
+            className="referenceScrollbar"
+            onPointerDown={onBarDown}
+            onPointerMove={onBarMove}
+            onPointerUp={onUp}
+            onPointerCancel={onUp}
+            aria-hidden
+          >
+            <span
+              className="referenceScrollbarThumb"
+              style={{ top: `${thumbTop}px`, height: `${thumbH}px`, opacity: ready ? 1 : 0 }}
+            />
+          </span>
+          <span className="referenceScrollHint" aria-hidden>↕ role para ver o site</span>
+        </>
+      )}
     </span>
   );
 }
