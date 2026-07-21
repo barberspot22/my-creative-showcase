@@ -4,20 +4,21 @@ import { BentoMorphGallery } from "@/components/imported/ecommerce/BentoMorphGal
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
 
 const marketStats = [
-  ["+R$ 234 bi", "Movimentados em e-commerce no Brasil em 2024. E não para de crescer."],
-  ["9 em 10", "Brasileiros conectados já compraram online pelo menos uma vez."],
-  ["73%", "Das jornadas de compra começam numa busca no digital, não na loja física."],
+  ["+R$ 234 bi", "Movimentados em e-commerce no Brasil em 2024."],
+  ["9 em 10", "Brasileiros já compraram online pelo menos uma vez."],
+  ["73%", "Das jornadas de compra começam no digital."],
 ];
 
 const deliverables = [
-  ["E-commerce que converte", "Loja própria com checkout otimizado, UX pensado para venda e performance mobile-first. Não é vitrine bonita — é máquina de conversão."],
-  ["Catálogo digital integrado", "Modalidade enxuta: sua vitrine online conectada ao WhatsApp para negócios que ainda não querem checkout, mas precisam vender pelo digital hoje."],
-  ["Cadastro por WhatsApp — texto, foto e áudio", "Manda um áudio descrevendo o produto. A IA cria título, descrição SEO, categoriza e sobe pronto para venda em todos os canais."],
-  ["Integração com marketplaces", "Mesma loja publicando em Mercado Livre, Shopee, Amazon e Instagram Shopping. Cadastro único, estoque sincronizado, pedidos num painel só."],
-  ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho abandonado e fecha venda no WhatsApp e Instagram sem você estar online."],
-  ["Rastreamento de comportamento", "Heatmap, replay de sessão e eventos configurados. A gente enxerga onde o cliente trava e ajusta até parar de perder venda."],
+  ["E-commerce que converte", "Loja própria com checkout otimizado e mobile-first. Máquina de conversão, não vitrine."],
+  ["Catálogo digital integrado", "Vitrine online conectada ao WhatsApp, sem checkout, pra vender no digital hoje."],
+  ["Cadastro por áudio", "Manda um áudio. A IA cria título, descrição SEO e publica em todos os canais."],
+  ["Marketplaces integrados", "Mercado Livre, Shopee, Amazon e Instagram sincronizados num painel só."],
+  ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho e fecha venda sem você online."],
+  ["Comportamento rastreado", "Heatmap, replay e funil. A gente vê onde trava e ajusta até vender mais."],
 ];
 
 const channels = [
@@ -30,10 +31,10 @@ const channels = [
 ];
 
 const steps = [
-  ["Briefing", "Entendemos seu produto, seu público, seus canais e onde as vendas estão travando hoje."],
-  ["Arquitetura", "Desenhamos loja, catálogo, marketplaces, automação e IA como um sistema único — não peças soltas."],
-  ["Implementação", "Construímos, integramos os canais, treinamos a IA no seu produto e testamos ponta a ponta."],
-  ["Operação", "Sistema entra no ar vendendo. A gente acompanha, mede, ajusta e escala junto."],
+  ["Briefing", "Entendemos seu produto, público e onde as vendas travam."],
+  ["Arquitetura", "Desenhamos loja, marketplaces e IA como um sistema único."],
+  ["Implementação", "Construímos, integramos os canais e treinamos a IA no seu produto."],
+  ["Operação", "Entra no ar vendendo. A gente acompanha, mede e escala junto."],
 ];
 
 function EcommercePage() {
@@ -47,7 +48,7 @@ function EcommercePage() {
         <div className="metallicTitle" data-text="O varejo migrou.">
           <h1>O varejo migrou.<br/><em>Sua marca já está lá?</em></h1>
         </div>
-        <p>Enquanto o físico estagna, o digital cresce em dois dígitos por ano. Grandes marcas já migraram — o mercado que sobra é online, rastreável e 24/7. A gente entrega o sistema completo para você entrar dentro dessa curva.</p>
+        <p>O físico estagna, o digital cresce em dois dígitos por ano. A gente entrega o sistema completo pra você entrar nessa curva.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
@@ -58,11 +59,11 @@ function EcommercePage() {
         <div className="commerceMarketGrid">
           {marketStats.map(([n, copy]) => <article key={n}><b>{n}</b><p>{copy}</p></article>)}
         </div>
-        <p className="commerceMarketNote">Todo mundo que enxergou primeiro está capturando o cliente antes de você. Estar no digital deixou de ser diferencial — virou ponto de partida.</p>
+        <p className="commerceMarketNote">Estar no digital deixou de ser diferencial — virou ponto de partida.</p>
       </section>
 
       <section id="entregamos" className="commerceDeliverables">
-        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema completo <em>de venda.</em></h2></div>
+        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
 
@@ -70,23 +71,23 @@ function EcommercePage() {
         <div className="commerceAudioCopy">
           <p className="studioEyebrow">CADASTRO POR ÁUDIO</p>
           <h2>Manda um áudio. <em>Sobe em 4 canais.</em></h2>
-          <p>Grava um áudio no WhatsApp descrevendo o produto. A IA transcreve, escreve título e descrição otimizados para SEO, categoriza, sugere preço e publica na sua loja e nos marketplaces integrados. Sem planilha, sem cadastro manual, sem dor.</p>
+          <p>Grava o áudio no WhatsApp. A IA transcreve, escreve título, descrição SEO e publica na loja e nos marketplaces. Sem planilha, sem dor.</p>
         </div>
         <div className="chatDemo commerceAudioChat">
-          <header><span><i/>GB Commerce</span><small>catálogo online</small></header>
+          <header className="commerceAudioHeader"><span><i/>GB Commerce</span><small>catálogo online</small></header>
           <div className="commerceAudioBody">
             <p className="chatUser commerceAudioMsg"><span className="commerceAudioWave"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></span><small>0:22</small></p>
-            <p className="chatAgent"><b>GB Commerce</b>Entendi. Vou criar o cadastro do produto agora.</p>
+            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Entendi. Criando o cadastro agora.</span></p>
             <article className="commerceAudioCard">
-              <div className="commerceAudioCardImg"/>
-              <div>
+              <img className="commerceAudioCardImg" src={tshirtImg} alt="Camiseta oversized off-white" loading="lazy" width={768} height={768} />
+              <div className="commerceAudioCardBody">
                 <small>PRODUTO GERADO</small>
-                <b>Camiseta Oversized Off-White · Algodão Pima</b>
-                <p>Caimento oversized, gola reforçada, 100% algodão Pima. Peça leve, ideal para o verão e para looks casuais com camadas.</p>
+                <b>Camiseta Oversized Off-White</b>
+                <p>Caimento oversized, gola reforçada, 100% algodão Pima.</p>
                 <div className="commerceAudioTags"><span>R$ 129,90</span><span>Vestuário</span><span>SEO ✓</span></div>
               </div>
             </article>
-            <p className="chatAgent"><b>GB Commerce</b>Publicar em quais canais?</p>
+            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Publicar em quais canais?</span></p>
             <div className="commerceAudioChannels">
               <span>✓ Site</span><span>✓ Mercado Livre</span><span>✓ Shopee</span><span>✓ Instagram</span>
             </div>
@@ -95,8 +96,9 @@ function EcommercePage() {
         </div>
       </section>
 
+
       <section className="commerceOmni">
-        <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja GB IA no centro. Cada canal puxando produto, estoque e pedido do mesmo lugar. Sem duplicar cadastro, sem estoque furado, sem pedido perdido.</p></div>
+        <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja no centro. Todos os canais puxando produto, estoque e pedido do mesmo lugar.</p></div>
         <div className="commerceOmniDiagram">
           <div className="commerceOmniCore"><b>GB IA</b><small>Loja + Painel</small></div>
           {channels.map((c, i) => <span key={c} className="commerceOmniNode" style={{ ["--i" as string]: i, ["--total" as string]: channels.length } as React.CSSProperties}>{c}</span>)}
@@ -115,7 +117,7 @@ function EcommercePage() {
         <div className="commerceTrackingCopy">
           <p className="studioEyebrow">CONVERSÃO É ENGENHARIA</p>
           <h2>A gente vê onde <em>o cliente desiste.</em></h2>
-          <p>Heatmap, replay de sessão, funil de checkout e eventos de conversão instalados desde o primeiro dia. Cada abandono vira dado, cada dado vira ajuste, cada ajuste vira venda a mais no fim do mês.</p>
+          <p>Heatmap, replay, funil e pixel instalados desde o dia um. Cada abandono vira dado, cada dado vira ajuste, cada ajuste vira venda a mais.</p>
           <ul>
             <li><b>Heatmap</b> — onde o cliente clica, onde ele para de rolar.</li>
             <li><b>Replay</b> — assiste sessões reais de quem não comprou.</li>
