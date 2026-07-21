@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
-import { PerspectiveTicker } from "@/components/imported/site-institucional/PerspectiveTicker";
+import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { institucionalReferences } from "@/lib/references";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
-import { BentoMorphGallery } from "@/components/imported/ecommerce/BentoMorphGallery";
+import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { ecommerceReferences } from "@/lib/references";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
@@ -45,8 +46,8 @@ function EcommercePage() {
       </section>
 
       <section className="commerceGallerySection">
-        <div><p className="studioEyebrow">MODELOS & TEMPLATES</p><h2>Modelos que já <em>viraram loja no ar.</em></h2><p>Direções visuais que adaptamos à identidade, ao catálogo e à operação da sua marca. Arraste para ver todos.</p></div>
-        <BentoMorphGallery ctaUrl={whatsapp} />
+        <div><p className="studioEyebrow">REFERÊNCIAS & INSPIRAÇÕES</p><h2>Sites e lojas reais <em>que a gente recria do jeito da sua marca.</em></h2><p>Mix de pequenos negócios brasileiros e interfaces premium. Arraste, clique para ampliar e imagine o seu produto nesse nível.</p></div>
+        <ReferenceGallery items={ecommerceReferences} ctaUrl={whatsapp} />
       </section>
 
 
