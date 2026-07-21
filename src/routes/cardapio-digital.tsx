@@ -27,11 +27,6 @@ const steps = [
   ["No ar", "Cliente vê, escolhe e pede sozinho. Você recebe pronto para preparar."],
 ];
 
-const proof = [
-  "Proposta de agente de atendimento com cardápio integrado — Fontana di Trevi Colatina, restaurante e boliche",
-  "GB Social configurado como assistente de marketing autônomo — Instagram, Facebook, TikTok, LinkedIn e Google Meu Negócio",
-  "Arquitetura reaproveitada e testada em mais de um cliente do setor de alimentação",
-];
 
 
 function CardapioDigitalPage() {
