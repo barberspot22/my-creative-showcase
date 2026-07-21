@@ -157,18 +157,19 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default" }: 
   );
 }
 
-/** Vertical auto-scrolling site preview inside a browser frame; drag Y to control. */
+/** Vertical auto-scrolling site preview inside a browser frame; drag Y / wheel / scrollbar to control. */
 function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
   const wrapRef = useRef<HTMLSpanElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const [posPct, setPosPct] = useState(0); // 0..1 vertical position
-  const dragState = useRef({ dragging: false, startY: 0, startPct: 0, pausedUntil: 0, dir: 1 });
+  const barRef = useRef<HTMLSpanElement | null>(null);
+  const [posPct, setPosPct] = useState(0);
+  const [ready, setReady] = useState(false);
+  const dragState = useRef({ dragging: false, startY: 0, startPct: 0, pausedUntil: 0, dir: 1, source: "" as "media" | "bar" | "" });
 
-  // Auto-scroll animation
   useEffect(() => {
     let raf = 0;
     let last = performance.now();
-    const speed = 0.05; // fraction per second
+    const speed = 0.05;
     const tick = (now: number) => {
       const dt = (now - last) / 1000; last = now;
       if (!dragState.current.dragging && performance.now() > dragState.current.pausedUntil) {
@@ -185,28 +186,28 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const onPointerDown = (e: React.PointerEvent<HTMLSpanElement>) => {
+  const pause = (ms = 2200) => { dragState.current.pausedUntil = performance.now() + ms; };
+
+  const onMediaDown = (e: React.PointerEvent<HTMLSpanElement>) => {
     e.stopPropagation();
-    dragState.current.dragging = true;
-    dragState.current.startY = e.clientY;
-    dragState.current.startPct = posPct;
+    dragState.current = { ...dragState.current, dragging: true, startY: e.clientY, startPct: posPct, source: "media" };
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
   };
-  const onPointerMove = (e: React.PointerEvent<HTMLSpanElement>) => {
-    if (!dragState.current.dragging) return;
+  const onMediaMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (!dragState.current.dragging || dragState.current.source !== "media") return;
     e.stopPropagation();
     const wrap = wrapRef.current; const img = imgRef.current;
     if (!wrap || !img) return;
     const range = img.offsetHeight - wrap.offsetHeight;
     if (range <= 0) return;
     const dy = e.clientY - dragState.current.startY;
-    const dPct = -dy / range;
-    setPosPct(Math.min(1, Math.max(0, dragState.current.startPct + dPct)));
+    setPosPct(Math.min(1, Math.max(0, dragState.current.startPct + (-dy / range))));
   };
-  const onPointerUp = (e: React.PointerEvent<HTMLSpanElement>) => {
+  const onUp = (e: React.PointerEvent<HTMLSpanElement>) => {
     if (!dragState.current.dragging) return;
     dragState.current.dragging = false;
-    dragState.current.pausedUntil = performance.now() + 2200;
+    dragState.current.source = "";
+    pause();
     try { (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId); } catch { /* noop */ }
   };
   const onWheel = (e: React.WheelEvent<HTMLSpanElement>) => {
@@ -214,23 +215,48 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     if (!wrap || !img) return;
     const range = img.offsetHeight - wrap.offsetHeight;
     if (range <= 0) return;
-    const delta = e.deltaY / range;
-    setPosPct((p) => Math.min(1, Math.max(0, p + delta)));
-    dragState.current.pausedUntil = performance.now() + 2200;
+    e.preventDefault();
+    e.stopPropagation();
+    setPosPct((p) => Math.min(1, Math.max(0, p + e.deltaY / range)));
+    pause();
+  };
+
+  const onBarDown = (e: React.PointerEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const bar = barRef.current;
+    if (!bar) return;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+    setPosPct(pct);
+    dragState.current = { ...dragState.current, dragging: true, startY: e.clientY, startPct: pct, source: "bar" };
+    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+  const onBarMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (!dragState.current.dragging || dragState.current.source !== "bar") return;
+    e.stopPropagation();
+    const bar = barRef.current;
+    if (!bar) return;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+    setPosPct(pct);
   };
 
   const wrapH = wrapRef.current?.offsetHeight ?? 0;
   const imgH = imgRef.current?.offsetHeight ?? 0;
-  const translate = -(Math.max(0, imgH - wrapH)) * posPct;
+  const range = Math.max(0, imgH - wrapH);
+  const translate = -range * posPct;
+  const thumbH = wrapH && imgH ? Math.max(24, (wrapH / imgH) * wrapH) : 40;
+  const thumbTop = wrapH ? (wrapH - thumbH) * posPct : 0;
 
   return (
     <span
       ref={wrapRef}
       className="referenceCardMedia referenceCardMediaTall"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
+      onPointerDown={onMediaDown}
+      onPointerMove={onMediaMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
       onWheel={onWheel}
       onClick={(e) => e.stopPropagation()}
     >
@@ -238,14 +264,27 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
         ref={imgRef}
         src={src}
         alt={alt}
-        loading="lazy"
+        loading="eager"
         decoding="async"
+        onLoad={() => setReady(true)}
         style={{ transform: `translateY(${translate}px)` }}
         draggable={false}
       />
-      <span className="referenceScrollbar" aria-hidden>
-        <span style={{ top: `${posPct * 100}%` }} />
+      <span
+        ref={barRef}
+        className="referenceScrollbar"
+        onPointerDown={onBarDown}
+        onPointerMove={onBarMove}
+        onPointerUp={onUp}
+        onPointerCancel={onUp}
+        aria-hidden
+      >
+        <span
+          className="referenceScrollbarThumb"
+          style={{ top: `${thumbTop}px`, height: `${thumbH}px`, opacity: ready ? 1 : 0 }}
+        />
       </span>
+      <span className="referenceScrollHint" aria-hidden>↕ role para ver o site</span>
     </span>
   );
 }

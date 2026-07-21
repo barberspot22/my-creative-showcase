@@ -36,7 +36,7 @@ function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   const [tab, setTab] = useState<RefTab>("institucional");
   const activeItems = tab === "vendas" ? vendasReferences : tab === "captura" ? capturaReferences : institucionalReferences;
-  const activeVariant = tab === "institucional" ? undefined : "tall" as const;
+  const activeVariant = "tall" as const;
   const activeHint = REF_TABS.find((item) => item.key === tab)?.hint ?? "";
   return <div className="siteProductPage">
     <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
