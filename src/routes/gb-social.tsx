@@ -5,6 +5,7 @@ import { FormEvent, ReactNode, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
+import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const channels = ["Instagram", "Facebook", "Google Business Profile", "Outros canais da empresa"];
 const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao DNA da empresa", "Criação e adaptação", "Aprovação e publicação"];
@@ -22,6 +23,7 @@ function GBSocialPage() {
     <header className="studioNav"><BrandLogo />{ctaUrl
       ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a>
       : <a href="#começar" className="studioNavCta">{ctaLabel} <span>↗</span></a>}</header>
+    <ProductSwitcher current="gb-social" />
     <main>
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>

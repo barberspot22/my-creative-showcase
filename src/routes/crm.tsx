@@ -3,6 +3,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
 import { FinalCta } from "@/components/FinalCta";
+import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const automations = [
   ["01", "Conversa automática com IA", "IA treinada no seu negócio responde no WhatsApp, Instagram e site — qualifica o lead antes do time humano entrar."],
@@ -57,6 +58,7 @@ function CRMPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("crm");
   return <div className="crmPage">
     <header className="studioNav crmNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <ProductSwitcher current="crm" />
     <main>
       {/* 1. Hero */}
       <section className="crmHero">

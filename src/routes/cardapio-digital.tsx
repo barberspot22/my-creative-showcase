@@ -4,6 +4,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWidget";
 import { FinalCta } from "@/components/FinalCta";
+import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const deliverables = [
   ["Cardápio digital via WhatsApp", "O cliente pede e recebe na hora, com formato definido caso a caso — arquivo direto ou navegação interativa por categoria."],
@@ -30,6 +31,7 @@ function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
   return <div className="menuProductPage">
     <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <ProductSwitcher current="cardapio-digital" />
     <main>
       <section className="menuProductHero">
         <p className="studioEyebrow">CARDÁPIO DIGITAL + SOCIAL MEDIA</p>

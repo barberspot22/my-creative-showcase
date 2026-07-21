@@ -3,6 +3,7 @@ import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { PerspectiveTicker } from "@/components/imported/site-institucional/PerspectiveTicker";
 import { FinalCta } from "@/components/FinalCta";
+import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const deliverables = [
   ["Posicionamento claro na primeira dobra", "O que a empresa faz, para quem e por quê, sem rolar a página."],
@@ -23,6 +24,7 @@ function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   return <div className="siteProductPage">
     <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">{ctaLabel} <span>↗</span></a></header>
+    <ProductSwitcher current="site-institucional" />
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
