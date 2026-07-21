@@ -210,17 +210,6 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
               </button>
               <span className="referenceCardMeta">
                 <small>{ref.segment}</small>
-                {ref.type && <span className="referenceCardType">{TYPE_LABELS[ref.type]}</span>}
-                {ctaUrl && (
-                  <a
-                    href={ctaUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => { if (state.current.moved) e.preventDefault(); }}
-                  >
-                    Falar no WhatsApp
-                  </a>
-                )}
               </span>
             </article>
           ))}
