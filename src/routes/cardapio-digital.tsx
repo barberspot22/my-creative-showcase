@@ -37,7 +37,13 @@ function CardapioDigitalPage() {
         <div className="menuHeroFan"><FanGallery/></div>
       </section>
 
-      <section className="menuVisualShowcase"><div><p className="studioEyebrow">VEJA NA PRÁTICA</p><h2>O cliente toca e pede. Simples assim.</h2><p style={{marginTop:18,color:"#51545c",fontSize:17,lineHeight:1.6,maxWidth:640}}>Ele vê os produtos, abre a foto, lê o que tem dentro — ingredientes, tamanhos, adicionais — e compra na hora, sem precisar perguntar nada.</p></div></section>
+      <section id="entregamos" className="menuValueDeliverables">
+        <div>
+          <p className="studioEyebrow">O QUE VOCÊ RECEBE</p>
+          <h2>Um cardápio que atende e vende sozinho.</h2>
+        </div>
+        <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
+      </section>
 
 
       <section className="menuCatalogWidgetSection">
