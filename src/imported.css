@@ -1557,3 +1557,11 @@ section[aria-label^="Notifications"] {
 .menuReferenceSection>div:first-child{max-width:900px;margin:0 3% 65px}
 .menuReferenceSection>div:first-child>p:last-child{max-width:600px;line-height:1.65;color:#9ba69f}
 @media(max-width:760px){.referenceScrollWrap{padding:0 22px}.referenceCard{flex-basis:82vw}.referenceCardFrame{padding:13px 13px 0 13px;border-radius:20px}.referenceCardMedia{border-radius:10px 10px 0 0}.referenceLightbox img{max-width:96vw;max-height:84vh}.menuReferenceSection{padding:75px 22px 95px}.menuReferenceSection>div:first-child{margin:0 0 40px}}
+
+/* Site institucional — reference tabs (Institucional / Vendas / Captura) */
+.siteRefHint{margin:14px 0 0;font:11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.6px;color:#7b7b7b}
+.siteRefTabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 9%;margin:36px 0 8px}
+.siteRefTab{appearance:none;border:1px solid #2a2a2a;background:transparent;color:#bdbdbd;padding:12px 20px;border-radius:999px;font:10px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.4px;cursor:pointer;transition:all .2s ease}
+.siteRefTab:hover{border-color:#555;color:#fff}
+.siteRefTab.isActive{background:#fff;color:#080808;border-color:#fff;box-shadow:0 6px 18px #ffffff20}
+@media(max-width:760px){.siteRefTabs{padding:0 22px;margin:26px 0 4px}.siteRefTab{padding:10px 14px;font-size:9.5px;letter-spacing:1.1px}}

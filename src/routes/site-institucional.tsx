@@ -1,10 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
-import { institucionalReferences } from "@/lib/references";
+import { institucionalReferences, vendasReferences, capturaReferences } from "@/lib/references";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+
+type RefTab = "institucional" | "vendas" | "captura";
+const REF_TABS: { key: RefTab; label: string; hint: string }[] = [
+  { key: "institucional", label: "Institucional", hint: "Autoridade & apresentação" },
+  { key: "vendas", label: "Página de vendas", hint: "Long-form focada em conversão" },
+  { key: "captura", label: "Página de captura", hint: "Opt-in / lead magnet" },
+];
+
 
 const deliverables = [
   ["Proposta clara na primeira dobra", "O que você faz, para quem e por quê — sem rolar a página."],
@@ -25,6 +34,10 @@ const steps = [
 
 function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
+  const [tab, setTab] = useState<RefTab>("institucional");
+  const activeItems = tab === "vendas" ? vendasReferences : tab === "captura" ? capturaReferences : institucionalReferences;
+  const activeVariant = tab === "institucional" ? undefined : "tall" as const;
+  const activeHint = REF_TABS.find((item) => item.key === tab)?.hint ?? "";
   return <div className="siteProductPage">
     <header className="studioNav siteProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="site-institucional" />
@@ -36,7 +49,28 @@ function SiteInstitucionalPage() {
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
-      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Referências que a gente transforma no seu site.</h2></div><ReferenceGallery items={institucionalReferences} ctaUrl={whatsapp} /></section>
+      <section className="siteWorkShowcase">
+        <div>
+          <p className="studioEyebrow">PORTFÓLIO</p>
+          <h2>Referências que a gente transforma no seu site.</h2>
+          <p className="siteRefHint">{activeHint}</p>
+        </div>
+        <div className="siteRefTabs" role="tablist" aria-label="Tipos de página">
+          {REF_TABS.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              role="tab"
+              aria-selected={tab === item.key}
+              className={`siteRefTab${tab === item.key ? " isActive" : ""}`}
+              onClick={() => setTab(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <ReferenceGallery key={tab} items={activeItems} ctaUrl={whatsapp} variant={activeVariant} />
+      </section>
 
 
       <section className="siteProductValue">
