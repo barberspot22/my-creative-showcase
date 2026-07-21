@@ -36,7 +36,7 @@ function SiteInstitucionalPage() {
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
-      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Sites que já entregamos.</h2></div><PerspectiveTicker/></section>
+      <section className="siteWorkShowcase"><div><p className="studioEyebrow">PORTFÓLIO</p><h2>Referências que a gente transforma no seu site.</h2></div><ReferenceGallery items={institucionalReferences} ctaUrl={whatsapp} /></section>
 
 
       <section className="siteProductValue">

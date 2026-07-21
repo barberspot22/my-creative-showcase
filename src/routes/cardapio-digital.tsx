@@ -46,6 +46,11 @@ function CardapioDigitalPage() {
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
 
+      <section className="menuReferenceSection">
+        <div><p className="studioEyebrow">REFERÊNCIAS</p><h2>Cardápios de restaurantes reais <em>e interfaces que a gente replica.</em></h2><p>Pequenos negócios brasileiros e designs premium. Clique para ampliar e imagine o seu cardápio nesse visual.</p></div>
+        <ReferenceGallery items={cardapioReferences} ctaUrl={whatsapp} />
+      </section>
+
 
       <section className="menuCatalogWidgetSection">
         <div className="menuCatalogIntro">
