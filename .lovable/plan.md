@@ -1,7 +1,8 @@
 ## Objetivo
-Padronizar a chamada para ação (CTA) final de todas as páginas internas com um bloco **elegante, minimalista e tech**, encaminhando para o **WhatsApp de orçamento** com uma mensagem pré-preenchida contando de qual produto se trata.
+Facilitar a navegação entre as páginas de produto adicionando um **menu horizontal deslizável** (rola lateralmente com dedo/mouse) presente em todas as páginas internas, mostrando todos os produtos em pílulas — o produto atual fica destacado.
 
-## Páginas afetadas
+## Onde aparece
+Em todas as páginas de produto:
 - `/site-institucional`
 - `/cardapio-digital`
 - `/ecommerce`
@@ -9,52 +10,40 @@ Padronizar a chamada para ação (CTA) final de todas as páginas internas com u
 - `/gb-social`
 - `/gb-studio`
 
-## O que muda visualmente
-Substituir o bloco final atual (que hoje varia entre `siteProductFinal`, `menuProductFinal`, `commerceFinal`, `crmFinal`, `socialFinal` e `briefingBlock`) por um **componente único e sóbrio**:
+Posição: **logo abaixo do cabeçalho**, antes do hero. Grudado no topo (sticky) ao rolar, para o usuário poder pular pra outro produto a qualquer momento.
+
+## Visual
+Estética coerente com o resto do site (minimal, platinum, tech):
 
 ```text
-──────────────────────────────────────────────
- ORÇAMENTO · [NOME DO PRODUTO]         (eyebrow em mono, cinza)
-
- Uma conversa. Um orçamento sob medida.     (headline fina, platinum sutil)
- Conte o contexto — devolvemos escopo e valor.
-
-  [ Solicitar orçamento no WhatsApp  → ]      (botão pill minimal, borda 1px platinum,
-                                               hover: leve glow dourado)
-──────────────────────────────────────────────
+┌────────────────────────────────────────────────────────────────────┐
+│  NOSSOS PRODUTOS →                                                 │
+│  ● Site Institucional   ○ Cardápio   ○ E-commerce   ○ CRM   ○ …   │  ← rola lateral
+└────────────────────────────────────────────────────────────────────┘
 ```
 
-- Sem gradientes fortes, sem emojis, sem texto grande gritando.
-- Tipografia leve (peso 300–400), letter-spacing amplo no eyebrow, divisor 1px platinum acima e abaixo.
-- Botão pill preto com borda platinum 1px, seta unicode `→` fina; hover: borda dourada + glow discreto.
-- Alinhamento centralizado, muito respiro (padding vertical generoso).
-- Responsivo: no mobile o botão vira full-width contido pelo padding lateral.
+- Barra fina (~56px altura), fundo `#08080a` com borda 1px `#ffffff10` embaixo.
+- Cada item é uma **pílula** com nome do produto, borda 1px platinum sutil.
+- Item ativo: borda dourada `#c9a84c`, texto branco.
+- Itens inativos: cinza `#9a9a9a`, hover ilumina.
+- Scroll horizontal nativo, com `scroll-snap`, esconde scrollbar, `mask` fade nas laterais para indicar continuação.
+- Arrasta com o dedo (mobile) e com o mouse (drag-to-scroll) no desktop.
 
-## Implementação técnica
+## Componente
+Criar `src/components/ProductSwitcher.tsx`:
+- Lista fixa dos 6 produtos com `{ key, label, href }`.
+- Prop `current: PageKey` para destacar o ativo.
+- Auto-scroll para centralizar o item ativo ao montar.
+- Drag-to-scroll (pointer events) no desktop; touch nativo no mobile.
+- Link do item ativo é não-clicável (só visual).
 
-1. **Novo componente** `src/components/FinalCta.tsx`
-   - Props: `pageKey: PageKey`, `productName: string`.
-   - Lê `usePageLink(pageKey)` para pegar URL/label configurados no admin, mas por padrão renderiza label fixo "Solicitar orçamento no WhatsApp".
-   - Renderiza a estrutura minimal descrita acima.
+## CSS
+Adicionar em `src/imported.css` classes `.productSwitcher`, `.productSwitcherTrack`, `.productSwitcherItem`, `.productSwitcherItem.active`, com mask-gradient nas bordas e `scrollbar-width: none`.
 
-2. **Novo CSS** em `src/imported.css` (classe `.finalCta`, `.finalCtaEyebrow`, `.finalCtaTitle`, `.finalCtaButton`) — sem depender das classes específicas atuais (`siteProductFinal` etc.).
+## Integração
+Em cada uma das 6 páginas, inserir `<ProductSwitcher current="..." />` logo após o `<header className="studioNav …">` e antes do primeiro `<section>` do hero. Nada mais muda — heróis, seções e CTA final ficam intactos.
 
-3. **Atualizar defaults em `src/lib/adminLinks.ts`**
-   - Trocar `defaultLabel` das 6 páginas para `"Solicitar orçamento no WhatsApp"`.
-   - Ajustar `defaultUrl` de cada uma com mensagem pré-preenchida específica, ex.:
-     - Cardápio: `Olá! Quero um orçamento de Cardápio Digital + Social Media.`
-     - E-commerce: `Olá! Quero um orçamento de E-commerce completo (loja + automação + IA).`
-     - CRM: `Olá! Quero um orçamento de CRM sob medida.`
-     - Site institucional: `Olá! Quero um orçamento de Site Institucional.`
-     - GB Social: `Olá! Quero um orçamento do GB Social (social media de IA).`
-     - GB Studio: `Olá! Quero um orçamento do GB Studio (fotografia com IA).`
-   - Todos apontando para `https://wa.me/?text=...` (o número segue vazio como está hoje, para o admin configurar depois — se você já tiver o número, me passa que eu embuto).
-
-4. **Substituir as `<section>` finais** em cada página pelo `<FinalCta pageKey="..." productName="..." />`. Remover CSS específico dos blocos finais antigos que ficar órfão (opcional — deixo comentado se preferir manter).
-
-## Escopo intocado
-- Não altero navegação, heróis, seções intermediárias, nem outras CTAs (cabeçalho, hero, botões de "ver como funciona"). Apenas o bloco final e os defaults do admin.
-
-## Perguntas rápidas (posso seguir sem, com defaults acima)
-- Você quer que eu **também substitua a CTA do cabeçalho** e do hero pelo mesmo padrão "Solicitar orçamento", ou mantenho como está? _Meu default: manter._
-- Tem um **número de WhatsApp fixo** para embutir no `defaultUrl`, ou deixo vazio (`wa.me/?text=...`) para o admin preencher? _Meu default: deixar vazio._
+## Fora do escopo
+- Não mexer no cabeçalho principal (hamburger continua igual).
+- Não adicionar na home (`/`) — lá os cards do carrossel já cumprem esse papel.
+- Sem alteração no admin.
