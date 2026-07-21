@@ -79,6 +79,11 @@ function PrivacyPage() {
           <h2>10. Contato do encarregado (DPO)</h2>
           <p>Para exercer seus direitos ou tirar dúvidas sobre esta política, entre em contato pelo e-mail <a href="mailto:privacidade@gbia.com.br">privacidade@gbia.com.br</a>.</p>
         </section>
+
+        <section>
+          <h2>11. Sites de referência exibidos</h2>
+          <p>As imagens e sites exibidos nas seções de referência do portfólio têm caráter exclusivamente ilustrativo. Parte deles é de autoria da GB IA e parte pertence a marcas de terceiros, exibidos apenas como inspiração ou para contextualizar o segmento. Não reivindicamos autoria, titularidade ou qualquer direito de propriedade intelectual sobre trabalhos de terceiros. Marcas, logotipos e conteúdos pertencem aos seus respectivos donos. Caso você seja titular de algum material aqui exibido e deseje sua remoção, basta escrever para <a href="mailto:privacidade@gbia.com.br">privacidade@gbia.com.br</a>.</p>
+        </section>
       </main>
     </div>
   );
