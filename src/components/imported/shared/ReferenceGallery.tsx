@@ -125,6 +125,58 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
   return (
     <div className={`referenceGallery ${variant === "tall" ? "referenceGalleryTall" : ""}`}>
       {title && <p className="referenceGalleryHint">{title}</p>}
+      {showFilters && (
+        <div className="referenceFilterBar">
+          <label className="referenceSearch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Buscar por segmento, domínio ou tipo…"
+              aria-label="Buscar referências"
+            />
+            {query && (
+              <button type="button" className="referenceSearchClear" onClick={() => setQuery("")} aria-label="Limpar busca">×</button>
+            )}
+          </label>
+          {availableTypes.length > 1 && (
+            <div className="referenceChips" role="tablist">
+              <button
+                role="tab"
+                aria-selected={activeType === "all"}
+                className={`referenceChip ${activeType === "all" ? "active" : ""}`}
+                onClick={() => setActiveType("all")}
+              >
+                Todos <em>{items.length}</em>
+              </button>
+              {availableTypes.map((t) => {
+                const count = items.filter((r) => r.type === t).length;
+                return (
+                  <button
+                    key={t}
+                    role="tab"
+                    aria-selected={activeType === t}
+                    className={`referenceChip ${activeType === t ? "active" : ""}`}
+                    onClick={() => setActiveType(t)}
+                  >
+                    {TYPE_LABELS[t]} <em>{count}</em>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          <span className="referenceResultCount" aria-live="polite">
+            {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
+          </span>
+        </div>
+      )}
+      {filtered.length === 0 ? (
+        <div className="referenceEmpty">
+          <p>Nenhuma referência encontrada.</p>
+          <button type="button" onClick={() => { setQuery(""); setActiveType("all"); }}>Limpar filtros</button>
+        </div>
+      ) : (
       <div className="referenceScrollWrap">
         <div
           ref={trackRef}
