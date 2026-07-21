@@ -29,7 +29,7 @@ function SiteInstitucionalPage() {
     <main>
       <section className="siteProductHero">
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
-        <h1>Seu negócio existe.<br/>Só falta ser encontrado com autoridade.</h1>
+        <h1>Só existir<br/>não basta.</h1>
         <p>Um site institucional não é cartão de visita. É um funil 24h que apresenta o que você faz, prova que pode confiar e direciona o visitante para o contato — sem depender de algoritmo.</p>
         <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
