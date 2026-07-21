@@ -30,12 +30,8 @@ const channels = [
   "WhatsApp Catálogo",
 ];
 
-const steps = [
-  ["Briefing", "Entendemos seu produto, público e onde as vendas travam."],
-  ["Arquitetura", "Desenhamos loja, marketplaces e IA como um sistema único."],
-  ["Implementação", "Construímos, integramos os canais e treinamos a IA no seu produto."],
-  ["Operação", "Entra no ar vendendo. A gente acompanha, mede e escala junto."],
-];
+
+
 
 function EcommercePage() {
   const { ctaUrl: whatsapp } = usePageLink("ecommerce");
