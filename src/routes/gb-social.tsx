@@ -4,6 +4,7 @@ import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
 import { FormEvent, ReactNode, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
+import { FinalCta } from "@/components/FinalCta";
 
 const channels = ["Instagram", "Facebook", "Google Business Profile", "Outros canais da empresa"];
 const flow = ["Sua mensagem no WhatsApp", "Entendimento do pedido", "Consulta ao DNA da empresa", "Criação e adaptação", "Aprovação e publicação"];
@@ -73,7 +74,7 @@ function GBSocialPage() {
 
       <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA A INTERNET</p><h2>Uma mensagem. Uma operação inteira.</h2><ol>{flow.map((item, i) => <li key={item}><span>{String(i + 1).padStart(2, "0")}</span><b>{item}</b></li>)}</ol></section>
 
-      <section id="começar" className="socialFinal"><p className="studioEyebrow">TUDO COMEÇA COM UMA MENSAGEM</p><h2>Você cuida da empresa.<br/>Seu agente cuida para que ela continue aparecendo.</h2><p>Sem aprender prompts. Sem administrar ferramentas. Abra o WhatsApp e delegue o trabalho.</p><CtaPrimary>{ctaLabel} <span>↗</span></CtaPrimary></section>
+      <FinalCta pageKey="gb-social" productName="GB Social" />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA no WhatsApp</span></footer>
 
