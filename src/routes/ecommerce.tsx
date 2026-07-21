@@ -98,31 +98,6 @@ function EcommercePage() {
         </div>
       </section>
 
-      <section className="commerceTracking">
-        <div className="commerceTrackingCopy">
-          <p className="studioEyebrow">CONVERSÃO É ENGENHARIA</p>
-          <h2>A gente vê onde <em>o cliente desiste.</em></h2>
-          <p>Heatmap, replay, funil e pixel instalados desde o dia um. Cada abandono vira dado, cada dado vira ajuste, cada ajuste vira venda a mais.</p>
-          <ul>
-            <li><b>Heatmap</b> — onde o cliente clica, onde ele para de rolar.</li>
-            <li><b>Replay</b> — assiste sessões reais de quem não comprou.</li>
-            <li><b>Funil</b> — do anúncio ao pagamento, etapa por etapa.</li>
-            <li><b>Pixel</b> — Meta, Google e TikTok configurados corretamente.</li>
-          </ul>
-        </div>
-        <div className="commerceHeatmap" aria-hidden="true">
-          <div className="commerceHeatmapChrome"><i/><i/><i/></div>
-          <div className="commerceHeatmapPage">
-            <div className="commerceHeatmapImg"/>
-            <div className="commerceHeatmapText"><i/><i/><i style={{ width: "60%" }}/></div>
-            <div className="commerceHeatmapCta"/>
-            <span className="commerceHeatSpot" style={{ top: "22%", left: "30%" }}/>
-            <span className="commerceHeatSpot commerceHeatSpotHot" style={{ top: "72%", left: "58%" }}/>
-            <span className="commerceHeatSpot commerceHeatSpotWarm" style={{ top: "48%", left: "20%" }}/>
-            <span className="commerceHeatSpot commerceHeatSpotWarm" style={{ top: "38%", left: "70%" }}/>
-          </div>
-        </div>
-      </section>
 
       <FinalCta pageKey="ecommerce" productName="E-commerce" title="Pronto para entrar no mercado que só cresce?" subtitle="Me conta seu produto e onde você quer vender. Devolvo escopo de loja, catálogo, marketplaces e IA vendedora." />
 

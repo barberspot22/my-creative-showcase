@@ -108,28 +108,10 @@
 .commerceOmniLines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .commerceOmniNode{position:absolute;top:50%;left:50%;padding:10px 16px;background:#fff;border:1px solid #d4dcd6;border-radius:24px;font:11px 'JetBrains Mono',monospace;color:#1a2b22;text-transform:uppercase;letter-spacing:.8px;font-weight:600;box-shadow:0 6px 18px #1b211d15;white-space:nowrap;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px))}
 
-.commerceTracking{padding:120px 9%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:#050706}
-.commerceTrackingCopy h2{font-size:clamp(44px,5.5vw,78px);line-height:.98;margin:14px 0 22px}
-.commerceTrackingCopy>p{font-size:17px;line-height:1.7;color:#a8b2ac;margin:0 0 28px;max-width:520px}
-.commerceTrackingCopy ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
-.commerceTrackingCopy li{font-size:14px;color:#9ba69f;padding-left:20px;position:relative;line-height:1.55}
-.commerceTrackingCopy li:before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:#d9ff61;border-radius:2px}
-.commerceTrackingCopy li b{color:#f5f8f6;font-weight:700;margin-right:4px}
-.commerceHeatmap{position:relative;background:#0e1512;border:1px solid #1e2823;border-radius:14px;padding:16px;box-shadow:0 30px 70px #00000060;max-width:520px;margin:0 auto;width:100%}
-.commerceHeatmapChrome{display:flex;gap:6px;margin-bottom:14px}
-.commerceHeatmapChrome i{width:8px;height:8px;border-radius:50%;background:#3a4640}
-.commerceHeatmapPage{position:relative;background:#f5f1e8;border-radius:8px;padding:24px;min-height:340px;overflow:hidden}
-.commerceHeatmapImg{height:120px;background:linear-gradient(135deg,#d4dcd6,#a8b2ac);border-radius:6px;margin-bottom:16px}
-.commerceHeatmapText{display:grid;gap:8px;margin-bottom:20px}
-.commerceHeatmapText i{display:block;height:10px;background:#0b100d;opacity:.15;border-radius:3px}
-.commerceHeatmapCta{width:140px;height:38px;background:#0b100d;border-radius:6px}
-.commerceHeatSpot{position:absolute;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,rgba(217,255,97,.7) 0%,rgba(217,255,97,0) 70%);transform:translate(-50%,-50%);pointer-events:none;animation:heatPulse 2.8s ease-in-out infinite}
-.commerceHeatSpotWarm{background:radial-gradient(circle,rgba(255,180,60,.6) 0%,rgba(255,180,60,0) 70%);width:70px;height:70px}
-.commerceHeatSpotHot{background:radial-gradient(circle,rgba(255,80,60,.75) 0%,rgba(255,80,60,0) 70%);width:96px;height:96px}
-@keyframes heatPulse{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(.94)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 
 @media(max-width:760px){
-  .commerceAudio,.commerceOmni,.commerceTracking{padding:70px 22px;grid-template-columns:1fr;gap:45px}
+  .commerceAudio,.commerceOmni{padding:70px 22px;grid-template-columns:1fr;gap:45px}
+
   .commerceOmniDiagram{max-width:340px;aspect-ratio:1}
   .commerceOmniCore{width:100px;height:100px}
   .commerceOmniCore b{font-size:20px}
