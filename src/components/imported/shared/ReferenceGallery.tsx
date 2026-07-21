@@ -30,10 +30,33 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
 export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [query, setQuery] = useState("");
+  const [activeType, setActiveType] = useState<ReferenceType | "all">("all");
   const trackRef = useRef<HTMLDivElement | null>(null);
   const state = useRef({ startX: 0, startScroll: 0, moved: false, pausedUntil: 0 });
 
-  const loop = items.length > 1 ? [...items, ...items, ...items] : items;
+  const availableTypes = useMemo(() => {
+    const set = new Set<ReferenceType>();
+    for (const r of items) if (r.type) set.add(r.type);
+    return Array.from(set);
+  }, [items]);
+
+  const showFilters = enableFilters ?? (availableTypes.length > 1 || items.length > 6);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return items.filter((r) => {
+      if (activeType !== "all" && r.type !== activeType) return false;
+      if (!q) return true;
+      return (
+        r.segment.toLowerCase().includes(q) ||
+        (r.domain?.toLowerCase().includes(q) ?? false) ||
+        (r.type ? TYPE_LABELS[r.type].toLowerCase().includes(q) : false)
+      );
+    });
+  }, [items, query, activeType]);
+
+  const loop = filtered.length > 1 ? [...filtered, ...filtered, ...filtered] : filtered;
 
   useEffect(() => {
     const el = trackRef.current;
