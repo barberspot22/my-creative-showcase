@@ -39,7 +39,6 @@ function CardapioDigitalPage() {
 
       <section id="entregamos" className="menuValueDeliverables">
         <div>
-          <p className="studioEyebrow">O QUE VOCÊ RECEBE</p>
           <h2>Um cardápio que atende e vende sozinho.</h2>
         </div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
