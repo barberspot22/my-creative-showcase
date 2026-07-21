@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
 const designs = [
-  "/gb-social-designs/design-08.png",
-  "/gb-social-designs/design-09.png",
-  "/gb-social-designs/design-10.png",
-  "/gb-social-designs/design-02.png",
-  "/gb-social-designs/design-03.png",
-  "/gb-social-designs/design-04.png",
-  "/gb-social-designs/design-05.png",
-  "/gb-social-designs/design-06.png",
-  "/gb-social-designs/design-07.png",
+  "/gb-social-designs/new-01.jpg",
+  "/gb-social-designs/new-02.jpg",
+  "/gb-social-designs/new-03.jpg",
+  "/gb-social-designs/new-04.jpg",
+  "/gb-social-designs/new-05.jpg",
+  "/gb-social-designs/new-06.jpg",
+  "/gb-social-designs/new-07.jpg",
+  "/gb-social-designs/new-08.jpg",
+  "/gb-social-designs/new-09.jpg",
 ];
 
 export function PerspectiveTicker() {
