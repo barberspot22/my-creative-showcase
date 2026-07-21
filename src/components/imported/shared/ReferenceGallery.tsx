@@ -264,7 +264,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
         ref={imgRef}
         src={src}
         alt={alt}
-        loading="lazy"
+        loading="eager"
         decoding="async"
         onLoad={() => setReady(true)}
         style={{ transform: `translateY(${translate}px)` }}
