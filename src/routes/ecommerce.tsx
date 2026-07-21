@@ -36,10 +36,10 @@ function EcommercePage() {
     <main>
       <section className="commerceHero">
         <p className="studioEyebrow">GB IA · E-COMMERCE INTELIGENTE</p>
-        <div className="metallicTitle" data-text="O varejo migrou.">
-          <h1>O varejo migrou.<br/><em>Sua marca já está lá?</em></h1>
+        <div className="metallicTitle" data-text="O varejo não morreu.">
+          <h1>O varejo não morreu.<br/><em>Ele só mudou de endereço.</em></h1>
         </div>
-        <p>O físico estagna, o digital cresce em dois dígitos por ano. Entregamos o sistema completo pra você entrar nessa curva.</p>
+        <p>Seu produto precisa estar onde o cliente está comprando. A gente monta essa loja, catálogo e IA vendedora pra você não perder mais nenhuma venda.</p>
         <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
