@@ -83,10 +83,10 @@ export function ReferenceGallery({ items, ctaUrl, title }: ReferenceGalleryProps
   };
 
   const handleClick = (src: string) => {
-    console.log("handleClick", src, "moved", state.current.moved);
     if (state.current.moved) return;
     setLightbox(src);
   };
+
 
 
   return (
