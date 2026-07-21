@@ -1368,3 +1368,13 @@ section[aria-label^="Notifications"] {
 .productSwitcherItem:hover{color:#e8e8e8;border-color:#ffffff30;background:#141416}
 .productSwitcherItem.active{color:#fff;border-color:#c9a84c;background:linear-gradient(180deg,#1a1611,#0e0e10);box-shadow:0 0 0 1px #c9a84c1f,0 6px 24px -12px #c9a84c40;cursor:default}
 @media(max-width:760px){.productSwitcher{top:0}.productSwitcherTrack{padding:10px 16px;gap:8px}.productSwitcherItem{padding:8px 14px;font-size:12px}}
+
+/* Site institucional — value section + problem CTA */
+.siteProductValue{padding:110px 9%;background:var(--black);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:95px;align-items:center}
+.siteProductValue h2{color:#fff}
+.siteProductValue ul{list-style:none;margin:0;padding:0;display:grid;gap:24px}
+.siteProductValue li{font-size:18px;line-height:1.55;color:#bbb;border-left:2px solid #444;padding-left:22px}
+.siteProductValue li strong{color:#fff;font-weight:700}
+.siteProductValue .siteProductPrimary{margin-top:10px}
+.siteProblemCta{display:inline-block;margin-top:28px}
+@media(max-width:760px){.siteProductValue{padding:75px 22px;grid-template-columns:1fr;gap:45px}.siteProductValue li{font-size:16px}}
