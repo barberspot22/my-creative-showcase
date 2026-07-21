@@ -7,17 +7,17 @@ import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
 const deliverables = [
-  ["Cardápio digital via WhatsApp", "O cliente pede e recebe na hora, com formato definido caso a caso — arquivo direto ou navegação interativa por categoria."],
-  ["Atendimento integrado", "O mesmo agente já responde dúvida, direciona pra reserva ou pedido."],
-  ["Social media autônomo (GB Social)", "Agente que cria e publica conteúdo, com aprovação sua antes de qualquer post."],
-  ["Painel único", "Cardápio, conversas e postagens agendadas num só lugar."],
+  ["Cardápio digital visual", "Fotos, preços, descrições e variações organizadas por categoria — o cliente vê tudo antes de pedir."],
+  ["Pedido integrado ao WhatsApp", "Cliente escolhe, monta o pedido e envia pronto para você confirmar."],
+  ["Atendimento apenas quando importa", "O agente responde dúvidas, direciona reservas e finaliza pedidos — sem segurar quem já quer comprar."],
+  ["Painel único", "Cardápio, pedidos, conversas e postagens agendadas num só lugar."],
 ];
 
 const steps = [
-  ["Briefing", "Entendemos o cardápio atual, o volume de pedido e como as redes estão hoje."],
-  ["Arquitetura", "Definimos o formato do cardápio e o fluxo de conteúdo social."],
-  ["Implementação", "Configuramos o agente de WhatsApp e o GB Social com aprovação humana antes de publicar."],
-  ["Operação", "Cardápio respondendo sozinho, redes postando com aval do cliente."],
+  ["Briefing", "Entendemos seu cardápio, preços e as dúvidas mais frequentes dos clientes."],
+  ["Arquitetura", "Montamos a navegação por categorias, variações e o fluxo de pedido."],
+  ["Implementação", "Subimos o cardápio digital e conectamos ao seu WhatsApp."],
+  ["Operação", "Cliente vê, escolhe e pede. Você só confirma e prepara."],
 ];
 
 const proof = [
