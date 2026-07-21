@@ -1602,6 +1602,18 @@ section[aria-label^="Notifications"] {
 .referenceScrollHint{position:absolute;left:12px;bottom:10px;font:9px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1.4px;color:#ffffffcc;background:#000000a0;backdrop-filter:blur(6px);padding:6px 10px;border-radius:999px;pointer-events:none;opacity:.95;border:1px solid #ffffff18}
 @media(max-width:760px){.referenceCardMediaTall{max-height:clamp(340px,72vw,460px)}.referenceScrollbar{width:6px}.referenceScrollHint{font-size:8px;padding:4px 7px}}
 
+/* Phone-frame look for tall reference cards */
+.referenceGalleryTall .referenceCard{flex:0 0 300px}
+.referenceGalleryTall .referenceCardFrame{padding:14px 10px 10px;border-radius:44px;background:linear-gradient(180deg,#161616,#080808);border:1px solid #ffffff14;box-shadow:0 30px 60px #000000a0,inset 0 0 0 2px #0000004d}
+.referenceGalleryTall .referenceCardTop{position:relative;justify-content:center;margin:0 0 10px;height:22px}
+.referenceGalleryTall .referenceCardDots{display:none}
+.referenceGalleryTall .referenceCardUrl{font:600 10px 'JetBrains Mono',monospace;color:#e7e7e7;letter-spacing:.5px}
+.referenceGalleryTall .referenceCardTop:before{content:"";position:absolute;top:2px;left:50%;transform:translateX(-50%);width:82px;height:20px;border-radius:14px;background:#000;border:1px solid #ffffff16;z-index:2}
+.referenceGalleryTall .referenceCardTop:after{content:"";position:absolute;top:8px;left:calc(50% + 22px);width:8px;height:8px;border-radius:50%;background:#111;box-shadow:inset 0 0 0 1px #ffffff22;z-index:3}
+.referenceGalleryTall .referenceCardMediaTall{border-radius:26px;max-height:clamp(420px,52vw,560px);background:#000;box-shadow:inset 0 0 0 1px #ffffff10}
+.referenceGalleryTall .referenceCardMeta small{text-align:center;display:block}
+@media(max-width:760px){.referenceGalleryTall .referenceCard{flex:0 0 260px}.referenceGalleryTall .referenceCardMediaTall{max-height:clamp(400px,86vw,520px)}}
+
 /* ===== Catalog Widget V2 — full menu, iFood-style ===== */
 .menuCatalogScreenV2 { padding: 44px 14px 14px; min-height: 720px; gap: 12px; }
 .menuCatalogHeaderV2 { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; }
