@@ -90,9 +90,7 @@ const caseCards: CaseCard[] = [
     description: "Loja pronta pra vender no automático, com IA que atende e converte",
     badge: "LOJA",
     frames: [
-      { kind: "image", src: webCoverImages.ecommerce[0], alt: "Loja virtual aberta em notebook" },
-      { kind: "image", src: webCoverImages.ecommerce[1], alt: "Compra online em notebook" },
-      { kind: "ui", variant: "commerce-product", label: "Página de produto" },
+      { kind: "image", src: "/covers/hero-ecommerce.jpg", alt: "E-commerce — capa com bolsas, cartão e checkout mobile" },
     ],
   },
   {
@@ -114,7 +112,7 @@ const caseCards: CaseCard[] = [
     description: "Autoridade em segundos e contato sem desvio",
     badge: "SITES",
     frames: [
-      { kind: "ui", variant: "institutional-relaunch", label: "Website Relaunch institucional" },
+      { kind: "image", src: "/covers/hero-institucional.jpg", alt: "Site institucional — capa com laptop, colunas e globo" },
     ],
   },
   {
