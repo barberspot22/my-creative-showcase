@@ -1,29 +1,11 @@
 import type { Reference } from "@/components/imported/shared/ReferenceGallery";
 
 export const ecommerceReferences: Reference[] = [
-  {
-    image: "/references/ecommerce/ponto-atelier.jpg",
-    segment: "Moda & acessórios",
-    domain: "pontoatelier.com.br",
-  },
-  {
-    image: "/references/ecommerce/the-morais.jpg",
-    segment: "Moda feminina",
-    domain: "the-morais.com.br",
-  },
-  {
-    image: "/references/ecommerce/benoliel.jpg",
-    segment: "Loja de departamentos",
-    domain: "benoliel.com.br",
-  },
-  {
-    image: "/references/ecommerce/mockup-moda.jpg",
-    segment: "E-commerce premium",
-  },
-  {
-    image: "/references/ecommerce/mockup-beleza.jpg",
-    segment: "Skincare & beleza",
-  },
+  { image: "/references/ecommerce/tall-1.jpg", segment: "Moda feminina", domain: "lumiere.com" },
+  { image: "/references/ecommerce/tall-2.jpg", segment: "Skincare & beleza", domain: "verene.co" },
+  { image: "/references/ecommerce/tall-3.jpg", segment: "Streetwear & sneakers", domain: "kickz.store" },
+  { image: "/references/ecommerce/tall-4.jpg", segment: "Joias & acessórios", domain: "aurelie.jewelry" },
+  { image: "/references/ecommerce/tall-5.jpg", segment: "Casa & mobiliário", domain: "terra.design" },
 ];
 
 export const cardapioReferences: Reference[] = [
@@ -53,27 +35,9 @@ export const cardapioReferences: Reference[] = [
 ];
 
 export const institucionalReferences: Reference[] = [
-  {
-    image: "/references/institucional/gabriel-site.jpg",
-    segment: "Agência de sites",
-    domain: "gabrieldosite.com.br",
-  },
-  {
-    image: "/references/institucional/minimal.jpg",
-    segment: "Agência de design",
-    domain: "agenciaminimal.com.br",
-  },
-  {
-    image: "/references/institucional/bcicleta.jpg",
-    segment: "Estúdio criativo",
-    domain: "bcicleta.com.br",
-  },
-  {
-    image: "/references/institucional/mockup-estudio.jpg",
-    segment: "Site institucional",
-  },
-  {
-    image: "/references/institucional/mockup-consultoria.jpg",
-    segment: "Consultoria B2B",
-  },
+  { image: "/references/institucional/premium-1.jpg", segment: "Consultoria estratégica", domain: "stratfordadvisors.com" },
+  { image: "/references/institucional/premium-2.jpg", segment: "Estúdio de arquitetura", domain: "ateliernova.co" },
+  { image: "/references/institucional/premium-3.jpg", segment: "Escritório jurídico", domain: "stonebridgelegal.com" },
+  { image: "/references/institucional/premium-4.jpg", segment: "SaaS & tecnologia", domain: "launchpad.io" },
+  { image: "/references/institucional/premium-5.jpg", segment: "Clínica & bem-estar", domain: "ardorwellness.com" },
 ];
