@@ -41,8 +41,8 @@ function GBSocialPage() {
       <section className="socialHero">
         <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
         
-        <div className="metallicTitle" data-text="Sua social midia">
-          <h1>Sua social midia<br/><em>Seu social media agora mora no WhatsApp.</em></h1>
+        <div className="metallicTitle" data-text="Seu social media agora mora no WhatsApp.">
+          <h1>Seu social media <em>agora mora no WhatsApp.</em></h1>
         </div>
 
         <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
