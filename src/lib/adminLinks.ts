@@ -21,7 +21,7 @@ export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; def
   { key: "ecommerce", label: "E-commerce", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de E-commerce completo (loja + automação + IA).") },
   { key: "crm", label: "CRM", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de CRM sob medida.") },
   { key: "site-institucional", label: "Site Institucional", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Site Institucional.") },
-  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Cardápio Digital. Quero que meus clientes vejam os produtos e consigam pedir com mais autonomia.") },
+  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Cardápio Digital. Vendo por [mesa/delivery/WhatsApp] e quero que meus clientes vejam e peçam sozinhos.") },
   { key: "trilha-cta", label: "Home · Trilha (CTA final)", defaultLabel: "Começar minha trilha", defaultUrl: "#kontakt" },
 ];
 
