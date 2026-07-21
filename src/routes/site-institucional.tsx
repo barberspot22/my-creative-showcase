@@ -9,7 +9,7 @@ const deliverables = [
   ["Proposta clara na primeira dobra", "O que você faz, para quem e por quê — sem rolar a página."],
   ["Prova de capacidade", "Cases, números e depoimentos que tiram a dúvida na hora."],
   ["Caminho único pro contato", "CTA claro, sem botões competindo pela atenção."],
-  ["Estrutura sob medida", "Nada de template genérico adaptado à força."],
+  ["Estrutura sob medida", "Nada de template genérico personalizamos para sua empresa\u00a0"],
 ];
 
 const steps = [
