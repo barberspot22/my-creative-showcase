@@ -1610,7 +1610,7 @@ section[aria-label^="Notifications"] {
 
 /* Phone-frame look for tall reference cards */
 .referenceGalleryTall .referenceCard{flex:0 0 300px}
-.referenceGalleryTall .referenceCardFrame{padding:14px 10px 10px;border-radius:44px;background:linear-gradient(180deg,#161616,#080808);border:1px solid #ffffff14;box-shadow:0 30px 60px #000000a0,inset 0 0 0 2px #0000004d}
+.referenceGalleryTall .referenceCardFrame{padding:14px 10px 10px;border-radius:44px;background:linear-gradient(180deg,#242424,#0f0f0f);border:1px solid #ffffff30;box-shadow:none}
 .referenceGalleryTall .referenceCardTop{position:relative;justify-content:center;margin:0 0 10px;height:22px}
 .referenceGalleryTall .referenceCardDots{display:none}
 .referenceGalleryTall .referenceCardUrl{font:600 10px 'JetBrains Mono',monospace;color:#e7e7e7;letter-spacing:.5px}
