@@ -463,7 +463,7 @@ function HomePage() {
       <a href="#top" className="brand gbImageBrand"><img src={gbLogo} alt="GB IA" /></a>
       <button className={`menuButton ${menu ? "open" : ""}`} onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Abrir menu"><i/><i/><i/></button>
       <nav className={menu ? "open" : ""}>
-        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="/crm">CRM</a><a onClick={go} href="/ecommerce">E-commerce</a><a onClick={go} href="/politica-de-privacidade">Política de Privacidade</a><a onClick={go} href="#kontakt">Contato</a>
+        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="/crm">CRM</a><a onClick={go} href="/ecommerce">E-commerce</a><a onClick={go} href="#kontakt">Contato</a>
       </nav>
     </header>
 
