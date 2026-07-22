@@ -52,7 +52,7 @@ function CardapioDigitalPage() {
 
       <section className="menuReferenceSection">
         <div><p className="studioEyebrow">REFERÊNCIAS</p><h2>Cardápios de restaurantes reais <em>e interfaces que a gente replica.</em></h2><p>Pequenos negócios brasileiros e designs premium. Clique para ampliar e imagine o seu cardápio nesse visual.</p></div>
-        <ReferenceGallery items={cardapioReferences} ctaUrl={whatsapp} />
+        <ReferenceGallery items={refs} ctaUrl={whatsapp} />
       </section>
 
 
