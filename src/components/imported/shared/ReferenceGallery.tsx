@@ -381,7 +381,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
       onPointerUp={onUp}
       onPointerCancel={onUp}
       onWheel={onWheel}
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => { if ((dragState.current as any).moved) { e.stopPropagation(); (dragState.current as any).moved = false; } }}
     >
       <img
         ref={imgRef}
