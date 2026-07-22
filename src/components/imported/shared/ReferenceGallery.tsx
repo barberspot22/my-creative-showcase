@@ -72,7 +72,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || filtered.length <= 1) return;
+    if (!el || filtered.length <= 2) return;
     const onScroll = () => {
       const third = el.scrollWidth / 3;
       if (el.scrollLeft < third * 0.5) el.scrollLeft += third;
