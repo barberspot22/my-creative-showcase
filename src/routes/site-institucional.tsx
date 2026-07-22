@@ -69,7 +69,7 @@ function SiteInstitucionalPage() {
             </button>
           ))}
         </div>
-        <ReferenceGallery key={tab} items={activeItems} ctaUrl={whatsapp} variant={activeVariant} showResultCount={false} />
+        <ReferenceGallery key={tab} items={activeItems} ctaUrl={whatsapp} variant={activeVariant} showResultCount={false} showSearch={false} />
       </section>
 
 

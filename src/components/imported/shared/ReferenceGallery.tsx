@@ -19,6 +19,8 @@ interface ReferenceGalleryProps {
   enableFilters?: boolean;
   /** Show the "X referências" count text. Defaults true. */
   showResultCount?: boolean;
+  /** Show the search input. Defaults true. */
+  showSearch?: boolean;
 }
 
 const TYPE_LABELS: Record<ReferenceType, string> = {
@@ -29,7 +31,7 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
   cardapio: "Cardápio digital",
 };
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true }: ReferenceGalleryProps) {
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true, showSearch = true }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [query, setQuery] = useState("");
@@ -134,19 +136,21 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
       {title && <p className="referenceGalleryHint">{title}</p>}
       {showFilters && (
         <div className="referenceFilterBar">
-          <label className="referenceSearch">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar por segmento, domínio ou tipo…"
-              aria-label="Buscar referências"
-            />
-            {query && (
-              <button type="button" className="referenceSearchClear" onClick={() => setQuery("")} aria-label="Limpar busca">×</button>
-            )}
-          </label>
+          {showSearch && (
+            <label className="referenceSearch">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Buscar por segmento, domínio ou tipo…"
+                aria-label="Buscar referências"
+              />
+              {query && (
+                <button type="button" className="referenceSearchClear" onClick={() => setQuery("")} aria-label="Limpar busca">×</button>
+              )}
+            </label>
+          )}
           {availableTypes.length > 1 && (
             <div className="referenceChips" role="tablist">
               <button
