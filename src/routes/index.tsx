@@ -384,7 +384,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
   };
 
-  return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
+  return <section id="servicos" className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
       className="circleProductCarousel"
@@ -463,7 +463,7 @@ function HomePage() {
       <a href="#top" className="brand gbImageBrand"><img src={gbLogo} alt="GB IA" /></a>
       <button className={`menuButton ${menu ? "open" : ""}`} onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Abrir menu"><i/><i/><i/></button>
       <nav className={menu ? "open" : ""}>
-        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="/crm">CRM</a><a onClick={go} href="/ecommerce">E-commerce</a><a onClick={go} href="#kontakt">Contato</a>
+        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={go} href="#servicos">Serviços</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
       </nav>
     </header>
 
