@@ -173,9 +173,11 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
               })}
             </div>
           )}
-          <span className="referenceResultCount" aria-live="polite">
-            {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
-          </span>
+          {showResultCount && (
+            <span className="referenceResultCount" aria-live="polite">
+              {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
+            </span>
+          )}
         </div>
       )}
       {filtered.length === 0 ? (
