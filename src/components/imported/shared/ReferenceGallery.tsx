@@ -19,6 +19,8 @@ interface ReferenceGalleryProps {
   enableFilters?: boolean;
   /** Show the "X referências" count text. Defaults true. */
   showResultCount?: boolean;
+  /** Show the search input. Defaults true. */
+  showSearch?: boolean;
 }
 
 const TYPE_LABELS: Record<ReferenceType, string> = {
@@ -29,7 +31,7 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
   cardapio: "Cardápio digital",
 };
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true }: ReferenceGalleryProps) {
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true, showSearch = true }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [query, setQuery] = useState("");
