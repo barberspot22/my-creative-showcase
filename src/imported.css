@@ -1714,7 +1714,7 @@ section[aria-label^="Notifications"] {
 .referenceEmpty button{padding:10px 18px;border-radius:999px;border:1px solid #c9a84c60;background:transparent;color:#f0d78c;font:700 11px 'Manrope',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 .referenceEmpty button:hover{background:#c9a84c15}
 .referenceCardType{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#c9a84c20;color:#f0d78c;border:1px solid #c9a84c40;margin-left:8px}
-.light .referenceFilterBar,.commerceGallerySection .referenceFilterBar,.siteWorkShowcase .referenceFilterBar{background:#000;border-radius:18px;padding:16px 18px;border:1px solid #ffffff15}
+.light .referenceFilterBar,.commerceGallerySection .referenceFilterBar,.siteWorkShowcase .referenceFilterBar{background:#000;border-radius:18px;padding:16px 18px;border:1px solid #ffffff15;margin:8px 32px 32px}
 .light .referenceSearch,.commerceGallerySection .referenceSearch,.siteWorkShowcase .referenceSearch{background:#121212;border-color:#ffffff18;color:#ffffffb0}
 .light .referenceSearch:focus-within,.commerceGallerySection .referenceSearch:focus-within,.siteWorkShowcase .referenceSearch:focus-within{background:#181818;border-color:#c9a84c80}
 .light .referenceSearch input,.commerceGallerySection .referenceSearch input,.siteWorkShowcase .referenceSearch input{color:#f5f5f5}
