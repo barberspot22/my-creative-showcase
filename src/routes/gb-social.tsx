@@ -53,6 +53,11 @@ function GBSocialPage() {
         <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
       </section>
 
+      <section className="socialWorkShowcase">
+        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
+        <PerspectiveTicker />
+      </section>
+
       <section className="whatsappBlock">
         <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe usar WhatsApp. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para fazer um post.</p></div>
         <div className="chatDemo socialDesignerChat">
@@ -74,11 +79,6 @@ function GBSocialPage() {
       <section className="socialFeatures">
         <div><p className="studioEyebrow">O QUE ELE FAZ</p><h2>Social media completo, numa conversa.</h2></div>
         <div className="socialFeaturesGrid">{features.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
-      </section>
-
-      <section className="socialWorkShowcase">
-        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
-        <PerspectiveTicker />
       </section>
 
       <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
