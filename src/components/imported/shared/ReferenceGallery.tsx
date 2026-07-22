@@ -62,7 +62,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || filtered.length <= 1) return;
+    if (!el || filtered.length <= 2) return;
     const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
     setStart();
     const ro = new ResizeObserver(setStart);
