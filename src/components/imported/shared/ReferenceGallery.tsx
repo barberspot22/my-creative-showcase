@@ -17,6 +17,8 @@ interface ReferenceGalleryProps {
   variant?: "default" | "tall";
   /** Show search + type filter chips. Defaults true when items span >1 type. */
   enableFilters?: boolean;
+  /** Show the "X referências" count text. Defaults true. */
+  showResultCount?: boolean;
 }
 
 const TYPE_LABELS: Record<ReferenceType, string> = {
