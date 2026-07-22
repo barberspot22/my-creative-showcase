@@ -456,6 +456,15 @@ function HomePage() {
 
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
   const go = () => setMenu(false);
+  const scrollToCenter = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    go();
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const target = rect.top + window.scrollY + rect.height / 2 - window.innerHeight / 2;
+    window.scrollTo({ top: target, behavior: "smooth" });
+  };
 
   return <>
     <div className="cursor" aria-hidden="true" />
