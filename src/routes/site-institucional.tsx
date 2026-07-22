@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
-import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { ReferenceGallery, type Reference } from "@/components/imported/shared/ReferenceGallery";
 import { institucionalReferences, vendasReferences, capturaReferences } from "@/lib/references";
+import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
