@@ -17,6 +17,8 @@ interface ReferenceGalleryProps {
   variant?: "default" | "tall";
   /** Show search + type filter chips. Defaults true when items span >1 type. */
   enableFilters?: boolean;
+  /** Show the "X referências" count text. Defaults true. */
+  showResultCount?: boolean;
 }
 
 const TYPE_LABELS: Record<ReferenceType, string> = {
@@ -27,7 +29,7 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
   cardapio: "Cardápio digital",
 };
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters }: ReferenceGalleryProps) {
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [query, setQuery] = useState("");
@@ -171,9 +173,11 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
               })}
             </div>
           )}
-          <span className="referenceResultCount" aria-live="polite">
-            {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
-          </span>
+          {showResultCount && (
+            <span className="referenceResultCount" aria-live="polite">
+              {filtered.length} {filtered.length === 1 ? "referência" : "referências"}
+            </span>
+          )}
         </div>
       )}
       {filtered.length === 0 ? (
