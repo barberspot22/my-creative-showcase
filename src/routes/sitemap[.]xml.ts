@@ -5,13 +5,15 @@ const BASE_URL = "https://gb-ia.lovable.app";
 
 const entries = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/gb-studio", changefreq: "monthly", priority: "0.8" },
-  { path: "/gb-social", changefreq: "monthly", priority: "0.8" },
-  { path: "/ecommerce", changefreq: "monthly", priority: "0.8" },
-  { path: "/crm", changefreq: "monthly", priority: "0.8" },
-  { path: "/site-institucional", changefreq: "monthly", priority: "0.8" },
+  { path: "/admin", changefreq: "monthly", priority: "0.3" },
+  { path: "/api/public/meta-capi", changefreq: "yearly", priority: "0.1" },
   { path: "/cardapio-digital", changefreq: "monthly", priority: "0.8" },
+  { path: "/crm", changefreq: "monthly", priority: "0.8" },
+  { path: "/ecommerce", changefreq: "monthly", priority: "0.8" },
+  { path: "/gb-social", changefreq: "monthly", priority: "0.8" },
+  { path: "/gb-studio", changefreq: "monthly", priority: "0.8" },
   { path: "/politica-de-privacidade", changefreq: "yearly", priority: "0.3" },
+  { path: "/site-institucional", changefreq: "monthly", priority: "0.8" },
   { path: "/termos-de-uso", changefreq: "yearly", priority: "0.3" },
 ];
 
