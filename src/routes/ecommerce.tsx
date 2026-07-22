@@ -50,7 +50,7 @@ function EcommercePage() {
 
       <section className="commerceGallerySection">
         <div><p className="studioEyebrow">REFERÊNCIAS & INSPIRAÇÕES</p><h2>Sites e lojas reais <em>que a gente recria do jeito da sua marca.</em></h2><p>Arraste lateral para trocar de referência · role dentro do card para percorrer o site inteiro, de cima a baixo.</p></div>
-        <ReferenceGallery items={ecommerceReferences} ctaUrl={whatsapp} variant="tall" />
+        <ReferenceGallery items={refs} ctaUrl={whatsapp} variant="tall" />
       </section>
 
 
