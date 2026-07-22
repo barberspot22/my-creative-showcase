@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
-import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { ReferenceGallery, type Reference } from "@/components/imported/shared/ReferenceGallery";
 import { ecommerceReferences } from "@/lib/references";
+import { fetchReferencesByPage } from "@/lib/cms";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
