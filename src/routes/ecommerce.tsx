@@ -40,7 +40,7 @@ function EcommercePage() {
           <h1>Seu cliente está online.<br/><em>Seu produto também?</em></h1>
         </div>
         <p>A gente coloca sua loja, catálogo e IA vendedora nos canais onde o cliente já compra. Você cadastra uma vez e vende em todo lugar.</p>
-        <div className="commerceHeroActions"><a className="commercePrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO MINHA LOJA VENDENDO<br/><span>↗</span></a><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
+        <div className="commerceHeroActions"><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
         <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
       </section>
 
