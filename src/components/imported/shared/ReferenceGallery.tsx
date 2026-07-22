@@ -29,7 +29,7 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
   cardapio: "Cardápio digital",
 };
 
-export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters }: ReferenceGalleryProps) {
+export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true }: ReferenceGalleryProps) {
   const [lightbox, setLightbox] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [query, setQuery] = useState("");
