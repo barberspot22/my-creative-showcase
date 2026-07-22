@@ -83,6 +83,8 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
   useEffect(() => {
     const el = trackRef.current;
     if (!el || filtered.length <= 1) return;
+    // Disable auto-scroll on coarse-pointer (touch) devices — it fights native scroll.
+    if (typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches) return;
     let raf = 0;
     let last = performance.now();
     const speed = 26;
@@ -307,8 +309,10 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
   const pause = (ms = 2200) => { dragState.current.pausedUntil = performance.now() + ms; };
 
   const onMediaDown = (e: React.PointerEvent<HTMLSpanElement>) => {
+    // Only hijack for mouse/pen vertical drag; let touch fall through to native gestures + parent click.
+    if (e.pointerType === "touch") { pause(2500); return; }
     e.stopPropagation();
-    dragState.current = { ...dragState.current, dragging: true, startY: e.clientY, startPct: posPct, source: "media" };
+    dragState.current = { ...dragState.current, dragging: true, startY: e.clientY, startPct: posPct, source: "media", moved: false } as typeof dragState.current & { moved: boolean };
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
   };
   const onMediaMove = (e: React.PointerEvent<HTMLSpanElement>) => {
@@ -319,6 +323,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     const range = img.offsetHeight - wrap.offsetHeight;
     if (range <= 0) return;
     const dy = e.clientY - dragState.current.startY;
+    if (Math.abs(dy) > 4) (dragState.current as any).moved = true;
     setPosPct(Math.min(1, Math.max(0, dragState.current.startPct + (-dy / range))));
   };
   const onUp = (e: React.PointerEvent<HTMLSpanElement>) => {
@@ -376,7 +381,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
       onPointerUp={onUp}
       onPointerCancel={onUp}
       onWheel={onWheel}
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => { if ((dragState.current as any).moved) { e.stopPropagation(); (dragState.current as any).moved = false; } }}
     >
       <img
         ref={imgRef}
