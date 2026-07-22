@@ -1733,13 +1733,14 @@ section[aria-label^="Notifications"] {
 .lookbookViewport{position:relative;width:100%;overflow:hidden;cursor:grab;user-select:none;touch-action:pan-y;padding:14px 0;mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
 .lookbookViewport:active{cursor:grabbing}
 .lookbookTrack{display:flex;gap:22px;width:max-content;will-change:transform;padding:0 22px}
-.lookbookCard{position:relative;flex:0 0 auto;width:clamp(340px,42vw,560px);aspect-ratio:16/10;margin:0;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 24px 60px #0009;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
-.lookbookCard img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;filter:grayscale(.35) contrast(1.02);transition:filter .35s ease,transform .6s ease}
+.lookbookCard{position:relative;flex:0 0 auto;height:clamp(280px,44vw,520px);width:auto;margin:0;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 24px 60px #0009;transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
+.lookbookCard img{height:100%;width:auto;display:block;pointer-events:none;filter:grayscale(.35) contrast(1.02);transition:filter .35s ease}
 .lookbookCard:hover{transform:translateY(-4px);box-shadow:0 34px 80px #000c}
-.lookbookCard:hover img{filter:none;transform:scale(1.03)}
+.lookbookCard:hover img{filter:none}
 .lookbookCard figcaption{position:absolute;left:14px;right:14px;bottom:14px;padding:10px 14px;border-radius:10px;background:linear-gradient(180deg,#0000,#000000d9);color:#fff;opacity:0;transform:translateY(6px);transition:.25s;pointer-events:none}
 .lookbookCard:hover figcaption{opacity:1;transform:none}
 .lookbookCard figcaption strong{display:block;font:800 11px Manrope,Arial,sans-serif;text-transform:uppercase;letter-spacing:1.2px}
 .lookbookCard figcaption span{display:block;margin-top:3px;color:#ddd;font-size:11px}
 .lookbookHint{margin:26px 0 0;text-align:center;color:#777;text-transform:uppercase;font-size:10px;letter-spacing:2px}
-@media(max-width:760px){.galleryBlock{padding:60px 0 70px!important}.lookbookCard{width:78vw}}
+@media(max-width:760px){.galleryBlock{padding:60px 0 70px!important}.lookbookCard{height:60vw}}
+
