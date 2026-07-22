@@ -1,31 +1,27 @@
-## Ajustes na galeria de referências + aviso legal
+## Problem
 
-### 1. Corrigir o arrastar lateral no mobile
-Arquivo: `src/components/imported/shared/ReferenceGallery.tsx` + `src/imported.css`
+On `/crm`, the section intro block in `#estrutura` (heading "Dois módulos, cada um com sua própria lógica.") is meant to stay pinned on the left while the numbered list scrolls on the right. Today it doesn't behave as fixed:
 
-O track hoje usa `touch-action: pan-y`, que devolve o gesto horizontal para o navegador e faz o carrossel travar em iOS/Android quando o dedo se move na diagonal. Além disso, o `<button.referenceCardFrame>` interno recebe o pointerdown antes do track, sequestrando o gesto.
+- The `ProductSwitcher` above it is `position: sticky; top: 0` (~46px tall), but `.crmSectionIntro` uses `top: 70px` with no accounting for the switcher — they can visually collide and the heading gets pushed under the switcher on some viewports.
+- The mobile media query (`max-width: 760px`) forces `.crmSectionIntro { position: static }`. At tablet widths just above that (e.g. 768px, the current preview) the grid stays 2-column but the intro no longer feels anchored, so as the user scrolls the list the heading scrolls away and overlaps the next section's text.
 
-- Trocar `touch-action` do `.referenceScrollTrack` para `pan-y pinch-zoom` → na prática usar `touch-action: pan-y` no wrapper e `touch-action: none` no track (ou `pan-x`), garantindo que só o drag horizontal seja controlado pelo JS.
-- Adicionar `touch-action: inherit` nos filhos (`.referenceCard`, `.referenceCardFrame`, `img`) e `user-select:none` + `-webkit-user-drag:none` nas imagens.
-- No handler de pointer: ignorar `pointerType === "mouse"` já funciona, mas incluir `e.preventDefault()` no `onPointerMove` quando `moved` for true, e liberar o clique só se `!moved`.
-- Manter o auto-scroll pausado enquanto o dedo estiver na tela (já existe pausedUntil).
+## Fix (CSS-only, `src/imported.css`)
 
-### 2. Limpar a UI de cada card
-Arquivo: `src/components/imported/shared/ReferenceGallery.tsx` + `src/imported.css`
+1. Make `.crmSectionIntro` reliably sticky:
+   - Keep `position: sticky; align-self: start`.
+   - Change `top` to sit just below the `ProductSwitcher` (approx `top: 60px`) and add a small `padding-bottom` so descenders don't touch the list rows behind it.
+   - Add `z-index: 1` so the pinned heading paints above the scrolling column, and a subtle background matching `.crmStructure` (`background: var(--cream)` in default theme / `#050807` in the dark override on line 1165) so text doesn't bleed through.
 
-- Remover o botão "Falar no WhatsApp" da meta do card (`referenceCardMeta a`) — a CTA global no fim da página já cumpre esse papel.
-- Remover a tag verde/dourada `.referenceCardType` do card (tanto do JSX quanto do CSS). Manter apenas o `<small>` do segmento, centralizado.
-- Como o `ctaUrl` deixa de aparecer no card, manter a prop apenas para compatibilidade (sem uso visual) — sem alterar as rotas que ainda o passam.
+2. Keep it sticky on tablet, only drop to static on true mobile:
+   - Remove `.crmSectionIntro { position: static }` from the `@media (max-width: 760px)` block, or narrow it to `@media (max-width: 620px)` so 768px preview keeps the sticky behavior.
 
-### 3. Aviso legal sobre as referências
-Arquivo: `src/routes/politica-de-privacidade.tsx` (e mesmo bloco em `src/routes/termos.tsx`)
+3. No changes to `src/routes/crm.tsx` markup or copy.
 
-Adicionar uma nova seção curta ao final ("11. Sites de referência exibidos"):
+## Files touched
 
-> As imagens e sites exibidos nas seções de referência do portfólio têm caráter exclusivamente ilustrativo. Parte deles é de autoria da GB IA e parte pertence a marcas de terceiros, exibidos apenas como inspiração ou para contextualizar o segmento. Não reivindicamos autoria, titularidade ou qualquer direito de propriedade intelectual sobre trabalhos de terceiros. Marcas, logotipos e conteúdos pertencem aos seus respectivos donos. Caso você seja titular de algum material aqui exibido e deseje sua remoção, basta escrever para privacidade@gbia.com.br.
+- `src/imported.css` — update `.crmSectionIntro` rule (~line 125 block) and the mobile override (~line 127 block).
 
-O mesmo texto (ou uma referência a essa seção) entra em `termos.tsx` como cláusula de propriedade intelectual de terceiros.
+## Verification
 
-### Fora de escopo
-- Não altero o conteúdo das referências, o lightbox nem o layout das rotas que usam a galeria.
-- Não mexo no CTA final (`FinalCta`).
+- Load `/crm` at 768px and desktop: scroll through `#estrutura` and confirm the heading stays pinned under the ProductSwitcher and never overlaps the "RECOVER DENTRO DO CRM" section below.
+- At <620px, intro flows inline as before.
