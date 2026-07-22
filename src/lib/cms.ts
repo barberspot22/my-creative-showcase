@@ -97,13 +97,13 @@ export async function fetchPortfolio(pageKey: string): Promise<PortfolioItem[]> 
 }
 
 export async function upsertPortfolioItem(item: PortfolioItem) {
-  const { error } = await supabase.from("portfolio_items").upsert(item);
-  if (error) throw error;
+  const payload: any = { ...item };
+  if (!payload.id) delete payload.id;
+  await upsertPortfolioFn({ data: payload });
 }
 
 export async function deletePortfolioItem(id: string) {
-  const { error } = await supabase.from("portfolio_items").delete().eq("id", id);
-  if (error) throw error;
+  await deletePortfolioFn({ data: { id } });
 }
 
 export async function reorderPortfolio(items: PortfolioItem[]) {
