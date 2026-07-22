@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { upsertPortfolioFn, deletePortfolioFn } from "@/lib/portfolio.functions";
 
 export type HomeCard = {
   key: string;
@@ -96,19 +97,19 @@ export async function fetchPortfolio(pageKey: string): Promise<PortfolioItem[]> 
 }
 
 export async function upsertPortfolioItem(item: PortfolioItem) {
-  const { error } = await supabase.from("portfolio_items").upsert(item);
-  if (error) throw error;
+  const payload: any = { ...item };
+  if (!payload.id) delete payload.id;
+  await upsertPortfolioFn({ data: payload });
 }
 
 export async function deletePortfolioItem(id: string) {
-  const { error } = await supabase.from("portfolio_items").delete().eq("id", id);
-  if (error) throw error;
+  await deletePortfolioFn({ data: { id } });
 }
 
 export async function reorderPortfolio(items: PortfolioItem[]) {
-  const rows = items.map((it, i) => ({ ...it, position: i }));
-  const { error } = await supabase.from("portfolio_items").upsert(rows);
-  if (error) throw error;
+  for (let i = 0; i < items.length; i++) {
+    await upsertPortfolioItem({ ...items[i], position: i });
+  }
 }
 
 // ---------------- Site Texts ----------------
