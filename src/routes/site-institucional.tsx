@@ -36,7 +36,15 @@ const steps = [
 function SiteInstitucionalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("site-institucional");
   const [tab, setTab] = useState<RefTab>("institucional");
-  const activeItems = tab === "vendas" ? vendasReferences : tab === "captura" ? capturaReferences : institucionalReferences;
+  const [instItems, setInstItems] = useState<Reference[]>(institucionalReferences);
+  const [vendasItems, setVendasItems] = useState<Reference[]>(vendasReferences);
+  const [capturaItems, setCapturaItems] = useState<Reference[]>(capturaReferences);
+  useEffect(() => {
+    fetchReferencesByPage("site-institucional").then((r) => { if (r.length) setInstItems(r.map((x) => ({ ...x, type: "institucional" }))); }).catch(() => {});
+    fetchReferencesByPage("pagina-vendas").then((r) => { if (r.length) setVendasItems(r.map((x) => ({ ...x, type: "vendas" }))); }).catch(() => {});
+    fetchReferencesByPage("pagina-captura").then((r) => { if (r.length) setCapturaItems(r.map((x) => ({ ...x, type: "captura" }))); }).catch(() => {});
+  }, []);
+  const activeItems = tab === "vendas" ? vendasItems : tab === "captura" ? capturaItems : instItems;
   const activeVariant = "tall" as const;
   const activeHint = REF_TABS.find((item) => item.key === tab)?.hint ?? "";
   return <div className="siteProductPage">
