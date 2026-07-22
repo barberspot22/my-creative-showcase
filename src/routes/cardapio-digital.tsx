@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { FanGallery } from "@/components/imported/cardapio-digital/FanGallery";
 import { CatalogWidget } from "@/components/imported/cardapio-digital/CatalogWidget";
-import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { ReferenceGallery, type Reference } from "@/components/imported/shared/ReferenceGallery";
 import { cardapioReferences } from "@/lib/references";
+import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 
@@ -27,6 +29,8 @@ const steps = [
 
 function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
+  const [refs, setRefs] = useState<Reference[]>(cardapioReferences);
+  useEffect(() => { fetchReferencesByPage("cardapio-digital").then((r) => { if (r.length) setRefs(r.map((x) => ({ ...x, type: "cardapio" }))); }).catch(() => {}); }, []);
   return <div className="menuProductPage">
     <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="cardapio-digital" />
@@ -48,7 +52,7 @@ function CardapioDigitalPage() {
 
       <section className="menuReferenceSection">
         <div><p className="studioEyebrow">REFERÊNCIAS</p><h2>Cardápios de restaurantes reais <em>e interfaces que a gente replica.</em></h2><p>Pequenos negócios brasileiros e designs premium. Clique para ampliar e imagine o seu cardápio nesse visual.</p></div>
-        <ReferenceGallery items={cardapioReferences} ctaUrl={whatsapp} />
+        <ReferenceGallery items={refs} ctaUrl={whatsapp} />
       </section>
 
 

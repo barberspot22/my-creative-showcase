@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
-import { ReferenceGallery } from "@/components/imported/shared/ReferenceGallery";
+import { ReferenceGallery, type Reference } from "@/components/imported/shared/ReferenceGallery";
 import { ecommerceReferences } from "@/lib/references";
+import { fetchReferencesByPage } from "@/lib/cms";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
@@ -30,6 +32,8 @@ const channels = [
 
 function EcommercePage() {
   const { ctaUrl: whatsapp } = usePageLink("ecommerce");
+  const [refs, setRefs] = useState<Reference[]>(ecommerceReferences);
+  useEffect(() => { fetchReferencesByPage("ecommerce").then((r) => { if (r.length) setRefs(r.map((x) => ({ ...x, type: "ecommerce" }))); }).catch(() => {}); }, []);
   return <div className="commercePage">
     <header className="studioNav commerceNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="ecommerce" />
@@ -46,7 +50,7 @@ function EcommercePage() {
 
       <section className="commerceGallerySection">
         <div><p className="studioEyebrow">REFERÊNCIAS & INSPIRAÇÕES</p><h2>Sites e lojas reais <em>que a gente recria do jeito da sua marca.</em></h2><p>Arraste lateral para trocar de referência · role dentro do card para percorrer o site inteiro, de cima a baixo.</p></div>
-        <ReferenceGallery items={ecommerceReferences} ctaUrl={whatsapp} variant="tall" />
+        <ReferenceGallery items={refs} ctaUrl={whatsapp} variant="tall" />
       </section>
 
 

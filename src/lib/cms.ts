@@ -36,11 +36,31 @@ export type TrackingSettings = {
 export const PORTFOLIO_PAGES: { key: string; label: string }[] = [
   { key: "gb-social", label: "GB Social" },
   { key: "site-institucional", label: "Site Institucional" },
+  { key: "pagina-vendas", label: "Página de Vendas" },
+  { key: "pagina-captura", label: "Página de Captura" },
   { key: "ecommerce", label: "E-commerce" },
   { key: "cardapio-digital", label: "Cardápio / Menu Digital" },
   { key: "gb-studio", label: "GB Studio" },
   { key: "crm", label: "CRM" },
 ];
+
+// Fetch portfolio items and map to ReferenceGallery shape, with fallback if empty/offline.
+export async function fetchReferencesByPage(
+  pageKey: string,
+): Promise<{ image: string; segment: string; domain?: string }[]> {
+  const { data, error } = await supabase
+    .from("portfolio_items")
+    .select("*")
+    .eq("page_key", pageKey)
+    .eq("visible", true)
+    .order("position");
+  if (error) throw error;
+  return (data ?? []).map((r: any) => ({
+    image: r.image_url,
+    segment: r.title,
+    domain: r.description || undefined,
+  }));
+}
 
 export const SITE_TEXT_PAGES = [
   { key: "home", label: "Home" },
