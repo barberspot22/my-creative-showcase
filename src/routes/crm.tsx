@@ -65,7 +65,7 @@ function CRMPage() {
         <p className="studioEyebrow">GB IA — CRM</p>
         <h1>Comercial e produção não podem viver na mesma bagunça.</h1>
         <p>Construímos um CRM próprio, dividido em dois módulos reais — um para o funil de vendas, outro para o fluxo de entrega — porque qualificar lead e entregar projeto são dois jogos completamente diferentes.</p>
-        <div className="crmHeroActions"><a className="crmPrimary" href={whatsapp} target="_blank" rel="noreferrer">SOLICITAR ORÇAMENTO<br/><span>↗</span></a><a className="crmSecondary" href="#automacoes">Ver como funciona <span>↓</span></a></div>
+        <div className="crmHeroActions"><a className="crmSecondary" href="#automacoes">Ver como funciona <span>↓</span></a></div>
         <small>Comercial separado da produção · Responsável por card · Fluxo próprio</small>
       </section>
 

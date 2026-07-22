@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
@@ -26,12 +26,8 @@ const steps = [
 function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const { ctaUrl, ctaLabel } = usePageLink("gb-social");
+  const { ctaUrl } = usePageLink("gb-social");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
-  const CtaPrimary = ({ children, className = "socialPrimary" }: { children: ReactNode; className?: string }) =>
-    ctaUrl
-      ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
-      : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
       ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a>
@@ -48,7 +44,6 @@ function GBSocialPage() {
         <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
         
         <strong>30 dias de conteúdo em uma conversa.</strong>
-        <CtaPrimary>CRIAR MEU CALENDÁRIO DE 30 DIAS<br/><span>↗</span></CtaPrimary>
 
         <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
       </section>

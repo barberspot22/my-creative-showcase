@@ -46,7 +46,7 @@ function SiteInstitucionalPage() {
         <p className="studioEyebrow">SITE INSTITUCIONAL</p>
         <h1>Presença digital que<br/>transforma visita em cliente.</h1>
         <p>Seu cartão de visita digital, aberto 24h. Apresenta, prova autoridade e leva ao contato.</p>
-        <div className="siteProductActions"><a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUERO UM SITE QUE VENDE<br/><span>↗</span></a><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
+        <div className="siteProductActions"><a className="siteProductSecondary" href="#entregamos">Ver como funciona <span>↓</span></a></div>
       </section>
 
       <section className="siteWorkShowcase">
@@ -81,7 +81,7 @@ function SiteInstitucionalPage() {
             <li><strong>Organiza serviços e produtos</strong> de um jeito que o cliente entende.</li>
             <li><strong>Converte visita</strong> em WhatsApp, ligação ou formulário.</li>
           </ul>
-          <a className="siteProductPrimary" href={whatsapp} target="_blank" rel="noreferrer">QUANTO CUSTA NÃO TER ISSO<br/><span>↗</span></a>
+          <a className="siteProductSecondary" href={whatsapp} target="_blank" rel="noreferrer">FALAR NO WHATSAPP <span>↗</span></a>
         </div>
       </section>
 
