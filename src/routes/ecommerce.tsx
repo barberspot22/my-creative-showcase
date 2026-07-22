@@ -32,6 +32,8 @@ const channels = [
 
 function EcommercePage() {
   const { ctaUrl: whatsapp } = usePageLink("ecommerce");
+  const [refs, setRefs] = useState<Reference[]>(ecommerceReferences);
+  useEffect(() => { fetchReferencesByPage("ecommerce").then((r) => { if (r.length) setRefs(r.map((x) => ({ ...x, type: "ecommerce" }))); }).catch(() => {}); }, []);
   return <div className="commercePage">
     <header className="studioNav commerceNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="ecommerce" />
