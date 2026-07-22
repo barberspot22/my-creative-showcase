@@ -58,11 +58,11 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     });
   }, [items, query, activeType]);
 
-  const loop = filtered.length > 1 ? [...filtered, ...filtered, ...filtered] : filtered;
+  const loop = filtered.length > 2 ? [...filtered, ...filtered, ...filtered] : filtered;
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || filtered.length <= 1) return;
+    if (!el || filtered.length <= 2) return;
     const setStart = () => { el.scrollLeft = el.scrollWidth / 3; };
     setStart();
     const ro = new ResizeObserver(setStart);
@@ -72,7 +72,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || filtered.length <= 1) return;
+    if (!el || filtered.length <= 2) return;
     const onScroll = () => {
       const third = el.scrollWidth / 3;
       if (el.scrollLeft < third * 0.5) el.scrollLeft += third;
@@ -84,7 +84,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   useEffect(() => {
     const el = trackRef.current;
-    if (!el || filtered.length <= 1) return;
+    if (!el || filtered.length <= 2) return;
     // Disable auto-scroll on coarse-pointer (touch) devices — it fights native scroll.
     if (typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches) return;
     let raf = 0;
