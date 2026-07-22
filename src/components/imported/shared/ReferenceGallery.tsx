@@ -83,6 +83,8 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
   useEffect(() => {
     const el = trackRef.current;
     if (!el || filtered.length <= 1) return;
+    // Disable auto-scroll on coarse-pointer (touch) devices — it fights native scroll.
+    if (typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches) return;
     let raf = 0;
     let last = performance.now();
     const speed = 26;
