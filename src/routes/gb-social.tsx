@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, useState } from "react";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
@@ -28,10 +28,6 @@ function GBSocialPage() {
   const [sent, setSent] = useState(false);
   const { ctaUrl, ctaLabel } = usePageLink("gb-social");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
-  const CtaPrimary = ({ children, className = "socialPrimary" }: { children: ReactNode; className?: string }) =>
-    ctaUrl
-      ? <a className={className} href={ctaUrl} target="_blank" rel="noreferrer">{children}</a>
-      : <button className={className} onClick={() => setOpen(true)}>{children}</button>;
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
       ? <a href={ctaUrl} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a>
