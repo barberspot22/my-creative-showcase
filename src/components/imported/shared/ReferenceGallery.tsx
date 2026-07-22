@@ -58,7 +58,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     });
   }, [items, query, activeType]);
 
-  const loop = filtered.length > 1 ? [...filtered, ...filtered, ...filtered] : filtered;
+  const loop = filtered.length > 2 ? [...filtered, ...filtered, ...filtered] : filtered;
 
   useEffect(() => {
     const el = trackRef.current;
