@@ -26,7 +26,7 @@ const steps = [
 function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
-  const { ctaUrl, ctaLabel } = usePageLink("gb-social");
+  const { ctaUrl } = usePageLink("gb-social");
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
