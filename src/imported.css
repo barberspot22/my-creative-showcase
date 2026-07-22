@@ -1714,4 +1714,13 @@ section[aria-label^="Notifications"] {
 .referenceEmpty button{padding:10px 18px;border-radius:999px;border:1px solid #c9a84c60;background:transparent;color:#f0d78c;font:700 11px 'Manrope',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
 .referenceEmpty button:hover{background:#c9a84c15}
 .referenceCardType{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:#c9a84c20;color:#f0d78c;border:1px solid #c9a84c40;margin-left:8px}
-@media(max-width:760px){.referenceFilterBar{padding:0 22px;gap:10px}.referenceSearch{min-width:100%}.referenceResultCount{margin-left:0}}
+.light .referenceFilterBar,.commerceGallerySection .referenceFilterBar,.siteWorkShowcase .referenceFilterBar{background:#000;border-radius:18px;padding:16px 18px;border:1px solid #ffffff15}
+.light .referenceSearch,.commerceGallerySection .referenceSearch,.siteWorkShowcase .referenceSearch{background:#121212;border-color:#ffffff18;color:#ffffffb0}
+.light .referenceSearch:focus-within,.commerceGallerySection .referenceSearch:focus-within,.siteWorkShowcase .referenceSearch:focus-within{background:#181818;border-color:#c9a84c80}
+.light .referenceSearch input,.commerceGallerySection .referenceSearch input,.siteWorkShowcase .referenceSearch input{color:#f5f5f5}
+.light .referenceSearch input::placeholder,.commerceGallerySection .referenceSearch input::placeholder,.siteWorkShowcase .referenceSearch input::placeholder{color:#ffffff55}
+.light .referenceChip,.commerceGallerySection .referenceChip,.siteWorkShowcase .referenceChip{background:#121212;border-color:#ffffff18;color:#e8e8e8}
+.light .referenceChip:hover,.commerceGallerySection .referenceChip:hover,.siteWorkShowcase .referenceChip:hover{background:#1a1a1a;border-color:#c9a84c60;color:#fff}
+.light .referenceChip.active,.commerceGallerySection .referenceChip.active,.siteWorkShowcase .referenceChip.active{background:linear-gradient(180deg,#f0d78c,#c9a84c);color:#1a0d05;border-color:transparent}
+.light .referenceResultCount,.commerceGallerySection .referenceResultCount,.siteWorkShowcase .referenceResultCount{color:#888}
+@media(max-width:760px){.referenceFilterBar{padding:0 22px;gap:10px}.light .referenceFilterBar,.commerceGallerySection .referenceFilterBar,.siteWorkShowcase .referenceFilterBar{padding:14px 16px;border-radius:14px}.referenceSearch{min-width:100%}.referenceResultCount{margin-left:0}}
