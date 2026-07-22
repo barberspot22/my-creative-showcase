@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { upsertPortfolioFn, deletePortfolioFn } from "@/lib/portfolio.functions";
 
 export type HomeCard = {
   key: string;
