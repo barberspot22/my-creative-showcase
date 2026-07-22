@@ -384,7 +384,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
   };
 
-  return <section className="circleProductSection reveal" aria-label="Produtos GB IA">
+  return <section id="servicos" className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
       className="circleProductCarousel"
