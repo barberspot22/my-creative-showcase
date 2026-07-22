@@ -29,6 +29,8 @@ const steps = [
 
 function CardapioDigitalPage() {
   const { ctaUrl: whatsapp, ctaLabel } = usePageLink("cardapio-digital");
+  const [refs, setRefs] = useState<Reference[]>(cardapioReferences);
+  useEffect(() => { fetchReferencesByPage("cardapio-digital").then((r) => { if (r.length) setRefs(r.map((x) => ({ ...x, type: "cardapio" }))); }).catch(() => {}); }, []);
   return <div className="menuProductPage">
     <header className="studioNav menuProductNav"><BrandLogo /><a href={whatsapp} target="_blank" rel="noreferrer" className="studioNavCta">SOLICITAR ORÇAMENTO<br/><span>↗</span></a></header>
     <ProductSwitcher current="cardapio-digital" />
