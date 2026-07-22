@@ -107,9 +107,9 @@ export async function deletePortfolioItem(id: string) {
 }
 
 export async function reorderPortfolio(items: PortfolioItem[]) {
-  const rows = items.map((it, i) => ({ ...it, position: i }));
-  const { error } = await supabase.from("portfolio_items").upsert(rows);
-  if (error) throw error;
+  for (let i = 0; i < items.length; i++) {
+    await upsertPortfolioItem({ ...items[i], position: i });
+  }
 }
 
 // ---------------- Site Texts ----------------
