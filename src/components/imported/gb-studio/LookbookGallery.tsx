@@ -1,4 +1,10 @@
 import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
+import img6166 from "@/assets/lookbook/IMG_6166.jpeg.asset.json";
+import img6167 from "@/assets/lookbook/IMG_6167.jpeg.asset.json";
+import img6168 from "@/assets/lookbook/IMG_6168.jpeg.asset.json";
+import img6169 from "@/assets/lookbook/IMG_6169.jpeg.asset.json";
+import img6170 from "@/assets/lookbook/IMG_6170.jpeg.asset.json";
+import img6171 from "@/assets/lookbook/IMG_6171.jpeg.asset.json";
 
 type LookbookCase = {
   id: string;
@@ -11,30 +17,25 @@ type Item = LookbookCase & { image: string; imageIndex: number };
 
 const lookbookCases: LookbookCase[] = [
   {
-    id: "fz-jeans",
-    title: "Denim editorial",
-    client: "FZ Jeans",
-    images: ["/gb-studio/lookbook-02.png", "/gb-studio/lookbook-03.png", "/gb-studio/lookbook-11.png"],
+    id: "concreto-listras",
+    title: "Editorial concreto",
+    client: "Studio Bruta",
+    images: [img6166.url, img6167.url, img6170.url],
   },
   {
-    id: "santa-pimenta",
-    title: "Lookbook branco",
-    client: "Santa Pimenta",
-    images: ["/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png", "/gb-studio/lookbook-09.png"],
+    id: "denim-jardim",
+    title: "Denim botânico",
+    client: "Herbá Denim",
+    images: [img6168.url, img6169.url],
   },
   {
-    id: "dondoca-express",
-    title: "Campanha urbana",
-    client: "Dondoca Express",
-    images: ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-08.png", "/gb-studio/lookbook-10.png"],
-  },
-  {
-    id: "beauty-studio",
-    title: "Beauty commerce",
-    client: "Studio Beauty",
-    images: ["/gb-studio/lookbook-06.png", "/gb-studio/lookbook-07.png", "/gb-studio/modelo-01.png"],
+    id: "verao-lago",
+    title: "Verão à beira do lago",
+    client: "Marê Beachwear",
+    images: [img6171.url],
   },
 ];
+
 
 export function LookbookGallery() {
   const base = useMemo<Item[]>(
