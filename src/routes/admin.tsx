@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState, useCallback, ReactNode } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef, ReactNode } from "react";
 import { toast, Toaster } from "sonner";
 import {
   fetchHomeCards, upsertHomeCards, HomeCard,
@@ -8,7 +8,8 @@ import {
   fetchSiteText, saveSiteText, SITE_TEXT_PAGES,
   fetchTracking, saveTracking, TrackingSettings, defaultTracking,
 } from "@/lib/cms";
-import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY } from "@/lib/adminLinks";
+import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY, type PageKey } from "@/lib/adminLinks";
+import { emitPreview, PREVIEW_READY_MSG } from "@/lib/livePreview";
 
 const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
@@ -21,20 +22,19 @@ const defaultHomeCards: HomeCard[] = [
   { key: "menu", title: "Menu Digital", description: "Cardápio, pedidos e presença digital", badge: "CATÁLOGO", href: "/cardapio-digital", frames: [], position: 5 },
 ];
 
-type TabKey = "home" | "portfolio" | "links" | "textos" | "tracking";
+type TabKey = "home" | "portfolio" | "conteudo" | "tracking";
 
 const TABS: { key: TabKey; label: string; icon: string; group: string }[] = [
-  { key: "home",      label: "Home",       icon: "◧", group: "Conteúdo" },
+  { key: "conteudo",  label: "Conteúdo",   icon: "¶", group: "Conteúdo" },
+  { key: "home",      label: "Home cards", icon: "◧", group: "Conteúdo" },
   { key: "portfolio", label: "Portfólios", icon: "▦", group: "Conteúdo" },
-  { key: "links",     label: "Links",      icon: "↗", group: "Conteúdo" },
-  { key: "textos",    label: "Textos",     icon: "¶", group: "Conteúdo" },
   { key: "tracking",  label: "Pixel",      icon: "◈", group: "Rastreamento" },
 ];
 
 export const Route = createFileRoute("/admin")({ component: AdminPage });
 
 function AdminPage() {
-  const [tab, setTab] = useState<TabKey>("home");
+  const [tab, setTab] = useState<TabKey>("conteudo");
   const current = TABS.find((t) => t.key === tab)!;
 
   return (
@@ -67,10 +67,9 @@ function AdminPage() {
         <main className="admX-main">
           <TopCrumb section={current.label} />
           <section className="admX-section" key={tab}>
+            {tab === "conteudo" && <ContentTab />}
             {tab === "home" && <HomeCardsTab />}
             {tab === "portfolio" && <PortfolioTab />}
-            {tab === "links" && <LinksTab />}
-            {tab === "textos" && <TextsTab />}
             {tab === "tracking" && <TrackingTab />}
           </section>
         </main>
@@ -842,3 +841,260 @@ function TrackingTab() {
     </>
   );
 }
+
+/* =========================================================
+   CONTEÚDO (Textos + Links por página, com preview ao vivo)
+   ========================================================= */
+type ContentPage = {
+  key: string;         // used for site_texts.page_key
+  label: string;
+  route: string;       // iframe URL path
+  linkKeys: PageKey[]; // page_links / adminLinks keys shown for this page
+};
+
+const CONTENT_PAGES: ContentPage[] = [
+  { key: "home",               label: "Home",                route: "/",                    linkKeys: ["trilha-cta"] },
+  { key: "gb-social",          label: "GB Social",           route: "/gb-social",           linkKeys: ["gb-social"] },
+  { key: "site-institucional", label: "Site Institucional",  route: "/site-institucional",  linkKeys: ["site-institucional"] },
+  { key: "ecommerce",          label: "E-commerce",          route: "/ecommerce",           linkKeys: ["ecommerce"] },
+  { key: "cardapio-digital",   label: "Cardápio Digital",    route: "/cardapio-digital",    linkKeys: ["cardapio-digital"] },
+  { key: "gb-studio",          label: "GB Studio",           route: "/gb-studio",           linkKeys: ["gb-studio"] },
+  { key: "crm",                label: "CRM",                 route: "/crm",                 linkKeys: ["crm"] },
+];
+
+function ContentTab() {
+  const [pageKey, setPageKey] = useState<string>(CONTENT_PAGES[0].key);
+  const page = CONTENT_PAGES.find((p) => p.key === pageKey)!;
+
+  // --- Texts state (for current page) ---
+  const [content, setContent] = useState<Record<string, string>>({});
+  const [newKey, setNewKey] = useState("");
+  const [textsDirty, setTextsDirty] = useState(false);
+
+  // --- Links state (all pages) ---
+  const [links, setLinks] = useState<Record<PageKey, { ctaLabel: string; ctaUrl: string }>>(() => ({ ...defaultLinks }));
+  const [linksDirty, setLinksDirty] = useState(false);
+
+  const [saving, setSaving] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const [iframeReady, setIframeReady] = useState(false);
+  const [iframeNonce, setIframeNonce] = useState(0);
+
+  // Load texts when page changes
+  useEffect(() => {
+    setTextsDirty(false);
+    fetchSiteText(pageKey)
+      .then((c) => {
+        const merged: Record<string, string> = {};
+        TEXT_FIELDS.forEach((f) => { merged[f.key] = c[f.key] ?? ""; });
+        Object.entries(c).forEach(([k, v]) => { if (!(k in merged)) merged[k] = v; });
+        setContent(merged);
+      })
+      .catch(() => {
+        const empty: Record<string, string> = {};
+        TEXT_FIELDS.forEach((f) => { empty[f.key] = ""; });
+        setContent(empty);
+      });
+  }, [pageKey]);
+
+  // Load links once
+  useEffect(() => {
+    fetchPageLinks().then((cloud) => {
+      setLinks((cur) => {
+        const next = { ...cur };
+        (Object.keys(next) as PageKey[]).forEach((k) => {
+          const row = cloud[k];
+          if (row) next[k] = { ctaLabel: row.cta_label || next[k].ctaLabel, ctaUrl: row.cta_url || next[k].ctaUrl };
+        });
+        return next;
+      });
+    }).catch(() => {});
+  }, []);
+
+  // Listen for iframe "ready" ping
+  useEffect(() => {
+    const h = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin) return;
+      if ((e.data as any)?.type === PREVIEW_READY_MSG) setIframeReady(true);
+    };
+    window.addEventListener("message", h);
+    return () => window.removeEventListener("message", h);
+  }, []);
+
+  // Reset ready flag when we navigate iframe to a different page
+  useEffect(() => { setIframeReady(false); }, [pageKey, iframeNonce]);
+
+  // Emit overlay on any change (debounced) — texts + links for selected page
+  const sendPreview = useCallback(() => {
+    const w = iframeRef.current?.contentWindow;
+    if (!w) return;
+    const linkPayload: Record<string, { ctaUrl: string; ctaLabel: string }> = {};
+    page.linkKeys.forEach((k) => { linkPayload[k] = links[k]; });
+    emitPreview(w, { texts: { [page.key]: content }, links: linkPayload });
+  }, [content, links, page]);
+
+  useEffect(() => {
+    if (!iframeReady) return;
+    const t = window.setTimeout(sendPreview, 120);
+    return () => window.clearTimeout(t);
+  }, [sendPreview, iframeReady]);
+
+  // Push once as soon as iframe signals ready
+  useEffect(() => { if (iframeReady) sendPreview(); }, [iframeReady, sendPreview]);
+
+  const setField = (k: string, v: string) => { setContent((c) => ({ ...c, [k]: v })); setTextsDirty(true); };
+  const removeField = (k: string) => { setContent((c) => { const { [k]: _, ...rest } = c; return rest; }); setTextsDirty(true); };
+  const updateLink = (k: PageKey, patch: Partial<{ ctaLabel: string; ctaUrl: string }>) => {
+    setLinks((cur) => ({ ...cur, [k]: { ...cur[k], ...patch } }));
+    setLinksDirty(true);
+  };
+
+  const standardKeys = new Set(TEXT_FIELDS.map((f) => f.key));
+  const custom = Object.entries(content).filter(([k]) => !standardKeys.has(k));
+
+  const save = useCallback(async () => {
+    setSaving(true);
+    try {
+      const jobs: Promise<any>[] = [];
+      if (textsDirty) jobs.push(saveSiteText(pageKey, content));
+      if (linksDirty) {
+        const rows: PageLinkRow[] = (Object.keys(links) as PageKey[]).map((k) => ({
+          page_key: k, cta_label: links[k].ctaLabel, cta_url: links[k].ctaUrl,
+        }));
+        jobs.push(savePageLinks(rows).then(() => {
+          const legacy: Record<string, { ctaLabel: string; ctaUrl: string }> = {};
+          (Object.keys(links) as PageKey[]).forEach((k) => { legacy[k] = links[k]; });
+          window.localStorage.setItem(ADMIN_LINKS_KEY, JSON.stringify(legacy));
+          window.dispatchEvent(new Event("gbia:links-changed"));
+        }));
+      }
+      await Promise.all(jobs);
+      setTextsDirty(false); setLinksDirty(false);
+      toast.success("Conteúdo salvo.");
+      setIframeNonce((n) => n + 1);
+    } catch (e: any) {
+      toast.error("Erro: " + (e?.message ?? "falha ao salvar"));
+    } finally { setSaving(false); }
+  }, [pageKey, content, links, textsDirty, linksDirty]);
+  useSaveShortcut(save);
+
+  const dirty = textsDirty || linksDirty;
+  const iframeSrc = `${page.route}${page.route.includes("?") ? "&" : "?"}preview=1&t=${iframeNonce}`;
+
+  return (
+    <>
+      <SectionHeader
+        title="Conteúdo por página"
+        description="Edite textos e links de cada página. A pré-visualização ao lado atualiza enquanto você digita."
+        actions={<SaveButton dirty={dirty} saving={saving} onClick={save}/>}
+      />
+
+      <div className="admX-pagebar" role="tablist" aria-label="Páginas">
+        {CONTENT_PAGES.map((p) => (
+          <button
+            key={p.key}
+            role="tab"
+            aria-selected={p.key === pageKey}
+            className={"admX-pagechip" + (p.key === pageKey ? " active" : "")}
+            onClick={() => setPageKey(p.key)}
+          >
+            <span className="admX-pagechip-label">{p.label}</span>
+            <span className="admX-pagechip-key">{p.route}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="admX-contentSplit">
+        <div className="admX-contentEditor">
+          {/* Links */}
+          <div className="admX-card">
+            <h3 style={{ marginTop: 0 }}>Links & CTAs</h3>
+            <p className="hint">Botão principal desta página.</p>
+            {page.linkKeys.map((k) => {
+              const meta = PAGE_META.find((m) => m.key === k);
+              const cur = links[k];
+              return (
+                <div key={k} style={{ marginTop: 10 }}>
+                  <div className="admX-row2">
+                    <div className="admX-field">
+                      <label>Texto do botão <code className="admX-key">{meta?.label ?? k}</code></label>
+                      <input className="admX-input" value={cur.ctaLabel} onChange={(e) => updateLink(k, { ctaLabel: e.target.value })}/>
+                    </div>
+                    <div className="admX-field">
+                      <label>URL de destino</label>
+                      <input className="admX-input" value={cur.ctaUrl} onChange={(e) => updateLink(k, { ctaUrl: e.target.value })} placeholder="https://… ou #contato"/>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Textos */}
+          <div className="admX-card">
+            <h3 style={{ marginTop: 0 }}>Textos padrão</h3>
+            <p className="hint">Mesmos campos em todas as páginas.</p>
+            <div className="admX-fieldgrid">
+              {TEXT_FIELDS.map((f) => (
+                <div key={f.key} className="admX-field">
+                  <label>
+                    <span>{f.label}</span>
+                    <code className="admX-key">{f.key}</code>
+                  </label>
+                  {f.multiline
+                    ? <textarea className="admX-textarea" value={content[f.key] ?? ""} onChange={(e) => setField(f.key, e.target.value)} placeholder={f.hint}/>
+                    : <input className="admX-input" value={content[f.key] ?? ""} onChange={(e) => setField(f.key, e.target.value)} placeholder={f.hint}/>}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {custom.length > 0 && (
+            <div className="admX-card">
+              <h3 style={{ marginTop: 0 }}>Chaves personalizadas</h3>
+              <div className="admX-fieldgrid">
+                {custom.map(([k, v]) => (
+                  <div key={k} className="admX-field">
+                    <label>
+                      <code className="admX-key">{k}</code>
+                      <button className="admX-icon-btn danger" title="Remover" onClick={() => removeField(k)} aria-label="Remover">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                      </button>
+                    </label>
+                    <textarea className="admX-textarea" value={v} onChange={(e) => setField(k, e.target.value)}/>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="admX-card">
+            <h3 style={{ marginTop: 0 }}>Nova chave personalizada</h3>
+            <div style={{ display: "flex", gap: 8 }}>
+              <input className="admX-input" placeholder="nome_da_chave" value={newKey} onChange={(e) => setNewKey(e.target.value)}/>
+              <button className="admX-btn primary" onClick={() => { const k = newKey.trim(); if (k && !(k in content)) { setContent((c) => ({ ...c, [k]: "" })); setNewKey(""); setTextsDirty(true); } }}>+ Adicionar</button>
+            </div>
+          </div>
+        </div>
+
+        <aside className="admX-previewWrap">
+          <div className="admX-previewHead">
+            <span className="admX-previewUrl">{page.route}</span>
+            <div style={{ display: "flex", gap: 6 }}>
+              <button className="admX-btn ghost" style={{ padding: "4px 10px", fontSize: 12 }} onClick={() => setIframeNonce((n) => n + 1)} title="Recarregar">↻</button>
+              <a className="admX-btn ghost" style={{ padding: "4px 10px", fontSize: 12 }} href={page.route} target="_blank" rel="noopener noreferrer">Abrir ↗</a>
+            </div>
+          </div>
+          <iframe
+            key={iframeNonce}
+            ref={iframeRef}
+            className="admX-previewFrame"
+            src={iframeSrc}
+            title={`Pré-visualização ${page.label}`}
+          />
+        </aside>
+      </div>
+    </>
+  );
+}
+

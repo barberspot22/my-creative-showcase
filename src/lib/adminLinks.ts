@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isPreviewMode, useOverlay } from "@/lib/livePreview";
 
 export type PageKey =
   | "gb-studio"
@@ -70,7 +71,15 @@ export function useAdminLinks(): PageLinks {
 }
 
 export function usePageLink(key: PageKey): PageLink {
-  return useAdminLinks()[key];
+  const base = useAdminLinks()[key];
+  const overlay = useOverlay();
+  if (!isPreviewMode()) return base;
+  const o = overlay.links[key];
+  if (!o) return base;
+  return {
+    ctaUrl: typeof o.ctaUrl === "string" ? o.ctaUrl : base.ctaUrl,
+    ctaLabel: typeof o.ctaLabel === "string" && o.ctaLabel.trim() ? o.ctaLabel : base.ctaLabel,
+  };
 }
 
 export function saveLinks(links: PageLinks) {
