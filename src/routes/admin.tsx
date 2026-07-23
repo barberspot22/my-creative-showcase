@@ -34,7 +34,7 @@ const TABS: { key: TabKey; label: string; icon: string; group: string }[] = [
 export const Route = createFileRoute("/admin")({ component: AdminPage });
 
 function AdminPage() {
-  const [tab, setTab] = useState<TabKey>("home");
+  const [tab, setTab] = useState<TabKey>("conteudo");
   const current = TABS.find((t) => t.key === tab)!;
 
   return (
