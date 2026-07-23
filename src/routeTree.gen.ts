@@ -18,6 +18,7 @@ import { Route as GbSocialRouteImport } from './routes/gb-social'
 import { Route as EcommerceRouteImport } from './routes/ecommerce'
 import { Route as CrmRouteImport } from './routes/crm'
 import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicMetaCapiRouteImport } from './routes/api/public/meta-capi'
@@ -67,6 +68,11 @@ const CardapioDigitalRoute = CardapioDigitalRouteImport.update({
   path: '/cardapio-digital',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -86,6 +92,7 @@ const ApiPublicMetaCapiRoute = ApiPublicMetaCapiRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -174,6 +186,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   CardapioDigitalRoute: typeof CardapioDigitalRoute
   CrmRoute: typeof CrmRoute
   EcommerceRoute: typeof EcommerceRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CardapioDigitalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -278,6 +298,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   CardapioDigitalRoute: CardapioDigitalRoute,
   CrmRoute: CrmRoute,
   EcommerceRoute: EcommerceRoute,
