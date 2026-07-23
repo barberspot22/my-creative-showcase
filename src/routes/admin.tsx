@@ -264,20 +264,23 @@ function HomeCardsTab() {
             <h3>Cards</h3>
             <p className="hint">Toque em um card para editar. As alterações aparecem para todos os visitantes ao publicar.</p>
             <div className="admX-list">
-              {cards.map((c) => (
+              {cards.map((c) => {
+                const isAnimated = c.key === "social" || c.key === "crm" || c.key === "menu";
+                const imgs = c.frames.filter(Boolean);
+                return (
                 <div key={c.key} className={"admX-item" + (c.key === activeKey ? " active" : "")} onClick={() => setActiveKey(c.key)}>
                   <div className="admX-thumb">
-                    {c.frames.filter(Boolean)[0] ? <img src={c.frames.filter(Boolean)[0]} alt=""/> : <span>Sem imagem</span>}
+                    {imgs[0] ? <img src={imgs[0]} alt=""/> : <span>{isAnimated ? "Animação" : "Sem imagem"}</span>}
                   </div>
                   <div className="admX-item-body">
                     <strong>{c.title}</strong>
                     <span>{c.href}</span>
                   </div>
-                  <span className={"admX-badge " + (c.frames.filter(Boolean).length ? "ok" : "warn")}>
-                    {c.frames.filter(Boolean).length ? `${c.frames.filter(Boolean).length} img` : "sem img"}
+                  <span className={"admX-badge " + (imgs.length ? "ok" : isAnimated ? "" : "warn")} title={isAnimated && !imgs.length ? "Este card usa uma animação da marca, não uma imagem." : undefined}>
+                    {imgs.length ? `${imgs.length} img` : isAnimated ? "animação" : "sem img"}
                   </span>
                 </div>
-              ))}
+              );})}
             </div>
           </div>
 

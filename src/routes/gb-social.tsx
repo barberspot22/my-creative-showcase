@@ -2,10 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
 import { FormEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { fetchReferencesByPage } from "@/lib/cms";
 
 const features = [
   ["Criação de posts", "Feed, story e carrossel prontos para publicar."],
@@ -27,6 +29,11 @@ function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const { ctaUrl } = usePageLink("gb-social");
+  const { data: refs } = useQuery({
+    queryKey: ["references", "gb-social"],
+    queryFn: () => fetchReferencesByPage("gb-social"),
+  });
+  const designs = (refs ?? []).map((r) => r.image).filter(Boolean);
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
@@ -50,7 +57,7 @@ function GBSocialPage() {
 
       <section className="socialWorkShowcase">
         <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
-        <PerspectiveTicker />
+        <PerspectiveTicker designs={designs} />
       </section>
 
       <section className="whatsappBlock">
