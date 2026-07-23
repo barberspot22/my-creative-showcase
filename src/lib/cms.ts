@@ -1,4 +1,8 @@
 import { supabase } from "@/integrations/supabase/client";
+import {
+  svUpsertPortfolioItem, svUpsertPortfolioMany, svDeletePortfolioItem,
+  svUpsertHomeCards, svSavePageLinks, svSaveSiteText, svSaveTracking,
+} from "@/lib/cms-admin.functions";
 
 export type HomeCard = {
   key: string;
