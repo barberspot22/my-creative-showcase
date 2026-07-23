@@ -1327,6 +1327,10 @@ body{overflow-x:clip}
 .admX-badge.ok{background:color-mix(in oklab,var(--adm-ok) 15%,var(--adm-bg));color:var(--adm-ok)}
 .admX-badge.warn{background:var(--adm-gold-soft);color:var(--adm-gold-ink)}
 .admX-badge.off{background:var(--adm-surface-2);color:var(--adm-ink-soft)}
+.admX-icon-btn{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;border:1px solid var(--adm-line);background:var(--adm-surface);cursor:pointer;font-size:14px;line-height:1;transition:.12s;padding:0}
+.admX-icon-btn:hover{border-color:var(--adm-ink);background:var(--adm-surface-2)}
+.admX-icon-btn.danger:hover{border-color:#c0392b;background:#fdecea}
+.admX-inline-view:hover{opacity:.75}
 
 /* Image editor */
 .admX-images{display:flex;flex-direction:column;gap:8px}
