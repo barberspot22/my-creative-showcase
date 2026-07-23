@@ -67,10 +67,9 @@ function AdminPage() {
         <main className="admX-main">
           <TopCrumb section={current.label} />
           <section className="admX-section" key={tab}>
+            {tab === "conteudo" && <ContentTab />}
             {tab === "home" && <HomeCardsTab />}
             {tab === "portfolio" && <PortfolioTab />}
-            {tab === "links" && <LinksTab />}
-            {tab === "textos" && <TextsTab />}
             {tab === "tracking" && <TrackingTab />}
           </section>
         </main>
