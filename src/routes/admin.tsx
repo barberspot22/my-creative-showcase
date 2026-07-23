@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState, useCallback, ReactNode } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef, ReactNode } from "react";
 import { toast, Toaster } from "sonner";
 import {
   fetchHomeCards, upsertHomeCards, HomeCard,
@@ -8,7 +8,8 @@ import {
   fetchSiteText, saveSiteText, SITE_TEXT_PAGES,
   fetchTracking, saveTracking, TrackingSettings, defaultTracking,
 } from "@/lib/cms";
-import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY } from "@/lib/adminLinks";
+import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY, type PageKey } from "@/lib/adminLinks";
+import { emitPreview, PREVIEW_READY_MSG } from "@/lib/livePreview";
 
 const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
@@ -21,13 +22,12 @@ const defaultHomeCards: HomeCard[] = [
   { key: "menu", title: "Menu Digital", description: "Cardápio, pedidos e presença digital", badge: "CATÁLOGO", href: "/cardapio-digital", frames: [], position: 5 },
 ];
 
-type TabKey = "home" | "portfolio" | "links" | "textos" | "tracking";
+type TabKey = "home" | "portfolio" | "conteudo" | "tracking";
 
 const TABS: { key: TabKey; label: string; icon: string; group: string }[] = [
-  { key: "home",      label: "Home",       icon: "◧", group: "Conteúdo" },
+  { key: "conteudo",  label: "Conteúdo",   icon: "¶", group: "Conteúdo" },
+  { key: "home",      label: "Home cards", icon: "◧", group: "Conteúdo" },
   { key: "portfolio", label: "Portfólios", icon: "▦", group: "Conteúdo" },
-  { key: "links",     label: "Links",      icon: "↗", group: "Conteúdo" },
-  { key: "textos",    label: "Textos",     icon: "¶", group: "Conteúdo" },
   { key: "tracking",  label: "Pixel",      icon: "◈", group: "Rastreamento" },
 ];
 
