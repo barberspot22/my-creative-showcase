@@ -1,8 +1,12 @@
 import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 import {
   svUpsertPortfolioItem, svUpsertPortfolioMany, svDeletePortfolioItem,
   svUpsertHomeCards, svSavePageLinks, svSaveSiteText, svSaveTracking,
+  svSaveSectionVisibility,
 } from "@/lib/cms-admin.functions";
+import type { VisibilityMap } from "@/lib/sectionsCatalog";
+import { isPreviewMode, useOverlay } from "@/lib/livePreview";
 
 export type HomeCard = {
   key: string;
