@@ -88,8 +88,7 @@ export async function fetchHomeCards(): Promise<HomeCard[]> {
 
 export async function upsertHomeCards(cards: HomeCard[]) {
   const rows = cards.map((c, i) => ({ ...c, position: i, frames: c.frames as unknown as any }));
-  const { error } = await supabase.from("home_cards").upsert(rows, { onConflict: "key" });
-  if (error) throw error;
+  await svUpsertHomeCards({ data: rows });
 }
 
 // ---------------- Page Links ----------------
