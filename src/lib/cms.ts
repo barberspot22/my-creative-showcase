@@ -159,6 +159,5 @@ export async function fetchTracking(): Promise<TrackingSettings> {
 }
 
 export async function saveTracking(settings: TrackingSettings) {
-  const { error } = await supabase.from("tracking_settings").upsert({ id: 1, ...settings });
-  if (error) throw error;
+  await svSaveTracking({ data: settings });
 }
