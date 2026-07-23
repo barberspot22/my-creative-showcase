@@ -468,41 +468,28 @@ function PortfolioTab() {
             {items.length === 0 && <div className="admX-item" style={{ justifyContent: "center", color: "var(--adm-ink-soft)" }}>Nenhum item nesta página ainda.</div>}
             <div className="admX-list">
               {items.map((it, idx) => (
-                <div key={it.id ?? idx} className={"admX-item" + (editingIdx === idx ? " active" : "")} onClick={() => setEditingIdx(idx)}>
+                <div key={it.id ?? idx} className={"admX-item" + (editingIdx === idx ? " active" : "") + (it.visible ? "" : " dim")} onClick={() => setEditingIdx(idx)}>
                   <div className="admX-thumb">{it.image_url ? <img src={it.image_url} alt=""/> : <span>Sem imagem</span>}</div>
                   <div className="admX-item-body" style={{ minWidth: 0 }}>
-                    <InlinePencil
-                      value={it.title}
-                      placeholder="(sem título)"
-                      onSave={async (v) => { update(idx, { title: v }); await upsertPortfolioItem({ ...items[idx], title: v }); toast.success("Título atualizado"); }}
-                      renderView={(v) => <strong>{v || "(sem título)"}</strong>}
-                    />
-                    <InlinePencil
-                      value={it.link_url}
-                      placeholder="cole o link"
-                      onSave={async (v) => { update(idx, { link_url: v }); await upsertPortfolioItem({ ...items[idx], link_url: v }); toast.success("Link atualizado"); }}
-                      renderView={(v) => <span style={{ fontSize: 12, color: "var(--adm-ink-soft)" }}>{v || "sem link"}</span>}
-                    />
-                    {it.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={it.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
+                    <strong style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{it.title || "(sem título)"}</strong>
+                    <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{it.link_url || "sem link"}</span>
                   </div>
-                  <div className="admX-row-actions" onClick={(e) => e.stopPropagation()} style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                    <label className="admX-icon-btn" title="Trocar imagem">
-                      <span aria-hidden>🖼️</span>
-                      <input type="file" accept="image/*" style={{ display: "none" }} onChange={async (e) => {
-                        const f = e.target.files?.[0]; if (!f) return;
-                        const url = await fileToDataUrl(f);
-                        update(idx, { image_url: url });
-                        try { await upsertPortfolioItem({ ...items[idx], image_url: url }); toast.success("Imagem atualizada"); }
-                        catch (err: any) { toast.error("Erro: " + err.message); }
-                      }}/>
-                    </label>
-                    <button className="admX-icon-btn" title="Editar tudo" onClick={() => setEditingIdx(idx)}>✏️</button>
-                    <button className="admX-icon-btn" title={it.visible ? "Ocultar" : "Mostrar"} onClick={async () => {
+                  <div className="admX-row-actions" onClick={(e) => e.stopPropagation()}>
+                    <button className="admX-icon-btn" title="Editar" onClick={() => setEditingIdx(idx)} aria-label="Editar">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                    </button>
+                    <button className="admX-icon-btn" title={it.visible ? "Ocultar" : "Mostrar"} aria-label="Visibilidade" onClick={async () => {
                       const next = !it.visible; update(idx, { visible: next });
                       try { await upsertPortfolioItem({ ...items[idx], visible: next }); }
                       catch (err: any) { toast.error("Erro: " + err.message); }
-                    }}>{it.visible ? "👁️" : "🚫"}</button>
-                    <button className="admX-icon-btn danger" title="Excluir" onClick={() => remove(idx)}>🗑️</button>
+                    }}>
+                      {it.visible
+                        ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        : <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.86 19.86 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a19.9 19.9 0 0 1-3.17 4.19M1 1l22 22M9.5 9.5a3 3 0 0 0 4.24 4.24"/></svg>}
+                    </button>
+                    <button className="admX-icon-btn danger" title="Excluir" aria-label="Excluir" onClick={() => remove(idx)}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
                   </div>
                 </div>
               ))}
