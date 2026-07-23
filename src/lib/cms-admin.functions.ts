@@ -101,7 +101,7 @@ export const svSaveSectionVisibility = createServerFn({ method: "POST" })
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const rows = data.map((r) => ({ ...r, updated_at: new Date().toISOString() }));
-    const { error } = await supabaseAdmin
+    const { error } = await (supabaseAdmin as any)
       .from("section_visibility")
       .upsert(rows, { onConflict: "page_key,section_key" });
     if (error) throw new Error(error.message);
