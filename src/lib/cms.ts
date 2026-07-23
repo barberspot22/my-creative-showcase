@@ -165,3 +165,36 @@ export async function fetchTracking(): Promise<TrackingSettings> {
 export async function saveTracking(settings: TrackingSettings) {
   await svSaveTracking({ data: settings });
 }
+
+// ---------------- Section Visibility ----------------
+export async function fetchSectionVisibility(): Promise<VisibilityMap> {
+  const { data, error } = await (supabase as any).from("section_visibility").select("*");
+  if (error) throw error;
+  const map: VisibilityMap = {};
+  (data ?? []).forEach((row: any) => {
+    if (!map[row.page_key]) map[row.page_key] = {};
+    map[row.page_key][row.section_key] = !!row.visible;
+  });
+  return map;
+}
+
+export async function saveSectionVisibility(rows: { page_key: string; section_key: string; visible: boolean }[]) {
+  await svSaveSectionVisibility({ data: rows });
+}
+
+export function useSectionVisibility() {
+  const overlay = useOverlay();
+  const query = useQuery({
+    queryKey: ["section_visibility"],
+    queryFn: fetchSectionVisibility,
+    staleTime: 30_000,
+  });
+  const base = query.data ?? {};
+  if (!isPreviewMode() || !overlay.sections) return base;
+  // Merge overlay on top of base
+  const merged: VisibilityMap = { ...base };
+  Object.entries(overlay.sections).forEach(([page, secs]) => {
+    merged[page] = { ...(merged[page] ?? {}), ...secs };
+  });
+  return merged;
+}
