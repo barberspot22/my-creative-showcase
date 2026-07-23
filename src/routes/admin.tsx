@@ -315,18 +315,24 @@ function HomeCardsTab() {
               {cards.map((c) => {
                 const isAnimated = c.key === "social" || c.key === "crm" || c.key === "menu";
                 const imgs = c.frames.filter(Boolean);
+                const isActive = c.key === activeKey;
                 return (
-                <div key={c.key} className={"admX-item" + (c.key === activeKey ? " active" : "")} onClick={() => setActiveKey(c.key)}>
+                <div key={c.key} className={"admX-item" + (isActive ? " active" : "")} onClick={() => setActiveKey(c.key)}>
                   <div className="admX-thumb">
                     {imgs[0] ? <img src={imgs[0]} alt=""/> : <span>{isAnimated ? "Animação" : "Sem imagem"}</span>}
                   </div>
-                  <div className="admX-item-body">
-                    <strong>{c.title}</strong>
-                    <span>{c.href}</span>
+                  <div className="admX-item-body" style={{ minWidth: 0 }}>
+                    <strong style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.title}</strong>
+                    <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.href}</span>
                   </div>
-                  <span className={"admX-badge " + (imgs.length ? "ok" : isAnimated ? "" : "warn")} title={isAnimated && !imgs.length ? "Este card usa uma animação da marca, não uma imagem." : undefined}>
-                    {imgs.length ? `${imgs.length} img` : isAnimated ? "animação" : "sem img"}
-                  </span>
+                  <div className="admX-row-actions" onClick={(e) => e.stopPropagation()}>
+                    <span className={"admX-badge " + (imgs.length ? "ok" : isAnimated ? "" : "warn")} title={isAnimated && !imgs.length ? "Este card usa animação da marca." : undefined}>
+                      {imgs.length ? `${imgs.length} img` : isAnimated ? "animação" : "sem img"}
+                    </span>
+                    <button className="admX-icon-btn" title="Editar" aria-label="Editar" onClick={() => setActiveKey(c.key)}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                    </button>
+                  </div>
                 </div>
               );})}
             </div>
