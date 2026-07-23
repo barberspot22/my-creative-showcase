@@ -1121,3 +1121,169 @@ function ContentTab() {
   );
 }
 
+
+/* =========================================================
+   SEÇÕES — mostrar/ocultar seções de cada página
+   ========================================================= */
+function SectionsTab() {
+  const [pageKey, setPageKey] = useState<SectionsPageKey>(SECTIONS_PAGES[0].key);
+  const page = SECTIONS_PAGES.find((p) => p.key === pageKey)!;
+  const catalog = SECTIONS_CATALOG[pageKey];
+
+  const [map, setMap] = useState<Record<string, Record<string, boolean>>>({});
+  const [dirty, setDirty] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const [iframeReady, setIframeReady] = useState(false);
+  const [iframeNonce, setIframeNonce] = useState(0);
+
+  useEffect(() => {
+    fetchSectionVisibility().then(setMap).catch(() => setMap({}));
+  }, []);
+
+  useEffect(() => {
+    const h = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin) return;
+      if ((e.data as any)?.type === PREVIEW_READY_MSG) setIframeReady(true);
+    };
+    window.addEventListener("message", h);
+    return () => window.removeEventListener("message", h);
+  }, []);
+  useEffect(() => { setIframeReady(false); }, [pageKey, iframeNonce]);
+
+  const sendPreview = useCallback(() => {
+    const w = iframeRef.current?.contentWindow;
+    if (!w) return;
+    emitPreview(w, { sections: map });
+  }, [map]);
+  useEffect(() => {
+    if (!iframeReady) return;
+    const t = window.setTimeout(sendPreview, 80);
+    return () => window.clearTimeout(t);
+  }, [sendPreview, iframeReady]);
+  useEffect(() => { if (iframeReady) sendPreview(); }, [iframeReady, sendPreview]);
+
+  const toggle = (sectionKey: string) => {
+    setMap((cur) => {
+      const cur_page = cur[pageKey] ?? {};
+      const curVal = cur_page[sectionKey];
+      const next = curVal === undefined ? false : !curVal;
+      return { ...cur, [pageKey]: { ...cur_page, [sectionKey]: next } };
+    });
+    setDirty(true);
+  };
+
+  const save = useCallback(async () => {
+    setSaving(true);
+    try {
+      const rows: { page_key: string; section_key: string; visible: boolean }[] = [];
+      Object.entries(map).forEach(([pk, secs]) => {
+        Object.entries(secs).forEach(([sk, v]) => {
+          rows.push({ page_key: pk, section_key: sk, visible: !!v });
+        });
+      });
+      await saveSectionVisibility(rows);
+      setDirty(false);
+      toast.success("Visibilidade salva.");
+      setIframeNonce((n) => n + 1);
+    } catch (e: any) {
+      toast.error("Erro: " + (e?.message ?? "falha ao salvar"));
+    } finally { setSaving(false); }
+  }, [map]);
+  useSaveShortcut(save);
+
+  const iframeSrc = `${page.route}${page.route.includes("?") ? "&" : "?"}preview=1&t=${iframeNonce}`;
+  const visibleFor = (sk: string) => {
+    const v = map?.[pageKey]?.[sk];
+    return v === undefined ? true : v;
+  };
+
+  return (
+    <>
+      <SectionHeader
+        title="Seções da página"
+        description="Ligue ou desligue blocos inteiros de cada página. A prévia ao lado atualiza na hora."
+        actions={<SaveButton dirty={dirty} saving={saving} onClick={save}/>}
+      />
+
+      <div className="admX-pagebar" role="tablist" aria-label="Páginas">
+        {SECTIONS_PAGES.map((p) => (
+          <button
+            key={p.key}
+            role="tab"
+            aria-selected={p.key === pageKey}
+            className={"admX-pagechip" + (p.key === pageKey ? " active" : "")}
+            onClick={() => setPageKey(p.key)}
+          >
+            <span className="admX-pagechip-label">{p.label}</span>
+            <span className="admX-pagechip-key">{p.route}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="admX-contentSplit">
+        <div className="admX-contentEditor">
+          <div className="admX-card">
+            <h3 style={{ marginTop: 0 }}>Blocos de {page.label}</h3>
+            <p className="hint">Desativar oculta o bloco no site publicado imediatamente após salvar.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+              {catalog.map((s) => {
+                const on = visibleFor(s.key);
+                return (
+                  <label
+                    key={s.key}
+                    style={{
+                      display: "flex", alignItems: "center", justifyContent: "space-between",
+                      gap: 12, padding: "10px 12px",
+                      border: "1px solid #e6e1d6", borderRadius: 8,
+                      background: on ? "#fff" : "#faf7f1",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span style={{ fontWeight: 600, fontSize: 14 }}>{s.label}</span>
+                      <code className="admX-key" style={{ fontSize: 11 }}>{s.key}</code>
+                    </div>
+                    <span
+                      role="switch"
+                      aria-checked={on}
+                      onClick={(e) => { e.preventDefault(); toggle(s.key); }}
+                      style={{
+                        width: 42, height: 24, borderRadius: 999, position: "relative",
+                        background: on ? "#111" : "#c9c3b4", transition: "background 120ms",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <span style={{
+                        position: "absolute", top: 3, left: on ? 21 : 3,
+                        width: 18, height: 18, borderRadius: "50%", background: "#fff",
+                        transition: "left 120ms", boxShadow: "0 1px 2px rgba(0,0,0,.2)",
+                      }}/>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <aside className="admX-previewWrap">
+          <div className="admX-previewHead">
+            <span className="admX-previewUrl">{page.route}</span>
+            <div style={{ display: "flex", gap: 6 }}>
+              <button className="admX-btn ghost" style={{ padding: "4px 10px", fontSize: 12 }} onClick={() => setIframeNonce((n) => n + 1)} title="Recarregar">↻</button>
+              <a className="admX-btn ghost" style={{ padding: "4px 10px", fontSize: 12 }} href={page.route} target="_blank" rel="noopener noreferrer">Abrir ↗</a>
+            </div>
+          </div>
+          <iframe
+            key={iframeNonce}
+            ref={iframeRef}
+            className="admX-previewFrame"
+            src={iframeSrc}
+            title={`Pré-visualização ${page.label}`}
+          />
+        </aside>
+      </div>
+    </>
+  );
+}
