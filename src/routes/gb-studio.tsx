@@ -91,4 +91,17 @@ function GBStudioPage() {
   </div>;
 }
 
-export const Route = createFileRoute("/gb-studio")({ component: GBStudioPage });
+export const Route = createFileRoute("/gb-studio")({
+  component: GBStudioPage,
+  head: () => ({
+    meta: [
+      { title: "GB Studio — Fotografia de moda com IA | GB IA" },
+      { name: "description", content: "Editoriais, lookbooks e catálogos com direção criativa e IA generativa. Produção em dias, sem estúdio físico, sem modelo, sem viagem — pronto para o seu e-commerce." },
+      { property: "og:title", content: "GB Studio — Fotografia de moda com IA | GB IA" },
+      { property: "og:description", content: "Editoriais, lookbooks e catálogos com direção criativa e IA generativa. Produção em dias, sem estúdio, sem modelo, sem viagem." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/gb-studio" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/gb-studio" }],
+  }),
+});

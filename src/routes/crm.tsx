@@ -123,4 +123,17 @@ function CRMPage() {
   </div>;
 }
 
-export const Route = createFileRoute("/crm")({ component: CRMPage });
+export const Route = createFileRoute("/crm")({
+  component: CRMPage,
+  head: () => ({
+    meta: [
+      { title: "CRM sob medida — Comercial e produção | GB IA" },
+      { name: "description", content: "CRM sob medida com automações comerciais e de produção, integrações com WhatsApp e pagamento, e visão real do seu funil. Sem planilha, sem template engessado." },
+      { property: "og:title", content: "CRM sob medida — Comercial e produção | GB IA" },
+      { property: "og:description", content: "CRM sob medida com automações comerciais e de produção, integrações com WhatsApp e pagamento, e visão real do seu funil." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/crm" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/crm" }],
+  }),
+});

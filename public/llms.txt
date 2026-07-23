@@ -1,0 +1,20 @@
+# GB IA
+
+> Sistemas sob medida, automação e agentes de IA autônoma para negócios que querem escalar com tecnologia de ponta.
+
+GB IA desenha, constrói e mantém em produção soluções digitais: sistemas próprios, automações comerciais, agentes de IA autônoma, sites institucionais, e-commerces, CRMs, cardápios digitais, produção de conteúdo social e fotografia de moda com IA.
+
+## Pages
+
+- [Home](/): Visão geral da GB IA e portfólio de produtos.
+- [GB Social](/gb-social): Social media com IA operado pelo WhatsApp — posts, calendário, métricas e concorrentes.
+- [GB Studio](/gb-studio): Fotografia de moda com IA — editoriais, lookbooks e catálogos.
+- [E-commerce](/ecommerce): Lojas com catálogo, marketplaces, WhatsApp e IA vendedora integrados.
+- [Site Institucional](/site-institucional): Sites institucionais, páginas de vendas e páginas de captura estruturados como funil.
+- [Cardápio Digital](/cardapio-digital): Cardápio digital para restaurantes com QR de mesa, delivery e pagamento.
+- [CRM](/crm): CRM sob medida com automações comerciais e de produção.
+
+## Optional
+
+- [Política de Privacidade](/politica-de-privacidade): Como coletamos, usamos e protegemos dados pessoais (LGPD).
+- [Termos de Uso](/termos-de-uso): Condições de uso do site e dos serviços GB IA.

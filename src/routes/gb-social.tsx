@@ -98,7 +98,7 @@ export const Route = createFileRoute("/gb-social")({
   head: () => ({
     meta: [
       { title: "GB Social — Social Media de IA pelo WhatsApp | GB IA" },
-      { name: "description", content: "GB Social cria posts, agenda conteúdo, analisa métricas, concorrentes e monta calendário editorial pelo WhatsApp. Sua marca ativa nas redes sem você cuidar de tudo." },
+      { name: "description", content: "GB Social cria posts, agenda conteúdo, analisa métricas e concorrentes e monta calendário editorial pelo WhatsApp. Sua marca ativa sem você cuidar de tudo." },
       { property: "og:title", content: "GB Social — Social Media de IA pelo WhatsApp | GB IA" },
       { property: "og:description", content: "GB Social cria posts, agenda conteúdo, analisa métricas, concorrentes e monta calendário editorial pelo WhatsApp." },
       { property: "og:type", content: "product" },

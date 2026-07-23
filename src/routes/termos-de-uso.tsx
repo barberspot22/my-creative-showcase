@@ -75,7 +75,7 @@ export const Route = createFileRoute("/termos-de-uso")({
   head: () => ({
     meta: [
       { title: "Termos de Uso — GB IA" },
-      { name: "description", content: "Termos de Uso do site e serviços GB IA." },
+      { name: "description", content: "Termos de Uso do site e serviços GB IA: condições de acesso, responsabilidades, propriedade intelectual e uso aceitável da plataforma." },
       { property: "og:title", content: "Termos de Uso — GB IA" },
       { property: "og:description", content: "Condições de uso da plataforma e serviços GB IA." },
     ],

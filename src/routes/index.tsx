@@ -478,7 +478,7 @@ function HomePage() {
 
     <main id="top">
       <div className="heroFoldScene">
-        <section className="hero"><ElasticGrid/><LumusReplicaEffect/></section>
+        <section className="hero"><h1 className="sr-only">GB IA — Sistemas, automação e IA autônoma para escalar seu negócio</h1><ElasticGrid/><LumusReplicaEffect/></section>
         <CircleGalleryCarousel cards={editableCaseCards} />
       </div>
 
