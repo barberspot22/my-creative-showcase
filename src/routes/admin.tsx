@@ -26,10 +26,11 @@ const defaultHomeCards: HomeCard[] = [
   { key: "menu", title: "Menu Digital", description: "Cardápio, pedidos e presença digital", badge: "CATÁLOGO", href: "/cardapio-digital", frames: [], position: 5 },
 ];
 
-type TabKey = "home" | "portfolio" | "conteudo" | "tracking";
+type TabKey = "home" | "portfolio" | "conteudo" | "secoes" | "tracking";
 
 const TABS: { key: TabKey; label: string; icon: string; group: string }[] = [
   { key: "conteudo",  label: "Conteúdo",   icon: "¶", group: "Conteúdo" },
+  { key: "secoes",    label: "Seções",     icon: "◱", group: "Conteúdo" },
   { key: "home",      label: "Home cards", icon: "◧", group: "Conteúdo" },
   { key: "portfolio", label: "Portfólios", icon: "▦", group: "Conteúdo" },
   { key: "tracking",  label: "Pixel",      icon: "◈", group: "Rastreamento" },
