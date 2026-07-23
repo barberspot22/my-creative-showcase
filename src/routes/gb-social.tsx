@@ -2,10 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
 import { FormEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { fetchReferencesByPage } from "@/lib/cms";
 
 const features = [
   ["Criação de posts", "Feed, story e carrossel prontos para publicar."],
