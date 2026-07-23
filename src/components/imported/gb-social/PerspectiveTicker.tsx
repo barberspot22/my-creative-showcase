@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-const designs = [
+const defaultDesigns = [
   "/gb-social-designs/design-08.png",
   "/gb-social-designs/design-09.png",
   "/gb-social-designs/design-10.png",
@@ -12,7 +12,8 @@ const designs = [
   "/gb-social-designs/design-07.png",
 ];
 
-export function PerspectiveTicker() {
+export function PerspectiveTicker({ designs: designsProp }: { designs?: string[] } = {}) {
+  const designs = useMemo(() => (designsProp && designsProp.length ? designsProp : defaultDesigns), [designsProp]);
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const [lightbox, setLightbox] = useState<string | null>(null);
