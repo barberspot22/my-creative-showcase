@@ -1,8 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { assertAdmin } from "./admin-guard.functions";
 
-// All writes for /admin. /admin is not auth-gated in this project (matches the
-// legacy behavior). Server functions use the service-role client so RLS
-// (locked to service_role) is satisfied.
+// All writes for /admin. Every function requires an authenticated user with
+// the `admin` role. Writes then use the service-role client to satisfy RLS
+// (locked to service_role).
 
 type PortfolioItemInput = {
   id?: string;
@@ -16,8 +18,10 @@ type PortfolioItemInput = {
 };
 
 export const svUpsertPortfolioItem = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: PortfolioItemInput) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("portfolio_items").upsert(data);
     if (error) throw new Error(error.message);
@@ -25,8 +29,10 @@ export const svUpsertPortfolioItem = createServerFn({ method: "POST" })
   });
 
 export const svUpsertPortfolioMany = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: PortfolioItemInput[]) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("portfolio_items").upsert(data);
     if (error) throw new Error(error.message);
@@ -34,8 +40,10 @@ export const svUpsertPortfolioMany = createServerFn({ method: "POST" })
   });
 
 export const svDeletePortfolioItem = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: { id: string }) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("portfolio_items").delete().eq("id", data.id);
     if (error) throw new Error(error.message);
@@ -43,8 +51,10 @@ export const svDeletePortfolioItem = createServerFn({ method: "POST" })
   });
 
 export const svUpsertHomeCards = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: any[]) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("home_cards").upsert(data, { onConflict: "key" });
     if (error) throw new Error(error.message);
@@ -52,8 +62,10 @@ export const svUpsertHomeCards = createServerFn({ method: "POST" })
   });
 
 export const svSavePageLinks = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: { page_key: string; cta_label: string; cta_url: string }[]) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("page_links").upsert(data, { onConflict: "page_key" });
     if (error) throw new Error(error.message);
@@ -61,8 +73,10 @@ export const svSavePageLinks = createServerFn({ method: "POST" })
   });
 
 export const svSaveSiteText = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: { page_key: string; content: Record<string, string> }) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("site_texts").upsert(data);
     if (error) throw new Error(error.message);
@@ -70,8 +84,10 @@ export const svSaveSiteText = createServerFn({ method: "POST" })
   });
 
 export const svSaveTracking = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data: Record<string, any>) => data)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("tracking_settings").upsert({ id: 1, ...data });
     if (error) throw new Error(error.message);
