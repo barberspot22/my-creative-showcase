@@ -29,6 +29,11 @@ function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const { ctaUrl } = usePageLink("gb-social");
+  const { data: refs } = useQuery({
+    queryKey: ["references", "gb-social"],
+    queryFn: () => fetchReferencesByPage("gb-social"),
+  });
+  const designs = (refs ?? []).map((r) => r.image).filter(Boolean);
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
   return <div className="socialProductPage">
     <header className="studioNav"><BrandLogo />{ctaUrl
