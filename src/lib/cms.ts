@@ -1,4 +1,8 @@
 import { supabase } from "@/integrations/supabase/client";
+import {
+  svUpsertPortfolioItem, svUpsertPortfolioMany, svDeletePortfolioItem,
+  svUpsertHomeCards, svSavePageLinks, svSaveSiteText, svSaveTracking,
+} from "@/lib/cms-admin.functions";
 
 export type HomeCard = {
   key: string;
@@ -84,8 +88,7 @@ export async function fetchHomeCards(): Promise<HomeCard[]> {
 
 export async function upsertHomeCards(cards: HomeCard[]) {
   const rows = cards.map((c, i) => ({ ...c, position: i, frames: c.frames as unknown as any }));
-  const { error } = await supabase.from("home_cards").upsert(rows, { onConflict: "key" });
-  if (error) throw error;
+  await svUpsertHomeCards({ data: rows });
 }
 
 // ---------------- Page Links ----------------
@@ -100,8 +103,7 @@ export async function fetchPageLinks(): Promise<Record<string, { cta_label: stri
 }
 
 export async function savePageLinks(links: PageLinkRow[]) {
-  const { error } = await supabase.from("page_links").upsert(links, { onConflict: "page_key" });
-  if (error) throw error;
+  await svSavePageLinks({ data: links });
 }
 
 // ---------------- Portfolio ----------------
@@ -116,19 +118,16 @@ export async function fetchPortfolio(pageKey: string): Promise<PortfolioItem[]> 
 }
 
 export async function upsertPortfolioItem(item: PortfolioItem) {
-  const { error } = await supabase.from("portfolio_items").upsert(item);
-  if (error) throw error;
+  await svUpsertPortfolioItem({ data: item });
 }
 
 export async function deletePortfolioItem(id: string) {
-  const { error } = await supabase.from("portfolio_items").delete().eq("id", id);
-  if (error) throw error;
+  await svDeletePortfolioItem({ data: { id } });
 }
 
 export async function reorderPortfolio(items: PortfolioItem[]) {
   const rows = items.map((it, i) => ({ ...it, position: i }));
-  const { error } = await supabase.from("portfolio_items").upsert(rows);
-  if (error) throw error;
+  await svUpsertPortfolioMany({ data: rows });
 }
 
 // ---------------- Site Texts ----------------
@@ -139,8 +138,7 @@ export async function fetchSiteText(pageKey: string): Promise<Record<string, str
 }
 
 export async function saveSiteText(pageKey: string, content: Record<string, string>) {
-  const { error } = await supabase.from("site_texts").upsert({ page_key: pageKey, content });
-  if (error) throw error;
+  await svSaveSiteText({ data: { page_key: pageKey, content } });
 }
 
 // ---------------- Tracking ----------------
@@ -161,6 +159,5 @@ export async function fetchTracking(): Promise<TrackingSettings> {
 }
 
 export async function saveTracking(settings: TrackingSettings) {
-  const { error } = await supabase.from("tracking_settings").upsert({ id: 1, ...settings });
-  if (error) throw error;
+  await svSaveTracking({ data: settings });
 }

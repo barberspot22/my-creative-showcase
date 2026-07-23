@@ -209,6 +209,54 @@ function DimTag({ src, spec }: { src: string; spec: ImgSpec }) {
   );
 }
 
+/* --------------------- Inline pencil edit --------------------- */
+function InlinePencil({
+  value, placeholder, onSave, renderView,
+}: {
+  value: string;
+  placeholder?: string;
+  onSave: (v: string) => void | Promise<void>;
+  renderView: (v: string) => ReactNode;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(value);
+  useEffect(() => { setDraft(value); }, [value]);
+  const commit = async () => {
+    setEditing(false);
+    if (draft !== value) await onSave(draft);
+  };
+  if (editing) {
+    return (
+      <input
+        autoFocus
+        className="admX-input"
+        style={{ padding: "4px 8px", fontSize: 13, height: 28 }}
+        value={draft}
+        placeholder={placeholder}
+        onClick={(e) => e.stopPropagation()}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+          if (e.key === "Escape") { setDraft(value); setEditing(false); }
+        }}
+      />
+    );
+  }
+  return (
+    <button
+      type="button"
+      className="admX-inline-view"
+      onClick={(e) => { e.stopPropagation(); setEditing(true); }}
+      style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "none", border: "none", padding: 0, cursor: "text", textAlign: "left", color: "inherit", font: "inherit", maxWidth: "100%" }}
+      title="Clique para editar"
+    >
+      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0 }}>{renderView(value)}</span>
+      <span style={{ opacity: 0.4, fontSize: 11 }}>✎</span>
+    </button>
+  );
+}
+
 /* =========================================================
    HOME · CARDS
    ========================================================= */
@@ -422,12 +470,40 @@ function PortfolioTab() {
               {items.map((it, idx) => (
                 <div key={it.id ?? idx} className={"admX-item" + (editingIdx === idx ? " active" : "")} onClick={() => setEditingIdx(idx)}>
                   <div className="admX-thumb">{it.image_url ? <img src={it.image_url} alt=""/> : <span>Sem imagem</span>}</div>
-                  <div className="admX-item-body">
-                    <strong>{it.title || "(sem título)"}</strong>
-                    <span>{it.link_url || "sem link"}</span>
+                  <div className="admX-item-body" style={{ minWidth: 0 }}>
+                    <InlinePencil
+                      value={it.title}
+                      placeholder="(sem título)"
+                      onSave={async (v) => { update(idx, { title: v }); await upsertPortfolioItem({ ...items[idx], title: v }); toast.success("Título atualizado"); }}
+                      renderView={(v) => <strong>{v || "(sem título)"}</strong>}
+                    />
+                    <InlinePencil
+                      value={it.link_url}
+                      placeholder="cole o link"
+                      onSave={async (v) => { update(idx, { link_url: v }); await upsertPortfolioItem({ ...items[idx], link_url: v }); toast.success("Link atualizado"); }}
+                      renderView={(v) => <span style={{ fontSize: 12, color: "var(--adm-ink-soft)" }}>{v || "sem link"}</span>}
+                    />
                     {it.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={it.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
                   </div>
-                  <span className={"admX-badge " + (it.visible ? "ok" : "off")}>{it.visible ? "visível" : "oculto"}</span>
+                  <div className="admX-row-actions" onClick={(e) => e.stopPropagation()} style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <label className="admX-icon-btn" title="Trocar imagem">
+                      <span aria-hidden>🖼️</span>
+                      <input type="file" accept="image/*" style={{ display: "none" }} onChange={async (e) => {
+                        const f = e.target.files?.[0]; if (!f) return;
+                        const url = await fileToDataUrl(f);
+                        update(idx, { image_url: url });
+                        try { await upsertPortfolioItem({ ...items[idx], image_url: url }); toast.success("Imagem atualizada"); }
+                        catch (err: any) { toast.error("Erro: " + err.message); }
+                      }}/>
+                    </label>
+                    <button className="admX-icon-btn" title="Editar tudo" onClick={() => setEditingIdx(idx)}>✏️</button>
+                    <button className="admX-icon-btn" title={it.visible ? "Ocultar" : "Mostrar"} onClick={async () => {
+                      const next = !it.visible; update(idx, { visible: next });
+                      try { await upsertPortfolioItem({ ...items[idx], visible: next }); }
+                      catch (err: any) { toast.error("Erro: " + err.message); }
+                    }}>{it.visible ? "👁️" : "🚫"}</button>
+                    <button className="admX-icon-btn danger" title="Excluir" onClick={() => remove(idx)}>🗑️</button>
+                  </div>
                 </div>
               ))}
             </div>
