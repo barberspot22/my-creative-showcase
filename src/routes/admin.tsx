@@ -209,6 +209,54 @@ function DimTag({ src, spec }: { src: string; spec: ImgSpec }) {
   );
 }
 
+/* --------------------- Inline pencil edit --------------------- */
+function InlinePencil({
+  value, placeholder, onSave, renderView,
+}: {
+  value: string;
+  placeholder?: string;
+  onSave: (v: string) => void | Promise<void>;
+  renderView: (v: string) => ReactNode;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(value);
+  useEffect(() => { setDraft(value); }, [value]);
+  const commit = async () => {
+    setEditing(false);
+    if (draft !== value) await onSave(draft);
+  };
+  if (editing) {
+    return (
+      <input
+        autoFocus
+        className="admX-input"
+        style={{ padding: "4px 8px", fontSize: 13, height: 28 }}
+        value={draft}
+        placeholder={placeholder}
+        onClick={(e) => e.stopPropagation()}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+          if (e.key === "Escape") { setDraft(value); setEditing(false); }
+        }}
+      />
+    );
+  }
+  return (
+    <button
+      type="button"
+      className="admX-inline-view"
+      onClick={(e) => { e.stopPropagation(); setEditing(true); }}
+      style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "none", border: "none", padding: 0, cursor: "text", textAlign: "left", color: "inherit", font: "inherit", maxWidth: "100%" }}
+      title="Clique para editar"
+    >
+      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0 }}>{renderView(value)}</span>
+      <span style={{ opacity: 0.4, fontSize: 11 }}>✎</span>
+    </button>
+  );
+}
+
 /* =========================================================
    HOME · CARDS
    ========================================================= */
