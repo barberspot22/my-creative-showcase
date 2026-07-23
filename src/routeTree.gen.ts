@@ -18,9 +18,11 @@ import { Route as GbSocialRouteImport } from './routes/gb-social'
 import { Route as EcommerceRouteImport } from './routes/ecommerce'
 import { Route as CrmRouteImport } from './routes/crm'
 import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicMetaCapiRouteImport } from './routes/api/public/meta-capi'
+import { Route as ApiPublicBootstrapAdminRouteImport } from './routes/api/public/bootstrap-admin'
 
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
@@ -67,6 +69,11 @@ const CardapioDigitalRoute = CardapioDigitalRouteImport.update({
   path: '/cardapio-digital',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -82,10 +89,16 @@ const ApiPublicMetaCapiRoute = ApiPublicMetaCapiRouteImport.update({
   path: '/api/public/meta-capi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBootstrapAdminRoute = ApiPublicBootstrapAdminRouteImport.update({
+  id: '/api/public/bootstrap-admin',
+  path: '/api/public/bootstrap-admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -95,11 +108,13 @@ export interface FileRoutesByFullPath {
   '/site-institucional': typeof SiteInstitucionalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/api/public/bootstrap-admin': typeof ApiPublicBootstrapAdminRoute
   '/api/public/meta-capi': typeof ApiPublicMetaCapiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -109,12 +124,14 @@ export interface FileRoutesByTo {
   '/site-institucional': typeof SiteInstitucionalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/api/public/bootstrap-admin': typeof ApiPublicBootstrapAdminRoute
   '/api/public/meta-capi': typeof ApiPublicMetaCapiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
@@ -124,6 +141,7 @@ export interface FileRoutesById {
   '/site-institucional': typeof SiteInstitucionalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/api/public/bootstrap-admin': typeof ApiPublicBootstrapAdminRoute
   '/api/public/meta-capi': typeof ApiPublicMetaCapiRoute
 }
 export interface FileRouteTypes {
@@ -131,6 +149,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -140,11 +159,13 @@ export interface FileRouteTypes {
     | '/site-institucional'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/api/public/bootstrap-admin'
     | '/api/public/meta-capi'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -154,11 +175,13 @@ export interface FileRouteTypes {
     | '/site-institucional'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/api/public/bootstrap-admin'
     | '/api/public/meta-capi'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/auth'
     | '/cardapio-digital'
     | '/crm'
     | '/ecommerce'
@@ -168,12 +191,14 @@ export interface FileRouteTypes {
     | '/site-institucional'
     | '/sitemap.xml'
     | '/termos-de-uso'
+    | '/api/public/bootstrap-admin'
     | '/api/public/meta-capi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   CardapioDigitalRoute: typeof CardapioDigitalRoute
   CrmRoute: typeof CrmRoute
   EcommerceRoute: typeof EcommerceRoute
@@ -183,6 +208,7 @@ export interface RootRouteChildren {
   SiteInstitucionalRoute: typeof SiteInstitucionalRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
+  ApiPublicBootstrapAdminRoute: typeof ApiPublicBootstrapAdminRoute
   ApiPublicMetaCapiRoute: typeof ApiPublicMetaCapiRoute
 }
 
@@ -251,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CardapioDigitalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -272,12 +305,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicMetaCapiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/bootstrap-admin': {
+      id: '/api/public/bootstrap-admin'
+      path: '/api/public/bootstrap-admin'
+      fullPath: '/api/public/bootstrap-admin'
+      preLoaderRoute: typeof ApiPublicBootstrapAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   CardapioDigitalRoute: CardapioDigitalRoute,
   CrmRoute: CrmRoute,
   EcommerceRoute: EcommerceRoute,
@@ -287,18 +328,9 @@ const rootRouteChildren: RootRouteChildren = {
   SiteInstitucionalRoute: SiteInstitucionalRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
+  ApiPublicBootstrapAdminRoute: ApiPublicBootstrapAdminRoute,
   ApiPublicMetaCapiRoute: ApiPublicMetaCapiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
