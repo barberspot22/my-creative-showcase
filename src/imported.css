@@ -1330,6 +1330,9 @@ body{overflow-x:clip}
 .admX-icon-btn{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;border:1px solid var(--adm-line);background:var(--adm-surface);cursor:pointer;font-size:14px;line-height:1;transition:.12s;padding:0}
 .admX-icon-btn:hover{border-color:var(--adm-ink);background:var(--adm-surface-2)}
 .admX-icon-btn.danger:hover{border-color:#c0392b;background:#fdecea}
+.admX-row-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.admX-item.dim{opacity:.55}
+.admX-item.dim .admX-thumb img{filter:grayscale(1)}
 .admX-inline-view:hover{opacity:.75}
 
 /* Image editor */
