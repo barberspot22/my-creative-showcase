@@ -93,3 +93,17 @@ export const svSaveTracking = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+export const svSaveSectionVisibility = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { page_key: string; section_key: string; visible: boolean }[]) => data)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const rows = data.map((r) => ({ ...r, updated_at: new Date().toISOString() }));
+    const { error } = await (supabaseAdmin as any)
+      .from("section_visibility")
+      .upsert(rows, { onConflict: "page_key,section_key" });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });

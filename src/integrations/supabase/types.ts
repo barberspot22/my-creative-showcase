@@ -113,6 +113,27 @@ export type Database = {
         }
         Relationships: []
       }
+      section_visibility: {
+        Row: {
+          page_key: string
+          section_key: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          page_key: string
+          section_key: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          page_key?: string
+          section_key?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       site_texts: {
         Row: {
           content: Json
