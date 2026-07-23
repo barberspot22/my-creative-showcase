@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { svIsAdmin } from "@/lib/admin-guard.functions";
 import { useEffect, useMemo, useState, useCallback, useRef, ReactNode } from "react";
 import { toast, Toaster } from "sonner";
 import {
@@ -31,7 +33,24 @@ const TABS: { key: TabKey; label: string; icon: string; group: string }[] = [
   { key: "tracking",  label: "Pixel",      icon: "◈", group: "Rastreamento" },
 ];
 
-export const Route = createFileRoute("/admin")({ component: AdminPage });
+export const Route = createFileRoute("/admin")({
+  ssr: false,
+  beforeLoad: async ({ location }) => {
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) {
+      throw redirect({ to: "/auth", search: { redirect: location.href } });
+    }
+    try {
+      const { isAdmin } = await svIsAdmin();
+      if (!isAdmin) throw redirect({ to: "/auth", search: { redirect: location.href } });
+    } catch (err) {
+      if ((err as { isRedirect?: boolean })?.isRedirect) throw err;
+      throw redirect({ to: "/auth", search: { redirect: location.href } });
+    }
+  },
+  head: () => ({ meta: [{ title: "Admin — GB IA" }, { name: "robots", content: "noindex, nofollow" }] }),
+  component: AdminPage,
+});
 
 function AdminPage() {
   const [tab, setTab] = useState<TabKey>("conteudo");
