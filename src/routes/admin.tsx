@@ -422,12 +422,40 @@ function PortfolioTab() {
               {items.map((it, idx) => (
                 <div key={it.id ?? idx} className={"admX-item" + (editingIdx === idx ? " active" : "")} onClick={() => setEditingIdx(idx)}>
                   <div className="admX-thumb">{it.image_url ? <img src={it.image_url} alt=""/> : <span>Sem imagem</span>}</div>
-                  <div className="admX-item-body">
-                    <strong>{it.title || "(sem título)"}</strong>
-                    <span>{it.link_url || "sem link"}</span>
+                  <div className="admX-item-body" style={{ minWidth: 0 }}>
+                    <InlinePencil
+                      value={it.title}
+                      placeholder="(sem título)"
+                      onSave={async (v) => { update(idx, { title: v }); await upsertPortfolioItem({ ...items[idx], title: v }); toast.success("Título atualizado"); }}
+                      renderView={(v) => <strong>{v || "(sem título)"}</strong>}
+                    />
+                    <InlinePencil
+                      value={it.link_url}
+                      placeholder="cole o link"
+                      onSave={async (v) => { update(idx, { link_url: v }); await upsertPortfolioItem({ ...items[idx], link_url: v }); toast.success("Link atualizado"); }}
+                      renderView={(v) => <span style={{ fontSize: 12, color: "var(--adm-ink-soft)" }}>{v || "sem link"}</span>}
+                    />
                     {it.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={it.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
                   </div>
-                  <span className={"admX-badge " + (it.visible ? "ok" : "off")}>{it.visible ? "visível" : "oculto"}</span>
+                  <div className="admX-row-actions" onClick={(e) => e.stopPropagation()} style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                    <label className="admX-icon-btn" title="Trocar imagem">
+                      <span aria-hidden>🖼️</span>
+                      <input type="file" accept="image/*" style={{ display: "none" }} onChange={async (e) => {
+                        const f = e.target.files?.[0]; if (!f) return;
+                        const url = await fileToDataUrl(f);
+                        update(idx, { image_url: url });
+                        try { await upsertPortfolioItem({ ...items[idx], image_url: url }); toast.success("Imagem atualizada"); }
+                        catch (err: any) { toast.error("Erro: " + err.message); }
+                      }}/>
+                    </label>
+                    <button className="admX-icon-btn" title="Editar tudo" onClick={() => setEditingIdx(idx)}>✏️</button>
+                    <button className="admX-icon-btn" title={it.visible ? "Ocultar" : "Mostrar"} onClick={async () => {
+                      const next = !it.visible; update(idx, { visible: next });
+                      try { await upsertPortfolioItem({ ...items[idx], visible: next }); }
+                      catch (err: any) { toast.error("Erro: " + err.message); }
+                    }}>{it.visible ? "👁️" : "🚫"}</button>
+                    <button className="admX-icon-btn danger" title="Excluir" onClick={() => remove(idx)}>🗑️</button>
+                  </div>
                 </div>
               ))}
             </div>
