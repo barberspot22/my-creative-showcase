@@ -640,6 +640,17 @@ function LinksTab() {
 /* =========================================================
    TEXTOS
    ========================================================= */
+const TEXT_FIELDS: { key: string; label: string; hint?: string; multiline?: boolean }[] = [
+  { key: "hero_eyebrow",   label: "Selo do topo (eyebrow)", hint: "Etiqueta curta acima do título" },
+  { key: "hero_title",     label: "Título principal", multiline: true },
+  { key: "hero_subtitle",  label: "Subtítulo", multiline: true },
+  { key: "section_title",  label: "Título da seção", multiline: true },
+  { key: "section_body",   label: "Texto da seção", multiline: true },
+  { key: "cta_label",      label: "Texto do botão principal" },
+  { key: "cta_help",       label: "Frase de apoio abaixo do botão" },
+  { key: "footer_note",    label: "Observação do rodapé", multiline: true },
+];
+
 function TextsTab() {
   const [pageKey, setPageKey] = useState(SITE_TEXT_PAGES[0].key);
   const [content, setContent] = useState<Record<string, string>>({});
@@ -648,7 +659,21 @@ function TextsTab() {
   const [saving, setSaving] = useState(false);
   const [q, setQ] = useState("");
 
-  useEffect(() => { fetchSiteText(pageKey).then(setContent).catch(() => setContent({})); setDirty(false); }, [pageKey]);
+  useEffect(() => {
+    fetchSiteText(pageKey)
+      .then((c) => {
+        const merged: Record<string, string> = {};
+        TEXT_FIELDS.forEach((f) => { merged[f.key] = c[f.key] ?? ""; });
+        Object.entries(c).forEach(([k, v]) => { if (!(k in merged)) merged[k] = v; });
+        setContent(merged);
+      })
+      .catch(() => {
+        const empty: Record<string, string> = {};
+        TEXT_FIELDS.forEach((f) => { empty[f.key] = ""; });
+        setContent(empty);
+      });
+    setDirty(false);
+  }, [pageKey]);
 
   const save = useCallback(async () => {
     setSaving(true);
@@ -658,45 +683,83 @@ function TextsTab() {
   }, [pageKey, content]);
   useSaveShortcut(save);
 
-  const entries = Object.entries(content).filter(([k, v]) => !q || k.toLowerCase().includes(q.toLowerCase()) || v.toLowerCase().includes(q.toLowerCase()));
+  const standardKeys = new Set(TEXT_FIELDS.map((f) => f.key));
+  const custom = Object.entries(content).filter(([k]) => !standardKeys.has(k));
+  const matches = (k: string, v: string) => !q || k.toLowerCase().includes(q.toLowerCase()) || (v ?? "").toLowerCase().includes(q.toLowerCase());
+
+  const setField = (k: string, v: string) => { setContent((c) => ({ ...c, [k]: v })); setDirty(true); };
+  const removeField = (k: string) => { setContent((c) => { const { [k]: _, ...rest } = c; return rest; }); setDirty(true); };
 
   return (
     <>
       <SectionHeader
         title="Textos das páginas"
-        description="Textos editáveis expostos pelo hook useSiteText. Use chaves como hero_title, cta_help, etc."
+        description="Cada página tem os mesmos campos padrão. Escolha uma rota abaixo e preencha o que aparece no site."
         actions={<SaveButton dirty={dirty} saving={saving} onClick={save}/>}
       />
 
-      <div className="admX-chips">
+      <div className="admX-pagebar" role="tablist" aria-label="Páginas">
         {SITE_TEXT_PAGES.map((p) => (
-          <button key={p.key} className={"admX-chip" + (p.key === pageKey ? " active" : "")} onClick={() => setPageKey(p.key)}>{p.label}</button>
+          <button
+            key={p.key}
+            role="tab"
+            aria-selected={p.key === pageKey}
+            className={"admX-pagechip" + (p.key === pageKey ? " active" : "")}
+            onClick={() => setPageKey(p.key)}
+          >
+            <span className="admX-pagechip-label">{p.label}</span>
+            <span className="admX-pagechip-key">/{p.key === "home" ? "" : p.key}</span>
+          </button>
         ))}
       </div>
 
       <div className="admX-search" style={{ maxWidth: 420 }}>
-        <input className="admX-input" placeholder="Buscar chave ou conteúdo…" value={q} onChange={(e) => setQ(e.target.value)}/>
-      </div>
-
-      <div className="admX-list">
-        {entries.length === 0 && <div className="admX-card"><p className="hint" style={{ margin: 0 }}>Nenhuma chave ainda. Crie a primeira abaixo.</p></div>}
-        {entries.map(([k, v]) => (
-          <div key={k} className="admX-card" style={{ padding: 16 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-              <code style={{ font: "700 12px JetBrains Mono, monospace", color: "var(--adm-gold-ink)", background: "var(--adm-gold-soft)", padding: "3px 8px", borderRadius: 6 }}>{k}</code>
-              <button className="admX-btn danger" onClick={() => { setContent((c) => { const { [k]: _, ...rest } = c; return rest; }); setDirty(true); }}>Remover</button>
-            </div>
-            <textarea className="admX-textarea" value={v} onChange={(e) => { setContent((c) => ({ ...c, [k]: e.target.value })); setDirty(true); }}/>
-          </div>
-        ))}
+        <input className="admX-input" placeholder="Buscar campo ou texto…" value={q} onChange={(e) => setQ(e.target.value)}/>
       </div>
 
       <div className="admX-card">
-        <h3>Nova chave</h3>
-        <p className="hint">Ex.: <code>hero_title</code>, <code>cta_secundario</code>.</p>
+        <h3 style={{ marginTop: 0 }}>Campos padrão</h3>
+        <p className="hint">Mesmos campos em todas as páginas — mantém o layout consistente para edição.</p>
+        <div className="admX-fieldgrid">
+          {TEXT_FIELDS.filter((f) => matches(f.key, content[f.key] ?? "")).map((f) => (
+            <div key={f.key} className="admX-field">
+              <label>
+                <span>{f.label}</span>
+                <code className="admX-key">{f.key}</code>
+              </label>
+              {f.multiline
+                ? <textarea className="admX-textarea" value={content[f.key] ?? ""} onChange={(e) => setField(f.key, e.target.value)} placeholder={f.hint}/>
+                : <input className="admX-input" value={content[f.key] ?? ""} onChange={(e) => setField(f.key, e.target.value)} placeholder={f.hint}/>}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {custom.length > 0 && (
+        <div className="admX-card">
+          <h3 style={{ marginTop: 0 }}>Chaves personalizadas</h3>
+          <div className="admX-fieldgrid">
+            {custom.filter(([k, v]) => matches(k, v)).map(([k, v]) => (
+              <div key={k} className="admX-field">
+                <label>
+                  <code className="admX-key">{k}</code>
+                  <button className="admX-icon-btn danger" title="Remover" onClick={() => removeField(k)} aria-label="Remover">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                  </button>
+                </label>
+                <textarea className="admX-textarea" value={v} onChange={(e) => setField(k, e.target.value)}/>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="admX-card">
+        <h3 style={{ marginTop: 0 }}>Nova chave personalizada</h3>
+        <p className="hint">Use apenas para textos fora dos campos padrão. Ex.: <code>faq_intro</code>.</p>
         <div style={{ display: "flex", gap: 8 }}>
           <input className="admX-input" placeholder="nome_da_chave" value={newKey} onChange={(e) => setNewKey(e.target.value)}/>
-          <button className="admX-btn primary" onClick={() => { if (newKey.trim()) { setContent((c) => ({ ...c, [newKey.trim()]: "" })); setNewKey(""); setDirty(true); } }}>+ Adicionar</button>
+          <button className="admX-btn primary" onClick={() => { const k = newKey.trim(); if (k && !(k in content)) { setContent((c) => ({ ...c, [k]: "" })); setNewKey(""); setDirty(true); } }}>+ Adicionar</button>
         </div>
       </div>
     </>
