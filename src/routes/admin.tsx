@@ -407,6 +407,8 @@ function PortfolioTab() {
         ))}
       </div>
 
+      {PORTFOLIO_SPECS[pageKey] && <SpecBadge spec={PORTFOLIO_SPECS[pageKey]} />}
+
       <div className="admX-split">
         <div>
           <div className="admX-card">
@@ -420,6 +422,7 @@ function PortfolioTab() {
                   <div className="admX-item-body">
                     <strong>{it.title || "(sem título)"}</strong>
                     <span>{it.link_url || "sem link"}</span>
+                    {it.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={it.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
                   </div>
                   <span className={"admX-badge " + (it.visible ? "ok" : "off")}>{it.visible ? "visível" : "oculto"}</span>
                 </div>
@@ -433,20 +436,40 @@ function PortfolioTab() {
           {editing && editingIdx !== null && (
             <>
               <h3>Editar item</h3>
+              {PORTFOLIO_SPECS[pageKey] && <SpecBadge spec={PORTFOLIO_SPECS[pageKey]} />}
               <div className="admX-field"><label>Título</label><input className="admX-input" value={editing.title} onChange={(e) => update(editingIdx, { title: e.target.value })}/></div>
               <div className="admX-field"><label>Descrição</label><textarea className="admX-textarea" value={editing.description} onChange={(e) => update(editingIdx, { description: e.target.value })}/></div>
               <div className="admX-field"><label>Link (opcional)</label><input className="admX-input" value={editing.link_url} onChange={(e) => update(editingIdx, { link_url: e.target.value })}/></div>
-              <div className="admX-field"><label>URL da imagem</label><input className="admX-input" value={editing.image_url} onChange={(e) => update(editingIdx, { image_url: e.target.value })} placeholder="https://…"/></div>
+              <div className="admX-field">
+                <label style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span>URL da imagem</span>
+                  {editing.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={editing.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
+                </label>
+                <input className="admX-input" value={editing.image_url} onChange={(e) => update(editingIdx, { image_url: e.target.value })} placeholder="https://…"/>
+              </div>
               <div className="admX-field">
                 <label className="admX-upload" style={{ textAlign: "center" }}>Fazer upload da imagem
                   <input type="file" accept="image/*" onChange={(e) => onUpload(editingIdx, e.target.files?.[0] ?? null)}/>
                 </label>
               </div>
               {editing.image_url && (
-                <div className="admX-thumb" style={{ width: "100%", height: 160, marginBottom: 12 }}>
-                  <img src={editing.image_url} alt=""/>
+                <div className="admX-thumb" style={{
+                  width: "100%",
+                  height: PORTFOLIO_SPECS[pageKey]?.tall ? 360 : 160,
+                  marginBottom: 12,
+                  overflow: "auto",
+                  alignItems: "flex-start",
+                }}>
+                  <img
+                    src={editing.image_url}
+                    alt=""
+                    style={PORTFOLIO_SPECS[pageKey]?.tall
+                      ? { width: "100%", height: "auto", objectFit: "unset" }
+                      : undefined}
+                  />
                 </div>
               )}
+
               <label className="admX-toggle">
                 <input type="checkbox" checked={editing.visible} onChange={(e) => update(editingIdx, { visible: e.target.checked })}/>
                 Visível no site
