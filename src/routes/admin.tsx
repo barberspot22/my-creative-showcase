@@ -141,6 +141,74 @@ async function fileToDataUrl(file: File): Promise<string> {
   });
 }
 
+/* --------------------- Dimensões recomendadas --------------------- */
+type ImgSpec = { w: number; h: number; note: string; tall?: boolean };
+
+const HOME_CARD_SPEC: ImgSpec = {
+  w: 1200, h: 1500,
+  note: "Retrato 4:5 · PNG/JPG até ~1MB. Todas as capas devem ter o mesmo tamanho para o carrossel ficar alinhado.",
+};
+
+const PORTFOLIO_SPECS: Record<string, ImgSpec> = {
+  "gb-social":          { w: 1080, h: 1350, note: "Post/feed 4:5 (1080×1350) — mantém a nitidez no mobile." },
+  "site-institucional": { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE do site (rolagem inteira). Largura fixa 1280px, altura livre até ~6000px." },
+  "pagina-vendas":      { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE da página de vendas. Largura 1280px, altura livre até ~6000px." },
+  "pagina-captura":     { w: 1280, h: 2000, tall: true, note: "Screenshot FULL PAGE da landing. Largura 1280px, altura livre até ~4000px." },
+  "ecommerce":          { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE da loja (home ou PDP). Largura 1280px, altura livre até ~6000px." },
+  "cardapio-digital":   { w: 1080, h: 1920, tall: true, note: "Mockup mobile 9:16 (cardápio). Padrão de tela cheia 1080×1920." },
+  "gb-studio":          { w: 1600, h: 1000, note: "Paisagem 16:10 (lookbook). Não usar retrato aqui." },
+  "crm":                { w: 1600, h: 1000, note: "Paisagem 16:10 (screenshot do painel)." },
+};
+
+function SpecBadge({ spec }: { spec: ImgSpec }) {
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
+      background: "#f6f4ef", border: "1px solid #e6e1d6", borderRadius: 8,
+      fontSize: 12, color: "#333", marginBottom: 10, flexWrap: "wrap",
+    }}>
+      <span style={{
+        fontWeight: 700, letterSpacing: 0.4, padding: "3px 8px", borderRadius: 4,
+        background: "#111", color: "#f6f4ef", whiteSpace: "nowrap",
+      }}>
+        {spec.w} × {spec.tall ? `até ${spec.h}` : spec.h} px
+      </span>
+      <span style={{ opacity: 0.75 }}>{spec.note}</span>
+    </div>
+  );
+}
+
+function useImgSize(src: string) {
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
+  useEffect(() => {
+    if (!src) { setSize(null); return; }
+    const im = new window.Image();
+    im.onload = () => setSize({ w: im.naturalWidth, h: im.naturalHeight });
+    im.onerror = () => setSize(null);
+    im.src = src;
+  }, [src]);
+  return size;
+}
+
+function DimTag({ src, spec }: { src: string; spec: ImgSpec }) {
+  const size = useImgSize(src);
+  if (!size) return null;
+  const wOk = Math.abs(size.w - spec.w) <= spec.w * 0.06;
+  const hOk = spec.tall ? size.h >= spec.h * 0.5 : Math.abs(size.h - spec.h) <= spec.h * 0.08;
+  const ok = wOk && hOk;
+  return (
+    <span style={{
+      display: "inline-block", fontSize: 11, padding: "2px 6px", borderRadius: 4,
+      background: ok ? "#e8f4ea" : "#fbeae0",
+      color: ok ? "#1f6a35" : "#8a3a12",
+      border: `1px solid ${ok ? "#bfe0c7" : "#f2c9a8"}`,
+      fontWeight: 600, letterSpacing: 0.2, marginLeft: 6,
+    }} title={ok ? "Dimensão dentro do recomendado" : `Recomendado: ${spec.w}×${spec.tall ? `até ${spec.h}` : spec.h}`}>
+      {size.w}×{size.h}px {ok ? "✓" : "!"}
+    </span>
+  );
+}
+
 /* =========================================================
    HOME · CARDS
    ========================================================= */
@@ -233,17 +301,22 @@ function HomeCardsTab() {
                   Imagens do card (loop na capa)
                   <button type="button" className="admX-btn primary" onClick={addFrame}>+ Adicionar</button>
                 </label>
+                <SpecBadge spec={HOME_CARD_SPEC} />
                 <div className="admX-images">
                   {(active.frames.length ? active.frames : [""]).map((src, i) => (
                     <div className="admX-image-row" key={i}>
                       <div className="admX-thumb">{src ? <img src={src} alt=""/> : <span>Sem imagem</span>}</div>
-                      <input type="text" value={src} placeholder="URL da imagem" onChange={(e) => setFrame(i, e.target.value)}/>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1, minWidth: 0 }}>
+                        <input type="text" value={src} placeholder="URL da imagem" onChange={(e) => setFrame(i, e.target.value)}/>
+                        {src && <DimTag src={src} spec={HOME_CARD_SPEC} />}
+                      </div>
                       <label className="admX-upload">Upload<input type="file" accept="image/*" onChange={(e) => onUpload(i, e.target.files?.[0] ?? null)}/></label>
                       <button type="button" className="admX-btn danger" onClick={() => removeFrame(i)}>Remover</button>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
           )}
         </div>
@@ -334,6 +407,8 @@ function PortfolioTab() {
         ))}
       </div>
 
+      {PORTFOLIO_SPECS[pageKey] && <SpecBadge spec={PORTFOLIO_SPECS[pageKey]} />}
+
       <div className="admX-split">
         <div>
           <div className="admX-card">
@@ -347,6 +422,7 @@ function PortfolioTab() {
                   <div className="admX-item-body">
                     <strong>{it.title || "(sem título)"}</strong>
                     <span>{it.link_url || "sem link"}</span>
+                    {it.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={it.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
                   </div>
                   <span className={"admX-badge " + (it.visible ? "ok" : "off")}>{it.visible ? "visível" : "oculto"}</span>
                 </div>
@@ -360,20 +436,40 @@ function PortfolioTab() {
           {editing && editingIdx !== null && (
             <>
               <h3>Editar item</h3>
+              {PORTFOLIO_SPECS[pageKey] && <SpecBadge spec={PORTFOLIO_SPECS[pageKey]} />}
               <div className="admX-field"><label>Título</label><input className="admX-input" value={editing.title} onChange={(e) => update(editingIdx, { title: e.target.value })}/></div>
               <div className="admX-field"><label>Descrição</label><textarea className="admX-textarea" value={editing.description} onChange={(e) => update(editingIdx, { description: e.target.value })}/></div>
               <div className="admX-field"><label>Link (opcional)</label><input className="admX-input" value={editing.link_url} onChange={(e) => update(editingIdx, { link_url: e.target.value })}/></div>
-              <div className="admX-field"><label>URL da imagem</label><input className="admX-input" value={editing.image_url} onChange={(e) => update(editingIdx, { image_url: e.target.value })} placeholder="https://…"/></div>
+              <div className="admX-field">
+                <label style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span>URL da imagem</span>
+                  {editing.image_url && PORTFOLIO_SPECS[pageKey] && <DimTag src={editing.image_url} spec={PORTFOLIO_SPECS[pageKey]} />}
+                </label>
+                <input className="admX-input" value={editing.image_url} onChange={(e) => update(editingIdx, { image_url: e.target.value })} placeholder="https://…"/>
+              </div>
               <div className="admX-field">
                 <label className="admX-upload" style={{ textAlign: "center" }}>Fazer upload da imagem
                   <input type="file" accept="image/*" onChange={(e) => onUpload(editingIdx, e.target.files?.[0] ?? null)}/>
                 </label>
               </div>
               {editing.image_url && (
-                <div className="admX-thumb" style={{ width: "100%", height: 160, marginBottom: 12 }}>
-                  <img src={editing.image_url} alt=""/>
+                <div className="admX-thumb" style={{
+                  width: "100%",
+                  height: PORTFOLIO_SPECS[pageKey]?.tall ? 360 : 160,
+                  marginBottom: 12,
+                  overflow: "auto",
+                  alignItems: "flex-start",
+                }}>
+                  <img
+                    src={editing.image_url}
+                    alt=""
+                    style={PORTFOLIO_SPECS[pageKey]?.tall
+                      ? { width: "100%", height: "auto", objectFit: "unset" }
+                      : undefined}
+                  />
                 </div>
               )}
+
               <label className="admX-toggle">
                 <input type="checkbox" checked={editing.visible} onChange={(e) => update(editingIdx, { visible: e.target.checked })}/>
                 Visível no site
