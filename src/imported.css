@@ -1333,6 +1333,16 @@ body{overflow-x:clip}
 .admX-row-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
 .admX-item.dim{opacity:.55}
 .admX-item.dim .admX-thumb img{filter:grayscale(1)}
+.admX-pagebar{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin:16px 0}
+.admX-pagechip{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 14px;border-radius:12px;border:1px solid var(--adm-line);background:var(--adm-surface);cursor:pointer;transition:.15s;text-align:left;min-height:56px}
+.admX-pagechip:hover{border-color:var(--adm-ink);background:var(--adm-surface-2)}
+.admX-pagechip.active{background:var(--adm-ink);color:var(--adm-surface);border-color:var(--adm-ink)}
+.admX-pagechip-label{font-weight:700;font-size:14px;line-height:1.2}
+.admX-pagechip-key{font:500 11px "JetBrains Mono",monospace;opacity:.6;letter-spacing:.02em}
+.admX-pagechip.active .admX-pagechip-key{opacity:.75}
+.admX-fieldgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.admX-fieldgrid .admX-field label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.admX-key{font:700 11px "JetBrains Mono",monospace;color:var(--adm-gold-ink);background:var(--adm-gold-soft);padding:2px 7px;border-radius:5px;letter-spacing:.02em}
 .admX-inline-view:hover{opacity:.75}
 
 /* Image editor */
