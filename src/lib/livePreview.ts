@@ -4,9 +4,10 @@ export type LinkOverlay = { ctaUrl?: string; ctaLabel?: string };
 export type Overlay = {
   texts: Record<string, Record<string, string>>;
   links: Record<string, LinkOverlay>;
+  sections: Record<string, Record<string, boolean>>;
 };
 
-const EMPTY: Overlay = { texts: {}, links: {} };
+const EMPTY: Overlay = { texts: {}, links: {}, sections: {} };
 let overlay: Overlay = EMPTY;
 const listeners = new Set<() => void>();
 
@@ -34,6 +35,7 @@ function install() {
     overlay = {
       texts: data.texts && typeof data.texts === "object" ? data.texts : {},
       links: data.links && typeof data.links === "object" ? data.links : {},
+      sections: data.sections && typeof data.sections === "object" ? data.sections : {},
     };
     listeners.forEach((l) => l());
   });
@@ -61,12 +63,17 @@ export function useOverlay(): Overlay {
 
 export function emitPreview(
   target: Window | null | undefined,
-  payload: { texts?: Overlay["texts"]; links?: Overlay["links"] },
+  payload: { texts?: Overlay["texts"]; links?: Overlay["links"]; sections?: Overlay["sections"] },
 ) {
   if (!target) return;
   try {
     target.postMessage(
-      { type: MSG_UPDATE, texts: payload.texts ?? {}, links: payload.links ?? {} },
+      {
+        type: MSG_UPDATE,
+        texts: payload.texts ?? {},
+        links: payload.links ?? {},
+        sections: payload.sections ?? {},
+      },
       window.location.origin,
     );
   } catch {}
