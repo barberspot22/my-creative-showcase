@@ -9,9 +9,11 @@ import {
   fetchPortfolio, upsertPortfolioItem, deletePortfolioItem, PortfolioItem, PORTFOLIO_PAGES,
   fetchSiteText, saveSiteText, SITE_TEXT_PAGES,
   fetchTracking, saveTracking, TrackingSettings, defaultTracking,
+  fetchSectionVisibility, saveSectionVisibility,
 } from "@/lib/cms";
 import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY, type PageKey } from "@/lib/adminLinks";
 import { emitPreview, PREVIEW_READY_MSG } from "@/lib/livePreview";
+import { SECTIONS_CATALOG, SECTIONS_PAGES, type SectionsPageKey } from "@/lib/sectionsCatalog";
 
 const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
