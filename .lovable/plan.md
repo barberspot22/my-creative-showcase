@@ -1,27 +1,34 @@
-## Problem
+## Diagnóstico
 
-On `/crm`, the section intro block in `#estrutura` (heading "Dois módulos, cada um com sua própria lógica.") is meant to stay pinned on the left while the numbered list scrolls on the right. Today it doesn't behave as fixed:
+Confirmei consultando o banco:
 
-- The `ProductSwitcher` above it is `position: sticky; top: 0` (~46px tall), but `.crmSectionIntro` uses `top: 70px` with no accounting for the switcher — they can visually collide and the heading gets pushed under the switcher on some viewports.
-- The mobile media query (`max-width: 760px`) forces `.crmSectionIntro { position: static }`. At tablet widths just above that (e.g. 768px, the current preview) the grid stays 2-column but the intro no longer feels anchored, so as the user scrolls the list the heading scrolls away and overlaps the next section's text.
+- **Tabela `home_cards`: 0 linhas.** Por isso o admin mostra "Sem imagem" em todos os cards da home. O site em si funciona porque o `src/routes/index.tsx` tem um array fixo (`caseCards`) como fallback — mas nada disso foi para o banco, então o admin não enxerga.
+- **`portfolio_items` do `gb-social`: 0 linhas.** E, além disso, a página `/gb-social` **não lê do banco** — o `PerspectiveTicker` usa uma lista fixa de `/gb-social-designs/design-*.png`. Ou seja, hoje qualquer coisa que você adicionar na aba "GB Social" do admin **não aparece em lugar nenhum no site**.
 
-## Fix (CSS-only, `src/imported.css`)
+Outro detalhe: alguns cards da home hoje são "UI animada" (chat do Social, dashboard do CRM, catálogo do Menu), não imagem. Esses não têm frames de imagem por design — precisam ser tratados no admin como "usar animação padrão" em vez de forçar uma imagem.
 
-1. Make `.crmSectionIntro` reliably sticky:
-   - Keep `position: sticky; align-self: start`.
-   - Change `top` to sit just below the `ProductSwitcher` (approx `top: 60px`) and add a small `padding-bottom` so descenders don't touch the list rows behind it.
-   - Add `z-index: 1` so the pinned heading paints above the scrolling column, and a subtle background matching `.crmStructure` (`background: var(--cream)` in default theme / `#050807` in the dark override on line 1165) so text doesn't bleed through.
+## Plano
 
-2. Keep it sticky on tablet, only drop to static on true mobile:
-   - Remove `.crmSectionIntro { position: static }` from the `@media (max-width: 760px)` block, or narrow it to `@media (max-width: 620px)` so 768px preview keeps the sticky behavior.
+### 1. Semear `home_cards` com o conteúdo atual da home
+Migração que insere os 6 cards atuais (`studio`, `social`, `ecommerce`, `crm`, `site`, `menu`) com título, descrição, badge, href e as `frames` de imagem que hoje aparecem no site (Studio pega as 3 do lookbook; E-commerce e Site pegam suas capas `/covers/hero-*.jpg`; Social, CRM e Menu ficam com `frames: []` porque usam UI animada).
 
-3. No changes to `src/routes/crm.tsx` markup or copy.
+Resultado: o admin passa a listar as capas reais e permitir editar. Os cards que hoje são animações continuam funcionando via fallback no `index.tsx` quando `frames` está vazio.
 
-## Files touched
+### 2. Conectar `/gb-social` ao `portfolio_items`
+- Semear `portfolio_items` com `page_key='gb-social'` usando os 9 designs hoje fixos no `PerspectiveTicker`.
+- Refatorar `PerspectiveTicker` para receber os designs por prop e alterar `src/routes/gb-social.tsx` para buscar via `fetchReferencesByPage("gb-social")` (com a lista atual como fallback, mesmo padrão de e-commerce/institucional/cardápio).
 
-- `src/imported.css` — update `.crmSectionIntro` rule (~line 125 block) and the mobile override (~line 127 block).
+Resultado: a aba "GB Social" do admin passa a controlar de verdade as imagens que rolam na página.
 
-## Verification
+### 3. Sinalizar no admin os cards "sem imagem editável"
+Nos cards da home cujo visual é UI animada (Social, CRM, Menu), mostrar no lugar do "SEM IMG" um rótulo tipo "ANIMAÇÃO" com um tooltip curto ("Este card usa uma animação da marca, não uma imagem"). Evita a sensação de bug.
 
-- Load `/crm` at 768px and desktop: scroll through `#estrutura` and confirm the heading stays pinned under the ProductSwitcher and never overlaps the "RECOVER DENTRO DO CRM" section below.
-- At <620px, intro flows inline as before.
+### Fora de escopo
+- Não vou mudar o layout do admin nem os specs de dimensões.
+- Não vou trocar as capas atuais — só levo o que já está no site para o banco para você poder editar.
+
+## Detalhes técnicos
+
+- Migração idempotente com `INSERT ... ON CONFLICT (key) DO NOTHING` para `home_cards` e um `INSERT ... WHERE NOT EXISTS` para os 9 itens do `gb-social`.
+- `PerspectiveTicker` ganha prop `designs?: string[]`; mantém a constante atual como default para não quebrar SSR/preview enquanto os dados carregam.
+- `src/routes/gb-social.tsx` passa a usar `useQuery` + `fetchReferencesByPage("gb-social")` no mesmo padrão já usado nas outras páginas.
