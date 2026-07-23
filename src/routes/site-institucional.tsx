@@ -102,4 +102,17 @@ function SiteInstitucionalPage() {
   </div>;
 }
 
-export const Route = createFileRoute("/site-institucional")({ component: SiteInstitucionalPage });
+export const Route = createFileRoute("/site-institucional")({
+  component: SiteInstitucionalPage,
+  head: () => ({
+    meta: [
+      { title: "Site Institucional — Autoridade e conversão | GB IA" },
+      { name: "description", content: "Sites institucionais, páginas de vendas e páginas de captura estruturados como funil. Autoridade, provas e caminho claro até o contato — sem template genérico." },
+      { property: "og:title", content: "Site Institucional — Autoridade e conversão | GB IA" },
+      { property: "og:description", content: "Sites institucionais, páginas de vendas e páginas de captura estruturados como funil. Autoridade, provas e caminho claro até o contato." },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "https://gb-ia.lovable.app/site-institucional" },
+    ],
+    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/site-institucional" }],
+  }),
+});

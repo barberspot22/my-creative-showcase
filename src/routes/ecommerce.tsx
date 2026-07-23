@@ -114,7 +114,7 @@ export const Route = createFileRoute("/ecommerce")({
   component: EcommercePage,
   head: () => ({
     meta: [
-      { title: "Seu cliente está online. Seu produto também? | GB IA E-commerce" },
+      { title: "E-commerce com IA vendedora | GB IA" },
       { name: "description", content: "Loja, catálogo digital, marketplaces, WhatsApp e IA vendedora num só sistema. Cadastre por áudio e venda em todos os canais onde seu cliente já está." },
       { property: "og:title", content: "E-commerce Inteligente — Loja + Marketplaces + IA Vendedora | GB IA" },
       { property: "og:description", content: "Loja, catálogo, marketplaces, WhatsApp e IA vendedora num sistema só. Cadastre por áudio, publique em todos os canais, rastreie e otimize a conversão." },
