@@ -141,6 +141,74 @@ async function fileToDataUrl(file: File): Promise<string> {
   });
 }
 
+/* --------------------- Dimensões recomendadas --------------------- */
+type ImgSpec = { w: number; h: number; note: string; tall?: boolean };
+
+const HOME_CARD_SPEC: ImgSpec = {
+  w: 1200, h: 1500,
+  note: "Retrato 4:5 · PNG/JPG até ~1MB. Todas as capas devem ter o mesmo tamanho para o carrossel ficar alinhado.",
+};
+
+const PORTFOLIO_SPECS: Record<string, ImgSpec> = {
+  "gb-social":          { w: 1080, h: 1350, note: "Post/feed 4:5 (1080×1350) — mantém a nitidez no mobile." },
+  "site-institucional": { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE do site (rolagem inteira). Largura fixa 1280px, altura livre até ~6000px." },
+  "pagina-vendas":      { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE da página de vendas. Largura 1280px, altura livre até ~6000px." },
+  "pagina-captura":     { w: 1280, h: 2000, tall: true, note: "Screenshot FULL PAGE da landing. Largura 1280px, altura livre até ~4000px." },
+  "ecommerce":          { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE da loja (home ou PDP). Largura 1280px, altura livre até ~6000px." },
+  "cardapio-digital":   { w: 1080, h: 1920, tall: true, note: "Mockup mobile 9:16 (cardápio). Padrão de tela cheia 1080×1920." },
+  "gb-studio":          { w: 1600, h: 1000, note: "Paisagem 16:10 (lookbook). Não usar retrato aqui." },
+  "crm":                { w: 1600, h: 1000, note: "Paisagem 16:10 (screenshot do painel)." },
+};
+
+function SpecBadge({ spec }: { spec: ImgSpec }) {
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
+      background: "#f6f4ef", border: "1px solid #e6e1d6", borderRadius: 8,
+      fontSize: 12, color: "#333", marginBottom: 10, flexWrap: "wrap",
+    }}>
+      <span style={{
+        fontWeight: 700, letterSpacing: 0.4, padding: "3px 8px", borderRadius: 4,
+        background: "#111", color: "#f6f4ef", whiteSpace: "nowrap",
+      }}>
+        {spec.w} × {spec.tall ? `até ${spec.h}` : spec.h} px
+      </span>
+      <span style={{ opacity: 0.75 }}>{spec.note}</span>
+    </div>
+  );
+}
+
+function useImgSize(src: string) {
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
+  useEffect(() => {
+    if (!src) { setSize(null); return; }
+    const im = new window.Image();
+    im.onload = () => setSize({ w: im.naturalWidth, h: im.naturalHeight });
+    im.onerror = () => setSize(null);
+    im.src = src;
+  }, [src]);
+  return size;
+}
+
+function DimTag({ src, spec }: { src: string; spec: ImgSpec }) {
+  const size = useImgSize(src);
+  if (!size) return null;
+  const wOk = Math.abs(size.w - spec.w) <= spec.w * 0.06;
+  const hOk = spec.tall ? size.h >= spec.h * 0.5 : Math.abs(size.h - spec.h) <= spec.h * 0.08;
+  const ok = wOk && hOk;
+  return (
+    <span style={{
+      display: "inline-block", fontSize: 11, padding: "2px 6px", borderRadius: 4,
+      background: ok ? "#e8f4ea" : "#fbeae0",
+      color: ok ? "#1f6a35" : "#8a3a12",
+      border: `1px solid ${ok ? "#bfe0c7" : "#f2c9a8"}`,
+      fontWeight: 600, letterSpacing: 0.2, marginLeft: 6,
+    }} title={ok ? "Dimensão dentro do recomendado" : `Recomendado: ${spec.w}×${spec.tall ? `até ${spec.h}` : spec.h}`}>
+      {size.w}×{size.h}px {ok ? "✓" : "!"}
+    </span>
+  );
+}
+
 /* =========================================================
    HOME · CARDS
    ========================================================= */
