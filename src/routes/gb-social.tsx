@@ -57,7 +57,7 @@ function GBSocialPage() {
 
       <section className="socialWorkShowcase">
         <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
-        <PerspectiveTicker />
+        <PerspectiveTicker designs={designs} />
       </section>
 
       <section className="whatsappBlock">
