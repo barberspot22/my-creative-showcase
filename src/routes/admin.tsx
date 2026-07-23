@@ -301,17 +301,22 @@ function HomeCardsTab() {
                   Imagens do card (loop na capa)
                   <button type="button" className="admX-btn primary" onClick={addFrame}>+ Adicionar</button>
                 </label>
+                <SpecBadge spec={HOME_CARD_SPEC} />
                 <div className="admX-images">
                   {(active.frames.length ? active.frames : [""]).map((src, i) => (
                     <div className="admX-image-row" key={i}>
                       <div className="admX-thumb">{src ? <img src={src} alt=""/> : <span>Sem imagem</span>}</div>
-                      <input type="text" value={src} placeholder="URL da imagem" onChange={(e) => setFrame(i, e.target.value)}/>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1, minWidth: 0 }}>
+                        <input type="text" value={src} placeholder="URL da imagem" onChange={(e) => setFrame(i, e.target.value)}/>
+                        {src && <DimTag src={src} spec={HOME_CARD_SPEC} />}
+                      </div>
                       <label className="admX-upload">Upload<input type="file" accept="image/*" onChange={(e) => onUpload(i, e.target.files?.[0] ?? null)}/></label>
                       <button type="button" className="admX-btn danger" onClick={() => removeFrame(i)}>Remover</button>
                     </div>
                   ))}
                 </div>
               </div>
+
             </div>
           )}
         </div>
