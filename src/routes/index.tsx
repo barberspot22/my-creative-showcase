@@ -380,12 +380,13 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (event && drag.current.pointerId !== event.pointerId) return;
     if (!drag.current.active) return;
     const dx = drag.current.delta;
-    const THRESHOLD = 60;
-    // Always advance/retreat exactly one card per gesture.
-    const steps = Math.abs(dx) >= THRESHOLD ? (dx < 0 ? 1 : -1) : 0;
+    const THRESHOLD = 30;
+    // Advance by however many cards the finger travelled (free scrolling).
+    const steps = Math.abs(dx) >= THRESHOLD ? -Math.round(dx / 270) || (dx < 0 ? 1 : -1) : 0;
     if (drag.current.intent === "x" && steps !== 0) {
       suppressClickUntil.current = Date.now() + 400;
       moveTo(drag.current.activeIndex + steps);
+
     } else if (drag.current.moved) {
       // Small drag → snap back and swallow the click.
       suppressClickUntil.current = Date.now() + 250;
