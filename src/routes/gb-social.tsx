@@ -50,7 +50,7 @@ function GBSocialPage() {
 
         <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
         
-        <strong>30 dias de posts, stories e carrossel — tudo pronto numa conversa de WhatsApp.</strong>
+        <strong>30 dias de posts, stories e carrossel tudo pronto numa conversa de WhatsApp.</strong>
 
         <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
       </section>
