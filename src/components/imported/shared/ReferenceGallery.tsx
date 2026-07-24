@@ -103,10 +103,52 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     return () => cancelAnimationFrame(raf);
   }, [dragging, filtered.length]);
 
+  const snapToNearest = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".referenceCard"));
+    if (!cards.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let nearest = cards[0];
+    let best = Infinity;
+    for (const card of cards) {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+      if (distance < best) {
+        best = distance;
+        nearest = card;
+      }
+    }
+    el.scrollTo({ left: nearest.offsetLeft - (el.clientWidth - nearest.offsetWidth) / 2, behavior: "smooth" });
+  };
+
+  const scrollOne = (direction: -1 | 1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    state.current.pausedUntil = performance.now() + 4000;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".referenceCard"));
+    if (!cards.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let currentIndex = 0;
+    let best = Infinity;
+    cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+      if (distance < best) {
+        best = distance;
+        currentIndex = index;
+      }
+    });
+    const targetIndex = Math.max(0, Math.min(cards.length - 1, currentIndex + direction));
+    const target = cards[targetIndex];
+    if (!target) return;
+    el.scrollTo({ left: target.offsetLeft - (el.clientWidth - target.offsetWidth) / 2, behavior: "smooth" });
+  };
+
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
     // On touch, let the browser handle native horizontal scroll (smoother, momentum, snap).
-    if (e.pointerType === "touch") { state.current.pausedUntil = performance.now() + 3000; return; }
+    if (e.pointerType === "touch") { state.current.moved = false; state.current.pausedUntil = performance.now() + 3000; return; }
     setDragging(true);
     state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
     try { trackRef.current.setPointerCapture(e.pointerId); } catch { /* noop */ }
@@ -124,6 +166,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     setDragging(false);
     state.current.pausedUntil = performance.now() + 1500;
     try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+    if (state.current.moved) window.setTimeout(snapToNearest, 20);
   };
 
   const handleClick = (src: string) => {
@@ -196,11 +239,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
           type="button"
           className="referenceNavArrow referenceNavArrowLeft"
           aria-label="Ver anteriores"
-          onClick={() => {
-            const el = trackRef.current; if (!el) return;
-            state.current.pausedUntil = performance.now() + 4000;
-            el.scrollBy({ left: -Math.round(el.clientWidth * 0.85), behavior: "smooth" });
-          }}
+          onClick={() => scrollOne(-1)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
@@ -243,11 +282,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
           type="button"
           className="referenceNavArrow referenceNavArrowRight"
           aria-label="Ver próximos"
-          onClick={() => {
-            const el = trackRef.current; if (!el) return;
-            state.current.pausedUntil = performance.now() + 4000;
-            el.scrollBy({ left: Math.round(el.clientWidth * 0.85), behavior: "smooth" });
-          }}
+          onClick={() => scrollOne(1)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 6l6 6-6 6"/></svg>
         </button>
