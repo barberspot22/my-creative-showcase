@@ -401,7 +401,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   useEffect(() => {
     const move = (event: globalThis.PointerEvent) => handlePointerMove(event);
     const up = (event: globalThis.PointerEvent) => handlePointerUp(event);
-    window.addEventListener("pointermove", move, { passive: false });
+    window.addEventListener("pointermove", move, { passive: true });
     window.addEventListener("pointerup", up);
     window.addEventListener("pointercancel", up);
     return () => {
