@@ -596,7 +596,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .socialHero .metallicTitle h1 { font-size: 38px; letter-spacing: -1px; line-height: 1.05; }
   .socialHero .metallicTitle h1 em { font-size: 17px; line-height: 1.35; margin-top: 12px; }
   .socialHeroPhone { max-width: 320px; }
-  .socialHeroPhoneBody { max-height: 420px; }
+  .socialHeroPhoneBody { max-height: 480px; }
 }
 
 
