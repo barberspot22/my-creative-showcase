@@ -55,11 +55,6 @@ function GBSocialPage() {
         <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
       </section>
 
-      <section className="socialWorkShowcase">
-        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
-        <PerspectiveTicker designs={designs} />
-      </section>
-
       <section className="whatsappBlock">
         <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe usar WhatsApp. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para fazer um post.</p></div>
         <div className="chatDemo socialDesignerChat">
@@ -76,6 +71,11 @@ function GBSocialPage() {
             <p className="socialApproval">Aprovação recebida · pronto para publicar</p>
           </div>
         </div>
+      </section>
+
+      <section className="socialWorkShowcase">
+        <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
+        <PerspectiveTicker designs={designs} />
       </section>
 
       <section className="socialFeatures">
