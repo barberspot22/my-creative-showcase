@@ -44,9 +44,9 @@ function EcommercePage() {
         <div className="metallicTitle" data-text="Seu cliente está online.">
           <h1>Seu cliente está online.<br/><em>Seu produto também?</em></h1>
         </div>
-        <p>A gente coloca sua loja, catálogo e IA vendedora nos canais onde o cliente já compra. Você cadastra uma vez e vende em todo lugar.</p>
+        <p>Você cadastra produtos e gera as fotos direto pelo WhatsApp. A gente sobe tudo na sua loja, no Mercado Livre, Shopee, Amazon e Instagram, e ainda deixa uma IA vendedora atendendo 24 horas por dia.</p>
         <div className="commerceHeroActions"><a className="commerceSecondary" href="#entregamos">Ver o que entregamos <span>↓</span></a></div>
-        <small>Loja · Catálogo · Marketplaces · WhatsApp · IA vendedora · Tráfego rastreado</small>
+        <small>WhatsApp · Loja · Catálogo · Marketplaces · IA vendedora · Tráfego rastreado</small>
       </section>
 
       <section className="commerceGallerySection">
