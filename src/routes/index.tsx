@@ -294,7 +294,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     for (let index = 0; index < els.length; index++) {
       const el = els[index];
       if (!el) continue;
-      const offset = normalize(index, base) - delta / 270;
+      const offset = normalize(index, base) + delta / 270;
       const abs = Math.abs(offset);
       const hidden = abs >= count / 2;
       const x = offset * 270;
