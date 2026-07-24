@@ -68,29 +68,24 @@ function GBSocialPage() {
               <i className="socialHeroPhoneDot" />
             </header>
             <div className="socialHeroPhoneBody">
-              <p className="socialHeroPhoneUser">Como está o perfil da @lojafontana esse mês?</p>
+              <p className="socialHeroPhoneUser">Como está o perfil da @modavera esse mês?</p>
               <p className="socialHeroPhoneAgent">
-                <b>Perfil · Lojafontana</b>
                 Seguidores <span>+412</span> · Alcance <span>38,2k</span> · Engajamento <span>6,4%</span>
               </p>
-              <div className="socialHeroPhoneCard">
-                <b>Top posts da semana</b>
-                <ul>
-                  <li><span>Carrossel · Coleção alta</span><em>12,4k</em></li>
-                  <li><span>Reels · Bastidor loja</span><em>9,1k</em></li>
-                  <li><span>Story · Enquete tamanhos</span><em>3,8k</em></li>
-                </ul>
-              </div>
+              <p className="socialHeroPhoneUser">Quais os posts que mais performaram?</p>
+              <p className="socialHeroPhoneAgent" style={{ whiteSpace: "pre-line" }}>
+                Carrossel · Coleção alta <span>12,4k</span>{"\n"}
+                Reels · Bastidor loja <span>9,1k</span>{"\n"}
+                Story · Enquete tamanhos <span>3,8k</span>
+              </p>
               <p className="socialHeroPhoneUser">E os concorrentes?</p>
-              <div className="socialHeroPhoneCard socialHeroPhoneCardDark">
-                <b>Benchmark · 3 concorrentes</b>
-                <ul>
-                  <li><span>@marca.a</span><em>engaj. 4,1%</em></li>
-                  <li><span>@marca.b</span><em>engaj. 5,7%</em></li>
-                  <li><span>@marca.c</span><em>engaj. 3,2%</em></li>
-                </ul>
-                <p>Você lidera em engajamento. Formato campeão do nicho: carrossel com preço.</p>
-              </div>
+              <p className="socialHeroPhoneAgent" style={{ whiteSpace: "pre-line" }}>
+                Benchmark de 3 concorrentes:{"\n"}
+                @marca.a <span>4,1%</span>{"\n"}
+                @marca.b <span>5,7%</span>{"\n"}
+                @marca.c <span>3,2%</span>{"\n\n"}
+                Você lidera em engajamento. Formato campeão do nicho: carrossel com preço.
+              </p>
               <p className="socialHeroPhoneAgent socialHeroPhoneTyping"><i /><i /><i /> montando plano de 7 posts</p>
             </div>
           </div>
