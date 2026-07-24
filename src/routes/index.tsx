@@ -334,8 +334,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
     drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active, delta: 0 };
-    try { (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId); } catch {}
+    // Don't capture pointer yet — wait for horizontal intent, otherwise vertical page scroll is hijacked on mobile.
   };
+
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
