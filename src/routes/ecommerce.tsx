@@ -62,25 +62,25 @@ function EcommercePage() {
 
       <section className="commerceAudio">
         <div className="commerceAudioCopy">
-          <p className="studioEyebrow">CADASTRO POR ÁUDIO</p>
-          <h2>Manda um áudio. <em>Sobe em 4 canais.</em></h2>
-          <p>Grava o áudio no WhatsApp. A IA transcreve, escreve título, descrição SEO e publica na loja e nos marketplaces. Sem planilha, sem dor.</p>
+          <p className="studioEyebrow">CADASTRO E FOTOS PELO WHATSAPP</p>
+          <h2>Manda no WhatsApp. <em>Sobe pronto em 4 canais.</em></h2>
+          <p>Grava um áudio, manda uma foto ou até um vídeo curto da peça. A IA cria as fotos de catálogo, escreve título e descrição com SEO e publica na loja, Mercado Livre, Shopee e Instagram. Sem planilha, sem estúdio, sem espera.</p>
         </div>
         <div className="chatDemo commerceAudioChat">
           <header className="commerceAudioHeader"><span><i/>GB Commerce</span><small>catálogo online</small></header>
           <div className="commerceAudioBody">
             <p className="chatUser commerceAudioMsg"><span className="commerceAudioWave"><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></span><small>0:22</small></p>
-            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Entendi. Criando o cadastro agora.</span></p>
+            <p className="chatAgent commerceAudioAgent"><b>GB Commerce</b><span>Recebi o áudio e a foto. Gerando o cadastro e as fotos de catálogo agora.</span></p>
             <article className="commerceAudioCard">
               <img className="commerceAudioCardImg" src={tshirtImg} alt="Camiseta oversized off-white" loading="lazy" width={768} height={768} />
               <div className="commerceAudioCardBody">
                 <small>PRODUTO GERADO</small>
                 <b>Camiseta Oversized Off-White</b>
                 <p>Caimento oversized, gola reforçada, 100% algodão Pima.</p>
-                <div className="commerceAudioTags"><span>R$ 129,90</span><span>Vestuário</span><span>SEO ✓</span></div>
+                <div className="commerceAudioTags"><span>R$ 129,90</span><span>Vestuário</span><span>SEO ✓</span><span>4 fotos</span></div>
               </div>
             </article>
-            <p className="chatUser commerceAudioUserMsg"><span>Publica no site, Mercado Livre, Shopee e Instagram.</span><small>10:24</small></p>
+            <p className="chatUser commerceAudioUserMsg"><span>Perfeito. Publica no site, Mercado Livre, Shopee e Instagram.</span><small>10:24</small></p>
             <p className="chatAgent commerceAudioAgent commerceAudioTyping"><b>GB Commerce</b><span className="commerceTypingDots"><i/><i/><i/></span></p>
           </div>
         </div>
