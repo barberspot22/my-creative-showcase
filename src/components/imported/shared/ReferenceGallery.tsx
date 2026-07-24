@@ -156,6 +156,14 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!dragging || !trackRef.current) return;
+    // Mouse/pen: if no button is held, treat as pointer-up (prevents "hover drags").
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      setDragging(false);
+      state.current.intent = "";
+      state.current.moved = false;
+      try { trackRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+      return;
+    }
     const dx = e.clientX - state.current.startX;
     const dy = e.clientY - state.current.startY;
     if (!state.current.intent) {
