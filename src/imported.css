@@ -1774,3 +1774,6 @@ section[aria-label^="Notifications"] {
 .socialTickerViewport,.lookbookViewport,.circleProductCarousel,.siteTicker{touch-action:pan-y}
 
 
+
+/* Unified grabbing cursor feedback while a carousel is actively being dragged with the mouse */
+.circleProductCarousel:active,.productSwitcherTrack:active,.commerceScrollTrack:active,.referenceScrollTrack:active,.lookbookViewport:active,.siteTicker:active,.socialTickerViewport:active,.recoverCarousel:active,.spiralViewport:active{cursor:grabbing}
