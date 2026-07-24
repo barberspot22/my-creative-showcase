@@ -370,9 +370,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     // touch-action: pan-y on the carousel already blocks native horizontal scroll,
     // so we don't need preventDefault here — that would also stall vertical scroll on some browsers.
     if (absX > 12) drag.current.moved = true;
-    // Clamp so the visual never skips past the neighboring card during drag.
-    const clamped = Math.max(-190, Math.min(190, dx));
-    drag.current.delta = clamped;
+    // Free-form drag: follow the finger across multiple cards.
+    drag.current.delta = dx;
+
     scheduleFrame();
   };
 
