@@ -11,9 +11,10 @@ import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
 
 
 const deliverables = [
+  ["Cadastro de produto pelo WhatsApp", "Manda foto, áudio ou vídeo no WhatsApp. A IA cria título, descrição, preço e categoria, e publica na loja e nos marketplaces."],
+  ["Fotos de produto geradas no WhatsApp", "Envia a peça crua ou uma referência. A IA devolve fotos prontas de catálogo, com fundo, luz e enquadramento profissionais."],
   ["E-commerce que converte", "Loja própria com checkout otimizado e mobile-first. Máquina de conversão, não vitrine."],
   ["Catálogo digital integrado", "Vitrine online conectada ao WhatsApp, sem checkout, pra vender no digital hoje."],
-  ["Cadastro por áudio", "Manda um áudio. A IA cria título, descrição SEO e publica em todos os canais."],
   ["Marketplaces integrados", "Mercado Livre, Shopee, Amazon e Instagram sincronizados num painel só."],
   ["IA vendedora 24/7", "Atende, tira dúvida, recupera carrinho e fecha venda sem você online."],
 ];
