@@ -1778,3 +1778,26 @@ section[aria-label^="Notifications"] {
 
 /* Unified grabbing cursor feedback while a carousel is actively being dragged with the mouse */
 .circleProductCarousel:active,.productSwitcherTrack:active,.commerceScrollTrack:active,.referenceScrollTrack:active,.lookbookViewport:active,.siteTicker:active,.socialTickerViewport:active,.recoverCarousel:active,.spiralViewport:active{cursor:grabbing}
+
+/* Cookie consent popup */
+.cookieConsent{position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:16px;pointer-events:none;animation:cookieConsentIn .35s ease-out both}
+@keyframes cookieConsentIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.cookieConsentInner{pointer-events:auto;max-width:960px;margin:0 auto;display:flex;gap:20px;align-items:center;justify-content:space-between;padding:18px 22px;border-radius:18px;background:rgba(14,14,16,.92);backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px -20px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.02) inset;color:#f5f5f7}
+.cookieConsentCopy{flex:1;min-width:0}
+.cookieConsentTitle{margin:0 0 4px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:#fff}
+.cookieConsentText{margin:0;font-size:13px;line-height:1.5;color:rgba(245,245,247,.72)}
+.cookieConsentLink{color:#fff;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(255,255,255,.35);transition:text-decoration-color .2s}
+.cookieConsentLink:hover{text-decoration-color:#fff}
+.cookieConsentActions{display:flex;gap:8px;flex-shrink:0}
+.cookieConsentBtn{border:none;font:inherit;font-size:13px;font-weight:500;letter-spacing:-.005em;padding:10px 18px;border-radius:999px;cursor:pointer;transition:transform .15s ease,background .2s ease,color .2s ease,border-color .2s ease;white-space:nowrap}
+.cookieConsentBtn:active{transform:scale(.97)}
+.cookieConsentBtnGhost{background:transparent;color:rgba(245,245,247,.7);border:1px solid rgba(255,255,255,.14)}
+.cookieConsentBtnGhost:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.cookieConsentBtnPrimary{background:#f5f5f7;color:#0e0e10}
+.cookieConsentBtnPrimary:hover{background:#fff}
+@media (max-width:640px){
+  .cookieConsent{padding:12px}
+  .cookieConsentInner{flex-direction:column;align-items:stretch;gap:14px;padding:16px}
+  .cookieConsentActions{flex-direction:row-reverse;justify-content:stretch}
+  .cookieConsentActions .cookieConsentBtn{flex:1;text-align:center}
+}
