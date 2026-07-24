@@ -1768,3 +1768,9 @@ section[aria-label^="Notifications"] {
 .lookbookHint{margin:26px 0 0;text-align:center;color:#777;text-transform:uppercase;font-size:10px;letter-spacing:2px}
 @media(max-width:760px){.galleryBlock{padding:60px 0 70px!important}.lookbookCard{height:60vw}}
 
+/* === Carousel scroll UX: don't hijack vertical page scroll + snap card-by-card === */
+.commerceScrollTrack,.referenceScrollTrack,.productSwitcherTrack{touch-action:pan-x pan-y;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.commerceScrollTrack>.commerceSiteCard,.referenceScrollTrack>.referenceCard,.productSwitcherTrack>.productSwitcherItem{scroll-snap-align:center;scroll-snap-stop:always}
+.socialTickerViewport,.lookbookViewport,.circleProductCarousel,.siteTicker{touch-action:pan-y}
+
+
