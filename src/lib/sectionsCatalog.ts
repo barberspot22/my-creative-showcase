@@ -28,7 +28,7 @@ export const SECTIONS_CATALOG: Record<SectionsPageKey, SectionDef[]> = {
   "home": [
     { key: "hero",         label: "Hero (robô + título)", selector: ".heroFoldScene" },
     { key: "produtos",     label: "Cards de produtos",    selector: ".circleProductSection" },
-    { key: "referencias",  label: "Referências",          selector: "section.references" },
+    
     { key: "contato",      label: "Contato / CTA final",  selector: "section.contact" },
   ],
   "gb-studio": [
