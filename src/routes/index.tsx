@@ -6,7 +6,7 @@ import { ProcessTrail } from "@/components/imported/ProcessTrail";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
 const A = "/lumus-assets/";
-const clients = ["FZ Jeans", "Santa Pimenta", "Dondoca Express", "Anykill", "Vivence Pharma", "Fontana di Trevi"];
+
 const studioCoverImages = ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png", "/gb-studio/lookbook-08.png", "/gb-studio/lookbook-09.png", "/gb-studio/lookbook-10.png", "/gb-studio/modelo-01.png", "/gb-studio/modelo-02.png"];
 const socialCoverImages = [
   "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=1800&q=94",
