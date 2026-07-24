@@ -566,7 +566,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 }
 .socialHeroPhoneBody p { margin: 0; font-size: 12.5px; line-height: 1.45; padding: 10px 12px; border-radius: 14px; max-width: 88%; }
 .socialHeroPhoneUser { align-self: flex-end; background: #1f3b2a; color: #d6f5c8; border-bottom-right-radius: 4px; }
-.socialHeroPhoneAgent { align-self: flex-start; background: #17191a; color: #dcdcdc; border: 1px solid #22" 262a; border-bottom-left-radius: 4px; }
+.socialHeroPhoneAgent { align-self: flex-start; background: #17191a; color: #dcdcdc; border: 1px solid #22262a; border-bottom-left-radius: 4px; }
 .socialHeroPhoneAgent b { display: block; font-size: 10px; letter-spacing: .8px; color: #8ad39c; margin-bottom: 4px; text-transform: uppercase; }
 .socialHeroPhoneAgent span { color: #f0fff2; font-weight: 700; }
 .socialHeroPhoneCard {
