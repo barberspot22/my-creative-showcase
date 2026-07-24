@@ -98,6 +98,14 @@ export function LookbookGallery() {
   };
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     const s = dragStart.current;
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      s.pending = false;
+      if (draggingRef.current) {
+        draggingRef.current = false;
+        try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+      }
+      return;
+    }
     if (s.pending && !draggingRef.current) {
       const dx = e.clientX - s.x;
       const dy = e.clientY - s.y;

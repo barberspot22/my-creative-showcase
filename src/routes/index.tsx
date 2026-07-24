@@ -339,8 +339,14 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   };
 
 
-  const handlePointerMove = (event: Pick<PointerEvent<HTMLDivElement>, "clientX" | "clientY" | "pointerId" | "cancelable" | "preventDefault">) => {
+  const handlePointerMove = (event: Pick<PointerEvent<HTMLDivElement>, "clientX" | "clientY" | "pointerId" | "cancelable" | "preventDefault"> & { pointerType?: string; buttons?: number }) => {
     if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
+    if (event.pointerType !== "touch" && event.buttons === 0) {
+      drag.current.active = false;
+      drag.current.delta = 0;
+      setDraggingClass(false);
+      return;
+    }
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
     if (!drag.current.intent) {

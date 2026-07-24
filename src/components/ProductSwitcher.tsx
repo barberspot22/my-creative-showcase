@@ -44,6 +44,10 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!dragState.current.active) return;
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      dragState.current.active = false;
+      return;
+    }
     const track = trackRef.current;
     if (!track) return;
     const dx = e.clientX - dragState.current.startX;
