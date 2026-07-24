@@ -291,23 +291,31 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
 
   const applyTransforms = (base: number, delta: number, lightweight = false) => {
     const els = cardRefs.current;
+    const deltaSteps = delta / 270;
+    const halfCount = count / 2;
     for (let index = 0; index < els.length; index++) {
       const el = els[index];
       if (!el) continue;
-      const offset = normalize(index, base) + delta / 270;
-      const abs = Math.abs(offset);
-      const hidden = abs >= count / 2;
+      const offset = normalize(index, base) + deltaSteps;
+      const abs = offset < 0 ? -offset : offset;
+      const hidden = abs >= halfCount;
       const x = offset * 270;
       const y = abs * 34;
       const rotate = offset * -10;
-      const scale = Math.max(.72, 1 - abs * .14);
+      const scale = 1 - abs * .14;
+      const clampedScale = scale < .72 ? .72 : scale;
       const s = el.style;
-      s.transform = `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`;
+      s.transform = `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${clampedScale})`;
+      if (lightweight) {
+        // During drag, minimize style writes — skip opacity/filter/pointerEvents thrash.
+        // Only update zIndex when the stack order actually shifts.
+        const z = String(50 - (abs | 0));
+        if (s.zIndex !== z) s.zIndex = z;
+        continue;
+      }
       s.opacity = hidden ? "0" : String(1 - abs * .16);
       s.zIndex = String(50 - Math.round(abs));
-      if (!lightweight) {
-        s.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
-      }
+      s.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
       s.pointerEvents = hidden ? "none" : "";
     }
   };
@@ -325,7 +333,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     rafPending.current = true;
     requestAnimationFrame(() => {
       rafPending.current = false;
-      if (drag.current.intent === "x") applyTransforms(drag.current.activeIndex, drag.current.delta, true);
+      if (drag.current.intent === "x" && drag.current.active) {
+        applyTransforms(drag.current.activeIndex, drag.current.delta, true);
+      }
     });
   };
 
@@ -342,41 +352,37 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
 
 
   const handlePointerMove = (event: Pick<PointerEvent<HTMLDivElement>, "clientX" | "clientY" | "pointerId" | "cancelable" | "preventDefault"> & { pointerType?: string; buttons?: number }) => {
-    if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
+    const d = drag.current;
+    if (!d.active || d.pointerId !== event.pointerId) return;
     if (event.pointerType !== "touch" && event.buttons === 0) {
-      drag.current.active = false;
-      drag.current.delta = 0;
+      d.active = false;
+      d.delta = 0;
       setDraggingClass(false);
       return;
     }
-    const dx = event.clientX - drag.current.x;
-    const dy = event.clientY - drag.current.y;
-    const absX = Math.abs(dx);
-    const absY = Math.abs(dy);
-    if (!drag.current.intent) {
-      // Give vertical page scrolling priority. Any meaningful vertical motion releases the gesture.
+    const dx = event.clientX - d.x;
+    const dy = event.clientY - d.y;
+    const absX = dx < 0 ? -dx : dx;
+    const absY = dy < 0 ? -dy : dy;
+    if (!d.intent) {
       if (absY > 5 && absY >= absX * 0.9) {
-        drag.current.intent = "y";
-        drag.current.active = false;
-        drag.current.delta = 0;
+        d.intent = "y";
+        d.active = false;
+        d.delta = 0;
         return;
       }
-      // Require a clearly horizontal gesture before hijacking.
       if (absX > 14 && absX > absY * 1.8) {
-        drag.current.intent = "x";
+        d.intent = "x";
         setDraggingClass(true);
       } else return;
     }
 
-    if (drag.current.intent !== "x") return;
-    // touch-action: pan-y on the carousel already blocks native horizontal scroll,
-    // so we don't need preventDefault here — that would also stall vertical scroll on some browsers.
-    if (absX > 12) drag.current.moved = true;
-    // Free-form drag: follow the finger across multiple cards.
-    drag.current.delta = dx;
-
+    if (d.intent !== "x") return;
+    if (absX > 12) d.moved = true;
+    d.delta = dx;
     scheduleFrame();
   };
+
 
   const handlePointerUp = (event?: Pick<PointerEvent<HTMLDivElement>, "pointerId">) => {
     if (event && drag.current.pointerId !== event.pointerId) return;
