@@ -13,6 +13,7 @@ GB IA desenha, constrói e mantém em produção soluções digitais: sistemas p
 - [Site Institucional](/site-institucional): Sites institucionais, páginas de vendas e páginas de captura estruturados como funil.
 - [Cardápio Digital](/cardapio-digital): Cardápio digital para restaurantes com QR de mesa, delivery e pagamento.
 - [CRM](/crm): CRM sob medida com automações comerciais e de produção.
+- [Catálogo Digital](/catalogo-digital): Catálogo digital para produtos, serviços, imóveis e eventos com link único e WhatsApp.
 
 ## Optional
 
