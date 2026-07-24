@@ -1582,14 +1582,14 @@ section[aria-label^="Notifications"] {
   z-index: 9999 !important;
 }
 
-.finalCta{padding:120px 24px;background:#0f0f0f;border-top:1px solid #ffffff12;border-bottom:1px solid #ffffff12}
-.finalCtaInner{max-width:760px;margin:0 auto;padding:70px 48px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;background:#171717;border:1px solid #ffffff16;border-radius:28px;box-shadow:0 28px 80px -24px rgba(0,0,0,.45)}
-.finalCtaEyebrow{margin:0;color:#a6a6a6;font:400 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase}
-.finalCtaTitle{margin:0;font:300 clamp(32px,4.5vw,52px)/1.2 'Inter','Helvetica Neue',Arial,sans-serif;letter-spacing:-.01em;background:linear-gradient(180deg,#ffffff 0%,#d0d0d0 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.finalCtaSub{margin:0;max-width:520px;color:#b8b8b8;font:400 16px/1.65 'Inter',Arial,sans-serif}
-.finalCtaButton{margin-top:14px;display:inline-flex;align-items:center;gap:14px;padding:17px 30px;border:1px solid #ffffff33;border-radius:999px;background:#1f1f1f;color:#f5f5f5;font:500 13px/1 'Inter',Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease,background .25s ease}
-.finalCtaButton i{font-style:normal;font-size:15px;color:#d4d4d4;transition:transform .25s ease,color .25s ease}
-.finalCtaButton:hover{border-color:#c9a84c;background:#252525;box-shadow:0 0 0 1px #c9a84c22,0 10px 44px -12px #c9a84c45;transform:translateY(-1px)}
+.finalCta{padding:120px 24px;background:#e7e1d5;border-top:1px solid #d4cfc3;border-bottom:1px solid #d4cfc3}
+.finalCtaInner{max-width:760px;margin:0 auto;padding:70px 48px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;background:#f3efe8;border:1px solid #d9d4c8;border-radius:28px;box-shadow:0 28px 80px -24px rgba(0,0,0,.25)}
+.finalCtaEyebrow{margin:0;color:#7a756b;font:400 11px/1 'JetBrains Mono',ui-monospace,monospace;letter-spacing:3px;text-transform:uppercase}
+.finalCtaTitle{margin:0;font:300 clamp(32px,4.5vw,52px)/1.2 'Inter','Helvetica Neue',Arial,sans-serif;letter-spacing:-.01em;background:linear-gradient(180deg,#1a1a1a 0%,#4a4a4a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.finalCtaSub{margin:0;max-width:520px;color:#5c5c5c;font:400 16px/1.65 'Inter',Arial,sans-serif}
+.finalCtaButton{margin-top:14px;display:inline-flex;align-items:center;gap:14px;padding:17px 30px;border:1px solid #1a1a1a;border-radius:999px;background:#1a1a1a;color:#f3efe8;font:500 13px/1 'Inter',Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease,background .25s ease}
+.finalCtaButton i{font-style:normal;font-size:15px;color:#d4cfc3;transition:transform .25s ease,color .25s ease}
+.finalCtaButton:hover{border-color:#c9a84c;background:#252525;box-shadow:0 0 0 1px #c9a84c22,0 10px 44px -12px #c9a84c35;transform:translateY(-1px)}
 .finalCtaButton:hover i{color:#e6c976;transform:translateX(4px)}
 @media(max-width:760px){.finalCta{padding:84px 18px}.finalCtaInner{padding:54px 26px;border-radius:22px}.finalCtaTitle{font-size:clamp(28px,8vw,40px)}.finalCtaButton{width:100%;justify-content:center}}
 .productSwitcher{position:sticky;top:0;z-index:60;background:rgba(8,8,10,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #ffffff10}
