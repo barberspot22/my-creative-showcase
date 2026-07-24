@@ -72,19 +72,16 @@ function GBSocialPage() {
               <p className="socialHeroPhoneAgent">
                 Seguidores <span>+412</span> · Alcance <span>38,2k</span> · Engajamento <span>6,4%</span>
               </p>
-              <p className="socialHeroPhoneUser">Quais os posts que mais performaram?</p>
               <p className="socialHeroPhoneAgent" style={{ whiteSpace: "pre-line" }}>
-                Carrossel · Coleção alta <span>12,4k</span>{"\n"}
-                Reels · Bastidor loja <span>9,1k</span>{"\n"}
-                Story · Enquete tamanhos <span>3,8k</span>
+                Top posts da semana:{"\n"}
+                Carrossel Coleção alta <span>12,4k</span>{"\n"}
+                Reels Bastidor loja <span>9,1k</span>{"\n"}
+                Story Enquete tamanhos <span>3,8k</span>
               </p>
               <p className="socialHeroPhoneUser">E os concorrentes?</p>
               <p className="socialHeroPhoneAgent" style={{ whiteSpace: "pre-line" }}>
-                Benchmark de 3 concorrentes:{"\n"}
-                @marca.a <span>4,1%</span>{"\n"}
-                @marca.b <span>5,7%</span>{"\n"}
-                @marca.c <span>3,2%</span>{"\n\n"}
-                Você lidera em engajamento. Formato campeão do nicho: carrossel com preço.
+                @marca.a <span>4,1%</span> · @marca.b <span>5,7%</span> · @marca.c <span>3,2%</span>{"\n"}
+                Você lidera. Formato campeão: carrossel com preço.
               </p>
               <p className="socialHeroPhoneAgent socialHeroPhoneTyping"><i /><i /><i /> montando plano de 7 posts</p>
             </div>
