@@ -354,18 +354,20 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     const absX = Math.abs(dx);
     const absY = Math.abs(dy);
     if (!drag.current.intent) {
-      // Give vertical page scrolling priority. Only start the carousel when the gesture is clearly horizontal.
-      if (absY > 7 && absY >= absX * .72) {
+      // Give vertical page scrolling priority. Any meaningful vertical motion releases the gesture.
+      if (absY > 5 && absY >= absX * 0.9) {
         drag.current.intent = "y";
         drag.current.active = false;
         drag.current.delta = 0;
         return;
       }
-      if (absX > 18 && absX > absY * 1.55) {
+      // Require a clearly horizontal gesture before hijacking.
+      if (absX > 14 && absX > absY * 1.8) {
         drag.current.intent = "x";
         setDraggingClass(true);
       } else return;
     }
+
     if (drag.current.intent !== "x") return;
     // touch-action: pan-y on the carousel already blocks native horizontal scroll,
     // so we don't need preventDefault here — that would also stall vertical scroll on some browsers.
