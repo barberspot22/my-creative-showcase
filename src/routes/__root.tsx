@@ -14,6 +14,8 @@ import importedCss from "../imported.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
+import { CookieConsent } from "@/components/CookieConsent";
+
 
 function NotFoundComponent() {
   return (
@@ -172,6 +174,8 @@ function RootComponent() {
       <SectionVisibilityStyle />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <CookieConsent />
     </QueryClientProvider>
+
   );
 }
