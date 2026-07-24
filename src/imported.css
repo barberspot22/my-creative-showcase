@@ -561,20 +561,19 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .socialHeroPhoneHead small { font-size: 10px; color: #8a8; letter-spacing: .3px; }
 .socialHeroPhoneDot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; box-shadow: 0 0 8px #25d36688; }
 .socialHeroPhoneBody {
-  padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 10px;
-  max-height: 460px; overflow: hidden;
+  padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 8px;
+  max-height: 500px; overflow-y: auto; scrollbar-width: none;
 }
-.socialHeroPhoneBody p { margin: 0; font-size: 12.5px; line-height: 1.45; padding: 10px 12px; border-radius: 14px; max-width: 88%; }
+.socialHeroPhoneBody::-webkit-scrollbar { display: none; }
+.socialHeroPhoneBody p { margin: 0; font-size: 11.5px; line-height: 1.45; padding: 9px 11px; border-radius: 14px; max-width: 88%; }
 .socialHeroPhoneUser { align-self: flex-end; background: #1f3b2a; color: #d6f5c8; border-bottom-right-radius: 4px; }
 .socialHeroPhoneAgent { align-self: flex-start; background: #17191a; color: #dcdcdc; border: 1px solid #22262a; border-bottom-left-radius: 4px; }
-.socialHeroPhoneAgent b { display: block; font-size: 10px; letter-spacing: .8px; color: #8ad39c; margin-bottom: 4px; text-transform: uppercase; }
 .socialHeroPhoneAgent span { color: #f0fff2; font-weight: 700; }
 .socialHeroPhoneCard {
   align-self: flex-start; width: 92%;
   background: #111413; border: 1px solid #232726; border-radius: 14px;
   padding: 12px 14px; color: #d8d8d8; font-size: 12px;
 }
-.socialHeroPhoneCard b { display: block; font-size: 10px; letter-spacing: .8px; color: #8ad39c; text-transform: uppercase; margin-bottom: 8px; }
 .socialHeroPhoneCard ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .socialHeroPhoneCard li { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: #cfcfcf; border-bottom: 1px dashed #24282750; padding-bottom: 5px; }
 .socialHeroPhoneCard li:last-child { border-bottom: 0; padding-bottom: 0; }
