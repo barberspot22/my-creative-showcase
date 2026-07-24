@@ -167,14 +167,18 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     const dx = e.clientX - state.current.startX;
     const dy = e.clientY - state.current.startY;
     if (!state.current.intent) {
-      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) state.current.intent = "x";
-      else if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+      const ax = Math.abs(dx), ay = Math.abs(dy);
+      // Vertical wins as soon as any meaningful vertical drift appears — preserves page scroll.
+      if (ay > 5 && ay >= ax * 0.9) {
         state.current.intent = "y";
         setDragging(false);
         try { trackRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
         return;
-      } else return;
+      }
+      if (ax > 12 && ax > ay * 1.8) state.current.intent = "x";
+      else return;
     }
+
     if (state.current.intent !== "x") return;
     if (Math.abs(dx) > 4) state.current.moved = true;
     trackRef.current.scrollLeft = state.current.startScroll - dx;
