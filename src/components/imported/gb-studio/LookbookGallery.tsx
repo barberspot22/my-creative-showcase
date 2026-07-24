@@ -49,7 +49,7 @@ export function LookbookGallery() {
   const offsetRef = useRef(0);
   const halfWidthRef = useRef(0);
   const draggingRef = useRef(false);
-  const dragStart = useRef({ x: 0, offset: 0, moved: false });
+  const dragStart = useRef({ x: 0, y: 0, offset: 0, moved: false, pending: false });
   const suppressClick = useRef(false);
   const hoverRef = useRef(false);
   const [active, setActive] = useState<Item | null>(null);
