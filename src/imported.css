@@ -492,56 +492,114 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 /* GB Social Hero Polish */
 .socialHero {
   position: relative;
-  min-height: 840px !important;
-  padding-top: 180px !important;
+  min-height: auto !important;
+  padding-top: 110px !important;
+  padding-bottom: 70px !important;
+  display: grid !important;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 60px;
+  align-items: center;
 }
+.socialHeroCopy { display: flex; flex-direction: column; align-items: flex-start; }
 .socialHero .metallicTitle {
   position: relative;
   inset: auto;
   transform: none;
   width: 100%;
   height: auto;
-  margin-bottom: 30px;
+  margin: 18px 0 26px;
   display: block;
 }
 .socialHero .metallicTitle h1 {
-  font-size: clamp(44px, 6vw, 84px);
+  font-size: clamp(44px, 5.2vw, 76px);
   white-space: normal;
-  line-height: 1.05;
+  line-height: 1.02;
   filter: drop-shadow(0 12px 3px #000);
 }
 .socialHero .metallicTitle h1 em {
   display: block;
-  font-size: 0.35em;
-  font-weight: 500;
-  letter-spacing: 0;
-  margin-top: 15px;
-  color: #888;
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  -webkit-text-fill-color: initial;
+  font-size: 0.42em;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-top: 14px;
+  color: transparent;
+  background: linear-gradient(180deg,#f4f6f5 0%,#d6dad8 45%,#8f9694 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 #0009);
 }
-.socialHero .metallicTitle h1:before, 
-.socialHero .metallicTitle h1:after {
-  display: none;
+.socialHero .metallicTitle h1:before,
+.socialHero .metallicTitle h1:after { display: none; }
+
+/* Phone mockup */
+.socialHeroMock { display: flex; justify-content: center; align-items: center; }
+.socialHeroPhone {
+  width: 100%;
+  max-width: 360px;
+  background: #0d0f0e;
+  border: 1px solid #2a2d2c;
+  border-radius: 38px;
+  padding: 14px 14px 18px;
+  box-shadow: 0 40px 90px #000c, inset 0 1px 0 #ffffff10;
+  position: relative;
+}
+.socialHeroPhoneNotch {
+  width: 110px; height: 22px; background: #000;
+  border-radius: 0 0 14px 14px; margin: 0 auto 12px;
+}
+.socialHeroPhoneHead {
+  display: grid; grid-template-columns: 40px 1fr 10px; gap: 10px;
+  align-items: center; padding: 6px 10px 12px; border-bottom: 1px solid #1c1f1e;
+}
+.socialHeroPhoneAvatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(145deg,#25d366,#128c4a);
+  display: grid; place-items: center; font: 700 13px/1 Manrope,sans-serif; color: #041;
+}
+.socialHeroPhoneHead b { display: block; font-size: 13px; color: #eee; }
+.socialHeroPhoneHead small { font-size: 10px; color: #8a8; letter-spacing: .3px; }
+.socialHeroPhoneDot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; box-shadow: 0 0 8px #25d36688; }
+.socialHeroPhoneBody {
+  padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 10px;
+  max-height: 460px; overflow: hidden;
+}
+.socialHeroPhoneBody p { margin: 0; font-size: 12.5px; line-height: 1.45; padding: 10px 12px; border-radius: 14px; max-width: 88%; }
+.socialHeroPhoneUser { align-self: flex-end; background: #1f3b2a; color: #d6f5c8; border-bottom-right-radius: 4px; }
+.socialHeroPhoneAgent { align-self: flex-start; background: #17191a; color: #dcdcdc; border: 1px solid #22" 262a; border-bottom-left-radius: 4px; }
+.socialHeroPhoneAgent b { display: block; font-size: 10px; letter-spacing: .8px; color: #8ad39c; margin-bottom: 4px; text-transform: uppercase; }
+.socialHeroPhoneAgent span { color: #f0fff2; font-weight: 700; }
+.socialHeroPhoneCard {
+  align-self: flex-start; width: 92%;
+  background: #111413; border: 1px solid #232726; border-radius: 14px;
+  padding: 12px 14px; color: #d8d8d8; font-size: 12px;
+}
+.socialHeroPhoneCard b { display: block; font-size: 10px; letter-spacing: .8px; color: #8ad39c; text-transform: uppercase; margin-bottom: 8px; }
+.socialHeroPhoneCard ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.socialHeroPhoneCard li { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: #cfcfcf; border-bottom: 1px dashed #24282750; padding-bottom: 5px; }
+.socialHeroPhoneCard li:last-child { border-bottom: 0; padding-bottom: 0; }
+.socialHeroPhoneCard li em { font-style: normal; color: #7dd39a; font-weight: 700; }
+.socialHeroPhoneCardDark { background: #0b1a12; border-color: #14311f; }
+.socialHeroPhoneCardDark p { padding: 8px 0 0; font-size: 11px; color: #9ec6a8; line-height: 1.4; max-width: 100%; }
+.socialHeroPhoneTyping { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #9c9c9c; }
+.socialHeroPhoneTyping i { width: 5px; height: 5px; border-radius: 50%; background: #6a6a6a; animation: sHeroDot 1.2s infinite ease-in-out; }
+.socialHeroPhoneTyping i:nth-child(2) { animation-delay: .15s; }
+.socialHeroPhoneTyping i:nth-child(3) { animation-delay: .3s; }
+@keyframes sHeroDot { 0%,80%,100%{transform:translateY(0);opacity:.4} 40%{transform:translateY(-3px);opacity:1} }
+
+@media (max-width: 900px) {
+  .socialHero {
+    grid-template-columns: 1fr !important;
+    gap: 40px;
+    padding-top: 90px !important;
+    padding-bottom: 50px !important;
+  }
+  .socialHero .metallicTitle h1 { font-size: 38px; letter-spacing: -1px; line-height: 1.05; }
+  .socialHero .metallicTitle h1 em { font-size: 17px; line-height: 1.35; margin-top: 12px; }
+  .socialHeroPhone { max-width: 320px; }
+  .socialHeroPhoneBody { max-height: 420px; }
 }
 
-@media (max-width: 760px) {
-  .socialHero {
-    min-height: 700px !important;
-    padding-top: 140px !important;
-    padding-bottom: 40px !important;
-  }
-  .socialHero .metallicTitle h1 {
-    font-size: 34px;
-    letter-spacing: -1px;
-  }
-  .socialHero .metallicTitle h1 em {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-}
 
 /* Commerce hero — neutralize absolute metallicTitle so the h1 flows in the hero */
 .commerceHero .metallicTitle{position:relative;inset:auto;transform:none;width:100%;height:auto;margin:0 0 18px;display:block;touch-action:auto}
