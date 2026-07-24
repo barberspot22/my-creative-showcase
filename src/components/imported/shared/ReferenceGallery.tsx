@@ -1,6 +1,6 @@
 import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
 
-export type ReferenceType = "ecommerce" | "institucional" | "vendas" | "captura" | "cardapio";
+export type ReferenceType = "ecommerce" | "institucional" | "vendas" | "captura" | "cardapio" | "catalogo";
 
 export interface Reference {
   image: string;
@@ -29,6 +29,7 @@ const TYPE_LABELS: Record<ReferenceType, string> = {
   vendas: "Página de vendas",
   captura: "Página de captura",
   cardapio: "Cardápio digital",
+  catalogo: "Catálogo digital",
 };
 
 export function ReferenceGallery({ items, ctaUrl, title, variant = "default", enableFilters, showResultCount = true, showSearch = true }: ReferenceGalleryProps) {

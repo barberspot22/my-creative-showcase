@@ -17,6 +17,7 @@ const entries: SitemapEntry[] = [
   { path: "/gb-social", changefreq: "monthly", priority: "0.9" },
   { path: "/gb-studio", changefreq: "monthly", priority: "0.9" },
   { path: "/crm", changefreq: "monthly", priority: "0.9" },
+  { path: "/catalogo-digital", changefreq: "monthly", priority: "0.9" },
   { path: "/politica-de-privacidade", changefreq: "yearly", priority: "0.3" },
   { path: "/termos-de-uso", changefreq: "yearly", priority: "0.3" },
 ];

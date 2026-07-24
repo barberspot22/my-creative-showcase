@@ -8,6 +8,7 @@ export type PageKey =
   | "crm"
   | "site-institucional"
   | "cardapio-digital"
+  | "catalogo-digital"
   | "trilha-cta";
 
 export type PageLink = { ctaUrl: string; ctaLabel: string };
@@ -23,6 +24,7 @@ export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; def
   { key: "crm", label: "CRM", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de CRM sob medida.") },
   { key: "site-institucional", label: "Site Institucional", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Site Institucional.") },
   { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Cardápio Digital. Vendo por [mesa/delivery/WhatsApp] e quero que meus clientes vejam e peçam sozinhos.") },
+  { key: "catalogo-digital", label: "Catálogo Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Catálogo Digital. Vendo [produtos/serviços/imóveis/eventos] e quero que meus clientes peçam orçamento sozinhos.") },
   { key: "trilha-cta", label: "Home · Trilha (CTA final)", defaultLabel: "Começar minha trilha", defaultUrl: "#kontakt" },
 ];
 

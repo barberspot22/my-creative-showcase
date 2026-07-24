@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 export type ProductKey =
   | "site-institucional"
   | "cardapio-digital"
+  | "catalogo-digital"
   | "ecommerce"
   | "crm"
   | "gb-social"
@@ -12,6 +13,7 @@ export type ProductKey =
 const PRODUCTS: { key: ProductKey; label: string; href: string }[] = [
   { key: "site-institucional", label: "Site Institucional", href: "/site-institucional" },
   { key: "cardapio-digital", label: "Cardápio Digital", href: "/cardapio-digital" },
+  { key: "catalogo-digital", label: "Catálogo Digital", href: "/catalogo-digital" },
   { key: "ecommerce", label: "E-commerce", href: "/ecommerce" },
   { key: "crm", label: "CRM", href: "/crm" },
   { key: "gb-social", label: "GB Social", href: "/gb-social" },
