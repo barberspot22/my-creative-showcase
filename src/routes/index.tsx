@@ -90,8 +90,12 @@ const caseCards: CaseCard[] = [
     description: "Loja pronta pra vender no automático, com IA que atende e converte",
     badge: "LOJA",
     frames: [
-      { kind: "image", src: "/covers/hero-ecommerce.jpg", alt: "E-commerce — capa com bolsas, cartão e checkout mobile" },
+      { kind: "image", src: "/references/ecommerce/tall-1.jpg", alt: "E-commerce criado pelo GB IA — moda feminina" },
+      { kind: "image", src: "/references/ecommerce/tall-6.jpg", alt: "E-commerce criado pelo GB IA — moda minimal" },
+      { kind: "image", src: "/references/ecommerce/tall-2.jpg", alt: "E-commerce criado pelo GB IA — skincare" },
+      { kind: "image", src: "/references/ecommerce/tall-7.jpg", alt: "E-commerce criado pelo GB IA — eletrônicos" },
     ],
+
   },
   {
     key: "crm",
@@ -112,8 +116,12 @@ const caseCards: CaseCard[] = [
     description: "Autoridade em segundos e contato sem desvio",
     badge: "SITES",
     frames: [
-      { kind: "image", src: "/covers/hero-institucional.jpg", alt: "Site institucional — capa com laptop, colunas e globo" },
+      { kind: "image", src: "/references/institucional/premium-1.jpg", alt: "Site institucional criado pelo GB IA — consultoria" },
+      { kind: "image", src: "/references/institucional/premium-6.jpg", alt: "Site institucional criado pelo GB IA — financeiro" },
+      { kind: "image", src: "/references/institucional/premium-2.jpg", alt: "Site institucional criado pelo GB IA — arquitetura" },
+      { kind: "image", src: "/references/institucional/premium-7.jpg", alt: "Site institucional criado pelo GB IA — boutique" },
     ],
+
   },
   {
     key: "menu",
