@@ -64,6 +64,16 @@ export function PerspectiveTicker({ designs: designsProp }: { designs?: string[]
       startOffset = x;
     };
     const onPointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== "touch" && e.buttons === 0) {
+        pending = false;
+        if (dragging) {
+          dragging = false;
+          try { vp.releasePointerCapture(e.pointerId); } catch {}
+          vp.classList.remove("isDragging");
+          paused = false;
+        }
+        return;
+      }
       if (pending && !dragging) {
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
