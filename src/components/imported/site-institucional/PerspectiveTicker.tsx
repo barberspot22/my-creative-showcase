@@ -51,6 +51,12 @@ export function PerspectiveTicker() {
   };
   const move = (event: PointerEvent<HTMLDivElement>) => {
     const s = state.current;
+    if (event.pointerType !== "touch" && event.buttons === 0) {
+      s.dragging = false;
+      s.pending = false;
+      try { if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId); } catch {}
+      return;
+    }
     if (s.pending && !s.dragging) {
       const dx = event.clientX - s.pointerX;
       const dy = event.clientY - s.pointerY;
