@@ -11,7 +11,7 @@ const cases = [
 export function PerspectiveTicker() {
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
-  const state = useRef({ x: 0, velocity: -.22, dragging: false, pointerX: 0, lastX: 0 });
+  const state = useRef({ x: 0, velocity: -.22, dragging: false, pending: false, pointerX: 0, pointerY: 0, lastX: 0, pointerId: -1 });
 
   useEffect(() => {
     let frame = 0;
@@ -41,23 +41,39 @@ export function PerspectiveTicker() {
   }, []);
 
   const down = (event: PointerEvent<HTMLDivElement>) => {
-    state.current.dragging = true;
+    // Defer capture until we know the gesture is horizontal — otherwise vertical page scroll breaks.
+    state.current.pending = true;
+    state.current.dragging = false;
     state.current.pointerX = event.clientX;
+    state.current.pointerY = event.clientY;
     state.current.lastX = event.clientX;
-    event.currentTarget.setPointerCapture(event.pointerId);
+    state.current.pointerId = event.pointerId;
   };
   const move = (event: PointerEvent<HTMLDivElement>) => {
-    if (!state.current.dragging) return;
-    const delta = event.clientX - state.current.pointerX;
-    state.current.x += delta;
-    state.current.velocity = (event.clientX - state.current.lastX) * .55;
-    state.current.pointerX = event.clientX;
-    state.current.lastX = event.clientX;
+    const s = state.current;
+    if (s.pending && !s.dragging) {
+      const dx = event.clientX - s.pointerX;
+      const dy = event.clientY - s.pointerY;
+      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { s.pending = false; return; }
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        s.dragging = true;
+        s.pending = false;
+        try { event.currentTarget.setPointerCapture(event.pointerId); } catch {}
+      } else return;
+    }
+    if (!s.dragging) return;
+    const delta = event.clientX - s.pointerX;
+    s.x += delta;
+    s.velocity = (event.clientX - s.lastX) * .55;
+    s.pointerX = event.clientX;
+    s.lastX = event.clientX;
   };
   const up = (event: PointerEvent<HTMLDivElement>) => {
     state.current.dragging = false;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    state.current.pending = false;
+    try { if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId); } catch {}
   };
+
 
   return <div ref={viewport} className="siteTicker" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}>
     <div ref={track} className="siteTickerTrack">{[...cases, ...cases].map((item, index) => <article className={`siteWorkCard ${item.className}`} key={`${item.name}-${index}`}>

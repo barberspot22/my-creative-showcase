@@ -1,39 +1,61 @@
-## Objetivo
-Unificar Textos + Links por página em uma aba "Conteúdo", com pré-visualização ao vivo (ao digitar, sem salvar) espelhando também Home cards e Portfólio.
+# Corrigir scroll dos carrosséis (horizontal e vertical)
 
-## Mudanças no Admin (`src/routes/admin.tsx`)
-1. **Nova aba "Conteúdo"** substituindo `Textos` e `Links`:
-   - Seletor de página (chips com rótulo + rota, mesmo padrão atual).
-   - Painel esquerdo (≈ 40%): editor da página selecionada
-     - Seção **Textos** — grid de campos padrão (hero_title, hero_subtitle, cta_label, etc.) + chaves customizadas.
-     - Seção **Links (CTA)** — `cta_label` + `cta_url` da página (de `page_links`).
-     - Seção **Home cards** e **Portfólio** aparecem apenas quando fizer sentido para a rota selecionada (Home mostra cards; rotas de produto mostram itens do portfólio filtrados por `page_key`).
-   - Painel direito (≈ 60%): iframe de preview.
-2. **Abas restantes**: manter "Home", "Portfólio", "Rastreamento" como estão (as edições continuam funcionando; a nova aba é a superfície unificada por página).
+## Problema atual
+Vários carrosséis do site implementam drag horizontal manual via `onPointerDown/Move/Up` + `scrollLeft`. Isso causa dois bugs:
 
-## Preview ao vivo (ao digitar, sem salvar)
-- Iframe aponta para a rota selecionada com query `?preview=1`.
-- Comunicação via `postMessage` (mesmo origin):
-  - Admin envia `{ type: 'lovable-preview', pageKey, texts, link, cards, portfolio }` a cada edição (debounce ~150ms).
-  - Rotas do site, quando `preview=1`, escutam a mensagem e sobrepõem os valores em memória, sem gravar no banco.
-- Ao salvar, persiste via server functions existentes (`cms-admin.functions.ts`) e o iframe é recarregado para refletir o estado real.
+1. **Sequestro do scroll vertical no mobile**: como o handler captura o pointer no primeiro toque, o gesto vertical fica preso no carrossel e a página não rola.
+2. **Sem snap card-a-card**: o drag solta o scroll em qualquer posição, os cards param "no meio", sem sensação fluida de um-a-um.
 
-### Camada de overlay no site
-- Novo hook `useLivePreview(pageKey)` em `src/lib/livePreview.ts` que:
-  - Retorna um `overlay` (texts/link/cards/portfolio) quando `?preview=1` está ativo.
-  - Escuta `message` do parent e mantém estado local.
-- Ajustar `useSiteText`, `usePageLink`, `useHomeCards`, `usePortfolio` (em `src/lib/cms.ts`) para mesclar dados do banco com o overlay quando presente. Sem `?preview=1`, comportamento inalterado.
+Componentes afetados:
+- `src/components/imported/ecommerce/BentoMorphGallery.tsx` (e-commerce — templates de site)
+- `src/components/imported/shared/ReferenceGallery.tsx` (institucional, e-commerce, cardápio — galeria de referências)
+- `src/components/imported/site-institucional/PerspectiveTicker.tsx`
+- `src/components/imported/gb-social/PerspectiveTicker.tsx`
+- `src/components/imported/gb-studio/LookbookGallery.tsx` (marquee horizontal)
+- `src/components/ProductSwitcher.tsx` (sub-header de produtos)
+- `src/routes/index.tsx` — CircleGalleryCarousel da home
 
-## Estilos
-- Adicionar em `src/imported.css`: layout split `.admX-contentSplit`, painel de preview `.admX-previewFrame` (borda sutil, cabeçalho com rota e botão "recarregar"), responsivo (empilha em telas < 1024px).
+## Estratégia
 
-## Não muda
-- Schema do banco, RLS, políticas.
-- Server functions de escrita.
-- SEO/rotas públicas para visitantes normais (overlay só ativa com `?preview=1` no iframe).
+Padronizar num único comportamento em todos os carrosséis:
 
-## Detalhes técnicos
-- `postMessage` restrito a `window.location.origin`.
-- Overlay não persiste em `localStorage`; vive só na sessão do iframe.
-- Debounce da emissão para evitar re-render excessivo.
-- Botão "Descartar alterações" volta ao estado do banco.
+1. **Não sequestrar o gesto vertical**
+   - Detectar a direção do gesto nos primeiros ~8px de movimento (`Math.abs(dx) > Math.abs(dy)`).
+   - Se o gesto for predominantemente vertical, **não** chamar `preventDefault` nem `setPointerCapture`, e deixar o browser rolar a página normalmente.
+   - Só ativar o modo "drag horizontal" quando ficar claro que é horizontal.
+   - Usar `touch-action: pan-y` no trilho (permite scroll vertical nativo; o horizontal é feito por nós).
+
+2. **Snap card-a-card fluido**
+   - Usar scroll nativo com `scroll-snap-type: x mandatory` no trilho e `scroll-snap-align: center` (ou `start`) em cada card.
+   - No fim de um drag/flick, calcular o card mais próximo do centro e chamar `scrollTo({ left, behavior: 'smooth' })` para garantir snap consistente também após um drag longo.
+   - Setas ←/→ (quando existirem, ex.: ReferenceGallery) avançam exatamente **1 card** por clique, usando o mesmo cálculo.
+   - Suporte a teclado (←/→) na galeria em foco.
+
+3. **Loop infinito**
+   - Manter a técnica atual do `BentoMorphGallery` (lista triplicada + reposicionamento silencioso quando cruza 1/3 ou 2/3 da largura) para os que já são infinitos, mas rodando por cima do scroll nativo com snap.
+
+4. **Auto-marquee (BentoMorph, PerspectiveTicker, LookbookGallery)**
+   - Continuar rodando via `requestAnimationFrame` incrementando `scrollLeft`.
+   - Pausar em `pointerdown`, `focusin`, `mouseenter` e retomar após ~1.5s de inatividade.
+   - Nunca chamar durante um drag ativo.
+
+5. **Hook compartilhado**
+   - Criar `src/hooks/useSnapCarousel.ts` que encapsula: detecção de direção, drag opcional, snap ao card mais próximo, avançar/retroceder N cards, e integração com auto-marquee.
+   - Refatorar cada carrossel para consumir esse hook, mantendo suas classes/markup atuais.
+
+## Alterações por arquivo
+
+- **Novo** `src/hooks/useSnapCarousel.ts` — lógica compartilhada.
+- `src/imported.css` — adicionar `scroll-snap-type: x mandatory` + `scroll-snap-align` + `touch-action: pan-y` nos trilhos `.commerceScrollTrack`, `.referenceGallery`, `.siteTickerTrack`, `.socialTickerTrack`, `.lookbookMarquee`, `.productSwitcherTrack`, `.circleProductTrack`.
+- Refatorar os 7 componentes listados para usar o hook e remover a lógica manual de `scrollLeft`/`pointercapture` que sequestra o scroll vertical.
+- Nas galerias com setas (`ReferenceGallery`), ligar as setas ao "advance by 1".
+
+## Validação
+- Rodar Playwright em mobile viewport (393×542) e verificar via script:
+  - swipe vertical na área do carrossel rola a página.
+  - swipe horizontal move ~1 card por gesto curto e faz snap.
+  - clique nas setas avança exatamente 1 card.
+- Screenshots antes/depois em Home, /ecommerce, /site-institucional, /cardapio-digital, /gb-studio, /gb-social.
+
+## Fora do escopo
+Nenhuma mudança de copy, layout, cores ou conteúdo dos cards — apenas comportamento de scroll/snap.

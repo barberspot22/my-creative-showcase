@@ -49,7 +49,7 @@ export function LookbookGallery() {
   const offsetRef = useRef(0);
   const halfWidthRef = useRef(0);
   const draggingRef = useRef(false);
-  const dragStart = useRef({ x: 0, offset: 0, moved: false });
+  const dragStart = useRef({ x: 0, y: 0, offset: 0, moved: false, pending: false });
   const suppressClick = useRef(false);
   const hoverRef = useRef(false);
   const [active, setActive] = useState<Item | null>(null);
@@ -93,23 +93,35 @@ export function LookbookGallery() {
   }, [active]);
 
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
-    draggingRef.current = true;
-    dragStart.current = { x: e.clientX, offset: offsetRef.current, moved: false };
-    e.currentTarget.setPointerCapture(e.pointerId);
+    dragStart.current = { x: e.clientX, y: e.clientY, offset: offsetRef.current, moved: false, pending: true };
+    draggingRef.current = false;
   };
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
+    const s = dragStart.current;
+    if (s.pending && !draggingRef.current) {
+      const dx = e.clientX - s.x;
+      const dy = e.clientY - s.y;
+      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { s.pending = false; return; }
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        draggingRef.current = true; s.pending = false;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
+      } else return;
+    }
     if (!draggingRef.current) return;
-    const delta = e.clientX - dragStart.current.x;
-    if (Math.abs(delta) > 5) dragStart.current.moved = true;
-    offsetRef.current = dragStart.current.offset + delta;
+    const delta = e.clientX - s.x;
+    if (Math.abs(delta) > 5) s.moved = true;
+    offsetRef.current = s.offset + delta;
   };
+
   const onUp = () => {
     draggingRef.current = false;
+    dragStart.current.pending = false;
     if (dragStart.current.moved) {
       suppressClick.current = true;
       window.setTimeout(() => (suppressClick.current = false), 120);
     }
   };
+
 
   return (
     <>

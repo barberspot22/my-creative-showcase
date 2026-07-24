@@ -52,15 +52,28 @@ export function PerspectiveTicker({ designs: designsProp }: { designs?: string[]
     const onEnter = () => { paused = true; };
     const onLeave = () => { if (!dragging) paused = false; };
 
+    let pending = false;
+    let startY = 0;
+
     const onPointerDown = (e: PointerEvent) => {
-      dragging = true;
+      pending = true;
+      dragging = false;
       moved = 0;
       startX = e.clientX;
+      startY = e.clientY;
       startOffset = x;
-      vp.setPointerCapture(e.pointerId);
-      vp.classList.add("isDragging");
     };
     const onPointerMove = (e: PointerEvent) => {
+      if (pending && !dragging) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { pending = false; return; }
+        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+          dragging = true; pending = false;
+          try { vp.setPointerCapture(e.pointerId); } catch {}
+          vp.classList.add("isDragging");
+        } else return;
+      }
       if (!dragging) return;
       const dx = e.clientX - startX;
       moved = Math.abs(dx);
@@ -69,12 +82,14 @@ export function PerspectiveTicker({ designs: designsProp }: { designs?: string[]
       apply();
     };
     const onPointerUp = (e: PointerEvent) => {
+      pending = false;
       if (!dragging) return;
       dragging = false;
       try { vp.releasePointerCapture(e.pointerId); } catch {}
       vp.classList.remove("isDragging");
       paused = false;
     };
+
 
     vp.addEventListener("pointerenter", onEnter);
     vp.addEventListener("pointerleave", onLeave);
