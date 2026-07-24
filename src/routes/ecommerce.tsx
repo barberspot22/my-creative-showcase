@@ -49,17 +49,6 @@ function EcommercePage() {
         <small>WhatsApp · Loja · Catálogo · Marketplaces · IA vendedora · Tráfego rastreado</small>
       </section>
 
-      <section className="commerceGallerySection">
-        <div><p className="studioEyebrow">REFERÊNCIAS & INSPIRAÇÕES</p><h2>Sites e lojas reais <em>que a gente recria do jeito da sua marca.</em></h2><p>Arraste lateral para trocar de referência · role dentro do card para percorrer o site inteiro, de cima a baixo.</p></div>
-        <ReferenceGallery items={refs} ctaUrl={whatsapp} variant="tall" enableFilters={false} />
-      </section>
-
-
-      <section id="entregamos" className="commerceDeliverables">
-        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
-        <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
-      </section>
-
       <section className="commerceAudio">
         <div className="commerceAudioCopy">
           <p className="studioEyebrow">CADASTRO E FOTOS PELO WHATSAPP</p>
@@ -84,6 +73,17 @@ function EcommercePage() {
             <p className="chatAgent commerceAudioAgent commerceAudioTyping"><b>GB Commerce</b><span className="commerceTypingDots"><i/><i/><i/></span></p>
           </div>
         </div>
+      </section>
+
+      <section className="commerceGallerySection">
+        <div><p className="studioEyebrow">REFERÊNCIAS & INSPIRAÇÕES</p><h2>Sites e lojas reais <em>que a gente recria do jeito da sua marca.</em></h2><p>Arraste lateral para trocar de referência · role dentro do card para percorrer o site inteiro, de cima a baixo.</p></div>
+        <ReferenceGallery items={refs} ctaUrl={whatsapp} variant="tall" enableFilters={false} />
+      </section>
+
+
+      <section id="entregamos" className="commerceDeliverables">
+        <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
+        <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
 
 
