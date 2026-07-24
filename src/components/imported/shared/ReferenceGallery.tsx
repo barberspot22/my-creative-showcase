@@ -37,7 +37,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
   const [query, setQuery] = useState("");
   const [activeType, setActiveType] = useState<ReferenceType | "all">("all");
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const state = useRef({ startX: 0, startScroll: 0, moved: false, pausedUntil: 0 });
+  const state = useRef({ startX: 0, startY: 0, startScroll: 0, moved: false, pausedUntil: 0, intent: "" as "" | "x" | "y" });
 
   const availableTypes = useMemo(() => {
     const set = new Set<ReferenceType>();
@@ -103,18 +103,71 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     return () => cancelAnimationFrame(raf);
   }, [dragging, filtered.length]);
 
+  const snapToNearest = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".referenceCard"));
+    if (!cards.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let nearest = cards[0];
+    let best = Infinity;
+    for (const card of cards) {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+      if (distance < best) {
+        best = distance;
+        nearest = card;
+      }
+    }
+    el.scrollTo({ left: nearest.offsetLeft - (el.clientWidth - nearest.offsetWidth) / 2, behavior: "smooth" });
+  };
+
+  const scrollOne = (direction: -1 | 1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    state.current.pausedUntil = performance.now() + 4000;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".referenceCard"));
+    if (!cards.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let currentIndex = 0;
+    let best = Infinity;
+    cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(cardCenter - center);
+      if (distance < best) {
+        best = distance;
+        currentIndex = index;
+      }
+    });
+    const targetIndex = Math.max(0, Math.min(cards.length - 1, currentIndex + direction));
+    const target = cards[targetIndex];
+    if (!target) return;
+    el.scrollTo({ left: target.offsetLeft - (el.clientWidth - target.offsetWidth) / 2, behavior: "smooth" });
+  };
+
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
     // On touch, let the browser handle native horizontal scroll (smoother, momentum, snap).
-    if (e.pointerType === "touch") { state.current.pausedUntil = performance.now() + 3000; return; }
+    if (e.pointerType === "touch") { state.current.moved = false; state.current.pausedUntil = performance.now() + 3000; return; }
     setDragging(true);
-    state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
+    state.current = { startX: e.clientX, startY: e.clientY, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0, intent: "" };
     try { trackRef.current.setPointerCapture(e.pointerId); } catch { /* noop */ }
   };
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!dragging || !trackRef.current) return;
     const dx = e.clientX - state.current.startX;
+    const dy = e.clientY - state.current.startY;
+    if (!state.current.intent) {
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) state.current.intent = "x";
+      else if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+        state.current.intent = "y";
+        setDragging(false);
+        try { trackRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+        return;
+      } else return;
+    }
+    if (state.current.intent !== "x") return;
     if (Math.abs(dx) > 4) state.current.moved = true;
     trackRef.current.scrollLeft = state.current.startScroll - dx;
     if (state.current.moved && e.cancelable) e.preventDefault();
@@ -124,6 +177,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
     setDragging(false);
     state.current.pausedUntil = performance.now() + 1500;
     try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+    if (state.current.moved) window.setTimeout(snapToNearest, 20);
   };
 
   const handleClick = (src: string) => {
@@ -196,11 +250,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
           type="button"
           className="referenceNavArrow referenceNavArrowLeft"
           aria-label="Ver anteriores"
-          onClick={() => {
-            const el = trackRef.current; if (!el) return;
-            state.current.pausedUntil = performance.now() + 4000;
-            el.scrollBy({ left: -Math.round(el.clientWidth * 0.85), behavior: "smooth" });
-          }}
+          onClick={() => scrollOne(-1)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
@@ -243,11 +293,7 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
           type="button"
           className="referenceNavArrow referenceNavArrowRight"
           aria-label="Ver próximos"
-          onClick={() => {
-            const el = trackRef.current; if (!el) return;
-            state.current.pausedUntil = performance.now() + 4000;
-            el.scrollBy({ left: Math.round(el.clientWidth * 0.85), behavior: "smooth" });
-          }}
+          onClick={() => scrollOne(1)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M9 6l6 6-6 6"/></svg>
         </button>
@@ -292,7 +338,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
   const barRef = useRef<HTMLSpanElement | null>(null);
   const [posPct, setPosPct] = useState(0);
   const [ready, setReady] = useState(false);
-  const dragState = useRef({ dragging: false, startY: 0, startPct: 0, pausedUntil: 0, dir: 1, source: "" as "media" | "bar" | "" });
+  const dragState = useRef({ dragging: false, pending: false, startX: 0, startY: 0, startPct: 0, pausedUntil: 0, dir: 1, source: "" as "media" | "bar" | "", moved: false });
 
   useEffect(() => {
     let raf = 0;
@@ -317,13 +363,26 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
   const pause = (ms = 2200) => { dragState.current.pausedUntil = performance.now() + ms; };
 
   const onMediaDown = (e: React.PointerEvent<HTMLSpanElement>) => {
-    // Only hijack for mouse/pen vertical drag; let touch fall through to native gestures + parent click.
+    // Only hijack a confirmed vertical mouse/pen drag; horizontal drag belongs to the gallery.
     if (e.pointerType === "touch") { pause(2500); return; }
-    e.stopPropagation();
-    dragState.current = { ...dragState.current, dragging: true, startY: e.clientY, startPct: posPct, source: "media", moved: false } as typeof dragState.current & { moved: boolean };
-    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+    dragState.current = { ...dragState.current, pending: true, dragging: false, startX: e.clientX, startY: e.clientY, startPct: posPct, source: "media", moved: false };
   };
   const onMediaMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (dragState.current.pending && dragState.current.source === "media") {
+      const dx = e.clientX - dragState.current.startX;
+      const dy = e.clientY - dragState.current.startY;
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        dragState.current.pending = false;
+        dragState.current.source = "";
+        return;
+      }
+      if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) {
+        dragState.current.pending = false;
+        dragState.current.dragging = true;
+        e.stopPropagation();
+        (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+      } else return;
+    }
     if (!dragState.current.dragging || dragState.current.source !== "media") return;
     e.stopPropagation();
     const wrap = wrapRef.current; const img = imgRef.current;
@@ -331,12 +390,13 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     const range = img.offsetHeight - wrap.offsetHeight;
     if (range <= 0) return;
     const dy = e.clientY - dragState.current.startY;
-    if (Math.abs(dy) > 4) (dragState.current as any).moved = true;
+    if (Math.abs(dy) > 4) dragState.current.moved = true;
     setPosPct(Math.min(1, Math.max(0, dragState.current.startPct + (-dy / range))));
   };
   const onUp = (e: React.PointerEvent<HTMLSpanElement>) => {
-    if (!dragState.current.dragging) return;
+    if (!dragState.current.dragging && !dragState.current.pending) return;
     dragState.current.dragging = false;
+    dragState.current.pending = false;
     dragState.current.source = "";
     pause();
     try { (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId); } catch { /* noop */ }
@@ -389,7 +449,7 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
       onPointerUp={onUp}
       onPointerCancel={onUp}
       onWheel={onWheel}
-      onClick={(e) => { if ((dragState.current as any).moved) { e.stopPropagation(); (dragState.current as any).moved = false; } }}
+      onClick={(e) => { if (dragState.current.moved) { e.stopPropagation(); dragState.current.moved = false; } }}
     >
       <img
         ref={imgRef}

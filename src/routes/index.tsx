@@ -278,6 +278,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const [active, setActive] = useState(0);
   const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
   const drag = useRef({ active: false, x: 0, y: 0, pointerId: -1, intent: "" as "" | "x" | "y", moved: false, activeIndex: 0, delta: 0 });
   const rafPending = useRef(false);
   const suppressClickUntil = useRef(0);
@@ -334,28 +335,27 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest(".circleNav")) return;
     drag.current = { active: true, x: event.clientX, y: event.clientY, pointerId: event.pointerId, intent: "", moved: false, activeIndex: active, delta: 0 };
-    // Don't capture pointer yet — wait for horizontal intent, otherwise vertical page scroll is hijacked on mobile.
+    // Window listeners below keep the drag alive even after the pointer leaves a transformed card.
   };
 
 
-  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+  const handlePointerMove = (event: Pick<PointerEvent<HTMLDivElement>, "clientX" | "clientY" | "pointerId" | "cancelable" | "preventDefault">) => {
     if (!drag.current.active || drag.current.pointerId !== event.pointerId) return;
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
     if (!drag.current.intent) {
       if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
         drag.current.intent = "x";
-        try { (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId); } catch {}
         setDraggingClass(true);
 
       } else if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
         drag.current.intent = "y";
-        try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
         drag.current.active = false;
         return;
       } else return;
     }
     if (drag.current.intent !== "x") return;
+    if (event.cancelable) event.preventDefault();
     if (Math.abs(dx) > 10) drag.current.moved = true;
     // Clamp so the visual never skips past the neighboring card during drag.
     const clamped = Math.max(-220, Math.min(220, dx));
@@ -363,7 +363,8 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     scheduleFrame();
   };
 
-  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+  const handlePointerUp = (event?: Pick<PointerEvent<HTMLDivElement>, "pointerId">) => {
+    if (event && drag.current.pointerId !== event.pointerId) return;
     if (!drag.current.active) return;
     const dx = drag.current.delta;
     const THRESHOLD = 60;
@@ -384,12 +385,28 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     drag.current.active = false;
     drag.current.delta = 0;
     setDraggingClass(false);
-    try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
   };
+
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => handlePointerMove(event);
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => handlePointerUp(event);
+
+  useEffect(() => {
+    const move = (event: globalThis.PointerEvent) => handlePointerMove(event);
+    const up = (event: globalThis.PointerEvent) => handlePointerUp(event);
+    window.addEventListener("pointermove", move, { passive: false });
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+    return () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+    };
+  }, []);
 
   return <section id="servicos" className="circleProductSection reveal" aria-label="Produtos GB IA">
     <h2>O futuro molda<br/>o seu negócio</h2>
     <div
+      ref={carouselRef}
       className="circleProductCarousel"
       onDragStart={(event) => event.preventDefault()}
       onPointerDown={onPointerDown}
