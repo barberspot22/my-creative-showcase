@@ -1878,3 +1878,7 @@ section[aria-label^="Notifications"] {
   .cookieConsentActions{flex-direction:row-reverse;justify-content:stretch}
   .cookieConsentActions .cookieConsentBtn{flex:1;text-align:center}
 }
+
+/* Reduce top spacing on all service page heroes (below ProductSwitcher) */
+.commerceHero,.studioHero,.crmHero,.socialHero,.menuProductHero,.siteProductHero{padding-top:36px!important;min-height:auto!important}
+@media(max-width:760px){.commerceHero,.studioHero,.crmHero,.socialHero,.menuProductHero,.siteProductHero{padding-top:24px!important}}
