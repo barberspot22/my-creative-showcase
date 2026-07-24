@@ -350,18 +350,20 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
     if (!drag.current.intent) {
-      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
-        drag.current.intent = "x";
-        setDraggingClass(true);
-
-      } else if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
+      // Require a clearly horizontal gesture before hijacking. Otherwise let the page scroll.
+      if (Math.abs(dy) > 6) {
         drag.current.intent = "y";
         drag.current.active = false;
         return;
+      }
+      if (Math.abs(dx) > 12) {
+        drag.current.intent = "x";
+        setDraggingClass(true);
       } else return;
     }
     if (drag.current.intent !== "x") return;
-    if (event.cancelable) event.preventDefault();
+    // touch-action: pan-y on the carousel already blocks native horizontal scroll,
+    // so we don't need preventDefault here — that would also stall vertical scroll on some browsers.
     if (Math.abs(dx) > 10) drag.current.moved = true;
     // Clamp so the visual never skips past the neighboring card during drag.
     const clamped = Math.max(-220, Math.min(220, dx));
@@ -399,7 +401,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
   useEffect(() => {
     const move = (event: globalThis.PointerEvent) => handlePointerMove(event);
     const up = (event: globalThis.PointerEvent) => handlePointerUp(event);
-    window.addEventListener("pointermove", move, { passive: false });
+    window.addEventListener("pointermove", move, { passive: true });
     window.addEventListener("pointerup", up);
     window.addEventListener("pointercancel", up);
     return () => {
