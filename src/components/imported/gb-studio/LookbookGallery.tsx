@@ -115,11 +115,13 @@ export function LookbookGallery() {
 
   const onUp = () => {
     draggingRef.current = false;
+    dragStart.current.pending = false;
     if (dragStart.current.moved) {
       suppressClick.current = true;
       window.setTimeout(() => (suppressClick.current = false), 120);
     }
   };
+
 
   return (
     <>
