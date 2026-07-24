@@ -345,7 +345,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (!drag.current.intent) {
       if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
         drag.current.intent = "x";
+        try { (event.currentTarget as HTMLElement).setPointerCapture?.(event.pointerId); } catch {}
         setDraggingClass(true);
+
       } else if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
         drag.current.intent = "y";
         try { (event.currentTarget as HTMLElement).releasePointerCapture?.(event.pointerId); } catch {}
