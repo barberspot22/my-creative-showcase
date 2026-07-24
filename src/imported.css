@@ -589,14 +589,33 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 @media (max-width: 900px) {
   .socialHero {
     grid-template-columns: 1fr !important;
-    gap: 40px;
-    padding-top: 90px !important;
-    padding-bottom: 50px !important;
+    gap: 28px;
+    padding-top: 80px !important;
+    padding-bottom: 45px !important;
   }
   .socialHero .metallicTitle h1 { font-size: 38px; letter-spacing: -1px; line-height: 1.05; }
   .socialHero .metallicTitle h1 em { font-size: 17px; line-height: 1.35; margin-top: 12px; }
-  .socialHeroPhone { max-width: 320px; }
-  .socialHeroPhoneBody { max-height: 480px; }
+  .socialHeroCopy p { font-size: 15px; line-height: 1.5; }
+  .socialHeroCopy strong { font-size: 16px; }
+  .socialHeroCopy small { display: none; }
+  .socialHeroPhone { max-width: 300px; }
+  .socialHeroPhoneBody { max-height: 420px; }
+}
+
+@media (max-width: 700px) {
+  .socialHero {
+    padding-top: 70px !important;
+    padding-bottom: 40px !important;
+  }
+  .socialHero .metallicTitle h1 { font-size: 32px; }
+  .socialHero .metallicTitle h1 em { font-size: 15px; }
+  .socialHeroCopy p { font-size: 14px; }
+  .socialHeroPhone { max-width: 280px; }
+  .socialHeroPhoneBody { max-height: 360px; }
+  .socialHeroPhoneHead { padding: 4px 8px 10px; }
+  .socialHeroPhoneAvatar { width: 36px; height: 36px; font-size: 11px; }
+  .socialHeroPhoneHead b { font-size: 12px; }
+  .socialHeroPhoneBody p { font-size: 10.5px; padding: 8px 10px; }
 }
 
 
