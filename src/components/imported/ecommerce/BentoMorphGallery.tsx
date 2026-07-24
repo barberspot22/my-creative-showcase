@@ -126,6 +126,11 @@ export function BentoMorphGallery({ ctaUrl }: { ctaUrl: string }) {
   };
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!dragging || !trackRef.current) return;
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      setDragging(false);
+      try { trackRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+      return;
+    }
     const dx = e.clientX - state.current.startX;
     if (Math.abs(dx) > 4) state.current.moved = true;
     trackRef.current.scrollLeft = state.current.startScroll - dx;
