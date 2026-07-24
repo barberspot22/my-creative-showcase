@@ -396,12 +396,14 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (event && drag.current.pointerId !== event.pointerId) return;
     if (!drag.current.active) return;
     const dx = drag.current.delta;
-    const THRESHOLD = 30;
-    // Advance by however many cards the finger travelled (free scrolling).
-    const steps = Math.abs(dx) >= THRESHOLD ? -Math.round(dx / 270) || (dx < 0 ? 1 : -1) : 0;
+    // Snap to the nearest card based on how far the finger travelled.
+    // No forced minimum step — small drags just settle back, avoiding the
+    // "flies past" jump when the release rounds up beyond the visual position.
+    const steps = -Math.round(dx / 270);
     if (drag.current.intent === "x" && steps !== 0) {
       suppressClickUntil.current = Date.now() + 400;
       moveTo(drag.current.activeIndex + steps);
+
 
     } else if (drag.current.moved) {
       // Small drag → snap back and swallow the click.
