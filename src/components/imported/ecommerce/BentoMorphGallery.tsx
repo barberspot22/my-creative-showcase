@@ -101,8 +101,25 @@ export function BentoMorphGallery({ ctaUrl }: { ctaUrl: string }) {
     return () => cancelAnimationFrame(raf);
   }, [dragging]);
 
+  const snapToNearest = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const cards = Array.from(el.querySelectorAll<HTMLElement>(".commerceSiteCard"));
+    if (!cards.length) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let nearest = cards[0];
+    let best = Infinity;
+    for (const c of cards) {
+      const cc = c.offsetLeft + c.offsetWidth / 2;
+      const d = Math.abs(cc - center);
+      if (d < best) { best = d; nearest = c; }
+    }
+    el.scrollTo({ left: nearest.offsetLeft - (el.clientWidth - nearest.offsetWidth) / 2, behavior: "smooth" });
+  };
+
   const onDown = (e: PointerEvent<HTMLDivElement>) => {
     if (!trackRef.current) return;
+    if (e.pointerType === "touch") { state.current.pausedUntil = performance.now() + 3000; return; }
     setDragging(true);
     state.current = { startX: e.clientX, startScroll: trackRef.current.scrollLeft, moved: false, pausedUntil: 0 };
     trackRef.current.setPointerCapture(e.pointerId);
@@ -113,11 +130,7 @@ export function BentoMorphGallery({ ctaUrl }: { ctaUrl: string }) {
     if (Math.abs(dx) > 4) state.current.moved = true;
     trackRef.current.scrollLeft = state.current.startScroll - dx;
   };
-  const onUp = (e: PointerEvent<HTMLDivElement>) => {
-    setDragging(false);
-    state.current.pausedUntil = performance.now() + 1500;
-    try { trackRef.current?.releasePointerCapture(e.pointerId); } catch { /* noop */ }
-  };
+
 
   return (
     <div className="commerceScrollWrap" onMouseEnter={() => { state.current.pausedUntil = performance.now() + 2000; }}>
