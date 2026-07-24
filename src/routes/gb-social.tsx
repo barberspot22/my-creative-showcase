@@ -42,18 +42,61 @@ function GBSocialPage() {
     <ProductSwitcher current="gb-social" />
     <main>
       <section className="socialHero">
-        <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
-        
-        <div className="metallicTitle" data-text="Seu social media agora mora no WhatsApp.">
-          <h1>Seu social media <em>agora mora no WhatsApp.</em></h1>
+        <div className="socialHeroCopy">
+          <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
+
+          <div className="metallicTitle" data-text="Seu social media agora mora no WhatsApp.">
+            <h1>Seu social media <em>agora mora no WhatsApp.</em></h1>
+          </div>
+
+          <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
+
+          <strong>30 dias de posts, stories e carrossel tudo pronto numa conversa de WhatsApp.</strong>
+
+          <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
         </div>
 
-        <p>Crie, agende e analise conteúdo conversando pelo WhatsApp. Sem ferramentas novas, no tom da sua marca.</p>
-        
-        <strong>30 dias de posts, stories e carrossel tudo pronto numa conversa de WhatsApp.</strong>
-
-        <small>100% pelo WhatsApp · Sem plataforma para aprender · Feito para quem vende</small>
+        <div className="socialHeroMock" aria-hidden="true">
+          <div className="socialHeroPhone">
+            <div className="socialHeroPhoneNotch" />
+            <header className="socialHeroPhoneHead">
+              <span className="socialHeroPhoneAvatar">GB</span>
+              <div>
+                <b>GB Social</b>
+                <small>analisando agora</small>
+              </div>
+              <i className="socialHeroPhoneDot" />
+            </header>
+            <div className="socialHeroPhoneBody">
+              <p className="socialHeroPhoneUser">Como está o perfil da @lojafontana esse mês?</p>
+              <p className="socialHeroPhoneAgent">
+                <b>Perfil · Lojafontana</b>
+                Seguidores <span>+412</span> · Alcance <span>38,2k</span> · Engajamento <span>6,4%</span>
+              </p>
+              <div className="socialHeroPhoneCard">
+                <b>Top posts da semana</b>
+                <ul>
+                  <li><span>Carrossel · Coleção alta</span><em>12,4k</em></li>
+                  <li><span>Reels · Bastidor loja</span><em>9,1k</em></li>
+                  <li><span>Story · Enquete tamanhos</span><em>3,8k</em></li>
+                </ul>
+              </div>
+              <p className="socialHeroPhoneUser">E os concorrentes?</p>
+              <div className="socialHeroPhoneCard socialHeroPhoneCardDark">
+                <b>Benchmark · 3 concorrentes</b>
+                <ul>
+                  <li><span>@marca.a</span><em>engaj. 4,1%</em></li>
+                  <li><span>@marca.b</span><em>engaj. 5,7%</em></li>
+                  <li><span>@marca.c</span><em>engaj. 3,2%</em></li>
+                </ul>
+                <p>Você lidera em engajamento. Formato campeão do nicho: carrossel com preço.</p>
+              </div>
+              <p className="socialHeroPhoneAgent socialHeroPhoneTyping"><i /><i /><i /> montando plano de 7 posts</p>
+            </div>
+          </div>
+        </div>
       </section>
+
 
       <section className="whatsappBlock">
         <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe usar WhatsApp. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para fazer um post.</p></div>
