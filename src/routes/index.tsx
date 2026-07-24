@@ -6,7 +6,7 @@ import { ProcessTrail } from "@/components/imported/ProcessTrail";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
 const A = "/lumus-assets/";
-const clients = ["FZ Jeans", "Santa Pimenta", "Dondoca Express", "Anykill", "Vivence Pharma", "Fontana di Trevi"];
+
 const studioCoverImages = ["/gb-studio/lookbook-01.png", "/gb-studio/lookbook-04.png", "/gb-studio/lookbook-05.png", "/gb-studio/lookbook-08.png", "/gb-studio/lookbook-09.png", "/gb-studio/lookbook-10.png", "/gb-studio/modelo-01.png", "/gb-studio/modelo-02.png"];
 const socialCoverImages = [
   "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=1800&q=94",
@@ -514,7 +514,7 @@ function HomePage() {
       <a href="#top" className="brand gbImageBrand"><img src={gbLogo} alt="GB IA" /></a>
       <button className={`menuButton ${menu ? "open" : ""}`} onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Abrir menu"><i/><i/><i/></button>
       <nav className={menu ? "open" : ""}>
-        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={scrollToCenter("servicos")} href="#servicos">Serviços</a><a onClick={go} href="#referenzen">Clientes</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
+        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={scrollToCenter("servicos")} href="#servicos">Serviços</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
       </nav>
     </header>
 
@@ -531,10 +531,6 @@ function HomePage() {
         <div className="whyPanel reveal"><div className="panelHero"><img src="/gb-network-map.png" alt="Mapa visual de conexões representando a arquitetura das soluções da GB IA"/><div><h3>Nosso jeito de construir</h3><p>Primeiro entendemos o gargalo. Depois desenhamos, construímos e acompanhamos a solução em produção.</p></div></div><ol>{benefits.map((b,i)=><li key={b[0]}><span>{i+1}</span><div><strong>{b[0]}</strong><p>{b[1]}</p></div></li>)}</ol></div>
       </section>
 
-      <section id="referenzen" className="references light">
-        <h2 className="reveal">Clientes</h2>
-        <div className="logoGrid clientNames reveal">{clients.map((name)=><div key={name}><strong>{name}</strong></div>)}</div>
-      </section>
 
       <section id="kontakt" className="contact reveal" aria-labelledby="contactHeading">
         <div className="contactInner">
@@ -564,7 +560,7 @@ function HomePage() {
             <div>
               <h5>Navegar</h5>
             <a href="#leistungen">O que fazemos</a>
-            <a href="#referenzen">Clientes</a>
+            
             <a href="#kontakt">Contato</a>
             </div>
             <div>
