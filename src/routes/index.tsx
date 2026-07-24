@@ -289,7 +289,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     return raw > count / 2 ? raw - count : raw;
   };
 
-  const applyTransforms = (base: number, delta: number) => {
+  const applyTransforms = (base: number, delta: number, lightweight = false) => {
     const els = cardRefs.current;
     for (let index = 0; index < els.length; index++) {
       const el = els[index];
@@ -305,7 +305,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       s.transform = `translate3d(${x}px, ${y}px, ${-abs * 120}px) rotate(${rotate}deg) scale(${scale})`;
       s.opacity = hidden ? "0" : String(1 - abs * .16);
       s.zIndex = String(50 - Math.round(abs));
-      s.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
+      if (!lightweight) {
+        s.filter = `blur(${abs > 0 ? Math.min(7, abs * 2.2) : 0}px) grayscale(${abs > 0.05 ? .7 : 0}) saturate(${abs > 0.05 ? .72 : 1.1})`;
+      }
       s.pointerEvents = hidden ? "none" : "";
     }
   };
@@ -323,7 +325,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     rafPending.current = true;
     requestAnimationFrame(() => {
       rafPending.current = false;
-      if (drag.current.intent === "x") applyTransforms(drag.current.activeIndex, drag.current.delta);
+      if (drag.current.intent === "x") applyTransforms(drag.current.activeIndex, drag.current.delta, true);
     });
   };
 
@@ -349,14 +351,17 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     }
     const dx = event.clientX - drag.current.x;
     const dy = event.clientY - drag.current.y;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
     if (!drag.current.intent) {
-      // Require a clearly horizontal gesture before hijacking. Otherwise let the page scroll.
-      if (Math.abs(dy) > 6) {
+      // Give vertical page scrolling priority. Only start the carousel when the gesture is clearly horizontal.
+      if (absY > 7 && absY >= absX * .72) {
         drag.current.intent = "y";
         drag.current.active = false;
+        drag.current.delta = 0;
         return;
       }
-      if (Math.abs(dx) > 12) {
+      if (absX > 18 && absX > absY * 1.55) {
         drag.current.intent = "x";
         setDraggingClass(true);
       } else return;
@@ -364,9 +369,9 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
     if (drag.current.intent !== "x") return;
     // touch-action: pan-y on the carousel already blocks native horizontal scroll,
     // so we don't need preventDefault here — that would also stall vertical scroll on some browsers.
-    if (Math.abs(dx) > 10) drag.current.moved = true;
+    if (absX > 12) drag.current.moved = true;
     // Clamp so the visual never skips past the neighboring card during drag.
-    const clamped = Math.max(-220, Math.min(220, dx));
+    const clamped = Math.max(-190, Math.min(190, dx));
     drag.current.delta = clamped;
     scheduleFrame();
   };
