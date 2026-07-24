@@ -376,6 +376,15 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     dragState.current = { ...dragState.current, pending: true, dragging: false, startX: e.clientX, startY: e.clientY, startPct: posPct, source: "media", moved: false };
   };
   const onMediaMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      if (dragState.current.dragging || dragState.current.pending) {
+        dragState.current.dragging = false;
+        dragState.current.pending = false;
+        dragState.current.source = "";
+        try { (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId); } catch {}
+      }
+      return;
+    }
     if (dragState.current.pending && dragState.current.source === "media") {
       const dx = e.clientX - dragState.current.startX;
       const dy = e.clientY - dragState.current.startY;
