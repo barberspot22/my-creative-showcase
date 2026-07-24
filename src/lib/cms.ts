@@ -48,6 +48,7 @@ export const PORTFOLIO_PAGES: { key: string; label: string }[] = [
   { key: "pagina-captura", label: "Página de Captura" },
   { key: "ecommerce", label: "E-commerce" },
   { key: "cardapio-digital", label: "Cardápio / Menu Digital" },
+  { key: "catalogo-digital", label: "Catálogo Digital" },
   { key: "gb-studio", label: "GB Studio" },
   { key: "crm", label: "CRM" },
 ];

@@ -24,6 +24,7 @@ const defaultHomeCards: HomeCard[] = [
   { key: "crm", title: "CRM", description: "Funil, follow-up e dashboard num só lugar", badge: "CRM + IA", href: "/crm", frames: [], position: 3 },
   { key: "site", title: "Site Institucional", description: "Autoridade em segundos e contato sem desvio", badge: "SITES", href: "/site-institucional", frames: [], position: 4 },
   { key: "menu", title: "Menu Digital", description: "Cardápio, pedidos e presença digital", badge: "CATÁLOGO", href: "/cardapio-digital", frames: [], position: 5 },
+  { key: "catalogo", title: "Catálogo Digital", description: "Produtos, serviços, imóveis e eventos organizados para vender", badge: "CATÁLOGO", href: "/catalogo-digital", frames: [], position: 6 },
 ];
 
 type TabKey = "home" | "portfolio" | "conteudo" | "secoes" | "tracking";
@@ -178,6 +179,7 @@ const PORTFOLIO_SPECS: Record<string, ImgSpec> = {
   "pagina-captura":     { w: 1280, h: 2000, tall: true, note: "Screenshot FULL PAGE da landing. Largura 1280px, altura livre até ~4000px." },
   "ecommerce":          { w: 1280, h: 3600, tall: true, note: "Screenshot FULL PAGE da loja (home ou PDP). Largura 1280px, altura livre até ~6000px." },
   "cardapio-digital":   { w: 1080, h: 1920, tall: true, note: "Mockup mobile 9:16 (cardápio). Padrão de tela cheia 1080×1920." },
+  "catalogo-digital":   { w: 1280, h: 1920, tall: true, note: "Screenshot full page do catálogo digital. Largura 1280px, altura livre até ~1920px." },
   "gb-studio":          { w: 1600, h: 1000, note: "Paisagem 16:10 (lookbook). Não usar retrato aqui." },
   "crm":                { w: 1600, h: 1000, note: "Paisagem 16:10 (screenshot do painel)." },
 };

@@ -133,6 +133,19 @@ const caseCards: CaseCard[] = [
       { kind: "ui", variant: "menu-catalog", label: "Catálogo digital com produtos rolando" },
     ],
   },
+  {
+    key: "catalogo",
+    href: "/catalogo-digital",
+    title: "Catálogo Digital",
+    description: "Produtos, serviços, imóveis e eventos organizados para vender",
+    badge: "CATÁLOGO",
+    frames: [
+      { kind: "image", src: "/references/catalogo/cover-1.jpg", alt: "Catálogo digital criado pelo GB IA — mobiliária" },
+      { kind: "image", src: "/references/catalogo/cover-2.jpg", alt: "Catálogo digital criado pelo GB IA — moda" },
+      { kind: "image", src: "/references/catalogo/cover-3.jpg", alt: "Catálogo digital criado pelo GB IA — imobiliária" },
+      { kind: "image", src: "/references/catalogo/cover-4.jpg", alt: "Catálogo digital criado pelo GB IA — eventos" },
+    ],
+  },
 ];
 
 function mergeAdminCaseCards(defaults: CaseCard[], stored: StoredCaseCard[]): CaseCard[] {
@@ -579,6 +592,9 @@ function HomePage() {
               <Link to="/gb-social">GB Social</Link>
               <Link to="/ecommerce">E-commerce</Link>
               <Link to="/crm">CRM</Link>
+              <Link to="/site-institucional">Site Institucional</Link>
+              <Link to="/cardapio-digital">Cardápio Digital</Link>
+              <Link to="/catalogo-digital">Catálogo Digital</Link>
             </div>
             <div>
               <h5>Legal</h5>

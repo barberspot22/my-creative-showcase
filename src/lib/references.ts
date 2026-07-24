@@ -20,6 +20,15 @@ export const cardapioReferences: Reference[] = [
   { image: "/references/cardapio/mockup-cafe.jpg", segment: "Cafeteria & brunch", type: "cardapio" },
 ];
 
+export const catalogoReferences: Reference[] = [
+  { image: "/references/catalogo/catalogo-mobilia.jpg", segment: "Mobiliária & decoração", domain: "luxora.com.br", type: "catalogo" },
+  { image: "/references/catalogo/catalogo-moda.jpg", segment: "Moda feminina", domain: "luminara.com.br", type: "catalogo" },
+  { image: "/references/catalogo/catalogo-servicos.jpg", segment: "Consultoria & serviços", domain: "strategix.com.br", type: "catalogo" },
+  { image: "/references/catalogo/catalogo-construcao.jpg", segment: "Materiais de construção", domain: "buildmate.com.br", type: "catalogo" },
+  { image: "/references/catalogo/catalogo-imobiliaria.jpg", segment: "Imobiliária de alto padrão", domain: "luxehabitat.com.br", type: "catalogo" },
+  { image: "/references/catalogo/catalogo-eventos.jpg", segment: "Eventos & locação", domain: "luxecelebrations.com.br", type: "catalogo" },
+];
+
 export const institucionalReferences: Reference[] = [
   { image: "/references/institucional/premium-1.jpg", segment: "Consultoria estratégica", domain: "stratfordadvisors.com", type: "institucional" },
   { image: "/references/institucional/premium-6.jpg", segment: "Financeiro corporativo", domain: "aureliuscap.com", type: "institucional" },
@@ -46,4 +55,5 @@ export const allReferences: Reference[] = [
   ...vendasReferences,
   ...capturaReferences,
   ...cardapioReferences,
+  ...catalogoReferences,
 ];

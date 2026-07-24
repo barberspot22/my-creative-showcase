@@ -12,7 +12,8 @@ export type SectionsPageKey =
   | "ecommerce"
   | "crm"
   | "site-institucional"
-  | "cardapio-digital";
+  | "cardapio-digital"
+  | "catalogo-digital";
 
 export const SECTIONS_PAGES: { key: SectionsPageKey; label: string; route: string }[] = [
   { key: "home",              label: "Home",              route: "/" },
@@ -22,13 +23,13 @@ export const SECTIONS_PAGES: { key: SectionsPageKey; label: string; route: strin
   { key: "crm",               label: "CRM",               route: "/crm" },
   { key: "site-institucional",label: "Site Institucional",route: "/site-institucional" },
   { key: "cardapio-digital",  label: "Cardápio Digital",  route: "/cardapio-digital" },
+  { key: "catalogo-digital",  label: "Catálogo Digital",  route: "/catalogo-digital" },
 ];
 
 export const SECTIONS_CATALOG: Record<SectionsPageKey, SectionDef[]> = {
   "home": [
     { key: "hero",         label: "Hero (robô + título)", selector: ".heroFoldScene" },
     { key: "produtos",     label: "Cards de produtos",    selector: ".circleProductSection" },
-    
     { key: "contato",      label: "Contato / CTA final",  selector: "section.contact" },
   ],
   "gb-studio": [
@@ -77,6 +78,14 @@ export const SECTIONS_CATALOG: Record<SectionsPageKey, SectionDef[]> = {
     { key: "deliverables", label: "O que entregamos",  selector: ".menuValueDeliverables" },
     { key: "reference",    label: "Referências",       selector: ".menuReferenceSection" },
     { key: "catalog",      label: "Widget de cardápio",selector: ".menuCatalogWidgetSection" },
+    { key: "process",      label: "Como funciona",     selector: ".menuProductProcess" },
+    { key: "final-cta",    label: "CTA final",         selector: ".finalCta" },
+  ],
+  "catalogo-digital": [
+    { key: "hero",         label: "Hero",              selector: ".menuProductHero" },
+    { key: "deliverables", label: "O que entregamos",  selector: ".menuValueDeliverables" },
+    { key: "reference",    label: "Referências",       selector: ".menuReferenceSection" },
+    { key: "catalog",      label: "Widget de catálogo",selector: ".menuCatalogWidgetSection" },
     { key: "process",      label: "Como funciona",     selector: ".menuProductProcess" },
     { key: "final-cta",    label: "CTA final",         selector: ".finalCta" },
   ],

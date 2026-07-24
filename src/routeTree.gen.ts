@@ -17,6 +17,7 @@ import { Route as GbStudioRouteImport } from './routes/gb-studio'
 import { Route as GbSocialRouteImport } from './routes/gb-social'
 import { Route as EcommerceRouteImport } from './routes/ecommerce'
 import { Route as CrmRouteImport } from './routes/crm'
+import { Route as CatalogoDigitalRouteImport } from './routes/catalogo-digital'
 import { Route as CardapioDigitalRouteImport } from './routes/cardapio-digital'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -63,6 +64,11 @@ const CrmRoute = CrmRouteImport.update({
   path: '/crm',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoDigitalRoute = CatalogoDigitalRouteImport.update({
+  id: '/catalogo-digital',
+  path: '/catalogo-digital',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CardapioDigitalRoute = CardapioDigitalRouteImport.update({
   id: '/cardapio-digital',
   path: '/cardapio-digital',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
+  '/catalogo-digital': typeof CatalogoDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
+  '/catalogo-digital': typeof CatalogoDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cardapio-digital': typeof CardapioDigitalRoute
+  '/catalogo-digital': typeof CatalogoDigitalRoute
   '/crm': typeof CrmRoute
   '/ecommerce': typeof EcommerceRoute
   '/gb-social': typeof GbSocialRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cardapio-digital'
+    | '/catalogo-digital'
     | '/crm'
     | '/ecommerce'
     | '/gb-social'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cardapio-digital'
+    | '/catalogo-digital'
     | '/crm'
     | '/ecommerce'
     | '/gb-social'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cardapio-digital'
+    | '/catalogo-digital'
     | '/crm'
     | '/ecommerce'
     | '/gb-social'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   CardapioDigitalRoute: typeof CardapioDigitalRoute
+  CatalogoDigitalRoute: typeof CatalogoDigitalRoute
   CrmRoute: typeof CrmRoute
   EcommerceRoute: typeof EcommerceRoute
   GbSocialRoute: typeof GbSocialRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo-digital': {
+      id: '/catalogo-digital'
+      path: '/catalogo-digital'
+      fullPath: '/catalogo-digital'
+      preLoaderRoute: typeof CatalogoDigitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cardapio-digital': {
       id: '/cardapio-digital'
       path: '/cardapio-digital'
@@ -300,6 +320,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   CardapioDigitalRoute: CardapioDigitalRoute,
+  CatalogoDigitalRoute: CatalogoDigitalRoute,
   CrmRoute: CrmRoute,
   EcommerceRoute: EcommerceRoute,
   GbSocialRoute: GbSocialRoute,
@@ -313,3 +334,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
