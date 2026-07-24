@@ -156,6 +156,14 @@ export function ReferenceGallery({ items, ctaUrl, title, variant = "default", en
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!dragging || !trackRef.current) return;
+    // Mouse/pen: if no button is held, treat as pointer-up (prevents "hover drags").
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      setDragging(false);
+      state.current.intent = "";
+      state.current.moved = false;
+      try { trackRef.current.releasePointerCapture(e.pointerId); } catch { /* noop */ }
+      return;
+    }
     const dx = e.clientX - state.current.startX;
     const dy = e.clientY - state.current.startY;
     if (!state.current.intent) {
@@ -368,6 +376,15 @@ function TallScrollingMedia({ src, alt }: { src: string; alt: string }) {
     dragState.current = { ...dragState.current, pending: true, dragging: false, startX: e.clientX, startY: e.clientY, startPct: posPct, source: "media", moved: false };
   };
   const onMediaMove = (e: React.PointerEvent<HTMLSpanElement>) => {
+    if (e.pointerType !== "touch" && e.buttons === 0) {
+      if (dragState.current.dragging || dragState.current.pending) {
+        dragState.current.dragging = false;
+        dragState.current.pending = false;
+        dragState.current.source = "";
+        try { (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId); } catch {}
+      }
+      return;
+    }
     if (dragState.current.pending && dragState.current.source === "media") {
       const dx = e.clientX - dragState.current.startX;
       const dy = e.clientY - dragState.current.startY;
