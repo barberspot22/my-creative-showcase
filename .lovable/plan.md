@@ -1,21 +1,30 @@
-## Diagnóstico
-- O scroll vertical da página CRM funciona em áreas normais no teste mobile.
-- O provável bloqueio está nos elementos horizontais/sticky: principalmente o `ProductSwitcher` no topo e trechos com `touch-action: pan-x`, que podem sinalizar ao navegador para priorizar gesto horizontal e prejudicar o deslize vertical quando o toque começa ali.
-- A seção `recoverNectionFlow` tem `overflow: hidden`, mas não há handler de gesto nela; não parece ser a causa principal do travamento vertical.
+## Problema
 
-## Plano de correção
-1. **Ajustar o menu horizontal de produtos**
-   - Trocar `touch-action: pan-x` por uma configuração que permita scroll vertical da página e scroll lateral nativo do menu.
-   - Manter o arraste horizontal suave, mas sem capturar swipe vertical.
+No desktop, os carrosséis estão "arrastando" apenas ao passar o mouse por cima (hover), sem clicar. O comportamento correto é: só arrastar quando o usuário **clicar e segurar** o botão do mouse (equivalente ao dedo pressionado no mobile).
 
-2. **Padronizar áreas horizontais da CRM**
-   - Aplicar `touch-action: pan-y`/scroll-snap apenas onde fizer sentido, para o navegador deixar a página rolar verticalmente.
-   - Garantir que nenhum contêiner horizontal da CRM bloqueie gesto vertical por `overflow` ou captura indevida.
+Causa provável: nos handlers de `onPointerMove`, a checagem que decide iniciar o arraste está reagindo a movimento de ponteiro mesmo sem `pointerdown` confirmado, ou o estado `dragging`/`pending` não está sendo resetado corretamente entre interações. Também é possível que o auto-scroll dos carrosséis esteja sendo interpretado como "arraste ao passar o mouse".
 
-3. **Validar no preview mobile**
-   - Testar swipe vertical começando no hero, menu de produtos, cards e seção de recuperação.
-   - Testar swipe horizontal onde houver trilha/carrossel para confirmar que continua funcionando sem travar a página.
+## Escopo
 
-## Arquivos previstos
-- `src/imported.css`
-- Possivelmente `src/components/ProductSwitcher.tsx`, se o ajuste de CSS não for suficiente.
+Corrigir em todos os carrosséis com arraste por mouse:
+- `src/components/imported/shared/ReferenceGallery.tsx` (institucional, e-commerce, cardápio)
+- `src/routes/index.tsx` — `CircleGalleryCarousel` (Home)
+- `src/components/imported/ecommerce/BentoMorphGallery.tsx`
+- `src/components/imported/gb-social/PerspectiveTicker.tsx`
+- `src/components/imported/site-institucional/PerspectiveTicker.tsx`
+- `src/components/imported/gb-studio/LookbookGallery.tsx`
+- `src/components/ProductSwitcher.tsx`
+
+## Correções
+
+1. **Exigir botão pressionado no `onPointerMove`**: checar `e.buttons === 1` (mouse) antes de mover o scroll. Se o botão não estiver segurado, ignorar o movimento e resetar `dragging`/`pending`.
+2. **Só iniciar tracking no `onPointerDown`**: garantir que `startX`/`startScroll` só sejam gravados no down, nunca no move.
+3. **Reset defensivo no `pointerleave`/`pointerup`**: zerar `dragging`, `pending`, `moved` para não vazar estado entre interações.
+4. **Separar hover de drag**: `onMouseEnter` pode pausar o auto-scroll, mas **não** deve alterar posição. Confirmar que nenhum handler de hover chama `scrollTo`/`scrollLeft`.
+5. **Manter comportamento mobile intacto**: touch continua usando scroll nativo com snap; a checagem `e.buttons` só se aplica a mouse/pen.
+
+## Validação
+
+- Playwright desktop: mover o mouse sobre cada carrossel sem clicar → posição do scroll não muda.
+- Clicar, segurar e arrastar → carrossel move junto; soltar → snap no card mais próximo.
+- Mobile (touch): swipe lateral continua trocando card por card; swipe vertical continua rolando a página.
