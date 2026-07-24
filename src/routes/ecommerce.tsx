@@ -91,15 +91,8 @@ function EcommercePage() {
         <div><p className="studioEyebrow">UMA LOJA · TODOS OS CANAIS</p><h2>Cadastra uma vez. <em>Vende em todo lugar.</em></h2><p>Sua loja no centro. Todos os canais puxando produto, estoque e pedido do mesmo lugar.</p></div>
         <div className="commerceOmniDiagram">
           <div className="commerceOmniCore"><b>GB IA</b><small>Loja + Painel</small></div>
+          {channels.map((_, i) => <span key={`line-${i}`} className="commerceOmniLine" style={{ ["--i" as string]: i, ["--total" as string]: channels.length } as React.CSSProperties} aria-hidden="true" />)}
           {channels.map((c, i) => <span key={c} className="commerceOmniNode" style={{ ["--i" as string]: i, ["--total" as string]: channels.length } as React.CSSProperties}>{c}</span>)}
-          <svg className="commerceOmniLines" viewBox="0 0 400 400" aria-hidden="true">
-            {channels.map((_, i) => {
-              const angle = (i / channels.length) * Math.PI * 2 - Math.PI / 2;
-              const x = 200 + Math.cos(angle) * 170;
-              const y = 200 + Math.sin(angle) * 170;
-              return <line key={i} x1="200" y1="200" x2={x} y2={y} stroke="#4a5a52" strokeWidth="1" strokeDasharray="3 4"/>;
-            })}
-          </svg>
         </div>
       </section>
 

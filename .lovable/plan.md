@@ -1,21 +1,23 @@
-## Plano
+## Problema
 
-1. **Ajustar só o carrossel principal da Home**
-   - Refinar a lógica do `CircleGalleryCarousel` em `/` para o gesto vertical da página não ser interpretado como arraste lateral.
-   - O código atual decide o gesto com limites muito sensíveis (`dy > 6` e `dx > 12`) e aplica transformações pesadas nos cards durante o movimento.
+Na seção "Uma loja · Todos os canais" (`/ecommerce`), os balões (Site próprio, Mercado Livre, etc.) são posicionados via CSS em pixels absolutos (raio 170px desktop / 100px mobile), mas as linhas pontilhadas são desenhadas num SVG com `viewBox="0 0 400 400"` e raio fixo 170. Como o SVG escala junto com o container (até 520px), as linhas ficam mais longas que os balões — passando por dentro deles ou saindo pra fora. Também começam no centro exato (atrás da esfera "GB IA") em vez de tangenciar a borda.
 
-2. **Deixar o dedo rolar a página com prioridade**
-   - No mobile, só ativar o carrossel quando o movimento for claramente horizontal.
-   - Se o usuário começar a deslizar com qualquer intenção vertical, liberar imediatamente o scroll normal da página.
+## Solução
 
-3. **Suavizar o movimento lateral**
-   - Reduzir trabalho visual durante o drag, especialmente efeitos como `filter/blur/grayscale` que podem causar travadinhas em celular.
-   - Manter o snap de 1 card por vez, mas com transição mais natural ao soltar o dedo.
+Trocar o SVG por linhas pontilhadas em CSS puro, usando os mesmos raios px dos balões. Cada linha vira um `<span>` absoluto, girado no ângulo do balão, com comprimento = `raioBalão − raioCore`, ancorado na borda do core.
 
-4. **Ajustar CSS de toque**
-   - Revisar `touch-action` do carrossel para favorecer `pan-y` sem bloquear a rolagem vertical.
-   - Garantir que imagens/cards não capturem gestos indevidamente.
+### Passos
 
-5. **Validar no preview mobile**
-   - Simular swipe vertical e horizontal em viewport mobile.
-   - Confirmar que: rolar a página fica fluido, arrastar lateral troca card, e clique no card continua entrando na página.
+1. Em `src/routes/ecommerce.tsx` (`section.commerceOmni`):
+   - Remover o `<svg className="commerceOmniLines">`.
+   - Renderizar, antes dos nodes, um `<span className="commerceOmniLine">` por canal com `style={{ ["--i"]: i, ["--total"]: channels.length }}`.
+
+2. Em `src/imported.css`:
+   - Adicionar `.commerceOmniLine` posicionada em `top/left: 50%`, `transform-origin: 0 50%`, altura `1px`, `background: repeating-linear-gradient(to right, #4a5a52 0 3px, transparent 3px 7px)`.
+   - Desktop: `width: calc(170px - 70px)` e `transform: rotate(calc((var(--i) / var(--total)) * 1turn - 0.25turn)) translateX(70px)` (70px = raio do core 140/2).
+   - Mobile: sobrescrever com `width: calc(100px - 48px)` e `translateX(48px)`.
+   - Remover regras órfãs de `.commerceOmniLines` se houver.
+
+### Resultado
+
+As pontas das linhas encostam exatamente na borda de cada balão e saem da borda do core, em qualquer tamanho de tela.

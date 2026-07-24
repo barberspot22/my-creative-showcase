@@ -105,7 +105,7 @@
 .commerceOmniCore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#1a2b22,#0b1510);color:#f5f8f6;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 50px #1b211d40;z-index:2}
 .commerceOmniCore b{font:800 26px Manrope,sans-serif;background:linear-gradient(180deg,#f5f8f6,#7a847d);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.5px}
 .commerceOmniCore small{font:10px 'JetBrains Mono',monospace;color:#8b968f;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-.commerceOmniLines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.commerceOmniLine{position:absolute;top:50%;left:50%;height:1px;width:calc(170px - 70px);transform-origin:0 50%;transform:rotate(calc((var(--i) / var(--total)) * 1turn - .25turn)) translateX(70px);background:repeating-linear-gradient(to right,#4a5a52 0 3px,transparent 3px 7px);pointer-events:none}
 .commerceOmniNode{position:absolute;top:50%;left:50%;padding:10px 16px;background:#fff;border:1px solid #d4dcd6;border-radius:24px;font:11px 'JetBrains Mono',monospace;color:#1a2b22;text-transform:uppercase;letter-spacing:.8px;font-weight:600;box-shadow:0 6px 18px #1b211d15;white-space:nowrap;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 170px))}
 
 
@@ -115,6 +115,7 @@
   .commerceOmniDiagram{max-width:min(320px,100%);aspect-ratio:1;overflow:visible}
   .commerceOmniCore{width:96px;height:96px}
   .commerceOmniCore b{font-size:19px}
+  .commerceOmniLine{width:calc(100px - 48px);transform:rotate(calc((var(--i) / var(--total)) * 1turn - .25turn)) translateX(48px)}
   .commerceOmniNode{padding:6px 9px;font-size:8.5px;letter-spacing:.5px;max-width:110px;white-space:normal;text-align:center;line-height:1.15;transform:translate(calc(-50% + cos((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 100px),calc(-50% + sin((var(--i) / var(--total)) * 2 * 3.14159 - 1.5708) * 100px))}
   .commerceHeatmap{max-width:100%}
   .commerceHeatmapPage{min-height:280px;padding:18px}
