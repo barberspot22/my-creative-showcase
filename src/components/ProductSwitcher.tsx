@@ -39,6 +39,7 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const track = trackRef.current;
     if (!track) return;
+    if (e.pointerType === "touch") return; // let native horizontal scroll + snap handle touch
     dragState.current = { startX: e.clientX, startScroll: track.scrollLeft, active: true, moved: 0 };
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -52,6 +53,7 @@ export function ProductSwitcher({ current }: { current: ProductKey }) {
   const endDrag = () => {
     dragState.current.active = false;
   };
+
   const onLinkClick = (e: React.MouseEvent) => {
     if (dragState.current.moved > 6) {
       e.preventDefault();
