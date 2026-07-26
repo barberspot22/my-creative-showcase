@@ -1,32 +1,13 @@
-import { defineConfig } from "vite";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import viteReact from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import tsConfigPaths from "vite-tsconfig-paths";
-import { nitro } from "nitro/vite";
-
-// Two build targets:
-// - default (Lovable hosting / preview): Cloudflare worker bundle emitted to `dist/`
-// - BUILD_TARGET=node (Hostinger/PM2, see scripts/deploy-hostinger.sh): node-server in `.output/`
-const isNodeTarget = process.env.BUILD_TARGET === "node";
+// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
+// or the app will break with duplicate plugins:
+//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
+//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
+//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  plugins: [
-    tsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tailwindcss(),
-    tanstackStart({
-      // Redirect TanStack Start's bundled server entry to src/server.ts
-      server: { entry: "server" },
-    }),
-    viteReact(),
-    nitro(
-      isNodeTarget
-        ? { preset: "node-server" }
-        : {
-            preset: "cloudflare_module",
-            output: { dir: "dist" },
-            compatibilityDate: "2025-09-01",
-          },
-    ),
-  ],
+  tanstackStart: {
+    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+    server: { entry: "server" },
+  },
 });
