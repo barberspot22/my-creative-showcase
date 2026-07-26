@@ -14,6 +14,7 @@ import importedCss from "../imported.css?url";
 import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
 import { CookieConsent } from "@/components/CookieConsent";
+import { Preloader } from "@/components/Preloader";
 import { siteUrl } from "@/lib/site";
 
 
