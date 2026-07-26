@@ -1,31 +1,24 @@
-## Objetivo
+## Diagnóstico
 
-Evitar que o site pareça "quebrado" enquanto carrega, mostrando uma tela de carregamento preta com a logo GB em brilho platinum.
+Tempos atuais no `Preloader`:
+- mínimo visível: 600 ms
+- teto de segurança: 4000 ms
+- fade de saída: 450 ms
+
+Enquanto está visível, a classe `gb-preloading` aplica `overflow:hidden !important` no html/body e o overlay cobre a tela inteira com z-index máximo.
+
+Ele só some quando as fontes terminam **e** o evento `window.load` dispara. `load` espera TODAS as imagens, iframes (as prévias de sites de referência) e scripts de rastreamento. Se qualquer um demorar, a página fica bloqueada até o teto de 4 s. E como o teto só começa a contar depois que o React hidrata, em conexões lentas o bloqueio pode passar de 4 s.
 
 ## O que será feito
 
-**1. Novo componente `src/components/Preloader.tsx`**
-- Overlay em tela cheia (fundo preto sólido, `position: fixed`, z-index acima de tudo, inclusive do pop-up de cookies).
-- Centro: a logo 3D GB (mesma usada em `BrandLogo`), com animação de pulsação suave e um brilho metálico platinum passando por cima (varredura de shimmer em loop).
-- Abaixo, uma barra fina de progresso com o mesmo gradiente platinum.
-- Saída com fade-out suave (~450ms) e remoção do DOM depois.
-
-**2. Comportamento no carregamento inicial (F5 / acesso direto)**
-- Aparece imediatamente na primeira pintura (marcação já presente no HTML raiz para não haver "flash" de página quebrada).
-- Some quando: fontes carregadas + imagens da primeira dobra prontas + `window.load`, com tempo mínimo de exibição (~600ms) para não piscar e teto máximo (~4s) para nunca travar a página.
-
-**3. Comportamento na troca de página (Home → E-commerce → GB Studio etc.)**
-- Versão mais leve e rápida: overlay entra apenas se a navegação demorar mais que ~150ms, com a logo pulsando, e sai assim que a nova rota renderiza.
-- Usa o estado de navegação do roteador para saber quando começa e termina.
-
-**4. Integração**
-- Montado em `src/routes/__root.tsx`, antes do `<Outlet />`, junto do `CookieConsent`.
-- Estilos adicionados em `src/imported.css` seguindo o padrão platinum já usado no site.
-- Respeita `prefers-reduced-motion` (sem shimmer/pulsação, apenas fade).
+1. **Sair na hidratação, não no `load`**: assim que o React monta e o primeiro frame é pintado, o preloader começa a sair. Fontes e `load` deixam de ser condição obrigatória.
+2. **Reduzir tempos**: mínimo visível de 600 ms para ~350 ms, teto de segurança de 4000 ms para ~2000 ms, fade de 450 ms para ~300 ms. Total típico: ~0,65 s.
+3. **Teto que não depende do React**: um pequeno script inline no HTML remove a classe `gb-preloading` e esconde o overlay após 2,5 s mesmo que o JS do app falhe ou demore, garantindo que a página nunca fique presa.
+4. **Nunca bloquear cliques na saída**: `pointer-events: none` e liberação do scroll aplicados no início do fade, não no fim.
+5. **Overlay de troca de rota**: aumentar o atraso de 150 ms para ~250 ms para não piscar em navegações rápidas, e nunca travar o scroll nesse modo.
 
 ## Detalhes técnicos
 
-- Sem dependências novas; CSS puro + React.
-- SSR-safe: nada de acesso a `window` fora de `useEffect`; o overlay inicial é renderizado no servidor e escondido pelo cliente, evitando hydration mismatch.
-- Cookie banner continua com o delay atual, mas só será exibido após o preloader sair.
-- Verificação final com Playwright: screenshot do preloader em `/` e checagem de que ele desaparece e não bloqueia cliques.
+- Arquivos: `src/components/Preloader.tsx`, `src/imported.css`, `src/routes/__root.tsx` (script inline de segurança).
+- Sem novas dependências; SSR-safe (nada de `window` fora de efeito, exceto o script inline no documento).
+- Verificação com Playwright: medir o tempo até o overlay sumir em `/`, `/ecommerce` e `/gb-studio`, e confirmar que o scroll e os cliques voltam a funcionar.
