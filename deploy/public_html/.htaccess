@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Canonical HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Arquivos/pastas reais em public_html (ex.: guia-social-midia) continuam estáticos
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# O resto passa pelo proxy PHP → Node/PM2 em :3008
+RewriteRule ^(.*)$ index.php [QSA,L]

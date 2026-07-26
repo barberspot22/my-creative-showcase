@@ -8,6 +8,7 @@ import { fetchReferencesByPage } from "@/lib/cms";
 import { CatalogoWidget } from "@/components/imported/catalogo-digital/CatalogoWidget";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { siteUrl } from "@/lib/site";
 
 const deliverables = [
   ["Catálogo organizado por categoria", "Produtos, serviços ou imóveis separados em grupos claros, com filtros e busca."],
@@ -133,8 +134,8 @@ export const Route = createFileRoute("/catalogo-digital")({
       { property: "og:title", content: "Catálogo Digital — Produtos, serviços e imóveis | GB IA" },
       { property: "og:description", content: "Catálogo digital sob medida para mobiliária, moda, serviços, construção, imobiliária e eventos. Seu cliente navega e pede orçamento no WhatsApp." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/catalogo-digital" },
+      { property: "og:url", content: siteUrl("/catalogo-digital") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/catalogo-digital" }],
+    links: [{ rel: "canonical", href: siteUrl("/catalogo-digital") }],
   }),
 });

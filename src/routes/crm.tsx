@@ -4,6 +4,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { siteUrl } from "@/lib/site";
 
 const automations = [
   ["01", "Conversa automática com IA", "IA treinada no seu negócio responde no WhatsApp, Instagram e site — qualifica o lead antes do time humano entrar."],
@@ -132,8 +133,8 @@ export const Route = createFileRoute("/crm")({
       { property: "og:title", content: "CRM sob medida — Comercial e produção | GB IA" },
       { property: "og:description", content: "CRM sob medida com automações comerciais e de produção, integrações com WhatsApp e pagamento, e visão real do seu funil." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/crm" },
+      { property: "og:url", content: siteUrl("/crm") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/crm" }],
+    links: [{ rel: "canonical", href: siteUrl("/crm") }],
   }),
 });

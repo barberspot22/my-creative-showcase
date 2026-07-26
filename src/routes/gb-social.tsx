@@ -8,6 +8,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import { fetchReferencesByPage } from "@/lib/cms";
+import { siteUrl } from "@/lib/site";
 
 const features = [
   ["Criação de posts", "Feed, story e carrossel prontos para publicar."],
@@ -137,8 +138,8 @@ export const Route = createFileRoute("/gb-social")({
       { property: "og:title", content: "GB Social — Social Media de IA pelo WhatsApp | GB IA" },
       { property: "og:description", content: "GB Social cria posts, agenda conteúdo, analisa métricas, concorrentes e monta calendário editorial pelo WhatsApp." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/gb-social" },
+      { property: "og:url", content: siteUrl("/gb-social") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/gb-social" }],
+    links: [{ rel: "canonical", href: siteUrl("/gb-social") }],
   }),
 });

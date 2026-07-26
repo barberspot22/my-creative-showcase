@@ -9,6 +9,7 @@ import { cardapioReferences } from "@/lib/references";
 import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { siteUrl } from "@/lib/site";
 
 
 const deliverables = [
@@ -87,8 +88,8 @@ export const Route = createFileRoute("/cardapio-digital")({
       { property: "og:title", content: "Cardápio Digital — Mesa, delivery e WhatsApp | GB IA" },
       { property: "og:description", content: "Cardápio digital com fotos, pedido no WhatsApp/mesa e pagamento integrado. Para restaurantes, delivery, autônomos e marcas de comida." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/cardapio-digital" },
+      { property: "og:url", content: siteUrl("/cardapio-digital") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/cardapio-digital" }],
+    links: [{ rel: "canonical", href: siteUrl("/cardapio-digital") }],
   }),
 });

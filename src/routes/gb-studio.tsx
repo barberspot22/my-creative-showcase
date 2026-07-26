@@ -5,6 +5,7 @@ import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { siteUrl } from "@/lib/site";
 
 const differences = [
   "Qualidade visual equivalente a um estúdio convencional",
@@ -100,8 +101,8 @@ export const Route = createFileRoute("/gb-studio")({
       { property: "og:title", content: "GB Studio — Fotografia de moda com IA | GB IA" },
       { property: "og:description", content: "Editoriais, lookbooks e catálogos com direção criativa e IA generativa. Produção em dias, sem estúdio, sem modelo, sem viagem." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/gb-studio" },
+      { property: "og:url", content: siteUrl("/gb-studio") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/gb-studio" }],
+    links: [{ rel: "canonical", href: siteUrl("/gb-studio") }],
   }),
 });

@@ -8,6 +8,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
+import { siteUrl } from "@/lib/site";
 
 
 const deliverables = [
@@ -113,8 +114,8 @@ export const Route = createFileRoute("/ecommerce")({
       { property: "og:title", content: "E-commerce Inteligente — Loja + Marketplaces + IA Vendedora | GB IA" },
       { property: "og:description", content: "Loja, catálogo, marketplaces, WhatsApp e IA vendedora num sistema só. Cadastre por áudio, publique em todos os canais, rastreie e otimize a conversão." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/ecommerce" },
+      { property: "og:url", content: siteUrl("/ecommerce") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/ecommerce" }],
+    links: [{ rel: "canonical", href: siteUrl("/ecommerce") }],
   }),
 });

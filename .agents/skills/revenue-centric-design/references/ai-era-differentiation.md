@@ -43,7 +43,7 @@
 ## Don't let AI-to-Figma-to-code factory technical debt
 **Principle.** A Claude → Figma → Code flow looks like speed but creates two documents that drift out of sync, plus inconsistent components — a maintenance Frankenstein, not velocity.
 **Apply when.** A tool promises round-tripping AI output through the design canvas into code as a shortcut.
-**The move.** Refuse the false shortcut. Without a design system and context, generated components are superficially similar but fundamentally inconsistent (random button padding, off-brand colors, inconsistent UX patterns). Manual tweaks don't flow back to code, so the source of truth reverts to the canvas and the two files desync. For devs it's useless (V0/Lovable already emit code without the full-seat toll); for designers it's a distraction that skips information architecture to spit out a screen fast.
+**The move.** Refuse the false shortcut. Without a design system and context, generated components are superficially similar but fundamentally inconsistent (random button padding, off-brand colors, inconsistent UX patterns). Manual tweaks don't flow back to code, so the source of truth reverts to the canvas and the two files desync. For devs it's useless (V0 and similar codegen tools already emit code without the full-seat toll); for designers it's a distraction that skips information architecture to spit out a screen fast.
 **Voice.** "A technical-debt factory."
 **Source.** [@richardrx · 2026-02-18](https://x.com/richardrx/status/2024076972565963186)
 

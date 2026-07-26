@@ -11,10 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import importedCss from "../imported.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
 import { CookieConsent } from "@/components/CookieConsent";
+import { siteUrl } from "@/lib/site";
 
 
 function NotFoundComponent() {
@@ -42,9 +42,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -91,15 +88,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "GB IA — Sistemas, automação e IA autônoma" },
       { property: "og:description", content: "Soluções sob medida em sistemas, automação e IA autônoma para transformar o seu negócio." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://gb-ia.lovable.app" },
-      { property: "og:image", content: "https://gb-ia.lovable.app/og-gb-ia.jpg" },
+      { property: "og:url", content: siteUrl() },
+      { property: "og:image", content: siteUrl("/og-gb-ia.jpg") },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "GB IA — Sistemas, automação e IA autônoma" },
       { name: "twitter:description", content: "Soluções sob medida em sistemas, automação e IA autônoma para transformar o seu negócio." },
-      { name: "twitter:image", content: "https://gb-ia.lovable.app/og-gb-ia.jpg" },
+      { name: "twitter:image", content: siteUrl("/og-gb-ia.jpg") },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -109,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" },
       { rel: "icon", type: "image/png", href: "/favicon-gb.png" },
       { rel: "apple-touch-icon", href: "/favicon-gb.png" },
-      { rel: "canonical", href: "https://gb-ia.lovable.app" },
+      { rel: "canonical", href: siteUrl() },
     ],
     scripts: [
       {
@@ -118,8 +115,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "GB IA",
-          url: "https://gb-ia.lovable.app",
-          logo: "https://gb-ia.lovable.app/favicon-gb.png",
+          url: siteUrl(),
+          logo: siteUrl("/favicon-gb.png"),
           description: "Sistemas sob medida, automação e IA autônoma para negócios.",
         }),
       },

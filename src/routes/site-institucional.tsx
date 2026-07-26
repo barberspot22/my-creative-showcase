@@ -7,6 +7,7 @@ import { institucionalReferences, vendasReferences, capturaReferences } from "@/
 import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { siteUrl } from "@/lib/site";
 
 type RefTab = "institucional" | "vendas" | "captura";
 const REF_TABS: { key: RefTab; label: string; hint: string }[] = [
@@ -111,8 +112,8 @@ export const Route = createFileRoute("/site-institucional")({
       { property: "og:title", content: "Site Institucional — Autoridade e conversão | GB IA" },
       { property: "og:description", content: "Sites institucionais, páginas de vendas e páginas de captura estruturados como funil. Autoridade, provas e caminho claro até o contato." },
       { property: "og:type", content: "product" },
-      { property: "og:url", content: "https://gb-ia.lovable.app/site-institucional" },
+      { property: "og:url", content: siteUrl("/site-institucional") },
     ],
-    links: [{ rel: "canonical", href: "https://gb-ia.lovable.app/site-institucional" }],
+    links: [{ rel: "canonical", href: siteUrl("/site-institucional") }],
   }),
 });
