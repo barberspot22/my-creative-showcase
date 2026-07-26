@@ -80,7 +80,19 @@ const lookbookCases: LookbookCase[] = [
     id: "detalhes-tecido",
     title: "Detalhes de tecido",
     client: "Studio Marés",
-    images: [look19.url, look20.url],
+    images: [look19.url, look20.url, look24.url, look27.url],
+  },
+  {
+    id: "palmeiras-dourado",
+    title: "Palmeiras ao entardecer",
+    client: "Casa Litoral",
+    images: [look21.url, look22.url, look23.url, look28.url, look30.url],
+  },
+  {
+    id: "lago-alpino",
+    title: "Lago alpino",
+    client: "Nortada Studio",
+    images: [look25.url, look26.url, look29.url],
   },
 ];
 
