@@ -37,7 +37,19 @@ function Overlay({ leaving, compact }: { leaving: boolean; compact?: boolean }) 
           <img src={gbLogo} alt="GB IA" style={{ display: "block", width: "100%", height: "auto" }} />
         </div>
         {!compact && (
-          <div className="gbPreloaderBar" aria-hidden="true">
+          <div
+            className="gbPreloaderBar"
+            aria-hidden="true"
+            style={{
+              position: "relative",
+              width: 150,
+              maxWidth: "46vw",
+              height: 2,
+              borderRadius: 999,
+              background: "rgba(255,255,255,.1)",
+              overflow: "hidden",
+            }}
+          >
             <span />
           </div>
         )}
