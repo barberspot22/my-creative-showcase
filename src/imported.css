@@ -1885,8 +1885,10 @@ section[aria-label^="Notifications"] {
 
 /* ===== Preloader (platinum) ===== */
 html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
-.gbPreloader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity .45s ease}
+.gbPreloader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity .3s ease}
 .gbPreloaderLeaving{opacity:0;pointer-events:none}
+.gbPreloaderForceHide{opacity:0!important;pointer-events:none!important;visibility:hidden!important}
+
 .gbPreloaderInner{display:flex;flex-direction:column;align-items:center;gap:26px}
 .gbPreloaderMark{position:relative;width:132px;max-width:44vw;overflow:hidden;animation:gbPreloadPulse 2.1s ease-in-out infinite}
 .gbPreloaderMark img{display:block;width:100%;height:auto}
