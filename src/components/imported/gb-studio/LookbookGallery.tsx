@@ -9,6 +9,16 @@ import look07 from "@/assets/lookbook/look-07.jpg.asset.json";
 import look08 from "@/assets/lookbook/look-08.jpg.asset.json";
 import look09 from "@/assets/lookbook/look-09.jpg.asset.json";
 import look10 from "@/assets/lookbook/look-10.jpg.asset.json";
+import look11 from "@/assets/lookbook/look-11.jpg.asset.json";
+import look12 from "@/assets/lookbook/look-12.jpg.asset.json";
+import look13 from "@/assets/lookbook/look-13.jpg.asset.json";
+import look14 from "@/assets/lookbook/look-14.jpg.asset.json";
+import look15 from "@/assets/lookbook/look-15.jpg.asset.json";
+import look16 from "@/assets/lookbook/look-16.jpg.asset.json";
+import look17 from "@/assets/lookbook/look-17.jpg.asset.json";
+import look18 from "@/assets/lookbook/look-18.jpg.asset.json";
+import look19 from "@/assets/lookbook/look-19.jpg.asset.json";
+import look20 from "@/assets/lookbook/look-20.jpg.asset.json";
 
 type LookbookCase = {
   id: string;
@@ -36,13 +46,13 @@ const lookbookCases: LookbookCase[] = [
     id: "denim-listrado",
     title: "Denim listrado",
     client: "Zinsk Collection",
-    images: [look05.url, look06.url, look07.url],
+    images: [look05.url, look06.url, look07.url, look12.url, look13.url],
   },
   {
     id: "verao-lago",
     title: "Verão à beira do lago",
     client: "Marê Beachwear",
-    images: [look08.url, look09.url],
+    images: [look08.url, look09.url, look11.url],
   },
   {
     id: "denim-verde",
@@ -50,7 +60,20 @@ const lookbookCases: LookbookCase[] = [
     client: "Casa Índigo",
     images: [look10.url],
   },
+  {
+    id: "linho-cru",
+    title: "Linho cru no píer",
+    client: "Studio Marés",
+    images: [look14.url, look15.url, look16.url, look17.url, look18.url],
+  },
+  {
+    id: "detalhes-tecido",
+    title: "Detalhes de tecido",
+    client: "Studio Marés",
+    images: [look19.url, look20.url],
+  },
 ];
+
 
 
 
