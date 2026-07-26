@@ -1,10 +1,14 @@
 import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
-import img6166 from "@/assets/lookbook/IMG_6166.jpeg.asset.json";
-import img6167 from "@/assets/lookbook/IMG_6167.jpeg.asset.json";
-import img6168 from "@/assets/lookbook/IMG_6168.jpeg.asset.json";
-import img6169 from "@/assets/lookbook/IMG_6169.jpeg.asset.json";
-import img6170 from "@/assets/lookbook/IMG_6170.jpeg.asset.json";
-import img6171 from "@/assets/lookbook/IMG_6171.jpeg.asset.json";
+import look01 from "@/assets/lookbook/look-01.jpg.asset.json";
+import look02 from "@/assets/lookbook/look-02.jpg.asset.json";
+import look03 from "@/assets/lookbook/look-03.jpg.asset.json";
+import look04 from "@/assets/lookbook/look-04.jpg.asset.json";
+import look05 from "@/assets/lookbook/look-05.jpg.asset.json";
+import look06 from "@/assets/lookbook/look-06.jpg.asset.json";
+import look07 from "@/assets/lookbook/look-07.jpg.asset.json";
+import look08 from "@/assets/lookbook/look-08.jpg.asset.json";
+import look09 from "@/assets/lookbook/look-09.jpg.asset.json";
+import look10 from "@/assets/lookbook/look-10.jpg.asset.json";
 
 type LookbookCase = {
   id: string;
@@ -17,24 +21,37 @@ type Item = LookbookCase & { image: string; imageIndex: number };
 
 const lookbookCases: LookbookCase[] = [
   {
-    id: "concreto-listras",
-    title: "Editorial concreto",
-    client: "Studio Bruta",
-    images: [img6166.url, img6167.url, img6170.url],
+    id: "galleria-milano",
+    title: "Editorial Galleria",
+    client: "Maison Vera",
+    images: [look01.url, look02.url],
   },
   {
-    id: "denim-jardim",
-    title: "Denim botânico",
-    client: "Herbá Denim",
-    images: [img6168.url, img6169.url],
+    id: "paris-alfaiataria",
+    title: "Alfaiataria em Paris",
+    client: "Atelier Nord",
+    images: [look03.url, look04.url],
+  },
+  {
+    id: "denim-listrado",
+    title: "Denim listrado",
+    client: "Zinsk Collection",
+    images: [look05.url, look06.url, look07.url],
   },
   {
     id: "verao-lago",
     title: "Verão à beira do lago",
     client: "Marê Beachwear",
-    images: [img6171.url],
+    images: [look08.url, look09.url],
+  },
+  {
+    id: "denim-verde",
+    title: "Denim em estúdio",
+    client: "Casa Índigo",
+    images: [look10.url],
   },
 ];
+
 
 
 export function LookbookGallery() {
