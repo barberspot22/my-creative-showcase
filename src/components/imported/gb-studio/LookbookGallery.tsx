@@ -29,6 +29,11 @@ import look27 from "@/assets/lookbook/look-27.jpg.asset.json";
 import look28 from "@/assets/lookbook/look-28.jpg.asset.json";
 import look29 from "@/assets/lookbook/look-29.jpg.asset.json";
 import look30 from "@/assets/lookbook/look-30.jpg.asset.json";
+import look31 from "@/assets/lookbook/look-31.jpg.asset.json";
+import look32 from "@/assets/lookbook/look-32.jpg.asset.json";
+import look33 from "@/assets/lookbook/look-33.jpg.asset.json";
+import look34 from "@/assets/lookbook/look-34.jpg.asset.json";
+import look35 from "@/assets/lookbook/look-35.jpg.asset.json";
 
 type LookbookCase = {
   id: string;
@@ -68,31 +73,31 @@ const lookbookCases: LookbookCase[] = [
     id: "denim-verde",
     title: "Denim em estúdio",
     client: "Casa Índigo",
-    images: [look10.url],
+    images: [look10.url, look32.url],
   },
   {
     id: "linho-cru",
     title: "Linho cru no píer",
     client: "Studio Marés",
-    images: [look14.url, look15.url, look16.url, look17.url, look18.url],
+    images: [look14.url, look15.url, look16.url, look17.url, look18.url, look31.url],
   },
   {
     id: "detalhes-tecido",
     title: "Detalhes de tecido",
     client: "Studio Marés",
-    images: [look19.url, look20.url, look24.url, look27.url],
+    images: [look19.url, look20.url, look24.url, look27.url, look35.url],
   },
   {
     id: "palmeiras-dourado",
     title: "Palmeiras ao entardecer",
     client: "Casa Litoral",
-    images: [look21.url, look22.url, look23.url, look28.url, look30.url],
+    images: [look21.url, look22.url, look23.url, look28.url, look30.url, look33.url],
   },
   {
     id: "lago-alpino",
     title: "Lago alpino",
     client: "Nortada Studio",
-    images: [look25.url, look26.url, look29.url],
+    images: [look25.url, look26.url, look29.url, look34.url],
   },
 ];
 
