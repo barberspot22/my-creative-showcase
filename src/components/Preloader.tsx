@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
-const MIN_VISIBLE = 600;
-const MAX_VISIBLE = 4000;
-const FADE_MS = 450;
+const MIN_VISIBLE = 350;
+const MAX_VISIBLE = 2000;
+const FADE_MS = 300;
 
 function Overlay({ leaving, compact }: { leaving: boolean; compact?: boolean }) {
   return (
@@ -22,7 +22,7 @@ function Overlay({ leaving, compact }: { leaving: boolean; compact?: boolean }) 
         justifyContent: "center",
         background: compact ? "rgba(0,0,0,.82)" : "#000",
         opacity: leaving ? 0 : 1,
-        transition: "opacity .45s ease",
+        transition: `opacity ${FADE_MS}ms ease`,
         pointerEvents: leaving ? "none" : undefined,
       }}
     >
@@ -64,43 +64,47 @@ function BootPreloader() {
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
+    // If the inline safety script already released the page, never show it again.
+    if (typeof window !== "undefined" && (window as unknown as { __gbPreloadDone?: boolean }).__gbPreloadDone) {
+      document.documentElement.classList.remove("gb-preloading");
+      setDone(true);
+      return;
+    }
+
     const start = Date.now();
+    let waitTimer: number | undefined;
     let removeTimer: number | undefined;
-    let cancelled = false;
+    let finished = false;
+
+    const release = () => {
+      document.documentElement.classList.remove("gb-preloading");
+      (window as unknown as { __gbPreloadDone?: boolean }).__gbPreloadDone = true;
+      window.dispatchEvent(new CustomEvent("gbia:preload-done"));
+    };
 
     const finish = () => {
-      if (cancelled) return;
-      cancelled = true;
+      if (finished) return;
+      finished = true;
       const wait = Math.max(0, MIN_VISIBLE - (Date.now() - start));
-      window.setTimeout(() => {
+      waitTimer = window.setTimeout(() => {
+        // Unlock scroll and pointer events as the fade starts, not after it.
         setLeaving(true);
-        removeTimer = window.setTimeout(() => {
-          setDone(true);
-          document.documentElement.classList.remove("gb-preloading");
-          window.dispatchEvent(new CustomEvent("gbia:preload-done"));
-        }, FADE_MS);
+        release();
+        removeTimer = window.setTimeout(() => setDone(true), FADE_MS);
       }, wait);
     };
 
     document.documentElement.classList.add("gb-preloading");
 
-    const ready = async () => {
-      try {
-        if (document.fonts?.ready) await document.fonts.ready;
-      } catch {
-        /* ignore */
-      }
-      if (document.readyState === "complete") finish();
-      else window.addEventListener("load", finish, { once: true });
-    };
-    void ready();
-
+    // Leave as soon as React has hydrated and painted the first frame.
+    const raf1 = requestAnimationFrame(() => requestAnimationFrame(finish));
     const hardStop = window.setTimeout(finish, MAX_VISIBLE);
 
     return () => {
+      cancelAnimationFrame(raf1);
       window.clearTimeout(hardStop);
+      if (waitTimer) window.clearTimeout(waitTimer);
       if (removeTimer) window.clearTimeout(removeTimer);
-      window.removeEventListener("load", finish);
       document.documentElement.classList.remove("gb-preloading");
     };
   }, []);
@@ -119,7 +123,7 @@ function RoutePreloader() {
       setShow(false);
       return;
     }
-    const t = window.setTimeout(() => setShow(true), 150);
+    const t = window.setTimeout(() => setShow(true), 250);
     return () => window.clearTimeout(t);
   }, [isLoading]);
 
