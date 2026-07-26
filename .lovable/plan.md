@@ -1,24 +1,13 @@
-## Diagnóstico
+## Objetivo
+Substituir as imagens do carrossel "Designs que já saíram daqui" (`/gb-social`) pelas 9 artes enviadas (Perfumaria, Academia x2, Açougue, Moda Jeans, Loja de Celular, Cervejaria, Sorveteria, Peças Automotivas).
 
-Tempos atuais no `Preloader`:
-- mínimo visível: 600 ms
-- teto de segurança: 4000 ms
-- fade de saída: 450 ms
+## Como funciona hoje
+A seção usa `PerspectiveTicker`, que recebe `designs` vindos do CMS (`portfolio_items` com `page_key = "gb-social"`); se vazio, cai em uma lista fixa antiga (`/gb-social-designs/design-XX.png`).
 
-Enquanto está visível, a classe `gb-preloading` aplica `overflow:hidden !important` no html/body e o overlay cobre a tela inteira com z-index máximo.
+## Passos
+1. Subir as 9 imagens como Lovable Assets (CDN), gerando os ponteiros em `src/assets/social/`.
+2. Substituir no banco os registros de portfólio de `page_key = "gb-social"` pelas novas 9 imagens (título/segmento por nicho: Perfumaria, Academia, Açougue, Moda Jeans, Loja de Celular, Cervejaria, Sorveteria, Peças Automotivas), mantendo a gestão pelo /admin.
+3. Atualizar a lista de fallback em `src/components/imported/gb-social/PerspectiveTicker.tsx` para as novas URLs, para nunca voltar às artes antigas.
+4. Validar o carrossel no preview (arraste + lightbox) e checar que as imagens carregam.
 
-Ele só some quando as fontes terminam **e** o evento `window.load` dispara. `load` espera TODAS as imagens, iframes (as prévias de sites de referência) e scripts de rastreamento. Se qualquer um demorar, a página fica bloqueada até o teto de 4 s. E como o teto só começa a contar depois que o React hidrata, em conexões lentas o bloqueio pode passar de 4 s.
-
-## O que será feito
-
-1. **Sair na hidratação, não no `load`**: assim que o React monta e o primeiro frame é pintado, o preloader começa a sair. Fontes e `load` deixam de ser condição obrigatória.
-2. **Reduzir tempos**: mínimo visível de 600 ms para ~350 ms, teto de segurança de 4000 ms para ~2000 ms, fade de 450 ms para ~300 ms. Total típico: ~0,65 s.
-3. **Teto que não depende do React**: um pequeno script inline no HTML remove a classe `gb-preloading` e esconde o overlay após 2,5 s mesmo que o JS do app falhe ou demore, garantindo que a página nunca fique presa.
-4. **Nunca bloquear cliques na saída**: `pointer-events: none` e liberação do scroll aplicados no início do fade, não no fim.
-5. **Overlay de troca de rota**: aumentar o atraso de 150 ms para ~250 ms para não piscar em navegações rápidas, e nunca travar o scroll nesse modo.
-
-## Detalhes técnicos
-
-- Arquivos: `src/components/Preloader.tsx`, `src/imported.css`, `src/routes/__root.tsx` (script inline de segurança).
-- Sem novas dependências; SSR-safe (nada de `window` fora de efeito, exceto o script inline no documento).
-- Verificação com Playwright: medir o tempo até o overlay sumir em `/`, `/ecommerce` e `/gb-studio`, e confirmar que o scroll e os cliques voltam a funcionar.
+Obs.: as artes têm proporção vertical (4:5); o card do ticker já se adapta, mas ajusto o enquadramento se ficar cortado.
