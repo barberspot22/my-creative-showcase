@@ -1882,3 +1882,20 @@ section[aria-label^="Notifications"] {
 /* Reduce top spacing on all service page heroes (below ProductSwitcher) */
 .commerceHero,.studioHero,.crmHero,.socialHero,.menuProductHero,.siteProductHero{padding-top:36px!important;min-height:auto!important}
 @media(max-width:760px){.commerceHero,.studioHero,.crmHero,.socialHero,.menuProductHero,.siteProductHero{padding-top:24px!important}}
+
+/* ===== Preloader (platinum) ===== */
+html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
+.gbPreloader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#000;opacity:1;transition:opacity .45s ease}
+.gbPreloaderLeaving{opacity:0;pointer-events:none}
+.gbPreloaderInner{display:flex;flex-direction:column;align-items:center;gap:26px}
+.gbPreloaderMark{position:relative;width:132px;max-width:44vw;overflow:hidden;animation:gbPreloadPulse 2.1s ease-in-out infinite}
+.gbPreloaderMark img{display:block;width:100%;height:auto}
+.gbPreloaderShine{position:absolute;inset:-20% -60%;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.06) 45%,rgba(255,255,255,.85) 50%,rgba(226,232,240,.35) 56%,transparent 64%);mix-blend-mode:screen;transform:translateX(-70%);animation:gbPreloadShine 2.4s cubic-bezier(.4,0,.2,1) infinite}
+.gbPreloaderBar{position:relative;width:150px;max-width:46vw;height:2px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.gbPreloaderBar>span{position:absolute;inset:0;width:42%;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0),#e8ecf1 35%,#fff 50%,#a7b0ba 75%,rgba(255,255,255,0));animation:gbPreloadBar 1.25s cubic-bezier(.65,0,.35,1) infinite}
+.gbPreloaderCompact{background:rgba(0,0,0,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.gbPreloaderCompact .gbPreloaderMark{width:92px}
+@keyframes gbPreloadPulse{0%,100%{opacity:.72;transform:scale(.985)}50%{opacity:1;transform:scale(1)}}
+@keyframes gbPreloadShine{0%{transform:translateX(-70%)}60%,100%{transform:translateX(70%)}}
+@keyframes gbPreloadBar{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
+@media(prefers-reduced-motion:reduce){.gbPreloaderMark,.gbPreloaderShine,.gbPreloaderBar>span{animation:none}.gbPreloaderShine{opacity:0}}
