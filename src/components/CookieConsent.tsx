@@ -10,14 +10,29 @@ export function CookieConsent() {
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem(STORAGE_KEY)) {
-        const t = window.setTimeout(() => setVisible(true), 600);
-        return () => window.clearTimeout(t);
-      }
+      if (localStorage.getItem(STORAGE_KEY)) return;
     } catch {
       setVisible(true);
+      return;
     }
+
+    let timer: number | undefined;
+    const show = () => {
+      timer = window.setTimeout(() => setVisible(true), 600);
+    };
+
+    if (!document.documentElement.classList.contains("gb-preloading")) {
+      show();
+    } else {
+      window.addEventListener("gbia:preload-done", show, { once: true });
+    }
+
+    return () => {
+      if (timer) window.clearTimeout(timer);
+      window.removeEventListener("gbia:preload-done", show);
+    };
   }, []);
+
 
   const decide = (choice: Choice) => {
     try {

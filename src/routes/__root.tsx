@@ -14,6 +14,7 @@ import importedCss from "../imported.css?url";
 import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
 import { CookieConsent } from "@/components/CookieConsent";
+import { Preloader } from "@/components/Preloader";
 import { siteUrl } from "@/lib/site";
 
 
@@ -167,12 +168,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Preloader />
       <TrackingScripts />
       <SectionVisibilityStyle />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <CookieConsent />
     </QueryClientProvider>
+
 
   );
 }
