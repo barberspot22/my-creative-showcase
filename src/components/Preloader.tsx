@@ -13,13 +13,43 @@ function Overlay({ leaving, compact }: { leaving: boolean; compact?: boolean }) 
       role="status"
       aria-live="polite"
       aria-label="Carregando"
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 2147483000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: compact ? "rgba(0,0,0,.82)" : "#000",
+        opacity: leaving ? 0 : 1,
+        transition: "opacity .45s ease",
+        pointerEvents: leaving ? "none" : undefined,
+      }}
     >
-      <div className="gbPreloaderInner">
-        <div className="gbPreloaderMark">
-          <img src={gbLogo} alt="GB IA" />
+      <div
+        className="gbPreloaderInner"
+        style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 26 }}
+      >
+        <div
+          className="gbPreloaderMark"
+          style={{ position: "relative", width: compact ? 92 : 132, maxWidth: "44vw", overflow: "hidden" }}
+        >
+          <img src={gbLogo} alt="GB IA" style={{ display: "block", width: "100%", height: "auto" }} />
         </div>
         {!compact && (
-          <div className="gbPreloaderBar" aria-hidden="true">
+          <div
+            className="gbPreloaderBar"
+            aria-hidden="true"
+            style={{
+              position: "relative",
+              width: 150,
+              maxWidth: "46vw",
+              height: 2,
+              borderRadius: 999,
+              background: "rgba(255,255,255,.1)",
+              overflow: "hidden",
+            }}
+          >
             <span />
           </div>
         )}
