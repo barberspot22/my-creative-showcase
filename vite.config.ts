@@ -5,6 +5,11 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { nitro } from "nitro/vite";
 
+// Two build targets:
+// - default (Lovable hosting / preview): Cloudflare worker bundle emitted to `dist/`
+// - BUILD_TARGET=node (Hostinger/PM2, see scripts/deploy-hostinger.sh): node-server in `.output/`
+const isNodeTarget = process.env.BUILD_TARGET === "node";
+
 export default defineConfig({
   plugins: [
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
@@ -14,6 +19,14 @@ export default defineConfig({
       server: { entry: "server" },
     }),
     viteReact(),
-    nitro(),
+    nitro(
+      isNodeTarget
+        ? { preset: "node-server" }
+        : {
+            preset: "cloudflare_module",
+            output: { dir: "dist" },
+            compatibilityDate: "2025-09-01",
+          },
+    ),
   ],
 });
