@@ -14,7 +14,7 @@ RSYNC_SSH="ssh -i $SSH_KEY -p $SSH_PORT -o BatchMode=yes -o IdentitiesOnly=yes"
 cd "$ROOT"
 
 echo "==> Build"
-npm run build
+npm run build:node
 
 echo "==> Garantindo pastas remotas"
 "${SSH[@]}" "$SSH_HOST" "mkdir -p '$REMOTE_APP' '$REMOTE_WEB' ~/bin"
