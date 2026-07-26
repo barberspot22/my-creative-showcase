@@ -130,6 +130,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const PRELOADER_SAFETY = `(function(){function r(){try{window.__gbPreloadDone=true;document.documentElement.classList.remove('gb-preloading');var n=document.querySelectorAll('.gbPreloader');for(var i=0;i<n.length;i++){n[i].classList.add('gbPreloaderForceHide')}window.dispatchEvent(new CustomEvent('gbia:preload-done'))}catch(e){}}setTimeout(r,2500)})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
@@ -138,11 +140,13 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: PRELOADER_SAFETY }} />
         <Scripts />
       </body>
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
