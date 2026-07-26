@@ -17,7 +17,6 @@ function Overlay({ leaving, compact }: { leaving: boolean; compact?: boolean }) 
       <div className="gbPreloaderInner">
         <div className="gbPreloaderMark">
           <img src={gbLogo} alt="GB IA" />
-          <span className="gbPreloaderShine" aria-hidden="true" />
         </div>
         {!compact && (
           <div className="gbPreloaderBar" aria-hidden="true">
