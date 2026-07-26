@@ -1895,6 +1895,5 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 .gbPreloaderCompact{background:rgba(0,0,0,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .gbPreloaderCompact .gbPreloaderMark{width:92px}
 @keyframes gbPreloadPulse{0%,100%{opacity:.72;transform:scale(.985)}50%{opacity:1;transform:scale(1)}}
-@keyframes gbPreloadShine{0%{transform:translateX(-70%)}60%,100%{transform:translateX(70%)}}
 @keyframes gbPreloadBar{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
-@media(prefers-reduced-motion:reduce){.gbPreloaderMark,.gbPreloaderShine,.gbPreloaderBar>span{animation:none}
+@media(prefers-reduced-motion:reduce){.gbPreloaderMark,.gbPreloaderBar>span{animation:none}}
