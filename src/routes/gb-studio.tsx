@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { LookbookGallery } from "@/components/imported/gb-studio/LookbookGallery";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { fetchReferencesByPage } from "@/lib/cms";
 import { siteUrl } from "@/lib/site";
 
 const differences = [
@@ -26,6 +28,11 @@ function GBStudioPage() {
   const [briefing, setBriefing] = useState(false);
   const [sent, setSent] = useState(false);
   const { ctaUrl, ctaLabel } = usePageLink("gb-studio");
+  const { data: studioRefs } = useQuery({
+    queryKey: ["references", "gb-studio"],
+    queryFn: () => fetchReferencesByPage("gb-studio"),
+  });
+  const studioImages = (studioRefs ?? []).map((r) => r.image).filter(Boolean);
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
   const navCtaProps = ctaUrl
     ? { href: ctaUrl, target: "_blank" as const, rel: "noreferrer" }
@@ -56,7 +63,7 @@ function GBStudioPage() {
           <h2>Veja o resultado de perto.</h2>
           <p>Cada card mostra um case diferente, com três imagens próprias em loop suave.</p>
         </div>
-        <LookbookGallery />
+        <LookbookGallery images={studioImages} />
       </section>
 
       <section className="problemBlock">

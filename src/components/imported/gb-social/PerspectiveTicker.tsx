@@ -1,24 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import perfumaria from "@/assets/social/perfumaria.png.asset.json";
-import academia01 from "@/assets/social/academia-01.png.asset.json";
-import academia02 from "@/assets/social/academia-02.png.asset.json";
-import acougue from "@/assets/social/acougue.png.asset.json";
-import modaJeans from "@/assets/social/moda-jeans.png.asset.json";
-import lojaCelular from "@/assets/social/loja-celular.png.asset.json";
-import cervejaria from "@/assets/social/cervejaria.png.asset.json";
-import sorveteria from "@/assets/social/sorveteria.png.asset.json";
-import pecas from "@/assets/social/pecas-automotivas.png.asset.json";
 
+/** Arquivos reais em `public/gb-social-designs/` — rota `/gb-social-designs/…`. */
 const defaultDesigns = [
-  perfumaria.url,
-  academia01.url,
-  acougue.url,
-  modaJeans.url,
-  lojaCelular.url,
-  cervejaria.url,
-  sorveteria.url,
-  pecas.url,
-  academia02.url,
+  "/gb-social-designs/design-01.png",
+  "/gb-social-designs/design-02.png",
+  "/gb-social-designs/design-03.png",
+  "/gb-social-designs/design-04.png",
+  "/gb-social-designs/design-05.png",
+  "/gb-social-designs/design-06.png",
+  "/gb-social-designs/design-07.png",
+  "/gb-social-designs/design-08.png",
+  "/gb-social-designs/design-09.png",
+  "/gb-social-designs/design-10.png",
 ];
 
 

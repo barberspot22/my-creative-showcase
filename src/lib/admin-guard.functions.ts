@@ -17,8 +17,11 @@ async function checkAdmin(context: {
   return !!data;
 }
 
-/** Server-side check: true if current authenticated user has admin role. */
-export const svIsAdmin = createServerFn({ method: "GET" })
+/** Server-side check: true if current authenticated user has admin role.
+ *  POST (not GET): behind Hostinger's PHP proxy, GET requests sometimes
+ *  arrive with a form Content-Type and TanStack Start throws "Invariant failed".
+ */
+export const svIsAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     return { isAdmin: await checkAdmin(context) };

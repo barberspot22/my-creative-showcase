@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BrandLogo } from "@/components/BrandLogo";
-import consumoConscienteAsset from "@/assets/consumo-consciente.png.asset.json";
 import { FormEvent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
@@ -9,6 +8,8 @@ import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import { fetchReferencesByPage } from "@/lib/cms";
 import { siteUrl } from "@/lib/site";
+
+const SOCIAL_PREVIEW_IMG = "/gb-social-designs/design-01.png";
 
 const features = [
   ["Criação de posts", "Feed, story e carrossel prontos para publicar."],
@@ -99,7 +100,7 @@ function GBSocialPage() {
             <p className="chatUser">Preciso de 15 dias de posts para o Instagram da loja.</p>
             <p className="chatAgent"><b>GB Social</b>Perfeito. Vou montar o calendário com posts de feed, stories e carrossel seguindo o DNA da marca.</p>
             <article className="socialDesignPreview socialDesignPreviewImage" aria-label="Preview da arte criada pelo designer">
-              <img src={consumoConscienteAsset.url} alt="Design criado pelo GB Social para campanha de Consumo Consciente" />
+              <img src={SOCIAL_PREVIEW_IMG} alt="Design criado pelo GB Social para campanha de Consumo Consciente" />
             </article>
             <p className="chatAgent"><b>GB Social</b>Primeira peça pronta. Posso também fazer análise de concorrentes e métricas do mês?</p>
             <p className="chatUser">Faz. E agenda tudo para sair às 19h.</p>

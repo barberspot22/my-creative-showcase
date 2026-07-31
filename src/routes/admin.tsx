@@ -155,15 +155,6 @@ function useSaveShortcut(fn: () => void) {
   }, [fn]);
 }
 
-async function fileToDataUrl(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const r = new FileReader();
-    r.onload = () => resolve(r.result as string);
-    r.onerror = reject;
-    r.readAsDataURL(file);
-  });
-}
-
 /* --------------------- Dimensões recomendadas --------------------- */
 type ImgSpec = { w: number; h: number; note: string; tall?: boolean };
 
@@ -306,7 +297,15 @@ function HomeCardsTab() {
   const setFrame = (i: number, src: string) => update({ frames: active.frames.map((f, j) => j === i ? src : f) });
   const addFrame = () => update({ frames: [...active.frames, ""] });
   const removeFrame = (i: number) => update({ frames: active.frames.filter((_, j) => j !== i) });
-  const onUpload = async (i: number, file: File | null) => { if (file) setFrame(i, await fileToDataUrl(file)); };
+  const onUpload = async (i: number, file: File | null) => {
+    if (!file) return;
+    try {
+      const { uploadSiteImage } = await import("@/lib/uploadSiteImage");
+      setFrame(i, await uploadSiteImage(file, `home/${activeKey}`));
+    } catch (e: any) {
+      toast.error(e?.message ?? "Falha no upload");
+    }
+  };
 
   const save = useCallback(async () => {
     setSaving(true);
@@ -456,7 +455,15 @@ function PortfolioTab() {
       cancel: { label: "Cancelar", onClick: () => {} },
     });
   };
-  const onUpload = async (idx: number, file: File | null) => { if (file) update(idx, { image_url: await fileToDataUrl(file) }); };
+  const onUpload = async (idx: number, file: File | null) => {
+    if (!file) return;
+    try {
+      const { uploadSiteImage } = await import("@/lib/uploadSiteImage");
+      update(idx, { image_url: await uploadSiteImage(file, `portfolio/${pageKey}`) });
+    } catch (e: any) {
+      toast.error(e?.message ?? "Falha no upload");
+    }
+  };
 
   const saveAll = useCallback(async () => {
     setSaving(true);

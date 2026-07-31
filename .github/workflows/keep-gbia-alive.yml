@@ -1,0 +1,37 @@
+name: Keep GBIA alive
+
+# A cada ~5 min reinicia o Node na Hostinger se a porta 3008 estiver morta.
+# (PHP na Hostinger tem exec() desabilitado — ping HTTP sozinho NÃO sobe o PM2.)
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.HOSTINGER_SSH_KEY }}
+
+      - name: Revive PM2 if needed
+        env:
+          HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          : "${HOST:?missing HOSTINGER_SSH_HOST secret}"
+          : "${PORT:?missing HOSTINGER_SSH_PORT secret}"
+          ssh -p "$PORT" \
+            -o BatchMode=yes \
+            -o StrictHostKeyChecking=accept-new \
+            -o ConnectTimeout=20 \
+            "$HOST" \
+            'bash /home/u465383396/bin/keep-gbia-alive.sh'
+          # Confirma site público
+          code=$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 15 --max-time 30 https://gbia.com.br/ || true)
+          echo "public_home=$code"
+          test "$code" = "200"

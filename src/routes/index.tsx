@@ -3,6 +3,8 @@ import { FormEvent, PointerEvent, ReactNode, useEffect, useRef, useState } from 
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
+import { usePageLink } from "@/lib/adminLinks";
+import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
 const A = "/lumus-assets/";
@@ -507,6 +509,7 @@ function HomePage() {
   const [contact, setContact] = useState(false);
   const [sent, setSent] = useState(false);
   const [editableCaseCards, setEditableCaseCards] = useState<CaseCard[]>(caseCards);
+  const { ctaUrl: homeWhatsApp } = usePageLink("trilha-cta");
 
   useEffect(() => {
     const io = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("seen")), { threshold: .12 });
@@ -514,6 +517,21 @@ function HomePage() {
     const move = (e: MouseEvent) => { document.documentElement.style.setProperty("--mx", `${e.clientX}px`); document.documentElement.style.setProperty("--my", `${e.clientY}px`); };
     const refreshAdminCases = () => setEditableCaseCards(readAdminCaseCards());
     refreshAdminCases();
+    // Admin → nuvem (home_cards) tem prioridade sobre localStorage para visitantes
+    fetchHomeCards()
+      .then((cloud) => {
+        if (!cloud.length) return;
+        const stored = cloud.map((c) => ({
+          key: c.key,
+          href: c.href,
+          title: c.title,
+          description: c.description,
+          badge: c.badge,
+          frames: (c.frames ?? []).filter(Boolean),
+        }));
+        setEditableCaseCards(mergeAdminCaseCards(caseCards, stored));
+      })
+      .catch(() => {});
     window.addEventListener("mousemove", move);
     window.addEventListener("storage", refreshAdminCases);
     return () => { io.disconnect(); window.removeEventListener("mousemove", move); window.removeEventListener("storage", refreshAdminCases); };
@@ -559,9 +577,15 @@ function HomePage() {
         <div className="contactInner">
           <div className="contactGoldGlow" aria-hidden="true" />
           <h2 id="contactHeading" className="contactHeading">Vamos<br/>conversar.</h2>
-          <button type="button" className="contactCta" onClick={() => { import("@/lib/tracking").then(({ trackLead }) => trackLead("home_contact_cta")); setContact(true); }}>
+          <a
+            className="contactCta"
+            href={homeWhatsApp}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => { import("@/lib/tracking").then(({ trackLead }) => trackLead("home_contact_cta")); }}
+          >
             <span className="contactCtaLabel">Falar com a equipe</span>
-          </button>
+          </a>
           <div className="contactCopy">
             <p className="contactLead">Vamos descobrir juntos se e como podemos te ajudar.</p>
             <p className="contactSub">Conte o problema.<br/>A gente desenha a solução.</p>

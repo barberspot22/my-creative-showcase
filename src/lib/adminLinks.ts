@@ -14,18 +14,22 @@ export type PageKey =
 export type PageLink = { ctaUrl: string; ctaLabel: string };
 export type PageLinks = Record<PageKey, PageLink>;
 
+/** WhatsApp comercial GB IA (DDI 55 + DDD 27). */
+export const WHATSAPP_NUMBER = "5527992812332";
+
 const orcamentoLabel = "SOLICITAR ORÇAMENTO";
-const wa = (msg: string) => `https://wa.me/?text=${encodeURIComponent(msg)}`;
+export const wa = (msg: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 export const PAGE_META: { key: PageKey; label: string; defaultLabel: string; defaultUrl: string }[] = [
-  { key: "gb-studio", label: "GB Studio", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento do GB Studio (fotografia com IA).") },
-  { key: "gb-social", label: "GB Social", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento do GB Social (social media de IA).") },
-  { key: "ecommerce", label: "E-commerce", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de E-commerce completo (loja + automação + IA).") },
-  { key: "crm", label: "CRM", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de CRM sob medida.") },
-  { key: "site-institucional", label: "Site Institucional", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Site Institucional.") },
-  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Cardápio Digital. Vendo por [mesa/delivery/WhatsApp] e quero que meus clientes vejam e peçam sozinhos.") },
-  { key: "catalogo-digital", label: "Catálogo Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Quero um orçamento de Catálogo Digital. Vendo [produtos/serviços/imóveis/eventos] e quero que meus clientes peçam orçamento sozinhos.") },
-  { key: "trilha-cta", label: "Home · Trilha (CTA final)", defaultLabel: "Começar minha trilha", defaultUrl: "#kontakt" },
+  { key: "gb-studio", label: "GB Studio", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento do GB Studio (fotografia com IA).") },
+  { key: "gb-social", label: "GB Social", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento do GB Social (social media de IA).") },
+  { key: "ecommerce", label: "E-commerce", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento de E-commerce completo (loja + automação + IA).") },
+  { key: "crm", label: "CRM", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento de CRM sob medida.") },
+  { key: "site-institucional", label: "Site Institucional", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento de Site Institucional.") },
+  { key: "cardapio-digital", label: "Cardápio Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento de Cardápio Digital. Vendo por mesa/delivery/WhatsApp e quero que meus clientes vejam e peçam sozinhos.") },
+  { key: "catalogo-digital", label: "Catálogo Digital", defaultLabel: orcamentoLabel, defaultUrl: wa("Olá! Vim pelo site e quero um orçamento de Catálogo Digital. Vendo produtos/serviços/imóveis/eventos e quero que meus clientes peçam orçamento sozinhos.") },
+  { key: "trilha-cta", label: "Home · Contato / Trilha", defaultLabel: "Falar no WhatsApp", defaultUrl: wa("Olá! Vim pelo site da GB IA e quero conversar sobre um projeto.") },
 ];
 
 export const defaultLinks: PageLinks = PAGE_META.reduce((acc, item) => {
@@ -33,7 +37,29 @@ export const defaultLinks: PageLinks = PAGE_META.reduce((acc, item) => {
   return acc;
 }, {} as PageLinks);
 
-export const ADMIN_LINKS_KEY = "gbia.pageLinks.v1";
+export const ADMIN_LINKS_KEY = "gbia.pageLinks.v2";
+
+/** Garante número comercial mesmo em URLs antigas salvas sem telefone. */
+function normalizeWhatsAppUrl(url: string, fallback: string): string {
+  if (!url || url.startsWith("#") || url.startsWith("/")) return url;
+  try {
+    const u = new URL(url);
+    if (!/(^|\.)wa\.me$/i.test(u.hostname) && !/api\.whatsapp\.com$/i.test(u.hostname)) {
+      return url;
+    }
+    const text = u.searchParams.get("text") ?? "";
+    // wa.me/?text=... (sem número) ou número errado → força o comercial
+    if (u.hostname.includes("wa.me")) {
+      const pathNum = u.pathname.replace(/\D/g, "");
+      if (!pathNum || pathNum !== WHATSAPP_NUMBER) {
+        return text ? wa(decodeURIComponent(text)) : fallback;
+      }
+    }
+    return url;
+  } catch {
+    return url;
+  }
+}
 
 function readLinks(): PageLinks {
   if (typeof window === "undefined") return defaultLinks;
@@ -45,8 +71,9 @@ function readLinks(): PageLinks {
     (Object.keys(defaultLinks) as PageKey[]).forEach((key) => {
       const value = parsed[key];
       if (value && typeof value === "object") {
+        const ctaUrl = typeof value.ctaUrl === "string" ? value.ctaUrl : defaultLinks[key].ctaUrl;
         merged[key] = {
-          ctaUrl: typeof value.ctaUrl === "string" ? value.ctaUrl : defaultLinks[key].ctaUrl,
+          ctaUrl: normalizeWhatsAppUrl(ctaUrl, defaultLinks[key].ctaUrl),
           ctaLabel: typeof value.ctaLabel === "string" && value.ctaLabel.trim() ? value.ctaLabel : defaultLinks[key].ctaLabel,
         };
       }
@@ -75,11 +102,22 @@ export function useAdminLinks(): PageLinks {
 export function usePageLink(key: PageKey): PageLink {
   const base = useAdminLinks()[key];
   const overlay = useOverlay();
-  if (!isPreviewMode()) return base;
+  if (!isPreviewMode()) {
+    return {
+      ...base,
+      ctaUrl: normalizeWhatsAppUrl(base.ctaUrl, defaultLinks[key].ctaUrl),
+    };
+  }
   const o = overlay.links[key];
-  if (!o) return base;
+  if (!o) {
+    return {
+      ...base,
+      ctaUrl: normalizeWhatsAppUrl(base.ctaUrl, defaultLinks[key].ctaUrl),
+    };
+  }
+  const ctaUrl = typeof o.ctaUrl === "string" ? o.ctaUrl : base.ctaUrl;
   return {
-    ctaUrl: typeof o.ctaUrl === "string" ? o.ctaUrl : base.ctaUrl,
+    ctaUrl: normalizeWhatsAppUrl(ctaUrl, defaultLinks[key].ctaUrl),
     ctaLabel: typeof o.ctaLabel === "string" && o.ctaLabel.trim() ? o.ctaLabel : base.ctaLabel,
   };
 }

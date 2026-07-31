@@ -64,11 +64,27 @@ export async function fetchReferencesByPage(
     .eq("visible", true)
     .order("position");
   if (error) throw error;
-  return (data ?? []).map((r: any) => ({
-    image: r.image_url,
-    segment: r.title,
-    domain: r.description || undefined,
-  }));
+  return (data ?? [])
+    .map((r: any) => ({
+      image: typeof r.image_url === "string" ? r.image_url.trim() : "",
+      segment: r.title,
+      domain: r.description || undefined,
+    }))
+    .filter((r) => isUsableImageUrl(r.image));
+}
+
+/** Rejeita URLs mortas (Lovable __l5e) e data:URL truncadas/corruptas. */
+export function isUsableImageUrl(url: string | null | undefined): boolean {
+  if (!url || typeof url !== "string") return false;
+  const u = url.trim();
+  if (!u) return false;
+  if (u.includes("/__l5e/")) return false;
+  if (u.startsWith("data:")) {
+    // data URL muito curta = truncada no Postgres
+    if (u.length < 64) return false;
+    if (!/^data:image\/[a-z0-9+.-]+;base64,/i.test(u)) return false;
+  }
+  return true;
 }
 
 export const SITE_TEXT_PAGES = [
@@ -86,7 +102,9 @@ export async function fetchHomeCards(): Promise<HomeCard[]> {
     description: row.description,
     badge: row.badge,
     href: row.href,
-    frames: Array.isArray(row.frames) ? (row.frames as string[]) : [],
+    frames: Array.isArray(row.frames)
+      ? (row.frames as string[]).filter((f) => isUsableImageUrl(f))
+      : [],
     position: row.position,
   }));
 }

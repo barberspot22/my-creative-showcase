@@ -82,8 +82,12 @@ export function ProcessTrail() {
       </ol>
 
       <div className="trailFoot">
-        <a href={cta?.ctaUrl || "#kontakt"} className="trailCta">
-          <span>{cta?.ctaLabel || "Começar minha trilha"}</span>
+        <a
+          href={cta?.ctaUrl || "#kontakt"}
+          className="trailCta"
+          {...(cta?.ctaUrl?.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+        >
+          <span>{cta?.ctaLabel || "Falar no WhatsApp"}</span>
         </a>
       </div>
     </section>

@@ -1,39 +1,4 @@
 import { PointerEvent, useEffect, useMemo, useRef, useState } from "react";
-import look01 from "@/assets/lookbook/look-01.jpg.asset.json";
-import look02 from "@/assets/lookbook/look-02.jpg.asset.json";
-import look03 from "@/assets/lookbook/look-03.jpg.asset.json";
-import look04 from "@/assets/lookbook/look-04.jpg.asset.json";
-import look05 from "@/assets/lookbook/look-05.jpg.asset.json";
-import look06 from "@/assets/lookbook/look-06.jpg.asset.json";
-import look07 from "@/assets/lookbook/look-07.jpg.asset.json";
-import look08 from "@/assets/lookbook/look-08.jpg.asset.json";
-import look09 from "@/assets/lookbook/look-09.jpg.asset.json";
-import look10 from "@/assets/lookbook/look-10.jpg.asset.json";
-import look11 from "@/assets/lookbook/look-11.jpg.asset.json";
-import look12 from "@/assets/lookbook/look-12.jpg.asset.json";
-import look13 from "@/assets/lookbook/look-13.jpg.asset.json";
-import look14 from "@/assets/lookbook/look-14.jpg.asset.json";
-import look15 from "@/assets/lookbook/look-15.jpg.asset.json";
-import look16 from "@/assets/lookbook/look-16.jpg.asset.json";
-import look17 from "@/assets/lookbook/look-17.jpg.asset.json";
-import look18 from "@/assets/lookbook/look-18.jpg.asset.json";
-import look19 from "@/assets/lookbook/look-19.jpg.asset.json";
-import look20 from "@/assets/lookbook/look-20.jpg.asset.json";
-import look21 from "@/assets/lookbook/look-21.jpg.asset.json";
-import look22 from "@/assets/lookbook/look-22.jpg.asset.json";
-import look23 from "@/assets/lookbook/look-23.jpg.asset.json";
-import look24 from "@/assets/lookbook/look-24.jpg.asset.json";
-import look25 from "@/assets/lookbook/look-25.jpg.asset.json";
-import look26 from "@/assets/lookbook/look-26.jpg.asset.json";
-import look27 from "@/assets/lookbook/look-27.jpg.asset.json";
-import look28 from "@/assets/lookbook/look-28.jpg.asset.json";
-import look29 from "@/assets/lookbook/look-29.jpg.asset.json";
-import look30 from "@/assets/lookbook/look-30.jpg.asset.json";
-import look31 from "@/assets/lookbook/look-31.jpg.asset.json";
-import look32 from "@/assets/lookbook/look-32.jpg.asset.json";
-import look33 from "@/assets/lookbook/look-33.jpg.asset.json";
-import look34 from "@/assets/lookbook/look-34.jpg.asset.json";
-import look35 from "@/assets/lookbook/look-35.jpg.asset.json";
 
 type LookbookCase = {
   id: string;
@@ -44,72 +9,60 @@ type LookbookCase = {
 
 type Item = LookbookCase & { image: string; imageIndex: number };
 
-const lookbookCases: LookbookCase[] = [
-  {
-    id: "galleria-milano",
-    title: "Editorial Galleria",
-    client: "Maison Vera",
-    images: [look01.url, look02.url],
-  },
-  {
-    id: "paris-alfaiataria",
-    title: "Alfaiataria em Paris",
-    client: "Atelier Nord",
-    images: [look03.url, look04.url],
-  },
-  {
-    id: "denim-listrado",
-    title: "Denim listrado",
-    client: "Zinsk Collection",
-    images: [look05.url, look06.url, look07.url, look12.url, look13.url],
-  },
-  {
-    id: "verao-lago",
-    title: "Verão à beira do lago",
-    client: "Marê Beachwear",
-    images: [look08.url, look09.url, look11.url],
-  },
-  {
-    id: "denim-verde",
-    title: "Denim em estúdio",
-    client: "Casa Índigo",
-    images: [look10.url, look32.url],
-  },
-  {
-    id: "linho-cru",
-    title: "Linho cru no píer",
-    client: "Studio Marés",
-    images: [look14.url, look15.url, look16.url, look17.url, look18.url, look31.url],
-  },
-  {
-    id: "detalhes-tecido",
-    title: "Detalhes de tecido",
-    client: "Studio Marés",
-    images: [look19.url, look20.url, look24.url, look27.url, look35.url],
-  },
-  {
-    id: "palmeiras-dourado",
-    title: "Palmeiras ao entardecer",
-    client: "Casa Litoral",
-    images: [look21.url, look22.url, look23.url, look28.url, look30.url, look33.url],
-  },
-  {
-    id: "lago-alpino",
-    title: "Lago alpino",
-    client: "Nortada Studio",
-    images: [look25.url, look26.url, look29.url, look34.url],
-  },
+/** Arquivos reais em `public/gb-studio/` — rota pública `/gb-studio/…`. */
+const STUDIO_IMGS = [
+  "/gb-studio/lookbook-01.png",
+  "/gb-studio/lookbook-02.png",
+  "/gb-studio/lookbook-03.png",
+  "/gb-studio/lookbook-04.png",
+  "/gb-studio/lookbook-05.png",
+  "/gb-studio/lookbook-06.png",
+  "/gb-studio/lookbook-07.png",
+  "/gb-studio/lookbook-08.png",
+  "/gb-studio/lookbook-09.png",
+  "/gb-studio/lookbook-10.png",
+  "/gb-studio/lookbook-11.png",
+  "/gb-studio/modelo-01.png",
+  "/gb-studio/modelo-02.png",
 ];
 
+const lookbookCases: LookbookCase[] = [
+  { id: "galleria-milano", title: "Editorial Galleria", client: "Maison Vera", images: STUDIO_IMGS.slice(0, 2) },
+  { id: "paris-alfaiataria", title: "Alfaiataria em Paris", client: "Atelier Nord", images: STUDIO_IMGS.slice(2, 4) },
+  { id: "denim-listrado", title: "Denim listrado", client: "Zinsk Collection", images: STUDIO_IMGS.slice(4, 7) },
+  { id: "verao-lago", title: "Verão à beira do lago", client: "Marê Beachwear", images: STUDIO_IMGS.slice(7, 10) },
+  { id: "denim-verde", title: "Denim em estúdio", client: "Casa Índigo", images: [STUDIO_IMGS[10], STUDIO_IMGS[11]] },
+  { id: "linho-cru", title: "Linho cru no píer", client: "Studio Marés", images: [STUDIO_IMGS[12], STUDIO_IMGS[0], STUDIO_IMGS[3]] },
+  { id: "detalhes-tecido", title: "Detalhes de tecido", client: "Studio Marés", images: [STUDIO_IMGS[1], STUDIO_IMGS[5], STUDIO_IMGS[8]] },
+  { id: "palmeiras-dourado", title: "Palmeiras ao entardecer", client: "Casa Litoral", images: [STUDIO_IMGS[2], STUDIO_IMGS[6], STUDIO_IMGS[9]] },
+  { id: "lago-alpino", title: "Lago alpino", client: "Nortada Studio", images: [STUDIO_IMGS[4], STUDIO_IMGS[11], STUDIO_IMGS[7]] },
+];
 
+type Props = {
+  /** URLs do admin (`portfolio_items`, page_key=`gb-studio`). Vazio → fallback local. */
+  images?: string[];
+};
 
+export function LookbookGallery({ images }: Props = {}) {
+  const base = useMemo<Item[]>(() => {
+    const cms = (images ?? [])
+      .map((u) => u?.trim())
+      .filter((u): u is string => !!u && !u.includes("/__l5e/") && !(u.startsWith("data:") && u.length < 64));
+    if (cms.length) {
+      return cms.map((image, imageIndex) => ({
+        id: `cms-${imageIndex}`,
+        title: "Lookbook",
+        client: "GB Studio",
+        images: [image],
+        image,
+        imageIndex,
+      }));
+    }
+    return lookbookCases.flatMap((c) =>
+      c.images.map((image, imageIndex) => ({ ...c, image, imageIndex })),
+    );
+  }, [images]);
 
-export function LookbookGallery() {
-  const base = useMemo<Item[]>(
-    () => lookbookCases.flatMap((c) => c.images.map((image, imageIndex) => ({ ...c, image, imageIndex }))),
-    [],
-  );
-  // duplicate for seamless loop
   const items = useMemo(() => [...base, ...base], [base]);
 
   const trackRef = useRef<HTMLDivElement>(null);
@@ -128,7 +81,7 @@ export function LookbookGallery() {
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, []);
+  }, [items.length]);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -138,7 +91,7 @@ export function LookbookGallery() {
       const dt = Math.min(48, now - prev);
       prev = now;
       if (!reduce && !draggingRef.current && !hoverRef.current && !active) {
-        offsetRef.current -= dt * 0.06; // right -> left
+        offsetRef.current -= dt * 0.06;
       }
       const hw = halfWidthRef.current;
       if (hw > 0) {
@@ -169,7 +122,7 @@ export function LookbookGallery() {
       s.pending = false;
       if (draggingRef.current) {
         draggingRef.current = false;
-        try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+        try { e.currentTarget.releasePointerCapture(e.pointerId); } catch { /* ignore */ }
       }
       return;
     }
@@ -179,7 +132,7 @@ export function LookbookGallery() {
       if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { s.pending = false; return; }
       if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
         draggingRef.current = true; s.pending = false;
-        try { e.currentTarget.setPointerCapture(e.pointerId); } catch {}
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* ignore */ }
       } else return;
     }
     if (!draggingRef.current) return;
@@ -196,7 +149,6 @@ export function LookbookGallery() {
       window.setTimeout(() => (suppressClick.current = false), 120);
     }
   };
-
 
   return (
     <>
