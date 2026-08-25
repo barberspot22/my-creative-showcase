@@ -838,7 +838,13 @@ function TrackingTab() {
           <div className="admX-field"><label>Pixel ID</label><input className="admX-input" value={t.meta_pixel_id} onChange={(e) => update({ meta_pixel_id: e.target.value })} placeholder="123456789012345"/></div>
           <label className="admX-toggle"><input type="checkbox" checked={t.meta_capi_enabled} onChange={(e) => update({ meta_capi_enabled: e.target.checked })}/>Ativar Conversion API (server-side)</label>
           <div className="admX-field" style={{ marginTop: 12 }}><label>Test Event Code (opcional)</label><input className="admX-input" value={t.meta_test_event_code} onChange={(e) => update({ meta_test_event_code: e.target.value })} placeholder="TEST12345"/></div>
-          <p className="hint" style={{ margin: 0 }}>Para a CAPI funcionar, o secret <code>META_CAPI_ACCESS_TOKEN</code> precisa estar configurado no backend.</p>
+          <SecureTokenField
+            secretKey="META_CAPI_ACCESS_TOKEN"
+            label="Token de acesso do Facebook (CAPI)"
+            placeholder="EAAG..."
+            hint="Gere em Meta Events Manager → Conversion API → Gerar token de acesso. Fica guardado no servidor e nunca aparece no site."
+          />
+
         </>
       ),
     },
