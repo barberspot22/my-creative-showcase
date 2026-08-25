@@ -113,6 +113,10 @@ function CatalogoDigitalPage() {
           </ol>
         </section>
 
+      <SectionCta source="catalogo_processo" message="Olá! Quero começar meu catálogo digital com a GB IA (produtos, fotos e pedidos pelo WhatsApp)." label="Começar meu catálogo" />
+
+
+
         <FinalCta
           pageKey="catalogo-digital"
           productName="Catálogo Digital"
