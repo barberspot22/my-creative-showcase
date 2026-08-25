@@ -12,7 +12,6 @@ import { fetchReferencesByPage } from "@/lib/cms";
 import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
-const SOCIAL_PREVIEW_IMG = "/gb-social-designs/design-17.jpg";
 
 const features = [
   ["Criação de posts", "Prato do dia, combo, promoção e bastidor da cozinha prontos para publicar."],
