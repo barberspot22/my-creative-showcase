@@ -1337,6 +1337,9 @@ body{overflow-x:clip}
 }
 .admX-crumb{color:var(--adm-ink-soft);font:600 12px JetBrains Mono,monospace;letter-spacing:1px;text-transform:uppercase;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .admX-crumb b{color:var(--adm-ink);font-weight:800}
+.admX-logout{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--adm-line);color:var(--adm-ink-soft);border-radius:999px;padding:8px 14px;font:700 12px Manrope,sans-serif;cursor:pointer;transition:.12s}
+.admX-logout:hover{background:var(--adm-surface-2);color:var(--adm-ink);border-color:var(--adm-ink)}
+.admX-logout svg{width:15px;height:15px}
 .admX-save{display:inline-flex;align-items:center;gap:8px;background:var(--adm-ink);color:var(--adm-bg);border:0;border-radius:999px;padding:10px 18px;font:800 12.5px Manrope,sans-serif;letter-spacing:.3px;cursor:pointer;transition:.15s;box-shadow:var(--adm-shadow)}
 .admX-save:hover{transform:translateY(-1px)}
 .admX-save[disabled]{opacity:.6;cursor:progress}
