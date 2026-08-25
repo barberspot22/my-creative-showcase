@@ -18,7 +18,7 @@
 .elasticGrid{position:absolute;z-index:-2;inset:-4% -3% 0;width:106%;height:108%;touch-action:pan-y;mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 78%,transparent 100%);opacity:.9}
 .hero:after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 50% 48%,transparent 0 12%,rgba(0,0,0,.13) 34%,rgba(0,0,0,.66) 82%,#000 100%);pointer-events:none}
 .hero video{position:relative;z-index:1;mix-blend-mode:screen;opacity:.75}
-.orb{z-index:3;background:radial-gradient(circle at 42% 36%,#fff 0 1%,#fa2e1e 3%,#8f0805 9%,#130302 25%,#080808 63%,#000 100%);filter:none;box-shadow:inset -12px -15px 24px #000,0 0 25px #4d0707}
+.orb{z-index:3;background:radial-gradient(circle at 42% 36%,#fff 0 1%,#c4363e 3%,#7a1112 9%,#130302 25%,#080808 63%,#000 100%);filter:none;box-shadow:inset -12px -15px 24px #000,0 0 25px #4d0707}
 .orb:after{content:"";position:absolute;width:74px;height:54px;left:-48px;top:58px;border-radius:50%;background:radial-gradient(ellipse,#f0e7df 0 1px,transparent 1.8px);background-size:4px 4px;transform:rotate(-14deg);mask-image:radial-gradient(ellipse,#000 0 48%,transparent 72%);opacity:.78}
 .orb i{position:absolute;border:2px solid #eee;border-radius:50%;width:68px;height:68px;left:-13px;top:-13px;box-shadow:0 0 5px #fff}
 .orb i+i{width:38px;height:38px;left:49px;top:42px;border-width:2px;opacity:.85}
