@@ -3,6 +3,7 @@ import { FormEvent, PointerEvent, ReactNode, useEffect, useRef, useState } from 
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
+import { SectionCta } from "@/components/SectionCta";
 import { usePageLink } from "@/lib/adminLinks";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
