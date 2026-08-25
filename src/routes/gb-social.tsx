@@ -98,7 +98,7 @@ function GBSocialPage() {
 
       <section className="socialFlow"><p className="studioEyebrow">DA CONVERSA PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
 
-      <FinalCta pageKey="gb-social" productName="GB Social" title="Faz tempo que seu restaurante não posta?" subtitle="Me conta seu cardápio e canais. Devolvo posts prontos para você escolher." />
+      <FinalCta pageKey="gb-social" productName="GB Social" title="Posts para semanas. Sem ficar sem postar." subtitle="Me conta seu cardápio e canais. Devolvo posts prontos para você aprovar." />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA por mensagem</span></footer>
 
