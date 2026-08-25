@@ -500,6 +500,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       <button type="button" className="circleNav circlePrev" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active - 1)} aria-label="Produto anterior">‹</button>
       <button type="button" className="circleNav circleNext" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active + 1)} aria-label="Próximo produto">›</button>
     </div>
+    <SectionCta source="home_produtos" message="Olá! Vi os serviços da GB IA e quero entender qual faz mais sentido pro meu negócio." label="Descobrir o ideal pra mim" />
   </section>;
 }
 
