@@ -96,7 +96,7 @@ function CatalogoDigitalPage() {
           <CatalogoWidget />
         </section>
 
-      <SectionCta message="Olá! Testei o catálogo digital no site e quero um assim para os meus produtos." label="Quero meu catálogo digital" />
+      <SectionCta source="catalogo_widget" message="Olá! Testei o catálogo digital no site e quero um assim para os meus produtos." label="Quero meu catálogo digital" />
 
         <section className="menuProductProcess">
           <div>
@@ -112,6 +112,10 @@ function CatalogoDigitalPage() {
             ))}
           </ol>
         </section>
+
+      <SectionCta source="catalogo_processo" message="Olá! Quero começar meu catálogo digital com a GB IA (produtos, fotos e pedidos pelo WhatsApp)." label="Começar meu catálogo" />
+
+
 
         <FinalCta
           pageKey="catalogo-digital"

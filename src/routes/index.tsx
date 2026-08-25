@@ -3,6 +3,7 @@ import { FormEvent, PointerEvent, ReactNode, useEffect, useRef, useState } from 
 import { ElasticGrid } from "@/components/imported/ElasticGrid";
 import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
+import { SectionCta } from "@/components/SectionCta";
 import { usePageLink } from "@/lib/adminLinks";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
@@ -500,6 +501,7 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
       <button type="button" className="circleNav circlePrev" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active - 1)} aria-label="Produto anterior">‹</button>
       <button type="button" className="circleNav circleNext" onPointerDown={(event) => event.stopPropagation()} onClick={() => moveTo(active + 1)} aria-label="Próximo produto">›</button>
     </div>
+    <SectionCta source="home_produtos" message="Olá! Vi os serviços da GB IA e quero entender qual faz mais sentido pro meu negócio." label="Descobrir o ideal pra mim" />
   </section>;
 }
 
@@ -602,6 +604,7 @@ function HomePage() {
           <div className="footerBrand">
             <img className="footerLogo" src={gbLogo} alt="GB IA" />
             <p className="footerTag">Soluções sob medida, automação e IA autônoma.</p>
+            <SectionCta source="footer" align="left" message="Olá! Cheguei pelo site da GB IA e quero conversar sobre uma solução para o meu negócio." label="Falar no WhatsApp" />
           </div>
           <div className="footerCols">
             <div>
