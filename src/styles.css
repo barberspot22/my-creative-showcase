@@ -140,6 +140,11 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --bordeaux: oklch(0.481 0.182 28.316);
+  --bordeaux-light: oklch(0.561 0.204 19.540);
+  --platinum-gray: oklch(0.700 0.013 259.824);
+  --platinum-white: oklch(0.900 0.009 258.336);
+  --platinum-soft: oklch(0.780 0.011 261.787);
 }
 
 @layer base {
