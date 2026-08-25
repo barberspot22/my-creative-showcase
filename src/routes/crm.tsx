@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
@@ -79,6 +80,8 @@ function CRMPage() {
         </div>
       </section>
 
+      <SectionCta message="Olá! Quero as automações do GB CRM rodando no meu atendimento e follow-up." label="Quero essas automações" />
+
       {/* 3. Dashboard + módulos */}
       <section className="crmSystemShowcase">
         <div><p className="studioEyebrow">DOIS JOGOS · DOIS FLUXOS</p><h2>O cliente avança.<br/>A bagunça não.</h2></div>
@@ -100,6 +103,8 @@ function CRMPage() {
         <div className="crmSectionIntro"><p className="studioEyebrow">COMO É ESTRUTURADO</p><h2>Dois módulos,<br/>cada um com sua própria lógica.</h2></div>
         <ol>{structure.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
+
+      <SectionCta message="Olá! Quero um CRM com módulos separados de comercial e produção para a minha empresa." label="Quero meu CRM sob medida" />
 
       {/* 6. Recover */}
       <section className="recoverShowcase recoverChatShowcase crmRecoverShowcase">

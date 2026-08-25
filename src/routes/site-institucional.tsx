@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
@@ -95,7 +96,11 @@ function SiteInstitucionalPage() {
         </div>
       </section>
 
+      <SectionCta message="Olá! Quero um site institucional que apresente minha empresa e converta visita em contato." label="Quero meu site institucional" />
+
       <section className="siteProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Do briefing ao ar em 4 passos.</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+
+      <SectionCta message="Olá! Quero começar o briefing do meu site institucional com a GB IA." label="Começar o briefing" />
 
       <FinalCta pageKey="site-institucional" productName="Site Institucional" title="Seu site pode ser sua melhor peça de vendas." subtitle="Me conta o que você vende. Devolvo uma estrutura e um valor." />
     </main>

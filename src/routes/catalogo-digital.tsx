@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
@@ -94,6 +95,8 @@ function CatalogoDigitalPage() {
           </div>
           <CatalogoWidget />
         </section>
+
+      <SectionCta message="Olá! Testei o catálogo digital no site e quero um assim para os meus produtos." label="Quero meu catálogo digital" />
 
         <section className="menuProductProcess">
           <div>

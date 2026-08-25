@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -115,10 +116,14 @@ function GBSocialPage() {
         <PerspectiveTicker designs={designs} />
       </section>
 
+      <SectionCta message="Olá! Vi os designs do GB Social e quero conteúdo assim para as minhas redes." label="Quero designs assim" />
+
       <section className="socialFeatures">
         <div><p className="studioEyebrow">O QUE ELE FAZ</p><h2>Social media completo, numa conversa.</h2></div>
         <div className="socialFeaturesGrid">{features.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </section>
+
+      <SectionCta message="Olá! Quero o GB Social cuidando do meu social media pelo WhatsApp." label="Quero meu social no automático" />
 
       <section className="socialFlow"><p className="studioEyebrow">DO WHATSAPP PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
 

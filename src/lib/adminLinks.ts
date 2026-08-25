@@ -15,7 +15,7 @@ export type PageLink = { ctaUrl: string; ctaLabel: string };
 export type PageLinks = Record<PageKey, PageLink>;
 
 /** WhatsApp comercial GB IA (DDI 55 + DDD 27). */
-export const WHATSAPP_NUMBER = "5527992812332";
+export const WHATSAPP_NUMBER = "5527988673309";
 
 const orcamentoLabel = "SOLICITAR ORÇAMENTO";
 export const wa = (msg: string) =>
