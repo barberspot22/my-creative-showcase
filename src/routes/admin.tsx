@@ -11,7 +11,9 @@ import {
   fetchTracking, saveTracking, TrackingSettings, defaultTracking,
   fetchSectionVisibility, saveSectionVisibility,
 } from "@/lib/cms";
+import { svGetSecureStatus, svSaveSecureSetting } from "@/lib/cms-admin.functions";
 import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY, type PageKey } from "@/lib/adminLinks";
+
 import { emitPreview, PREVIEW_READY_MSG } from "@/lib/livePreview";
 import { SECTIONS_CATALOG, SECTIONS_PAGES, type SectionsPageKey } from "@/lib/sectionsCatalog";
 
