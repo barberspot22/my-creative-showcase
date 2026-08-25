@@ -2,33 +2,27 @@ import { useEffect, useRef, useState } from "react";
 
 type Msg = { from: "user" | "agent"; text: string; delay?: number };
 
-/** Roteiro do chat do hero: pedido de post -> arte -> agendamento -> resultado. */
+/** Conversa do hero: pedido de calendário de 15 dias -> checagem -> arte -> aprovação -> agendamento. */
 const script: Msg[] = [
-  { from: "user", text: "Preciso de posts pra semana do restaurante." },
-  {
-    from: "agent",
-    text: "Fechado. 5 peças: prato do dia, combo de sábado, bastidor da cozinha, carrossel do cardápio com preço e story de enquete.",
-    delay: 1500,
-  },
-  { from: "user", text: "Manda a do combo primeiro." },
-  { from: "agent", text: "Arte do combo de sábado pronta: 2 parmegianas + Coca 2L por R$ 110. Aprova?", delay: 1600 },
-  { from: "user", text: "Aprovado. Agenda tudo." },
-  {
-    from: "agent",
-    text: "Agendado: seg 11h, qua 18h, sex 19h, sáb 12h e domingo 11h. Publico direto nos canais conectados.",
-    delay: 1500,
-  },
-  {
-    from: "agent",
-    text: "De bônus, a @cantinadobairro este mês: seguidores +412 · alcance 38,2k · engajamento 6,4%.",
-    delay: 1700,
-  },
+  { from: "user", text: "Oi, tudo bem? Preciso de post pros próximos 15 dias." },
+  { from: "agent", text: "Bom te ver por aqui! Consigo sim.", delay: 900 },
+  { from: "agent", text: "Antes de montar: segue a mesma linha do mês passado (prato do dia + combo de fim de semana) ou quer mudar alguma coisa?", delay: 1500 },
+  { from: "user", text: "Mesma linha. Só quero puxar mais o almoço executivo." },
+  { from: "agent", text: "Anotado. Fecho assim: 15 dias, 11 feeds e 4 stories, com 5 peças de almoço executivo espalhadas nos dias úteis.", delay: 1700 },
+  { from: "agent", text: "Calendário pronto. Dias 1 a 15, horários de pico de cada canal. Quer ver uma arte antes de eu soltar o resto?", delay: 1600 },
+  { from: "user", text: "Quero. Manda a do executivo." },
+  { from: "agent", text: "Aqui: executivo de terça, prato + suco por R$ 34,90. Legenda e hashtags já dentro do post.", delay: 1600 },
+  { from: "user", text: "Ficou boa. Pode aprovar os 15 dias." },
+  { from: "agent", text: "Aprovado. Os 15 dias entraram na fila e publico direto nos canais conectados. Te aviso se algum post render abaixo do normal.", delay: 1800 },
 ];
+
+const RESET_PAUSE = 3600;
 
 /** Chat animado do hero do GB Social, em loop, com indicador de digitação. */
 export function HeroChatLoop() {
   const [count, setCount] = useState(script.length);
   const [typing, setTyping] = useState(false);
+  const [fading, setFading] = useState(false);
   const bodyRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -43,27 +37,35 @@ export function HeroChatLoop() {
     const run = () => {
       if (!alive) return;
       if (step >= script.length) {
-        wait(3200, () => {
-          step = 0;
-          setCount(0);
-          wait(500, run);
+        // Pausa, apaga suavemente e recomeça (evita o "pulo" do reset seco).
+        wait(RESET_PAUSE, () => {
+          setFading(true);
+          wait(600, () => {
+            step = 0;
+            setCount(0);
+            if (bodyRef.current) bodyRef.current.scrollTop = 0;
+            wait(260, () => {
+              setFading(false);
+              wait(500, run);
+            });
+          });
         });
         return;
       }
       const msg = script[step];
       const isAgent = msg.from === "agent";
       setTyping(isAgent);
-      wait(isAgent ? (msg.delay ?? 1400) : 800, () => {
+      wait(isAgent ? (msg.delay ?? 1400) : 900, () => {
         if (!alive) return;
         setTyping(false);
         step += 1;
         setCount(step);
-        wait(450, run);
+        wait(isAgent ? 700 : 500, run);
       });
     };
 
     setCount(0);
-    wait(600, run);
+    wait(700, run);
     return () => {
       alive = false;
       timers.forEach(clearTimeout);
@@ -72,8 +74,12 @@ export function HeroChatLoop() {
 
   useEffect(() => {
     const el = bodyRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [count, typing]);
+    if (!el || fading) return;
+    const id = requestAnimationFrame(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [count, typing, fading]);
 
   return (
     <div className="socialHeroMock" aria-hidden="true">
@@ -83,11 +89,14 @@ export function HeroChatLoop() {
           <span className="socialHeroPhoneAvatar">GB</span>
           <div>
             <b>GB Social</b>
-            <small>criando agora</small>
+            <small>{typing ? "digitando..." : "online"}</small>
           </div>
           <i className="socialHeroPhoneDot" />
         </header>
-        <div className="socialHeroPhoneBody" ref={bodyRef}>
+        <div
+          className={`socialHeroPhoneBody${fading ? " socialHeroPhoneBodyFading" : ""}`}
+          ref={bodyRef}
+        >
           {script.slice(0, count).map((m, i) => (
             <p
               key={i}
