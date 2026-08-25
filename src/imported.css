@@ -2009,3 +2009,12 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 }
 .instCta .primary { animation: none; }
 
+
+/* === GB Social: chat animado do hero + CTA dentro da seção de portfólio === */
+.socialHeroMsg { animation: socialMsgIn .35s ease-out both; }
+@keyframes socialMsgIn { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .socialHeroMsg { animation: none; } }
+.socialWorkShowcaseCta { padding: 34px 9% 0; }
+.socialWorkShowcaseCta .sectionCtaWrap { margin: 0; padding: 0; }
+.socialFeatures .sectionCtaWrap { margin-top: 42px; padding: 0; }
+@media (max-width: 760px) { .socialWorkShowcaseCta { padding: 26px 22px 0; } }
