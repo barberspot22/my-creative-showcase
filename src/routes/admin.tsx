@@ -97,7 +97,7 @@ function AdminPage() {
         </aside>
 
         <main className="admX-main">
-          <TopCrumb section={current.label} />
+          <TopCrumb section={current.label} onSignOut={signOut} />
           <section className="admX-section" key={tab}>
             {tab === "conteudo" && <ContentTab />}
             {tab === "secoes" && <SectionsTab />}
