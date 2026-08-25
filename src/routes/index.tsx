@@ -604,6 +604,7 @@ function HomePage() {
           <div className="footerBrand">
             <img className="footerLogo" src={gbLogo} alt="GB IA" />
             <p className="footerTag">Soluções sob medida, automação e IA autônoma.</p>
+            <SectionCta source="footer" align="left" message="Olá! Cheguei pelo site da GB IA e quero conversar sobre uma solução para o meu negócio." label="Falar no WhatsApp" />
           </div>
           <div className="footerCols">
             <div>
