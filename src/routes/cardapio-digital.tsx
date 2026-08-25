@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { usePageLink } from "@/lib/adminLinks";
@@ -66,10 +67,14 @@ function CardapioDigitalPage() {
         <CatalogWidget />
       </section>
 
+      <SectionCta message="Olá! Testei o cardápio digital no site e quero um assim para o meu restaurante." label="Quero meu cardápio digital" />
+
 
 
 
       <section className="menuProductProcess"><div><p className="studioEyebrow">COMO FUNCIONA</p><h2>Autonomia para o cliente e tempo de volta para você!</h2></div><ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol></section>
+
+      <SectionCta message="Olá! Quero começar o cardápio digital do meu negócio (mesa, delivery e WhatsApp)." label="Começar agora" />
 
       
 

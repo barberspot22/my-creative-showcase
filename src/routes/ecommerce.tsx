@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ReferenceGallery, type Reference } from "@/components/imported/shared/ReferenceGallery";
@@ -81,11 +82,15 @@ function EcommercePage() {
         <ReferenceGallery items={refs} ctaUrl={whatsapp} variant="tall" enableFilters={false} />
       </section>
 
+      <SectionCta message="Olá! Vi as referências de loja no site e quero um e-commerce assim para a minha marca." label="Quero uma loja assim" />
+
 
       <section id="entregamos" className="commerceDeliverables">
         <div className="commerceSectionIntro"><p className="studioEyebrow">O QUE FAZEMOS</p><h2>Não é site.<br/>É sistema <em>de venda.</em></h2></div>
         <ol>{deliverables.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
+
+      <SectionCta message="Olá! Quero montar meu sistema de vendas online com a GB IA (loja + automação + IA)." label="Montar meu sistema de vendas" />
 
 
       <section className="commerceOmni">

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SectionCta } from "@/components/SectionCta";
 import { BrandLogo } from "@/components/BrandLogo";
 import { FormEvent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -66,6 +67,8 @@ function GBStudioPage() {
         <LookbookGallery images={studioImages} />
       </section>
 
+      <SectionCta message="Olá! Vi as fotos do GB Studio no site e quero um lookbook assim para a minha marca." label="Quero fotos assim" />
+
       <section className="problemBlock">
         <div>
           <p className="studioEyebrow">O PROBLEMA QUE RESOLVE</p>
@@ -83,6 +86,8 @@ function GBStudioPage() {
         <div className="processIntro"><p className="studioEyebrow">COMO FUNCIONA</p><h2>Da peça ao lookbook em quatro etapas.</h2></div>
         <ol>{steps.map(([title, copy], index) => <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
       </section>
+
+      <SectionCta message="Olá! Entendi as etapas do GB Studio e quero começar um briefing de fotos com IA." label="Começar meu briefing" />
 
       <section className="audienceBlock">
         <p className="studioEyebrow">PARA QUEM É</p>
