@@ -75,7 +75,7 @@ const caseCards: CaseCard[] = [
     description: "Seu Social Media de IA no WhatsApp",
     badge: "CHAT IA",
     frames: [
-      { kind: "ui", variant: "social-chat-card", label: "Chat animado do GB Social" },
+      { kind: "image", src: "/gb-social-designs/design-17.jpg", alt: "Post de social media criado pelo GB Social" },
     ],
   },
   {
