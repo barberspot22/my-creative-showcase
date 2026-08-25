@@ -5,6 +5,8 @@ import { LumusReplicaEffect } from "@/components/imported/LumusReplicaEffect";
 import { ProcessTrail } from "@/components/imported/ProcessTrail";
 import { SectionCta } from "@/components/SectionCta";
 import { usePageLink } from "@/lib/adminLinks";
+import { faqSchema, ldScript } from "@/lib/seo";
+import { siteUrl } from "@/lib/site";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
 
@@ -642,10 +644,57 @@ function HomePage() {
   </>;
 }
 
+
+function homeFaq() {
+  return faqSchema([
+    { question: "O que a GB IA faz?", answer: "A GB IA desenvolve sistemas sob medida, sites institucionais, e-commerces, CRMs, catálogos e cardápios digitais, social media com IA e automações com agentes de IA autônoma para empresas de qualquer porte." },
+    { question: "Quanto tempo leva uma entrega?", answer: "A maioria dos projetos da GB IA é entregue em dias, e não em meses, porque diagnóstico, proposta, teste prático e entrega seguem um processo curto e definido." },
+    { question: "Como funciona o primeiro contato?", answer: "Começa com um diagnóstico gratuito pelo WhatsApp, onde entendemos o estágio do negócio e mapeamos as oportunidades de melhoria antes de qualquer proposta." },
+    { question: "A GB IA atende negócios pequenos?", answer: "Sim. Restaurantes, lojas, prestadores de serviço, imobiliárias e marcas de moda estão entre os negócios atendidos." },
+    { question: "Preciso entender de tecnologia para usar as soluções?", answer: "Não. As soluções são operadas por conversa no WhatsApp ou por painéis simples, e a GB IA mantém tudo funcionando em produção." },
+  ]);
+}
+
+function homeServices() {
+  const items = [
+    ["Social media com IA", "/gb-social"],
+    ["Cardápio digital", "/cardapio-digital"],
+    ["E-commerce com IA vendedora", "/ecommerce"],
+    ["Catálogo digital", "/catalogo-digital"],
+    ["Site institucional", "/site-institucional"],
+    ["CRM sob medida", "/crm"],
+    ["Fotografia de moda com IA", "/gb-studio"],
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Soluções GB IA",
+    itemListElement: items.map(([name, path], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+      url: siteUrl(path),
+    })),
+  };
+}
+
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
+    meta: [
+      { title: "GB IA — Sistemas, sites, automação e IA autônoma para empresas" },
+      { name: "description", content: "A GB IA cria sistemas sob medida, sites, e-commerces, CRMs, catálogos e cardápios digitais, social media e automações com IA autônoma. Entrega em dias, não em meses." },
+      { property: "og:title", content: "GB IA — Sistemas, sites, automação e IA autônoma para empresas" },
+      { property: "og:description", content: "Sistemas sob medida, sites que convertem, e-commerce, CRM, cardápio digital, social media e agentes de IA que trabalham pelo seu negócio." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: siteUrl() },
+    ],
+    scripts: [
+      ldScript(homeFaq()),
+      ldScript(homeServices()),
+    ],
     links: [
+      { rel: "canonical", href: siteUrl() },
       { rel: "preload", as: "image", href: "/lumus-effect/gb-ia-robot.webp", type: "image/webp", fetchpriority: "high" } as any,
       { rel: "preload", as: "fetch", href: "/lumus-effect/helvetiker_bold.typeface.json", crossOrigin: "anonymous" } as any,
       { rel: "preload", as: "image", href: "/lumus-effect/cube/posx.jpg" },

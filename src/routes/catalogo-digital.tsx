@@ -9,6 +9,7 @@ import { fetchReferencesByPage } from "@/lib/cms";
 import { CatalogoWidget } from "@/components/imported/catalogo-digital/CatalogoWidget";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 const deliverables = [
@@ -144,5 +145,16 @@ export const Route = createFileRoute("/catalogo-digital")({
       { property: "og:url", content: siteUrl("/catalogo-digital") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/catalogo-digital") }],
+    scripts: servicePageLd({
+      name: "Catálogo digital para produtos, serviços e imóveis",
+      breadcrumbName: "Catálogo Digital",
+      serviceType: "Catálogo digital",
+      description: "Catálogo digital sob medida para moda, móveis, serviços, construção, imobiliária e eventos, com link único e orçamento pelo WhatsApp.",
+      path: "/catalogo-digital",
+      faq: [
+        { question: "Para quais negócios serve o catálogo digital?", answer: "Serve para moda, móveis, construção, imobiliária, serviços e eventos, qualquer negócio que hoje envia fotos soltas no WhatsApp." },
+        { question: "Substitui o PDF de catálogo?", answer: "Sim, com a vantagem de atualizar preços na hora, medir cliques e receber pedidos de orçamento." },
+      ],
+    }),
   }),
 });

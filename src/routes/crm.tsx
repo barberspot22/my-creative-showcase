@@ -5,6 +5,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { RecoverScrollChat } from "@/components/imported/crm/RecoverScrollChat";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 const automations = [
@@ -141,5 +142,17 @@ export const Route = createFileRoute("/crm")({
       { property: "og:url", content: siteUrl("/crm") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/crm") }],
+    scripts: servicePageLd({
+      name: "CRM sob medida com automação comercial",
+      breadcrumbName: "CRM",
+      serviceType: "Desenvolvimento de CRM",
+      description: "CRM sob medida com funil, follow-up automático, automações de produção e integrações com WhatsApp e pagamento.",
+      path: "/crm",
+      faq: [
+        { question: "Por que um CRM sob medida e não um pronto?", answer: "Porque o CRM sob medida acompanha o seu processo real de venda e de produção, sem campos inúteis nem mensalidade por usuário." },
+        { question: "O CRM integra com WhatsApp?", answer: "Sim, conversas, follow-ups e notificações podem rodar pelo WhatsApp de forma automática." },
+        { question: "Consigo ver métricas do funil?", answer: "Sim, o painel mostra entradas, conversão por etapa, tempo de resposta e receita prevista." },
+      ],
+    }),
   }),
 });

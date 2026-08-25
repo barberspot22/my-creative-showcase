@@ -9,6 +9,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import { fetchReferencesByPage } from "@/lib/cms";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 const SOCIAL_PREVIEW_IMG = "/gb-social-designs/design-17.jpg";
@@ -118,5 +119,17 @@ export const Route = createFileRoute("/gb-social")({
       { property: "og:url", content: siteUrl("/gb-social") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/gb-social") }],
+    scripts: servicePageLd({
+      name: "GB Social: social media com IA",
+      breadcrumbName: "GB Social",
+      serviceType: "Gestão de redes sociais com IA",
+      description: "Criação de posts, calendário editorial, análise de métricas e de concorrentes por conversa no WhatsApp, sem contratar agência ou designer.",
+      path: "/gb-social",
+      faq: [
+        { question: "Preciso aprender uma ferramenta nova?", answer: "Não. Tudo acontece por conversa, no WhatsApp que você já usa." },
+        { question: "A IA cria as artes e as legendas?", answer: "Sim, cria arte, legenda e sugestão de horário, e você aprova antes de publicar." },
+        { question: "Serve para restaurantes?", answer: "Sim, o GB Social foi desenhado principalmente para gastronomia e varejo local." },
+      ],
+    }),
   }),
 });

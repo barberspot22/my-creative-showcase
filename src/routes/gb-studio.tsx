@@ -8,6 +8,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import { fetchReferencesByPage } from "@/lib/cms";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 const differences = [
@@ -116,5 +117,16 @@ export const Route = createFileRoute("/gb-studio")({
       { property: "og:url", content: siteUrl("/gb-studio") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/gb-studio") }],
+    scripts: servicePageLd({
+      name: "GB Studio: fotografia de moda com IA",
+      breadcrumbName: "GB Studio",
+      serviceType: "Produção de imagem com IA",
+      description: "Editoriais, lookbooks e catálogos de moda produzidos com direção criativa e IA generativa, sem estúdio físico, modelo ou viagem.",
+      path: "/gb-studio",
+      faq: [
+        { question: "As imagens são geradas por IA?", answer: "Sim, com direção criativa humana definindo modelo, luz, locação e styling para manter a identidade da marca." },
+        { question: "Serve para o meu e-commerce?", answer: "Sim, as imagens saem em formatos prontos para loja, marketplace e redes sociais." },
+      ],
+    }),
   }),
 });

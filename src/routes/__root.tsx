@@ -15,6 +15,7 @@ import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Preloader } from "@/components/Preloader";
+import { ldScript, organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 
@@ -75,6 +76,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+function rootLd() {
+  return [ldScript(organizationSchema()), ldScript(websiteSchema())];
+}
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -109,19 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/favicon-gb.png" },
       { rel: "canonical", href: siteUrl() },
     ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "GB IA",
-          url: siteUrl(),
-          logo: siteUrl("/favicon-gb.png"),
-          description: "Sistemas sob medida, automação e IA autônoma para negócios.",
-        }),
-      },
-    ],
+    scripts: [...rootLd()],
   }),
 
   shellComponent: RootShell,
@@ -134,7 +127,7 @@ const PRELOADER_SAFETY = `(function(){function r(){try{window.__gbPreloadDone=tr
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

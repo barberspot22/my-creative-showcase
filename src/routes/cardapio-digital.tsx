@@ -10,6 +10,7 @@ import { cardapioReferences } from "@/lib/references";
 import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 
@@ -96,5 +97,17 @@ export const Route = createFileRoute("/cardapio-digital")({
       { property: "og:url", content: siteUrl("/cardapio-digital") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/cardapio-digital") }],
+    scripts: servicePageLd({
+      name: "Cardápio digital para restaurantes",
+      breadcrumbName: "Cardápio Digital",
+      serviceType: "Cardápio digital",
+      description: "Cardápio digital com fotos, QR code de mesa, pedido no WhatsApp, delivery e pagamento integrado para restaurantes, deliverys e marcas de comida.",
+      path: "/cardapio-digital",
+      faq: [
+        { question: "Como o cliente faz o pedido?", answer: "Ele acessa o cardápio pelo QR code da mesa ou pelo link, monta o pedido e envia direto para o WhatsApp ou para o painel do restaurante." },
+        { question: "Tem taxa por pedido?", answer: "Não trabalhamos com comissão por pedido como os aplicativos de delivery; o cardápio é do restaurante." },
+        { question: "Posso atualizar preços sozinho?", answer: "Sim, o painel permite editar itens, fotos, preços e disponibilidade a qualquer momento." },
+      ],
+    }),
   }),
 });
