@@ -8,6 +8,7 @@ import { institucionalReferences, vendasReferences, capturaReferences } from "@/
 import { fetchReferencesByPage } from "@/lib/cms";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 type RefTab = "institucional" | "vendas" | "captura";
@@ -120,5 +121,17 @@ export const Route = createFileRoute("/site-institucional")({
       { property: "og:url", content: siteUrl("/site-institucional") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/site-institucional") }],
+    scripts: servicePageLd({
+      name: "Criação de site institucional e páginas de vendas",
+      breadcrumbName: "Site Institucional",
+      serviceType: "Criação de sites",
+      description: "Sites institucionais, páginas de vendas e páginas de captura estruturados como funil de conversão, com autoridade, provas e caminho claro até o contato.",
+      path: "/site-institucional",
+      faq: [
+        { question: "Quanto tempo leva para criar um site institucional?", answer: "Na GB IA um site institucional fica pronto em poucos dias, porque a estrutura de funil, o design e o texto são produzidos em paralelo." },
+        { question: "Qual a diferença entre site institucional e página de vendas?", answer: "O site institucional constrói autoridade e apresenta a empresa inteira; a página de vendas foca em uma única oferta e em uma única ação de conversão." },
+        { question: "O site é otimizado para aparecer no Google?", answer: "Sim. Cada página sai com título, descrição, dados estruturados, sitemap e velocidade otimizados para busca." },
+      ],
+    }),
   }),
 });

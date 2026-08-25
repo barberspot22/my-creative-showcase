@@ -9,6 +9,7 @@ import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
 import tshirtImg from "@/assets/tshirt-oversized-offwhite.jpg";
+import { servicePageLd } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 
@@ -122,5 +123,17 @@ export const Route = createFileRoute("/ecommerce")({
       { property: "og:url", content: siteUrl("/ecommerce") },
     ],
     links: [{ rel: "canonical", href: siteUrl("/ecommerce") }],
+    scripts: servicePageLd({
+      name: "Criação de e-commerce com IA vendedora",
+      breadcrumbName: "E-commerce",
+      serviceType: "Desenvolvimento de e-commerce",
+      description: "Loja virtual, catálogo, marketplaces, WhatsApp e IA vendedora num sistema só, com cadastro de produtos por foto e áudio no WhatsApp.",
+      path: "/ecommerce",
+      faq: [
+        { question: "Dá para cadastrar produtos pelo WhatsApp?", answer: "Sim. Você envia foto, áudio ou texto no WhatsApp e a IA cria título, descrição, preço e publica o produto na loja." },
+        { question: "A loja integra com marketplaces?", answer: "Sim, o catálogo pode ser publicado na loja própria, no WhatsApp e nos principais marketplaces a partir do mesmo cadastro." },
+        { question: "Preciso de equipe para operar?", answer: "Não. A IA responde dúvidas, recomenda produtos e conduz o cliente até o pagamento." },
+      ],
+    }),
   }),
 });
