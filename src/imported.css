@@ -670,9 +670,9 @@ body.nav-hidden .nav{transform:translateY(-100%)}
 .services .lineIcon{height:86px;color:#6b4eff;font:inherit}
 .services .lineIcon svg{width:86px;height:86px;display:block;overflow:visible;fill:none;stroke:#6b4eff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .services .lineIcon svg circle:not(.iconAccent){fill:#0d0d14;stroke:#6b4eff}
-.services .lineIcon .iconAccent{stroke:#c4363e;fill:#0d0d14}
+.services .lineIcon .iconAccent{stroke:#9e1915;fill:#0d0d14}
 .services .lineIcon:before,.services .lineIcon:after{border-color:#6b4eff}
-.services .lineIcon:hover .iconAccent{stroke:#e84850}
+.services .lineIcon:hover .iconAccent{stroke:#c4363e}
 .services .systemIcon .cursorCue{animation:cursorBlink 1.05s steps(2,end) infinite!important}
 .services .automationIcon .gearCore{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
 .services .aiIcon .coreNode{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
