@@ -67,21 +67,8 @@ function GBSocialPage() {
 
       <section className="whatsappBlock">
         <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe conversar por mensagem. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para publicar o prato do dia.</p></div>
-        <div className="chatDemo socialDesignerChat">
-          <header><span><i/>GB Social</span><small>designer online</small></header>
-          <div className="socialChatBody">
-            <p className="chatUser">Preciso de 15 dias de posts para o Instagram do restaurante.</p>
-            <p className="chatAgent"><b>GB Social</b>Perfeito. Monto o calendário com prato do dia, combo de fim de semana, bastidor da cozinha e carrossel do cardápio, tudo no DNA da marca.</p>
-            <article className="socialDesignPreview socialDesignPreviewImage" aria-label="Preview da arte criada pelo designer">
-              <img src={SOCIAL_PREVIEW_IMG} alt="Arte de combo de restaurante criada pelo GB Social" />
-            </article>
-            <p className="chatAgent"><b>GB Social</b>Primeira peça pronta: combo de sábado. Posso também analisar os deliveries concorrentes e as métricas do mês?</p>
-            <p className="chatUser">Faz. E agenda tudo para sair às 19h.</p>
-            <p className="chatAgent"><b>Designer</b>Agendado. Calendário, análise e publicação configuradas.</p>
-            <p className="socialApproval">Aprovação recebida · pronto para publicar</p>
-          </div>
-        </div>
       </section>
+
 
       <section className="socialWorkShowcase">
         <div><p className="studioEyebrow">CRIADO PELO GB SOCIAL</p><h2>Designs que já saíram daqui.</h2><p>Arraste para explorar. Toque para ampliar. Tudo feito por um agente, aprovado por uma conversa.</p></div>
