@@ -96,7 +96,7 @@ function CatalogoDigitalPage() {
           <CatalogoWidget />
         </section>
 
-      <SectionCta message="Olá! Testei o catálogo digital no site e quero um assim para os meus produtos." label="Quero meu catálogo digital" />
+      <SectionCta source="catalogo_widget" message="Olá! Testei o catálogo digital no site e quero um assim para os meus produtos." label="Quero meu catálogo digital" />
 
         <section className="menuProductProcess">
           <div>
