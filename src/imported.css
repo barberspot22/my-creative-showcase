@@ -338,9 +338,9 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 .loopCaseCard a[href="/gb-studio"] .caseLoopFrame.active>img{animation:studioPhotoQuality 2.5s ease both!important}
 @keyframes studioPhotoQuality{0%{filter:saturate(1.03) contrast(1.03) brightness(1);transform:scale(1.01)}100%{filter:saturate(1.1) contrast(1.09) brightness(1.035);transform:scale(1.035)}}
 .socialTickerViewport{height:620px!important}
-.socialDesignCard{width:auto!important;height:510px!important;background:transparent!important}
+.socialDesignCard{width:auto!important;height:430px!important;background:transparent!important}
 .socialDesignCard img{object-fit:contain!important;background:transparent!important}
-@media(max-width:760px){.socialTickerViewport{height:470px!important}.socialDesignCard{width:auto!important;height:370px!important}}
+@media(max-width:760px){.socialTickerViewport{height:470px!important}.socialDesignCard{width:auto!important;height:330px!important}}
 
 /* Stronger non-Studio cardbox covers */
 .loopCaseCard a:not([href="/gb-studio"]) .caseUiFrame{padding:26px;background:#080808;overflow:hidden}
