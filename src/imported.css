@@ -1156,7 +1156,9 @@ body{overflow-x:clip}
   .siteFooter .footerOverlap{top:-80px;height:120px}
   .siteFooter .footerInner{padding:100px 22px 30px}
   .siteFooter .footerTop{grid-template-columns:1fr;gap:50px;padding-bottom:45px}
-  .siteFooter .footerCols{grid-template-columns:1fr 1fr;gap:35px 20px}
+  .siteFooter .footerCols{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px;align-items:start}
+  .siteFooter .footerCols h5{margin:0 0 14px;font-size:10px;letter-spacing:1.6px}
+  .siteFooter .footerCols a{font-size:13px;margin:0 0 10px;line-height:1.3}
   .siteFooter .footerBrand .footerLogo{height:64px}
   .siteFooter .footerBrand .footerTag{font-size:19px}
   .siteFooter .footerBottom{flex-direction:column;align-items:flex-start;gap:10px}
