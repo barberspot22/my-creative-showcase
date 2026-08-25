@@ -864,6 +864,15 @@ body{overflow-x:clip}
   background:rgba(255,255,255,.04)!important;
   color:#fff!important;
 }
+/* Botões primários com destaque bordô sutil */
+.studioButton,.studioNavCta,.menuProductPrimary,.crmPrimary,.siteProductPrimary,.commercePrimary,.contact button,.studioModalBox form>button{
+  border-color:rgba(195,35,45,.35)!important;
+}
+.studioButton:hover,.studioNavCta:hover,.menuProductPrimary:hover,.crmPrimary:hover,.siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,.studioModalBox form>button:hover{
+  border-color:rgba(195,35,45,.85)!important;
+  background:rgba(195,35,45,.08)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.25),0 0 0 1px rgba(195,35,45,.12);
+}
 
 /* Ícone da seta — SVG-like em CSS puro, robusto e consistente */
 .studioButton>span,.studioNavCta>span,.menuProductPrimary>span,.menuProductSecondary>span,
