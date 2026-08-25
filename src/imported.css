@@ -1902,3 +1902,37 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 @keyframes gbPreloadPulse{0%,100%{opacity:.72;transform:scale(.985)}50%{opacity:1;transform:scale(1)}}
 @keyframes gbPreloadBar{0%{transform:translateX(-110%)}100%{transform:translateX(260%)}}
 @media(prefers-reduced-motion:reduce){.gbPreloaderMark,.gbPreloaderBar>span{animation:none}}
+/* ---- Botão de WhatsApp por seção ---- */
+.sectionCtaWrap {
+  display: flex;
+  justify-content: center;
+  padding: 6px 20px 44px;
+}
+.sectionCtaWrap.isLeft { justify-content: flex-start; }
+.sectionCtaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(242, 242, 238, 0.22);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
+  color: #f2f2ee;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+}
+.sectionCtaButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(242, 242, 238, 0.5);
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+}
+.sectionCtaButton i { font-style: normal; opacity: .7; }
+@media (max-width: 640px) {
+  .sectionCtaWrap { padding: 4px 16px 34px; }
+  .sectionCtaButton { width: 100%; justify-content: center; font-size: 0.72rem; padding: 14px 20px; }
+}
