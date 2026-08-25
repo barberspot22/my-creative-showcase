@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /auth
 Disallow: /api/
 
-Sitemap: https://gb-ia.lovable.app/sitemap.xml
+Sitemap: https://gbia.com.br/sitemap.xml
