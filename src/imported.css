@@ -635,7 +635,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
 @media(max-width:760px){.manifest{min-height:300px;padding-bottom:45px}.manifest h1{font-size:34px}}
 
 /* Home — Circle Gallery Carousel inspired by CreativeApe circle carousel */
-.circleProductSection{position:relative;min-height:820px;padding:170px 0 92px;margin-top:-140px;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:3;box-shadow:none!important}
+.circleProductSection{position:relative;min-height:720px;padding:110px 0 72px;margin-top:-140px;background:#050505;color:#fff;overflow:hidden;text-align:center;isolation:isolate;z-index:3;box-shadow:none!important}
 .circleProductSection:before{display:none!important}
 .circleProductSection:after{content:"";position:absolute;left:0;right:0;bottom:0;height:190px;background:linear-gradient(transparent,#050505);pointer-events:none;z-index:5}
 
