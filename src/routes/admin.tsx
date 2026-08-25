@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { svIsAdmin } from "@/lib/admin-guard.functions";
 import { useEffect, useMemo, useState, useCallback, useRef, ReactNode } from "react";
@@ -59,6 +59,12 @@ export const Route = createFileRoute("/admin")({
 function AdminPage() {
   const [tab, setTab] = useState<TabKey>("conteudo");
   const current = TABS.find((t) => t.key === tab)!;
+  const navigate = useNavigate();
+
+  const signOut = useCallback(async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", search: { redirect: "/admin" } });
+  }, [navigate]);
 
   return (
     <>
@@ -70,6 +76,9 @@ function AdminPage() {
             <div className="admX-brand-name">GB IA Admin<small>Painel de conteúdo</small></div>
           </div>
           <a href="/" className="admX-back">← Voltar para o site</a>
+          <button type="button" className="admX-back" style={{ background: "none", border: "none", cursor: "pointer", textAlign: "left" }} onClick={signOut}>
+            ⎋ Sair
+          </button>
 
           <div className="admX-nav">
             <div className="admX-nav-label">Conteúdo</div>
