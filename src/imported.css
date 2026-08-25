@@ -1917,23 +1917,25 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   gap: 10px;
   padding: 15px 28px;
   border-radius: 999px;
-  border: 1px solid rgba(242, 242, 238, 0.22);
-  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
-  color: #f2f2ee;
+  border: 1px solid rgba(242, 242, 238, 0.55);
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+  color: #fff;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  backdrop-filter: blur(8px);
-  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);
+  transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
 }
 .sectionCtaButton:hover {
   transform: translateY(-2px);
-  border-color: rgba(242, 242, 238, 0.5);
-  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  border-color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.12));
+  box-shadow: 0 14px 38px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.25);
 }
-.sectionCtaButton i { font-style: normal; opacity: .7; }
+.sectionCtaButton i { font-style: normal; opacity: .9; }
 .siteFooter .sectionCtaWrap { padding: 18px 0 0; }
 .siteFooter .sectionCtaButton { padding: 13px 22px; font-size: 0.72rem; }
 .circleProductSection .sectionCtaWrap { padding: 40px 20px 0; }
