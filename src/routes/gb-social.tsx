@@ -10,7 +10,7 @@ import { ProductSwitcher } from "@/components/ProductSwitcher";
 import { fetchReferencesByPage } from "@/lib/cms";
 import { siteUrl } from "@/lib/site";
 
-const SOCIAL_PREVIEW_IMG = "/gb-social-designs/design-01.png";
+const SOCIAL_PREVIEW_IMG = "/gb-social-designs/design-17.jpg";
 
 const features = [
   ["Criação de posts", "Feed, story e carrossel prontos para publicar."],

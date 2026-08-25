@@ -1,18 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /** Arquivos reais em `public/gb-social-designs/` — rota `/gb-social-designs/…`. */
-const defaultDesigns = [
-  "/gb-social-designs/design-01.png",
-  "/gb-social-designs/design-02.png",
-  "/gb-social-designs/design-03.png",
-  "/gb-social-designs/design-04.png",
-  "/gb-social-designs/design-05.png",
-  "/gb-social-designs/design-06.png",
-  "/gb-social-designs/design-07.png",
-  "/gb-social-designs/design-08.png",
-  "/gb-social-designs/design-09.png",
-  "/gb-social-designs/design-10.png",
-];
+const defaultDesigns = Array.from({ length: 31 }, (_, i) =>
+  `/gb-social-designs/design-${String(i + 1).padStart(2, "0")}.jpg`
+);
+
 
 
 export function PerspectiveTicker({ designs: designsProp }: { designs?: string[] } = {}) {

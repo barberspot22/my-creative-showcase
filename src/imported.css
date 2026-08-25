@@ -18,7 +18,7 @@
 .elasticGrid{position:absolute;z-index:-2;inset:-4% -3% 0;width:106%;height:108%;touch-action:pan-y;mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 78%,transparent 100%);opacity:.9}
 .hero:after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 50% 48%,transparent 0 12%,rgba(0,0,0,.13) 34%,rgba(0,0,0,.66) 82%,#000 100%);pointer-events:none}
 .hero video{position:relative;z-index:1;mix-blend-mode:screen;opacity:.75}
-.orb{z-index:3;background:radial-gradient(circle at 42% 36%,#fff 0 1%,#fa2e1e 3%,#8f0805 9%,#130302 25%,#080808 63%,#000 100%);filter:none;box-shadow:inset -12px -15px 24px #000,0 0 25px #4d0707}
+.orb{z-index:3;background:radial-gradient(circle at 42% 36%,#fff 0 1%,#c4363e 3%,#7a1112 9%,#130302 25%,#080808 63%,#000 100%);filter:none;box-shadow:inset -12px -15px 24px #000,0 0 25px #4d0707}
 .orb:after{content:"";position:absolute;width:74px;height:54px;left:-48px;top:58px;border-radius:50%;background:radial-gradient(ellipse,#f0e7df 0 1px,transparent 1.8px);background-size:4px 4px;transform:rotate(-14deg);mask-image:radial-gradient(ellipse,#000 0 48%,transparent 72%);opacity:.78}
 .orb i{position:absolute;border:2px solid #eee;border-radius:50%;width:68px;height:68px;left:-13px;top:-13px;box-shadow:0 0 5px #fff}
 .orb i+i{width:38px;height:38px;left:49px;top:42px;border-width:2px;opacity:.85}
@@ -670,11 +670,13 @@ body.nav-hidden .nav{transform:translateY(-100%)}
 .services .lineIcon{height:86px;color:#6b4eff;font:inherit}
 .services .lineIcon svg{width:86px;height:86px;display:block;overflow:visible;fill:none;stroke:#6b4eff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .services .lineIcon svg circle:not(.iconAccent){fill:#0d0d14;stroke:#6b4eff}
-.services .lineIcon .iconAccent{stroke:#c8ff00;fill:#0d0d14}
+.services .lineIcon .iconAccent{stroke:#9e1915;fill:#0d0d14}
 .services .lineIcon:before,.services .lineIcon:after{border-color:#6b4eff}
+.services .lineIcon:hover .iconAccent{stroke:#c4363e}
 .services .systemIcon .cursorCue{animation:cursorBlink 1.05s steps(2,end) infinite!important}
 .services .automationIcon .gearCore{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
 .services .aiIcon .coreNode{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
+.services .serviceGrid p{color:var(--platinum-gray);line-height:1.8}
 @keyframes cursorBlink{50%{opacity:.18}}
 @keyframes coreBeat{50%{transform:scale(1.22)}}
 
@@ -862,6 +864,15 @@ body{overflow-x:clip}
   border-color:rgba(255,255,255,.7)!important;
   background:rgba(255,255,255,.04)!important;
   color:#fff!important;
+}
+/* Botões primários com destaque bordô sutil */
+.studioButton,.studioNavCta,.menuProductPrimary,.crmPrimary,.siteProductPrimary,.commercePrimary,.contact button,.studioModalBox form>button{
+  border-color:rgba(195,35,45,.35)!important;
+}
+.studioButton:hover,.studioNavCta:hover,.menuProductPrimary:hover,.crmPrimary:hover,.siteProductPrimary:hover,.commercePrimary:hover,.contact button:hover,.studioModalBox form>button:hover{
+  border-color:rgba(195,35,45,.85)!important;
+  background:rgba(195,35,45,.08)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.25),0 0 0 1px rgba(195,35,45,.12);
 }
 
 /* Ícone da seta — SVG-like em CSS puro, robusto e consistente */
@@ -1917,8 +1928,8 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   gap: 10px;
   padding: 15px 28px;
   border-radius: 999px;
-  border: 1px solid rgba(242, 242, 238, 0.55);
-  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08));
+  border: 1px solid rgba(158, 25, 21, 0.55);
+  background: linear-gradient(180deg, rgba(158, 25, 21, 0.16), rgba(158, 25, 21, 0.06));
   color: #fff;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
@@ -1926,16 +1937,16 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   font-weight: 700;
   text-decoration: none;
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12);
   transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
 }
 .sectionCtaButton:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.85);
-  background: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.12));
-  box-shadow: 0 14px 38px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.25);
+  border-color: rgba(158, 25, 21, 0.95);
+  background: linear-gradient(180deg, rgba(158, 25, 21, 0.26), rgba(158, 25, 21, 0.12));
+  box-shadow: 0 14px 38px rgba(0,0,0,.45), 0 0 0 1px rgba(158, 25, 21, 0.18), inset 0 1px 0 rgba(255,255,255,.18);
 }
-.sectionCtaButton i { font-style: normal; opacity: .9; }
+.sectionCtaButton i { font-style: normal; opacity: .9; color: rgba(242, 235, 235, 0.95); }
 .siteFooter .sectionCtaWrap { padding: 18px 0 0; }
 .siteFooter .sectionCtaButton { padding: 13px 22px; font-size: 0.72rem; }
 .circleProductSection .sectionCtaWrap { padding: 18px 20px 0; }
