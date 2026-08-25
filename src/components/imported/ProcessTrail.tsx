@@ -11,22 +11,22 @@ const steps: Step[] = [
   {
     n: "01",
     title: "Diagnóstico",
-    desc: "Entendemos o estágio do seu negócio e mapeamos oportunidades de melhoria.",
+    desc: "A gente entende como seu negócio funciona hoje e onde dá pra melhorar.",
   },
   {
     n: "02",
     title: "Proposta",
-    desc: "Escopo sob medida, stack certo, prazos e investimento claros.",
+    desc: "Você recebe um plano claro: o que vai ser feito, quanto tempo leva e quanto custa.",
   },
   {
     n: "03",
-    title: "MVP",
-    desc: "Versão navegável em dias para validar direção antes de escalar.",
+    title: "Teste prático",
+    desc: "Em poucos dias você já vê e usa uma primeira versão, antes de investir pesado.",
   },
   {
     n: "04",
     title: "Entrega",
-    desc: "Sistema no ar e evolução contínua guiada por dados.",
+    desc: "Seu sistema no ar, funcionando e evoluindo com o tempo.",
   },
 ];
 
