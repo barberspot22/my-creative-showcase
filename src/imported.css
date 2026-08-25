@@ -1974,3 +1974,34 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   .siteFooter .sectionCtaWrap { padding: 16px 0 0; }
   .siteFooter .sectionCtaButton { width: auto; }
 }
+
+/* === Contrastes home: todos os CTAs em bordô luminoso === */
+.pill, .instCta .primary, .contact button {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(158, 25, 21, 0.85) !important;
+  background: #9e1915 !important;
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 20px rgba(158,25,21,.25), inset 0 1px 0 rgba(255,255,255,.18);
+  transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.pill::before, .instCta .primary::before, .contact button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform .6s ease;
+  pointer-events: none;
+}
+.pill:hover, .instCta .primary:hover, .contact button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(158, 25, 21, 0.95) !important;
+  background: #b91d33 !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.45), 0 0 30px rgba(185,29,51,.35), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.pill:hover::before, .instCta .primary:hover::before, .contact button:hover::before {
+  transform: translateX(100%);
+}
+.instCta .primary { animation: none; }
+
