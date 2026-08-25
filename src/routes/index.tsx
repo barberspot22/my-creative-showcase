@@ -68,14 +68,6 @@ const ADMIN_CASES_KEY = "gbia.caseCards.v4";
 
 const caseCards: CaseCard[] = [
   {
-    key: "studio",
-    href: "/gb-studio",
-    title: "Studio",
-    description: "Lookbook completo gerado por IA para marca têxtil",
-    badge: "LOOKBOOK",
-    frames: studioCoverImages.slice(0, 3).map((src, index) => ({ kind: "image", src, alt: `Capa Studio ${index + 1}` })),
-  },
-  {
     key: "social",
     href: "/gb-social",
     title: "Social",
@@ -83,6 +75,16 @@ const caseCards: CaseCard[] = [
     badge: "CHAT IA",
     frames: [
       { kind: "ui", variant: "social-chat-card", label: "Chat animado do GB Social" },
+    ],
+  },
+  {
+    key: "menu",
+    href: "/cardapio-digital",
+    title: "Menu Digital",
+    description: "Cardápio, pedidos e presença digital que vendem por você",
+    badge: "CATÁLOGO",
+    frames: [
+      { kind: "ui", variant: "menu-catalog", label: "Catálogo digital com produtos rolando" },
     ],
   },
   {
@@ -126,16 +128,6 @@ const caseCards: CaseCard[] = [
 
   },
   {
-    key: "menu",
-    href: "/cardapio-digital",
-    title: "Menu Digital",
-    description: "Cardápio, pedidos e presença digital que vendem por você",
-    badge: "CATÁLOGO",
-    frames: [
-      { kind: "ui", variant: "menu-catalog", label: "Catálogo digital com produtos rolando" },
-    ],
-  },
-  {
     key: "catalogo",
     href: "/catalogo-digital",
     title: "Catálogo Digital",
@@ -147,6 +139,14 @@ const caseCards: CaseCard[] = [
       { kind: "image", src: "/references/catalogo/cover-3.jpg", alt: "Catálogo digital criado pelo GB IA — imobiliária" },
       { kind: "image", src: "/references/catalogo/cover-4.jpg", alt: "Catálogo digital criado pelo GB IA — eventos" },
     ],
+  },
+  {
+    key: "studio",
+    href: "/gb-studio",
+    title: "Studio",
+    description: "Lookbook completo gerado por IA para marca têxtil",
+    badge: "LOOKBOOK",
+    frames: studioCoverImages.slice(0, 3).map((src, index) => ({ kind: "image", src, alt: `Capa Studio ${index + 1}` })),
   },
 ];
 
