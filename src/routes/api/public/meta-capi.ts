@@ -21,8 +21,15 @@ export const Route = createFileRoute("/api/public/meta-capi")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const token = process.env.META_CAPI_ACCESS_TOKEN;
+        let token = process.env.META_CAPI_ACCESS_TOKEN ?? "";
+        try {
+          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+          const { data: row } = await (supabaseAdmin as any)
+            .from("secure_settings").select("value").eq("key", "META_CAPI_ACCESS_TOKEN").maybeSingle();
+          if (row?.value) token = row.value as string;
+        } catch { /* fall back to env */ }
         if (!token) return new Response(JSON.stringify({ ok: false, error: "no_token" }), { status: 200 });
+
 
         const settings = await loadTracking();
         const pixelId = settings?.meta_pixel_id as string | undefined;

@@ -107,3 +107,44 @@ export const svSaveSectionVisibility = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true };
   });
+
+/* ---------------- Secure settings (tokens) ---------------- */
+// Values are stored in `secure_settings`, a table only the service role can
+// read. The admin UI can only see whether a value is set, never the value.
+
+export const svGetSecureStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { key: string }) => data)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row } = await (supabaseAdmin as any)
+      .from("secure_settings").select("value, updated_at").eq("key", data.key).maybeSingle();
+    const value: string = row?.value ?? "";
+    return {
+      set: !!value,
+      masked: value ? `${value.slice(0, 4)}••••${value.slice(-4)}` : "",
+      updated_at: row?.updated_at ?? null,
+    };
+  });
+
+export const svSaveSecureSetting = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { key: string; value: string }) => data)
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const key = data.key.trim();
+    const value = data.value.trim();
+    if (!key) throw new Error("Chave inválida");
+    if (!value) {
+      const { error } = await (supabaseAdmin as any).from("secure_settings").delete().eq("key", key);
+      if (error) throw new Error(error.message);
+      return { ok: true, cleared: true };
+    }
+    const { error } = await (supabaseAdmin as any)
+      .from("secure_settings")
+      .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: "key" });
+    if (error) throw new Error(error.message);
+    return { ok: true, cleared: false };
+  });

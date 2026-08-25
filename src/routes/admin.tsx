@@ -11,7 +11,9 @@ import {
   fetchTracking, saveTracking, TrackingSettings, defaultTracking,
   fetchSectionVisibility, saveSectionVisibility,
 } from "@/lib/cms";
+import { svGetSecureStatus, svSaveSecureSetting } from "@/lib/cms-admin.functions";
 import { PAGE_META, defaultLinks, ADMIN_LINKS_KEY, type PageKey } from "@/lib/adminLinks";
+
 import { emitPreview, PREVIEW_READY_MSG } from "@/lib/livePreview";
 import { SECTIONS_CATALOG, SECTIONS_PAGES, type SectionsPageKey } from "@/lib/sectionsCatalog";
 
@@ -813,7 +815,55 @@ function TextsTab() {
 /* =========================================================
    TRACKING
    ========================================================= */
+function SecureTokenField({ secretKey, label, placeholder, hint }: { secretKey: string; label: string; placeholder?: string; hint?: string }) {
+  const [status, setStatus] = useState<{ set: boolean; masked: string } | null>(null);
+  const [value, setValue] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  const load = useCallback(() => {
+    svGetSecureStatus({ data: { key: secretKey } })
+      .then((s) => setStatus({ set: s.set, masked: s.masked }))
+      .catch(() => setStatus({ set: false, masked: "" }));
+  }, [secretKey]);
+  useEffect(() => { load(); }, [load]);
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      await svSaveSecureSetting({ data: { key: secretKey, value } });
+      setValue("");
+      load();
+      toast.success(value.trim() ? "Token salvo com segurança." : "Token removido.");
+    } catch (e: any) { toast.error("Erro: " + e.message); }
+    finally { setSaving(false); }
+  };
+
+  return (
+    <div className="admX-field" style={{ marginTop: 12 }}>
+      <label>
+        <span>{label}</span>
+        <span className={"admX-status " + (status?.set ? "on" : "off")}>{status?.set ? `Salvo ${status.masked}` : "Não configurado"}</span>
+      </label>
+      <div style={{ display: "flex", gap: 8 }}>
+        <input
+          className="admX-input"
+          type="password"
+          autoComplete="off"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder={status?.set ? "Cole um novo token para substituir" : placeholder}
+        />
+        <button className="admX-btn primary" disabled={saving || (!value.trim() && !status?.set)} onClick={save}>
+          {saving ? "Salvando…" : value.trim() ? "Salvar" : "Remover"}
+        </button>
+      </div>
+      {hint && <p className="hint" style={{ margin: "6px 0 0" }}>{hint}</p>}
+    </div>
+  );
+}
+
 function TrackingTab() {
+
   const [t, setT] = useState<TrackingSettings>(defaultTracking);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -838,7 +888,13 @@ function TrackingTab() {
           <div className="admX-field"><label>Pixel ID</label><input className="admX-input" value={t.meta_pixel_id} onChange={(e) => update({ meta_pixel_id: e.target.value })} placeholder="123456789012345"/></div>
           <label className="admX-toggle"><input type="checkbox" checked={t.meta_capi_enabled} onChange={(e) => update({ meta_capi_enabled: e.target.checked })}/>Ativar Conversion API (server-side)</label>
           <div className="admX-field" style={{ marginTop: 12 }}><label>Test Event Code (opcional)</label><input className="admX-input" value={t.meta_test_event_code} onChange={(e) => update({ meta_test_event_code: e.target.value })} placeholder="TEST12345"/></div>
-          <p className="hint" style={{ margin: 0 }}>Para a CAPI funcionar, o secret <code>META_CAPI_ACCESS_TOKEN</code> precisa estar configurado no backend.</p>
+          <SecureTokenField
+            secretKey="META_CAPI_ACCESS_TOKEN"
+            label="Token de acesso do Facebook (CAPI)"
+            placeholder="EAAG..."
+            hint="Gere em Meta Events Manager → Conversion API → Gerar token de acesso. Fica guardado no servidor e nunca aparece no site."
+          />
+
         </>
       ),
     },
