@@ -1,22 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 
-type Msg = { from: "user" | "agent"; text: string; delay?: number };
+type Msg = {
+  from: "user" | "agent";
+  text?: string;
+  images?: string[];
+  caption?: string;
+  delay?: number;
+};
 
-/** Conversa do hero: pedido de calendário de 15 dias -> checagem -> arte -> aprovação -> agendamento. */
+/** Conversa do hero: pedidos de post por dia da semana, com artes enviadas no chat. */
 const script: Msg[] = [
-  { from: "user", text: "Oi, tudo bem? Preciso de post pros próximos 15 dias." },
-  { from: "agent", text: "Bom te ver por aqui! Consigo sim.", delay: 900 },
-  { from: "agent", text: "Antes de montar: segue a mesma linha do mês passado (prato do dia + combo de fim de semana) ou quer mudar alguma coisa?", delay: 1500 },
-  { from: "user", text: "Mesma linha. Só quero puxar mais o almoço executivo." },
-  { from: "agent", text: "Anotado. Fecho assim: 15 dias, 11 feeds e 4 stories, com 5 peças de almoço executivo espalhadas nos dias úteis.", delay: 1700 },
-  { from: "agent", text: "Calendário pronto. Dias 1 a 15, horários de pico de cada canal. Quer ver uma arte antes de eu soltar o resto?", delay: 1600 },
-  { from: "user", text: "Quero. Manda a do executivo." },
-  { from: "agent", text: "Aqui: executivo de terça, prato + suco por R$ 34,90. Legenda e hashtags já dentro do post.", delay: 1600 },
-  { from: "user", text: "Ficou boa. Pode aprovar os 15 dias." },
-  { from: "agent", text: "Aprovado. Os 15 dias entraram na fila e publico direto nos canais conectados. Te aviso se algum post render abaixo do normal.", delay: 1800 },
+  { from: "user", text: "Oi! Preciso do post de terça, o do almoço executivo." },
+  { from: "agent", text: "Oi, bom te ver! Mesma pegada do mês passado, prato + suco?", delay: 1100 },
+  { from: "user", text: "Isso. R$ 34,90 nesta semana." },
+  {
+    from: "agent",
+    text: "Fechou. Fiz duas versões, olha aí:",
+    images: ["/gb-social-designs/design-17.jpg", "/gb-social-designs/design-05.jpg"],
+    caption: "Terça · Almoço executivo · legenda e hashtags já prontas",
+    delay: 2200,
+  },
+  { from: "user", text: "A primeira. Ficou ótima." },
+  { from: "agent", text: "Agendei para terça às 10h40, que é quando seu público decide o almoço.", delay: 1400 },
+  { from: "user", text: "E o de sexta? Queria puxar o combo da noite." },
+  {
+    from: "agent",
+    text: "Já subi o de sexta e deixei um story pra quinta esquentando:",
+    images: ["/gb-social-designs/design-22.jpg", "/gb-social-designs/design-09.jpg"],
+    caption: "Sexta · Combo da noite  |  Quinta · Story de bastidor",
+    delay: 2300,
+  },
+  { from: "user", text: "Perfeito. Pode aprovar os dois." },
+  {
+    from: "agent",
+    text: "Aprovados. Semana fechada: terça, quinta e sexta na fila. Sábado te mando o resultado de cada um.",
+    delay: 1800,
+  },
 ];
 
-const RESET_PAUSE = 3600;
+const RESET_PAUSE = 3800;
 
 /** Chat animado do hero do GB Social, em loop, com indicador de digitação. */
 export function HeroChatLoop() {
@@ -37,7 +59,6 @@ export function HeroChatLoop() {
     const run = () => {
       if (!alive) return;
       if (step >= script.length) {
-        // Pausa, apaga suavemente e recomeça (evita o "pulo" do reset seco).
         wait(RESET_PAUSE, () => {
           setFading(true);
           wait(600, () => {
@@ -60,7 +81,7 @@ export function HeroChatLoop() {
         setTyping(false);
         step += 1;
         setCount(step);
-        wait(isAgent ? 700 : 500, run);
+        wait(isAgent ? 800 : 500, run);
       });
     };
 
@@ -98,19 +119,35 @@ export function HeroChatLoop() {
           ref={bodyRef}
         >
           {script.slice(0, count).map((m, i) => (
-            <p
+            <div
               key={i}
-              className={`socialHeroMsg ${m.from === "user" ? "socialHeroPhoneUser" : "socialHeroPhoneAgent"}`}
+              className={`socialHeroMsg socialHeroRow ${m.from === "user" ? "socialHeroRowUser" : "socialHeroRowAgent"}`}
             >
-              {m.text}
-            </p>
+              {m.text && (
+                <p className={m.from === "user" ? "socialHeroPhoneUser" : "socialHeroPhoneAgent"}>
+                  {m.text}
+                </p>
+              )}
+              {m.images && (
+                <div className="socialHeroShots">
+                  <div className="socialHeroShotsGrid">
+                    {m.images.map((src) => (
+                      <img key={src} src={src} alt="" loading="lazy" />
+                    ))}
+                  </div>
+                  {m.caption && <small>{m.caption}</small>}
+                </div>
+              )}
+            </div>
           ))}
           {typing && (
-            <p className="socialHeroPhoneAgent socialHeroPhoneTyping socialHeroMsg">
-              <i />
-              <i />
-              <i />
-            </p>
+            <div className="socialHeroMsg socialHeroRow socialHeroRowAgent">
+              <p className="socialHeroPhoneAgent socialHeroPhoneTyping">
+                <i />
+                <i />
+                <i />
+              </p>
+            </div>
           )}
         </div>
       </div>
