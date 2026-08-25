@@ -2034,3 +2034,5 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 .socialWorkShowcaseCta .sectionCtaWrap { margin: 0; padding: 0; }
 .socialFeatures .sectionCtaWrap { margin-top: 42px; padding: 0; }
 @media (max-width: 760px) { .socialWorkShowcaseCta { padding: 26px 22px 0; } }
+
+.whatsappBlock:has(> div:only-child){grid-template-columns:1fr;max-width:1100px;margin:0 auto}
