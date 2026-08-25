@@ -11,7 +11,7 @@ const steps: Step[] = [
   {
     n: "01",
     title: "Diagnóstico",
-    desc: "Entendemos o gargalo real do seu negócio e mapeamos oportunidades.",
+    desc: "Entendemos o estágio do seu negócio e mapeamos oportunidades de melhoria.",
   },
   {
     n: "02",
