@@ -11,7 +11,7 @@ const script: Msg[] = [
     delay: 1500,
   },
   { from: "user", text: "Manda a do combo primeiro." },
-  { from: "agent", text: "Arte do combo de sábado pronta: 2 parmegianas + refri 2L por R$ 89. Aprova?", delay: 1600 },
+  { from: "agent", text: "Arte do combo de sábado pronta: 2 parmegianas + Coca 2L por R$ 110. Aprova?", delay: 1600 },
   { from: "user", text: "Aprovado. Agenda tudo." },
   {
     from: "agent",
