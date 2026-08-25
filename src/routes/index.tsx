@@ -102,15 +102,16 @@ const caseCards: CaseCard[] = [
 
   },
   {
-    key: "crm",
-    href: "/crm",
-    title: "CRM",
-    description: "Funil, follow-up e dashboard num só lugar — comercial que não perde lead",
-    badge: "CRM + IA",
+    key: "catalogo",
+    href: "/catalogo-digital",
+    title: "Catálogo Digital",
+    description: "Produtos, serviços, imóveis e eventos organizados para vender",
+    badge: "CATÁLOGO",
     frames: [
-      { kind: "ui", variant: "crm-dashboard-plus", label: "Dashboard subindo mais um cliente" },
-      { kind: "ui", variant: "recover-followup", label: "Follow-up enviado" },
-      { kind: "ui", variant: "recover-converted", label: "Venda recuperada" },
+      { kind: "image", src: "/references/catalogo/cover-1.jpg", alt: "Catálogo digital criado pelo GB IA — mobiliária" },
+      { kind: "image", src: "/references/catalogo/cover-2.jpg", alt: "Catálogo digital criado pelo GB IA — moda" },
+      { kind: "image", src: "/references/catalogo/cover-3.jpg", alt: "Catálogo digital criado pelo GB IA — imobiliária" },
+      { kind: "image", src: "/references/catalogo/cover-4.jpg", alt: "Catálogo digital criado pelo GB IA — eventos" },
     ],
   },
   {
@@ -128,16 +129,15 @@ const caseCards: CaseCard[] = [
 
   },
   {
-    key: "catalogo",
-    href: "/catalogo-digital",
-    title: "Catálogo Digital",
-    description: "Produtos, serviços, imóveis e eventos organizados para vender",
-    badge: "CATÁLOGO",
+    key: "crm",
+    href: "/crm",
+    title: "CRM",
+    description: "Funil, follow-up e dashboard num só lugar — comercial que não perde lead",
+    badge: "CRM + IA",
     frames: [
-      { kind: "image", src: "/references/catalogo/cover-1.jpg", alt: "Catálogo digital criado pelo GB IA — mobiliária" },
-      { kind: "image", src: "/references/catalogo/cover-2.jpg", alt: "Catálogo digital criado pelo GB IA — moda" },
-      { kind: "image", src: "/references/catalogo/cover-3.jpg", alt: "Catálogo digital criado pelo GB IA — imobiliária" },
-      { kind: "image", src: "/references/catalogo/cover-4.jpg", alt: "Catálogo digital criado pelo GB IA — eventos" },
+      { kind: "ui", variant: "crm-dashboard-plus", label: "Dashboard subindo mais um cliente" },
+      { kind: "ui", variant: "recover-followup", label: "Follow-up enviado" },
+      { kind: "ui", variant: "recover-converted", label: "Venda recuperada" },
     ],
   },
   {
