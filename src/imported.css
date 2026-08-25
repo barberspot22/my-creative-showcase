@@ -603,7 +603,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .socialHeroCopy strong { font-size: 16px; }
   .socialHeroCopy small { display: none; }
   .socialHeroPhone { max-width: 300px; }
-  .socialHeroPhoneBody { max-height: 420px; }
+  .socialHeroPhoneBody { height: 400px; }
 }
 
 @media (max-width: 700px) {
@@ -615,7 +615,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   .socialHero .metallicTitle h1 em { font-size: 15px; }
   .socialHeroCopy p { font-size: 14px; }
   .socialHeroPhone { max-width: 280px; }
-  .socialHeroPhoneBody { max-height: 360px; }
+  .socialHeroPhoneBody { height: 360px; }
   .socialHeroPhoneHead { padding: 4px 8px 10px; }
   .socialHeroPhoneAvatar { width: 36px; height: 36px; font-size: 11px; }
   .socialHeroPhoneHead b { font-size: 12px; }
