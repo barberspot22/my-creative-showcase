@@ -676,6 +676,7 @@ body.nav-hidden .nav{transform:translateY(-100%)}
 .services .systemIcon .cursorCue{animation:cursorBlink 1.05s steps(2,end) infinite!important}
 .services .automationIcon .gearCore{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
 .services .aiIcon .coreNode{animation:coreBeat 1.8s ease-in-out infinite!important;transform-origin:center}
+.services .serviceGrid p{color:var(--platinum-gray);line-height:1.8}
 @keyframes cursorBlink{50%{opacity:.18}}
 @keyframes coreBeat{50%{transform:scale(1.22)}}
 
