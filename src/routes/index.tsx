@@ -9,6 +9,7 @@ import { faqSchema, ldScript } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
+import { SiteMenu } from "@/components/SiteMenu";
 
 const A = "/lumus-assets/";
 
@@ -509,7 +510,6 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
 
 
 function HomePage() {
-  const [menu, setMenu] = useState(false);
   const [contact, setContact] = useState(false);
   const [sent, setSent] = useState(false);
   const [editableCaseCards, setEditableCaseCards] = useState<CaseCard[]>(caseCards);
@@ -542,25 +542,12 @@ function HomePage() {
   }, []);
 
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
-  const go = () => setMenu(false);
-  const scrollToCenter = (id: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    go();
-    const el = document.getElementById(id);
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const target = rect.top + window.scrollY + rect.height / 2 - window.innerHeight / 2;
-    window.scrollTo({ top: target, behavior: "smooth" });
-  };
 
   return <>
     <div className="cursor" aria-hidden="true" />
     <header className="nav">
       <a href="#top" className="brand gbImageBrand"><img src={gbLogo} alt="GB IA" /></a>
-      <button className={`menuButton ${menu ? "open" : ""}`} onClick={() => setMenu(!menu)} aria-expanded={menu} aria-label="Abrir menu"><i/><i/><i/></button>
-      <nav className={menu ? "open" : ""}>
-        <a onClick={go} href="#leistungen">O que fazemos</a><a onClick={scrollToCenter("servicos")} href="#servicos">Serviços</a><a onClick={go} href="/gb-studio">GB Studio</a><a onClick={go} href="#kontakt">Contato</a>
-      </nav>
+      <SiteMenu />
     </header>
 
     <main id="top">
