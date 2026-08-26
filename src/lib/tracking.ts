@@ -103,13 +103,10 @@ export function trackContact(source: string, extra: Record<string, unknown> = {}
 }
 
 export function trackPageView() {
-  const s = typeof window !== "undefined" ? window.__gbTracking : undefined;
-  try {
-    if (window.fbq && s?.meta_pixel_id) window.fbq("track", "PageView");
-  } catch { /* noop */ }
-  try {
-    if (window.gtag && s?.ga4_measurement_id) {
-      window.gtag("event", "page_view", { page_path: window.location.pathname });
-    }
-  } catch { /* noop */ }
+  // Passa pelo trackEvent para ter eventID (dedupe Pixel x CAPI) e envio server-side.
+  return trackEvent("PageView", {
+    page_path: window.location.pathname,
+    page_title: document.title,
+    page_location: window.location.href,
+  });
 }
