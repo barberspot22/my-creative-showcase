@@ -16,11 +16,10 @@ export function SiteMenu() {
   const isHome = pathname === "/";
   const onService = MENU_SERVICES.some((s) => s.href === pathname);
   const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(onService);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { setOpen(false); }, [pathname]);
-  useEffect(() => { setServicesOpen(onService); }, [onService]);
+  useEffect(() => { setOpen(false); setServicesOpen(false); }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -71,7 +70,7 @@ export function SiteMenu() {
           >
             Serviços <span aria-hidden="true">▾</span>
           </button>
-          <div className="menuGroupPanel">
+          <div className="menuGroupPanel"><div className="menuGroupPanelInner">
             {MENU_SERVICES.map((s) => (
               <Link
                 key={s.href}
@@ -82,7 +81,7 @@ export function SiteMenu() {
                 {s.label}
               </Link>
             ))}
-          </div>
+          </div></div>
         </div>
 
         <a href="/#servicos" onClick={goAnchor("servicos")}>Como trabalhamos</a>
