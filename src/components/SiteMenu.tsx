@@ -14,7 +14,6 @@ export const MENU_SERVICES = [
 export function SiteMenu() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
-  const onService = MENU_SERVICES.some((s) => s.href === pathname);
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
