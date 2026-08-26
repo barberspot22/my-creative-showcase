@@ -1,25 +1,39 @@
-# Corrigir o menu do cabeçalho
+# Menu do cabeçalho: links certos, submenu e visual
 
-O painel do menu hambúrguer está aparecendo colado nas bordas, sem cantos arredondados e com espaçamento estranho no mobile.
+Hoje o menu mostra só quatro itens genéricos ("O que fazemos", "Serviços", "GB Studio", "Contato"), sem os links reais dos serviços, e o painel aparece quebrado (colado nas bordas, sem cantos arredondados).
 
-## Causa
+## Novo menu
 
-Existem duas definições de estilo para o painel do menu no mesmo arquivo de CSS, ambas para telas até 760px:
+Estrutura, com "Serviços" recolhível (accordion) e na mesma ordem definida na home:
 
-- A antiga (bloco original importado) força `width: 100%`, `left: 0`, `top: 82px`, fundo chapado e `padding: 30px`.
-- A nova (redesign do hambúrguer) define painel flutuante com `left/right: 20px`, cantos arredondados, blur e sombra.
+```text
+INÍCIO
+SERVIÇOS  ▾
+   GB Social
+   Menu Digital
+   E-commerce
+   Catálogo Digital
+   Site Institucional
+   CRM
+   GB Studio
+COMO TRABALHAMOS
+CONTATO
+```
 
-Como a antiga mantém `width: 100%`, o painel estoura a largura e ignora o recuo lateral, produzindo o visual quebrado da captura.
+- "Serviços" abre/fecha ao clicar, com animação suave; fechado por padrão.
+- Estando dentro de uma página de serviço, "Serviços" já aparece aberto e o item atual fica destacado.
+- Os itens de serviço são links reais para as páginas, funcionando de qualquer página do site.
+- "Início", "Como trabalhamos" e "Contato" levam para a home na seção correta quando o usuário não está na home.
 
-## O que será feito
+## Correção visual
 
-1. Remover as regras antigas do painel de navegação mobile, deixando só o estilo novo do dropdown (flutuante, arredondado, com blur e sombra).
-2. Ajustar o painel para acompanhar a altura real do cabeçalho, com um pequeno respiro abaixo dele, em vez do `top: 82px` fixo.
-3. Padronizar os itens: espaçamento uniforme, separadores sutis entre os links, área de toque maior e alinhamento consistente.
-4. Fechar o menu automaticamente ao navegar para outra página ou ao clicar fora / pressionar Esc.
-5. Garantir que os links funcionem em todas as páginas: hoje "O que fazemos", "Serviços" e "Contato" são âncoras da home; fora da home passarão a levar para a home na seção correta.
+- O painel volta a ser um card flutuante: recuo lateral, cantos arredondados, fundo translúcido com blur e sombra.
+- Espaçamento uniforme, separadores sutis entre grupos e área de toque maior nos itens.
+- Menu fecha ao navegar, ao clicar fora e ao pressionar Esc.
 
 ## Detalhes técnicos
 
-- `src/imported.css`: remover o bloco `.nav nav` da media query legada (linha 3) e consolidar no bloco novo do dropdown; usar `top: calc(100% + 10px)` e `width: auto` com `left/right`.
-- `src/routes/index.tsx` (e demais cabeçalhos que usem `.nav`): fechar o menu em clique externo/Esc e apontar as âncoras para `/#id` quando fora da home.
+- Criar `src/components/SiteMenu.tsx` com a lista de itens e o accordion de serviços, reutilizado por todas as páginas que hoje renderizam o header `.nav`, para manter uma ordem única.
+- A ordem dos serviços segue os `caseCards` de `src/routes/index.tsx`: `/gb-social`, `/cardapio-digital`, `/ecommerce`, `/catalogo-digital`, `/site-institucional`, `/crm`, `/gb-studio`.
+- Navegação com `<Link>` do TanStack Router; âncoras da home como `/#servicos`, `/#leistungen`, `/#kontakt`.
+- Em `src/imported.css`: remover as regras antigas de `.nav nav` na media query legada (que forçam `width: 100%` e `left: 0`) e consolidar no bloco novo do dropdown, usando `top: calc(100% + 10px)` com `left/right` e `width: auto`; adicionar estilos do submenu.
