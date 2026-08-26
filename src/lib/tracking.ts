@@ -34,8 +34,23 @@ const META_STANDARD_EVENTS = new Set([
   "Donate", "FindLocation",
 ]);
 
+// GA4: nomes recomendados (evita colidir com eventos automaticos do GA4)
+const GA4_NAME_MAP: Record<string, string> = {
+  Scroll: "scroll_depth",
+  WhatsAppClick: "whatsapp_click",
+  PageExit: "page_exit",
+  ClickButton: "click_button",
+  ViewSection: "view_section",
+  TimeOnPage: "time_on_page",
+  EngagedVisit: "engaged_visit",
+  OutboundClick: "outbound_click",
+  FormSubmit: "form_submit",
+  PageView: "page_view",
+};
+
 // GA4 prefere snake_case
 function ga4Name(name: string) {
+  if (GA4_NAME_MAP[name]) return GA4_NAME_MAP[name];
   return name
     .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
     .replace(/[^a-zA-Z0-9_]/g, "_")
@@ -103,13 +118,10 @@ export function trackContact(source: string, extra: Record<string, unknown> = {}
 }
 
 export function trackPageView() {
-  const s = typeof window !== "undefined" ? window.__gbTracking : undefined;
-  try {
-    if (window.fbq && s?.meta_pixel_id) window.fbq("track", "PageView");
-  } catch { /* noop */ }
-  try {
-    if (window.gtag && s?.ga4_measurement_id) {
-      window.gtag("event", "page_view", { page_path: window.location.pathname });
-    }
-  } catch { /* noop */ }
+  // Passa pelo trackEvent para ter eventID (dedupe Pixel x CAPI) e envio server-side.
+  return trackEvent("PageView", {
+    page_path: window.location.pathname,
+    page_title: document.title,
+    page_location: window.location.href,
+  });
 }

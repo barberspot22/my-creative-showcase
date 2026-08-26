@@ -6,7 +6,20 @@ import { trackPageView } from "@/lib/tracking";
 import { initAutoTracking, resetPageTracking } from "@/lib/autoTracking";
 
 export function TrackingScripts() {
-  const { data: t } = useQuery({ queryKey: ["tracking-settings"], queryFn: fetchTracking, staleTime: 60_000 });
+  const { data: raw } = useQuery({ queryKey: ["tracking-settings"], queryFn: fetchTracking, staleTime: 60_000 });
+  // IDs colados do painel costumam vir com espaços/quebras: sempre normalizar.
+  const clean = (v?: string | null) => (v ?? "").trim();
+  const t = raw
+    ? {
+        ...raw,
+        meta_pixel_id: clean(raw.meta_pixel_id),
+        ga4_measurement_id: clean(raw.ga4_measurement_id),
+        gtm_container_id: clean(raw.gtm_container_id),
+        google_ads_id: clean(raw.google_ads_id),
+        google_ads_conversion_label: clean(raw.google_ads_conversion_label),
+        meta_test_event_code: clean(raw.meta_test_event_code),
+      }
+    : undefined;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   // Expose current settings to trackEvent helpers
@@ -29,7 +42,7 @@ export function TrackingScripts() {
     if (document.getElementById("meta-pixel-script")) return;
     const s = document.createElement("script");
     s.id = "meta-pixel-script";
-    s.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '${t.meta_pixel_id}');fbq('track', 'PageView');`;
+    s.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '${t.meta_pixel_id}');`;
     document.head.appendChild(s);
   }, [t?.meta_pixel_id]);
 
@@ -43,7 +56,7 @@ export function TrackingScripts() {
     s.src = `https://www.googletagmanager.com/gtag/js?id=${t.ga4_measurement_id}`;
     document.head.appendChild(s);
     const inline = document.createElement("script");
-    inline.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', '${t.ga4_measurement_id}', {allow_google_signals:true, allow_ad_personalization_signals:true, send_page_view:true});${t.google_ads_id ? `gtag('config','${t.google_ads_id}');` : ""}`;
+    inline.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', '${t.ga4_measurement_id}', {allow_google_signals:true, allow_ad_personalization_signals:true, send_page_view:false});${t.google_ads_id ? `gtag('config','${t.google_ads_id}');` : ""}`;
     document.head.appendChild(inline);
   }, [t?.ga4_measurement_id, t?.google_ads_id]);
 
