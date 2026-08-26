@@ -9,6 +9,7 @@ import { faqSchema, ldScript } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
+import { SiteMenu } from "@/components/SiteMenu";
 
 const A = "/lumus-assets/";
 
@@ -509,7 +510,6 @@ function CircleGalleryCarousel({ cards }: { cards: CaseCard[] }) {
 
 
 function HomePage() {
-  const [menu, setMenu] = useState(false);
   const [contact, setContact] = useState(false);
   const [sent, setSent] = useState(false);
   const [editableCaseCards, setEditableCaseCards] = useState<CaseCard[]>(caseCards);
@@ -542,7 +542,6 @@ function HomePage() {
   }, []);
 
   const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
-  const go = () => setMenu(false);
   const scrollToCenter = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     go();
