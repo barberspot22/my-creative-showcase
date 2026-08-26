@@ -21,6 +21,7 @@ export const Route = createFileRoute("/api/public/meta-capi")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+       try {
         let token = process.env.META_CAPI_ACCESS_TOKEN ?? "";
         try {
           const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -72,10 +73,18 @@ export const Route = createFileRoute("/api/public/meta-capi")({
           body: JSON.stringify(payload),
         });
         const json = await res.json().catch(() => ({}));
+        // Always answer 200: tracking must never surface as an app error.
         return new Response(JSON.stringify({ ok: res.ok, meta: json }), {
-          status: res.ok ? 200 : 502,
+          status: 200,
           headers: { "Content-Type": "application/json" },
         });
+       } catch (error) {
+        console.error("meta-capi handler failed", error);
+        return new Response(JSON.stringify({ ok: false, error: "capi_failed" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+       }
       },
     },
   },
