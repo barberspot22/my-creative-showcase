@@ -2065,6 +2065,7 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 .menuGroup.open .menuGroupPanel{grid-template-rows:1fr}
 .menuGroupPanel>*{min-height:0}
 .menuGroupPanel{overflow:hidden}
+.menuGroupPanelInner{display:flex;flex-direction:column;gap:2px;padding:4px 0 6px}
 .menuGroupPanel a{
   display:block;padding:10px 14px 10px 26px;border-radius:10px;
   font-size:12.5px;letter-spacing:.6px;text-transform:none;color:#9a9a9a;
