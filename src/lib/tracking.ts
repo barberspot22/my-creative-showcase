@@ -26,6 +26,23 @@ function uuid() {
   });
 }
 
+// Eventos padrao do Meta (os demais vao como trackCustom)
+const META_STANDARD_EVENTS = new Set([
+  "PageView", "Lead", "Contact", "Purchase", "ViewContent", "Search", "AddToCart",
+  "InitiateCheckout", "CompleteRegistration", "Schedule", "SubmitApplication",
+  "Subscribe", "StartTrial", "AddPaymentInfo", "AddToWishlist", "CustomizeProduct",
+  "Donate", "FindLocation",
+]);
+
+// GA4 prefere snake_case
+function ga4Name(name: string) {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+    .replace(/[^a-zA-Z0-9_]/g, "_")
+    .toLowerCase()
+    .slice(0, 40);
+}
+
 export function trackEvent(name: string, params: Record<string, unknown> = {}) {
   const s = typeof window !== "undefined" ? window.__gbTracking : undefined;
   const eventId = uuid();
@@ -33,13 +50,14 @@ export function trackEvent(name: string, params: Record<string, unknown> = {}) {
 
   try {
     if (window.fbq && s?.meta_pixel_id) {
-      window.fbq("track", name, withId, { eventID: eventId });
+      const verb = META_STANDARD_EVENTS.has(name) ? "track" : "trackCustom";
+      window.fbq(verb, name, withId, { eventID: eventId });
     }
   } catch { /* noop */ }
 
   try {
     if (window.gtag && s?.ga4_measurement_id) {
-      window.gtag("event", name, params);
+      window.gtag("event", ga4Name(name), params);
     }
   } catch { /* noop */ }
 
