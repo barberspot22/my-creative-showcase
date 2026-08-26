@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouterState } from "@tanstack/react-router";
 import { fetchTracking } from "@/lib/cms";
 import { trackPageView } from "@/lib/tracking";
+import { initAutoTracking, resetPageTracking } from "@/lib/autoTracking";
 
 export function TrackingScripts() {
   const { data: t } = useQuery({ queryKey: ["tracking-settings"], queryFn: fetchTracking, staleTime: 60_000 });
@@ -42,7 +43,7 @@ export function TrackingScripts() {
     s.src = `https://www.googletagmanager.com/gtag/js?id=${t.ga4_measurement_id}`;
     document.head.appendChild(s);
     const inline = document.createElement("script");
-    inline.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', '${t.ga4_measurement_id}');${t.google_ads_id ? `gtag('config','${t.google_ads_id}');` : ""}`;
+    inline.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', '${t.ga4_measurement_id}', {allow_google_signals:true, allow_ad_personalization_signals:true, send_page_view:true});${t.google_ads_id ? `gtag('config','${t.google_ads_id}');` : ""}`;
     document.head.appendChild(inline);
   }, [t?.ga4_measurement_id, t?.google_ads_id]);
 
@@ -56,10 +57,17 @@ export function TrackingScripts() {
     document.head.appendChild(s);
   }, [t?.gtm_container_id]);
 
-  // Fire pageview on route change
+  // Fire pageview on route change + reinicia o rastreamento de comportamento
+  const firstRun = useRef(true);
   useEffect(() => {
     if (!t) return;
     trackPageView();
+    if (firstRun.current) {
+      firstRun.current = false;
+      const stop = initAutoTracking();
+      return () => stop?.();
+    }
+    resetPageTracking();
   }, [pathname, t]);
 
   return null;
