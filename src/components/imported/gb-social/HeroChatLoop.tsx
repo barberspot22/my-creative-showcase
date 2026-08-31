@@ -40,20 +40,14 @@ const script: Msg[] = [
   { from: "agent", text: "Boa, anotei os dois. Preparando as artes, já te mando...", delay: 1400 },
   {
     from: "agent",
-    images: ["/gb-social-designs/design-22.jpg"],
-    caption: "Terça · variedade do buffet no centro",
-    delay: 2200,
+    images: ["/gb-social-designs/design-22.jpg", "/gb-social-designs/design-17.jpg"],
+    caption: "Terça e sexta · posts prontos",
+    delay: 2400,
   },
   {
     from: "agent",
     copy: "Trabalha no centro? A terça é dia de buffet variado por aqui: saladas frescas, grelhados e aquele tempero de casa. Almoço rápido e completo no seu intervalo. #buffet #almoco #centro #terca #restaurante #comidaboa",
     delay: 1800,
-  },
-  {
-    from: "agent",
-    images: ["/gb-social-designs/design-17.jpg"],
-    caption: "Sexta · jantar em família R$ 110",
-    delay: 2000,
   },
   {
     from: "agent",
