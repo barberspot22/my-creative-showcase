@@ -64,9 +64,7 @@ function GBSocialPage() {
       </section>
 
 
-      <section className="whatsappBlock">
-        <div><p className="studioEyebrow">UMA INTERFACE QUE VOCÊ JÁ CONHECE</p><h2>Você não precisa de mais uma ferramenta.</h2><p>Você já sabe conversar por mensagem. Nada de dashboards complexos, prompts gigantes ou cinco sistemas para publicar o prato do dia.</p></div>
-      </section>
+
 
 
       <section className="socialWorkShowcase">
