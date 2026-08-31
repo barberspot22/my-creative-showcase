@@ -63,8 +63,8 @@ function GBSocialPage() {
         <div className="socialHeroCopy">
           <p className="studioEyebrow">GB SOCIAL · SOCIAL MEDIA DE IA</p>
 
-          <div className="metallicTitle" data-text="Seu social media agora vive no seu canal de mensagens.">
-            <h1>Seu social media <em>agora vive no seu canal de mensagens.</em></h1>
+          <div className="metallicTitle" data-text="Seu social media agora vive no Whatsapp e Telegram.">
+            <h1>Seu social media <em>agora vive no Whatsapp e Telegram.</em></h1>
           </div>
 
           <p>Crie, agende e analise conteúdo conversando. Sem ferramenta nova, no tom da sua marca e com informações do seu cardápio.</p>
