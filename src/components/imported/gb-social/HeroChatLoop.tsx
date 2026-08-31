@@ -36,8 +36,8 @@ const script: Msg[] = [
     },
     delay: 1600,
   },
-  { from: "user", text: "Aprovado! Agora faz um de terça pro pessoal do centro, mostrando a variedade do buffet." },
-  { from: "agent", text: "Boa ideia, o buffet é o forte da terça. Fazendo aqui...", delay: 1400 },
+  { from: "user", text: "Aprovado! Agora já te passo os próximos dois: um de terça pro pessoal do centro, mostrando a variedade do buffet, e o jantar de sexta, que é 2 parmegianas + Coca 2L por R$ 110." },
+  { from: "agent", text: "Boa, anotei os dois. Preparando as artes, já te mando...", delay: 1400 },
   {
     from: "agent",
     images: ["/gb-social-designs/design-22.jpg"],
@@ -51,34 +51,14 @@ const script: Msg[] = [
   },
   {
     from: "agent",
-    poll: {
-      question: "E o de terça, aprova?",
-      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
-      picked: "Aprovar agora",
-    },
-    delay: 1600,
-  },
-  { from: "user", text: "Perfeito! Último: o jantar de sexta. É 2 parmegianas + Coca 2L por R$ 110." },
-  { from: "agent", text: "Anotado! Arte saindo do forno...", delay: 1400 },
-  {
-    from: "agent",
     images: ["/gb-social-designs/design-17.jpg"],
     caption: "Sexta · jantar em família R$ 110",
-    delay: 2200,
+    delay: 2000,
   },
   {
     from: "agent",
     copy: "Sexta é dia de jantar em família: 2 parmegianas + Coca 2L por apenas R$ 110. Peça já o seu e esqueça a louça! #sexta #jantar #parmegiana #familia #promocao #delivery",
     delay: 1800,
-  },
-  {
-    from: "agent",
-    poll: {
-      question: "Fechando a semana: aprova o de sexta?",
-      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
-      picked: "Aprovar agora",
-    },
-    delay: 1600,
   },
   {
     from: "agent",
