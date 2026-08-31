@@ -57,15 +57,15 @@ const script: Msg[] = [
   {
     from: "agent",
     poll: {
-      question: "E esses dois de terça e sexta, aprova?",
-      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
-      picked: "Aprovar agora",
+      question: "Aprovo os dois e já agendo todos os posts da semana?",
+      options: ["Agendar todos agora", "Agendar para depois", "Ajustar algum detalhe"],
+      picked: "Agendar todos agora",
     },
     delay: 1600,
   },
   {
     from: "agent",
-    text: "Semana fechada! Três posts aprovados e agendados: segunda às 10h40, terça às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer. Semana que vem já começo os próximos.",
+    text: "Pronto! Todos os posts foram agendados: segunda às 10h40, terça às 11h10 e sexta às 17h30 — horários com o maior engajamento do seu perfil. Semana que vem eu já começo os próximos.",
     delay: 1800,
   },
 ];
