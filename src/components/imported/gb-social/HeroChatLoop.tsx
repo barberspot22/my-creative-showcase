@@ -14,13 +14,15 @@ type Msg = {
 
 /** Conversa do hero: pedidos reais de posts da semana, com as artes enviadas no chat. */
 const script: Msg[] = [
-  { from: "user", text: "Oi! Consegue fazer o post de segunda pra mim? Quero puxar o almoço self-service." },
-  { from: "agent", text: "Claro! Deixa comigo, já te mando a arte.", delay: 1300 },
+  { from: "user", text: "Oi! Preciso de posts para essa semana. Quero começar com o de segunda sobre o almoço self-service." },
+  { from: "agent", text: "Claro! Para a arte de segunda, você quer que eu use uma imagem do seu Drive conectado ou vai me mandar uma foto de referência aqui na conversa?", delay: 1400 },
+  { from: "user", text: "Pode usar o Drive conectado." },
+  { from: "agent", text: "Perfeito! Deixa eu buscar uma referência boa lá e já te mando a arte.", delay: 1500 },
   {
     from: "agent",
     images: ["/gb-social-designs/design-09.jpg"],
     caption: "Segunda · almoço self-service",
-    delay: 2100,
+    delay: 2200,
   },
   {
     from: "agent",
@@ -31,18 +33,20 @@ const script: Msg[] = [
     from: "agent",
     poll: {
       question: "O que faço com o post de segunda?",
-      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
-      picked: "Aprovar agora",
+      options: ["Aprovar e publicar agora", "Aprovar e agendar", "Ajustar algum detalhe"],
+      picked: "Aprovar e publicar agora",
     },
     delay: 1600,
   },
-  { from: "user", text: "Aprovado! Agora já te passo os próximos dois: um de terça pro pessoal do centro, mostrando a variedade do buffet, e o jantar de sexta, que é 2 parmegianas + Coca 2L por R$ 110." },
-  { from: "agent", text: "Boa, anotei os dois. Preparando as artes, já te mando...", delay: 1400 },
+  { from: "user", text: "Aprova e publica agora." },
+  { from: "agent", text: "Aprovado! Já vou publicar o de segunda. Agora me conta dos próximos: terça para o pessoal do centro e sexta com a promoção do jantar?", delay: 1500 },
+  { from: "user", text: "Isso, pode fazer os dois. Pode usar o Drive também." },
+  { from: "agent", text: "Boa, anotei. Vou buscar as referências no Drive e preparar as artes...", delay: 1600 },
   {
     from: "agent",
     images: ["/gb-social-designs/design-22.jpg", "/gb-social-designs/design-17.jpg"],
     caption: "Terça e sexta · posts prontos",
-    delay: 2400,
+    delay: 2600,
   },
   {
     from: "agent",
@@ -57,15 +61,16 @@ const script: Msg[] = [
   {
     from: "agent",
     poll: {
-      question: "Aprovo os dois e já agendo todos os posts da semana?",
-      options: ["Agendar todos agora", "Agendar para depois", "Ajustar algum detalhe"],
-      picked: "Agendar todos agora",
+      question: "Aprovo os dois e já defino o que fazer?",
+      options: ["Aprovar e publicar todos agora", "Aprovar e agendar para outro dia", "Ajustar algum detalhe"],
+      picked: "Aprovar e agendar para outro dia",
     },
     delay: 1600,
   },
+  { from: "user", text: "Aprova e agenda para outro dia." },
   {
     from: "agent",
-    text: "Pronto! Todos os posts foram agendados: segunda às 10h40, terça às 11h10 e sexta às 17h30 — horários com o maior engajamento do seu perfil. Semana que vem eu já começo os próximos.",
+    text: "Combinado! Posts aprovados e agendados para os melhores horários: segunda às 10h40, terça às 11h10 e sexta às 17h30. Semana que vem eu começo os próximos.",
     delay: 1800,
   },
 ];
