@@ -92,7 +92,7 @@ export function HeroChatLoop() {
 
 
   return (
-    <div className="socialHeroMock" aria-hidden="true">
+    <div className="socialHeroMock">
       <div className="socialHeroPhone">
         <div className="socialHeroPhoneNotch" />
         <header className="socialHeroPhoneHead">
@@ -104,8 +104,9 @@ export function HeroChatLoop() {
           <i className="socialHeroPhoneDot" />
         </header>
         <div
-          className={`socialHeroPhoneBody${fading ? " socialHeroPhoneBodyFading" : ""}`}
+          className="socialHeroPhoneBody"
           ref={bodyRef}
+
         >
           {script.slice(0, count).map((m, i) => (
             <div
