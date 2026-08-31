@@ -2098,3 +2098,41 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 @media(max-width:760px){
   .nav .siteMenu nav{right:0;min-width:264px;max-width:calc(100vw - 40px);padding:12px}
 }
+
+/* ===== GB Social · canais conectáveis + FAQ ===== */
+.socialChannels{padding:100px 9%;background:var(--black);color:#fff;border-top:1px solid #232323}
+.socialChannelsHead{max-width:860px;margin-bottom:52px}
+.socialChannelsHead h2{font-size:clamp(42px,5.4vw,74px);line-height:.96;margin:18px 0 20px}
+.socialChannelsHead>p:last-child{color:#a9a9a9;line-height:1.65;max-width:640px;margin:0;font-size:16px}
+.channelGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.channelCard{border:1px solid #2e2e2e;background:linear-gradient(160deg,#0d0d0d,#080808);border-radius:10px;padding:24px 22px;transition:.25s}
+.channelCard:hover{border-color:rgba(158,25,21,.55);background:#111;transform:translateY(-3px)}
+.channelIcon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px;border:1px solid #333;background:#141414;color:#e8e6e2;margin-bottom:16px}
+.channelCard:hover .channelIcon{color:#fff;border-color:rgba(158,25,21,.6);background:rgba(158,25,21,.14)}
+.channelCard h3{font-size:19px;margin:0 0 8px;font-family:inherit;font-weight:600;letter-spacing:-.2px}
+.channelCard p{margin:0;color:#8f8f8f;font-size:13.5px;line-height:1.55}
+.socialChannels .sectionCtaWrap{margin-top:42px;padding:0}
+
+.socialFaq{padding:100px 9% 110px;background:var(--black);color:#fff;border-top:1px solid #232323}
+.socialFaqHead{max-width:860px;margin-bottom:42px}
+.socialFaqHead h2{font-size:clamp(42px,5.4vw,74px);line-height:.96;margin:18px 0 0}
+.faqList{border-top:1px solid #2b2b2b;max-width:900px}
+.faqItem{border-bottom:1px solid #2b2b2b}
+.faqItem>button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;background:none;border:0;color:#fff;text-align:left;padding:22px 2px;font-size:17px;line-height:1.35;cursor:pointer;font-family:inherit;transition:color .2s}
+.faqItem>button:hover{color:#e5b6b4}
+.faqItem>button i{font-style:normal;font-size:22px;color:#9e1915;line-height:1;flex:none}
+.faqItem.isOpen>button{color:#fff}
+.faqAnswer{padding:0 2px 24px;max-width:720px;animation:faqIn .28s ease}
+.faqAnswer p{margin:0;color:#a2a2a2;line-height:1.7;font-size:15px}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.socialFaq .sectionCtaWrap{margin-top:44px;padding:0}
+@media(max-width:760px){
+  .socialChannels{padding:70px 22px}
+  .socialFaq{padding:70px 22px 80px}
+  .channelGrid{grid-template-columns:1fr 1fr;gap:12px}
+  .channelCard{padding:18px 16px}
+  .channelCard h3{font-size:15px}
+  .channelCard p{font-size:12px}
+  .channelIcon{width:34px;height:34px;margin-bottom:12px}
+  .faqItem>button{font-size:15px;padding:18px 2px}
+}

@@ -138,11 +138,7 @@ export const Route = createFileRoute("/gb-social")({
       serviceType: "Gestão de redes sociais com IA",
       description: "Criação de posts, calendário editorial, análise de métricas e de concorrentes por conversa no WhatsApp, sem contratar agência ou designer.",
       path: "/gb-social",
-      faq: [
-        { question: "Preciso aprender uma ferramenta nova?", answer: "Não. Tudo acontece por conversa, no WhatsApp que você já usa." },
-        { question: "A IA cria as artes e as legendas?", answer: "Sim, cria arte, legenda e sugestão de horário, e você aprova antes de publicar." },
-        { question: "Serve para restaurantes?", answer: "Sim, o GB Social foi desenhado principalmente para gastronomia e varejo local." },
-      ],
+      faq: faqItems,
     }),
   }),
 });
