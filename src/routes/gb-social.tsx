@@ -53,7 +53,7 @@ function GBSocialPage() {
             <h1>Seu social media <em>agora vive no seu canal de mensagens.</em></h1>
           </div>
 
-          <p>Crie, agende e analise conteúdo conversando. Sem ferramenta nova, no tom da sua marca e com a cara do seu cardápio.</p>
+          <p>Crie, agende e analise conteúdo conversando. Sem ferramenta nova, no tom da sua marca e com informações do seu cardápio.</p>
 
           <strong>30 dias de posts, stories e carrossel do restaurante prontos numa conversa.</strong>
 
