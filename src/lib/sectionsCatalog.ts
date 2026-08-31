@@ -46,6 +46,8 @@ export const SECTIONS_CATALOG: Record<SectionsPageKey, SectionDef[]> = {
     { key: "whatsapp",  label: "Bloco WhatsApp",   selector: ".whatsappBlock" },
     { key: "features",  label: "Recursos",         selector: ".socialFeatures" },
     { key: "flow",      label: "Como funciona",    selector: ".socialFlow" },
+    { key: "channels",  label: "Canais conectáveis", selector: ".socialChannels" },
+    { key: "faq",       label: "Perguntas frequentes", selector: ".socialFaq" },
     { key: "final-cta", label: "CTA final",        selector: ".finalCta" },
   ],
   "ecommerce": [
