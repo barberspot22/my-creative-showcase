@@ -14,48 +14,67 @@ type Msg = {
 
 /** Conversa do hero: pedidos reais de posts da semana, com as artes enviadas no chat. */
 const script: Msg[] = [
-  { from: "user", text: "Oi! Preciso dos posts da semana do restaurante, foco no almoço." },
-  { from: "agent", text: "Oi! Boa. Segunda puxando o self-service e quinta o buffet variado?", delay: 1300 },
-  { from: "user", text: "Isso. Na quinta quero mostrar a variedade do buffet." },
+  { from: "user", text: "Oi! Consegue fazer o post de segunda pra mim? Quero puxar o almoço self-service." },
+  { from: "agent", text: "Claro! Deixa comigo, já te mando a arte.", delay: 1300 },
   {
     from: "agent",
-    text: "Fechou. Fiz esses dois primeiro:",
-    images: ["/gb-social-designs/design-09.jpg", "/gb-social-designs/design-22.jpg"],
-    caption: "Segunda · almoço caprichado  |  Quinta · variedade do buffet",
-    delay: 2200,
+    images: ["/gb-social-designs/design-09.jpg"],
+    caption: "Segunda · almoço self-service",
+    delay: 2100,
   },
   {
     from: "agent",
-    copy: "Bateu aquela fome? O almoço de hoje tá caprichado, comida caseira feita na hora. Corre pra cá que ainda dá tempo! #almoco #comidacaseira #selfservice #restaurante #ondecomer #fome",
+    copy: "Segundou com fome? O almoço de hoje tá caprichado: comida caseira feita na hora, self-service completo. Corre pra cá que ainda dá tempo! #almoco #comidacaseira #selfservice #restaurante #ondecomer #segundou",
     delay: 1800,
   },
   {
     from: "agent",
     poll: {
-      question: "O que faço com esses dois posts?",
+      question: "O que faço com o post de segunda?",
       options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
       picked: "Aprovar agora",
     },
     delay: 1600,
   },
-  { from: "user", text: "Aprovado! Agora um de terça pro pessoal do centro e o jantar de sexta." },
-  { from: "user", text: "O jantar de sexta é 2 parmegianas + Coca 2L por R$ 110." },
+  { from: "user", text: "Aprovado! Agora faz um de terça pro pessoal do centro, mostrando a variedade do buffet." },
+  { from: "agent", text: "Boa ideia, o buffet é o forte da terça. Fazendo aqui...", delay: 1400 },
   {
     from: "agent",
-    text: "Prontas também:",
-    images: ["/gb-social-designs/design-05.jpg", "/gb-social-designs/design-17.jpg"],
-    caption: "Terça · almoço no centro  |  Sexta · jantar em família R$ 110",
-    delay: 2300,
+    images: ["/gb-social-designs/design-22.jpg"],
+    caption: "Terça · variedade do buffet no centro",
+    delay: 2200,
   },
   {
     from: "agent",
-    copy: "Sexta é dia de jantar em família: 2 parmegianas + Coca 2L por apenas R$ 110. Peça já o seu! #sexta #jantar #parmegiana #familia #promocao #delivery",
-    delay: 1900,
+    copy: "Trabalha no centro? A terça é dia de buffet variado por aqui: saladas frescas, grelhados e aquele tempero de casa. Almoço rápido e completo no seu intervalo. #buffet #almoco #centro #terca #restaurante #comidaboa",
+    delay: 1800,
   },
   {
     from: "agent",
     poll: {
-      question: "E esses dois, aprova?",
+      question: "E o de terça, aprova?",
+      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
+      picked: "Aprovar agora",
+    },
+    delay: 1600,
+  },
+  { from: "user", text: "Perfeito! Último: o jantar de sexta. É 2 parmegianas + Coca 2L por R$ 110." },
+  { from: "agent", text: "Anotado! Arte saindo do forno...", delay: 1400 },
+  {
+    from: "agent",
+    images: ["/gb-social-designs/design-17.jpg"],
+    caption: "Sexta · jantar em família R$ 110",
+    delay: 2200,
+  },
+  {
+    from: "agent",
+    copy: "Sexta é dia de jantar em família: 2 parmegianas + Coca 2L por apenas R$ 110. Peça já o seu e esqueça a louça! #sexta #jantar #parmegiana #familia #promocao #delivery",
+    delay: 1800,
+  },
+  {
+    from: "agent",
+    poll: {
+      question: "Fechando a semana: aprova o de sexta?",
       options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
       picked: "Aprovar agora",
     },
@@ -63,7 +82,7 @@ const script: Msg[] = [
   },
   {
     from: "agent",
-    text: "Os quatro aprovados e agendados. Segunda e terça às 10h40, quinta às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer. Semana que vem já começo os próximos.",
+    text: "Semana fechada! Três posts aprovados e agendados: segunda às 10h40, terça às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer. Semana que vem já começo os próximos.",
     delay: 1800,
   },
 ];
