@@ -2156,29 +2156,34 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 18px 14px 16px;
+  padding: 8px 18px 8px 8px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  background: rgba(16, 18, 16, 0.92);
+  border: 1px solid rgba(76, 217, 100, 0.35);
+  backdrop-filter: blur(10px);
   color: #fff;
   font-weight: 800;
   font-size: 14px;
   letter-spacing: 0.2px;
-  box-shadow: 0 8px 28px rgba(18, 140, 126, 0.45), 0 2px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 22px rgba(76, 217, 100, 0.18);
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   text-decoration: none;
   line-height: 1;
 }
 .floatingWhatsApp:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 34px rgba(18, 140, 126, 0.55), 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 30px rgba(76, 217, 100, 0.3);
 }
 .floatingWhatsApp:active {
   transform: translateY(-1px) scale(0.98);
 }
 .floatingWhatsAppIcon {
-  width: 22px;
-  height: 22px;
+  width: 40px;
+  height: 40px;
   flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 .floatingWhatsAppLabel {
   white-space: nowrap;
@@ -2187,12 +2192,12 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   .floatingWhatsApp {
     right: 16px;
     bottom: 16px;
-    padding: 12px 14px 12px 12px;
+    padding: 7px 14px 7px 7px;
     gap: 8px;
     font-size: 13px;
   }
   .floatingWhatsAppIcon {
-    width: 20px;
-    height: 20px;
+    width: 34px;
+    height: 34px;
   }
 }
