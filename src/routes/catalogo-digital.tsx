@@ -126,7 +126,7 @@ function CatalogoDigitalPage() {
         />
       </main>
       <footer className="studioFooter">
-        <a href="/">GB IA.</a>
+        <BrandLogo className="footerBrand" />
         <span>Catálogo Digital · Produtos, serviços e imóveis</span>
       </footer>
     </div>

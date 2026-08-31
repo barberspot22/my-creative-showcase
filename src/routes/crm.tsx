@@ -126,7 +126,7 @@ function CRMPage() {
       {/* 8. Final */}
       <FinalCta pageKey="crm" productName="CRM" />
     </main>
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>CRM · Comercial e produção em fluxos próprios</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>CRM · Comercial e produção em fluxos próprios</span></footer>
   </div>;
 }
 

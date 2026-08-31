@@ -99,7 +99,7 @@ function GBStudioPage() {
       <FinalCta pageKey="gb-studio" productName="GB Studio" />
     </main>
 
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Studio · Fotografia de moda com IA</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>GB Studio · Fotografia de moda com IA</span></footer>
 
     {briefing && <div className="studioModal" role="dialog" aria-modal="true" aria-labelledby="briefingTitle" onMouseDown={(e)=>e.target===e.currentTarget&&setBriefing(false)}><div className="studioModalBox"><button className="studioClose" onClick={()=>setBriefing(false)} aria-label="Fechar">×</button>{sent?<div className="studioSuccess"><b>✓</b><h2>Briefing recebido.</h2><p>A equipe vai continuar o contato com você.</p><button onClick={()=>{setSent(false);setBriefing(false)}}>Fechar</button></div>:<><p className="studioEyebrow">GB STUDIO</p><h2 id="briefingTitle">Solicitar briefing</h2><form onSubmit={submit}><label>Nome<input name="name" required placeholder="Seu nome" /></label><label>E-mail<input name="email" type="email" required placeholder="voce@empresa.com.br" /></label><label>Marca ou empresa<input name="company" required placeholder="Nome da marca" /></label><label>O que você precisa produzir?<textarea name="message" required placeholder="Peças, quantidade e canais de uso" /></label><button type="submit">Enviar briefing <span>↗</span></button></form></>}</div></div>}
   </div>;

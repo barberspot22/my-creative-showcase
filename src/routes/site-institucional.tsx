@@ -105,7 +105,7 @@ function SiteInstitucionalPage() {
 
       <FinalCta pageKey="site-institucional" productName="Site Institucional" title="Seu site pode ser sua melhor peça de vendas." subtitle="Me conta o que você vende. Devolvo uma estrutura e um valor." />
     </main>
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>Site Institucional · Autoridade e contato sem desvio</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>Site Institucional · Autoridade e contato sem desvio</span></footer>
   </div>;
 }
 
