@@ -496,7 +496,7 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   padding-top: 110px !important;
   padding-bottom: 70px !important;
   display: grid !important;
-  grid-template-columns: 1.05fr .95fr;
+  grid-template-columns: 1.35fr .65fr;
   gap: 60px;
   align-items: center;
 }
@@ -516,9 +516,17 @@ html body{font-weight:400}button,input,textarea,select{font-weight:500}h1,h2,h3,
   line-height: 1.02;
   filter: drop-shadow(0 12px 3px #000);
 }
+.socialHero .metallicTitle h1 .socialTitleMain {
+  white-space: nowrap;
+  display: inline-block;
+}
 .socialHero .metallicTitle h1 em {
-  display: block;
-  font-size: 0.42em;
+  display: inline-block;
+  white-space: normal;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  font-size: clamp(18px, 2.38vw, 32px) !important;
   font-weight: 700;
   letter-spacing: -.01em;
   margin-top: 14px;
@@ -2107,7 +2115,7 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
 .socialChannelsHead h2{font-size:clamp(42px,5.4vw,74px);line-height:.96;margin:18px 0 20px}
 .socialChannelsHead>p:last-child{color:#a9a9a9;line-height:1.65;max-width:640px;margin:0;font-size:16px}
 .channelGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.channelCard{border:1px solid #2e2e2e;background:linear-gradient(160deg,#0d0d0d,#080808);border-radius:10px;padding:24px 22px;transition:.25s}
+.channelCard{border:1px solid #2e2e2e;background:linear-gradient(160deg,#0d0d0d,#080808);border-radius:10px;padding:24px 22px;transition:.25s;display:block;text-decoration:none;color:inherit}
 .channelCard:hover{border-color:rgba(158,25,21,.55);background:#111;transform:translateY(-3px)}
 .channelIcon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px;border:1px solid #333;background:#141414;color:#e8e6e2;margin-bottom:16px}
 .channelCard:hover .channelIcon{color:#fff;border-color:rgba(158,25,21,.6);background:rgba(158,25,21,.14)}
@@ -2137,4 +2145,54 @@ html.gb-preloading,html.gb-preloading body{overflow:hidden!important}
   .channelCard p{font-size:12px}
   .channelIcon{width:34px;height:34px;margin-bottom:12px}
   .faqItem>button{font-size:15px;padding:18px 2px}
+}
+
+/* Floating WhatsApp button */
+.floatingWhatsApp {
+  position: fixed;
+  z-index: 90;
+  right: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px 14px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 28px rgba(18, 140, 126, 0.45), 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+.floatingWhatsApp:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 34px rgba(18, 140, 126, 0.55), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.floatingWhatsApp:active {
+  transform: translateY(-1px) scale(0.98);
+}
+.floatingWhatsAppIcon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+.floatingWhatsAppLabel {
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .floatingWhatsApp {
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 14px 12px 12px;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .floatingWhatsAppIcon {
+    width: 20px;
+    height: 20px;
+  }
 }

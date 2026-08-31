@@ -15,6 +15,7 @@ import { TrackingScripts } from "@/components/TrackingScripts";
 import { SectionVisibilityStyle } from "@/components/SectionVisibilityStyle";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Preloader } from "@/components/Preloader";
+import { FloatingWhatsApp, DEFAULT_FLOATING_MESSAGE } from "@/components/FloatingWhatsApp";
 import { ldScript, organizationSchema, websiteSchema } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
@@ -141,8 +142,39 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 
+function floatingMessage(path: string) {
+  if (path.startsWith("/gb-social")) {
+    return "Olá! Vim pela página do GB Social e quero entender como funciona o social media de IA por mensagem.";
+  }
+  if (path.startsWith("/gb-studio")) {
+    return "Olá! Vim pela página do GB Studio e quero saber mais sobre ensaios e fotos com IA.";
+  }
+  if (path.startsWith("/ecommerce")) {
+    return "Olá! Vim pela página de E-commerce e quero uma loja com catálogo, marketplaces e IA vendedora.";
+  }
+  if (path.startsWith("/crm")) {
+    return "Olá! Vim pela página de CRM e quero organizar meu comercial e produção em fluxos próprios.";
+  }
+  if (path.startsWith("/site-institucional")) {
+    return "Olá! Vim pela página de Site Institucional e quero um site que posicione minha marca e converta visitantes.";
+  }
+  if (path.startsWith("/cardapio-digital")) {
+    return "Olá! Vim pela página de Cardápio Digital e quero que meus clientes peçam sozinhos na mesa, delivery ou WhatsApp.";
+  }
+  if (path.startsWith("/catalogo-digital")) {
+    return "Olá! Vim pela página de Catálogo Digital e quero mostrar meus produtos/serviços com pedido de orçamento fácil.";
+  }
+  if (path.startsWith("/admin")) {
+    return "";
+  }
+  return DEFAULT_FLOATING_MESSAGE;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+  const pathname = router.state.location.pathname;
+  const floatingMsg = floatingMessage(pathname);
 
   useEffect(() => {
     let last = window.scrollY;
@@ -170,6 +202,13 @@ function RootComponent() {
       <SectionVisibilityStyle />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {floatingMsg && (
+        <FloatingWhatsApp
+          message={floatingMsg}
+          label="Falar no WhatsApp"
+          source="floating_whatsapp"
+        />
+      )}
       <CookieConsent />
     </QueryClientProvider>
 
