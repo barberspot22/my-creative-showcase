@@ -29,6 +29,18 @@ const steps = [
   ["Publica sozinho", "Ele agenda ou publica nos canais configurados, no horário que vende."],
 ];
 
+// Fonte única: alimenta o accordion visível e o schema de FAQ do Google.
+const faqItems = [
+  { question: "Quais canais eu consigo conectar?", answer: "Instagram, Facebook, TikTok, YouTube, LinkedIn, X (Twitter), Threads, Pinterest, Bluesky, Twitch e Google Business Profile." },
+  { question: "Preciso aprender uma ferramenta nova?", answer: "Não. Tudo acontece por conversa, no WhatsApp que você já usa. Nada de painel novo para aprender." },
+  { question: "A IA cria as artes e as legendas?", answer: "Sim, cria arte, legenda com hashtags e sugestão de horário, e você aprova antes de publicar." },
+  { question: "Quem aprova o que vai ao ar?", answer: "Você. O agente entrega a arte e a legenda na conversa e só publica ou agenda depois do seu ok." },
+  { question: "Dá para publicar em vários canais ao mesmo tempo?", answer: "Sim. Você aprova uma vez e o conteúdo é adaptado e distribuído para os canais conectados." },
+  { question: "Consigo usar minhas próprias fotos?", answer: "Sim. Você pode mandar a foto na própria conversa ou conectar seu Drive para o agente buscar as referências." },
+  { question: "Serve para restaurantes?", answer: "Sim, o GB Social foi desenhado principalmente para gastronomia e varejo local." },
+  { question: "Ele também mostra resultados?", answer: "Sim. Métricas de perfil, desempenho dos posts e comparação com concorrentes chegam na mesma conversa." },
+];
+
 function GBSocialPage() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
