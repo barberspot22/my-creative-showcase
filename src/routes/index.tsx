@@ -9,6 +9,7 @@ import { faqSchema, ldScript } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 import { fetchHomeCards } from "@/lib/cms";
 import gbLogo from "@/assets/gb-ia-logo.png";
+import socialCoverAsset from "@/assets/social/terca-estrogonofe.png.asset.json";
 import { SiteMenu } from "@/components/SiteMenu";
 
 const A = "/lumus-assets/";
@@ -78,7 +79,7 @@ const caseCards: CaseCard[] = [
     description: "Seu Social Media de IA no WhatsApp",
     badge: "CHAT IA",
     frames: [
-      { kind: "image", src: "/gb-social-designs/design-17.jpg", alt: "Post de social media criado pelo GB Social" },
+      { kind: "image", src: socialCoverAsset.url, alt: "Post de terça do estrogonofe criado pelo GB Social" },
     ],
   },
   {
