@@ -3,7 +3,7 @@
 // Bluesky, Facebook, Google Business Profile, Instagram, LinkedIn, Pinterest,
 // Threads, TikTok, Twitch, Twitter (X) e YouTube.
 
-type Channel = { name: string; note: string; icon: JSX.Element };
+type Channel = { name: string; note: string; icon: ReactNode };
 
 const s = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 const letter = (t: string) => (
