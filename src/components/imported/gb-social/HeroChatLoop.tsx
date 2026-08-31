@@ -161,7 +161,7 @@ export function HeroChatLoop() {
                     {m.poll.options.map((opt) => (
                       <span
                         key={opt}
-                        className={`socialHeroPollOption ${opt === m.poll.picked ? "socialHeroPollOptionPicked" : ""}`}
+                        className={`socialHeroPollOption ${opt === m.poll?.picked ? "socialHeroPollOptionPicked" : ""}`}
                       >
                         {opt}
                       </span>
