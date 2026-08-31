@@ -114,7 +114,7 @@ function GBSocialPage() {
 
       <FinalCta pageKey="gb-social" productName="GB Social" title="Crie seu calendário de posts sozinho. Sem contratar ninguém." subtitle="Em poucos minutos, você monta semanas de conteúdo no tom da sua marca. Sem agência, sem freelancer." />
     </main>
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA por mensagem</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>GB Social · Seu Social Media de IA por mensagem</span></footer>
 
     {open && <div className="studioModal" role="dialog" aria-modal="true" onMouseDown={e => e.target === e.currentTarget && setOpen(false)}><div className="studioModalBox"><button className="studioClose" onClick={() => setOpen(false)} aria-label="Fechar">×</button>{sent ? <div className="studioSuccess"><b>✓</b><h2>Mensagem recebida.</h2><p>A equipe vai continuar o contato com você.</p><button onClick={() => {setSent(false);setOpen(false)}}>Fechar</button></div> : <><p className="studioEyebrow">GB SOCIAL</p><h2>Conhecer o GB Social</h2><form onSubmit={submit}><label>Nome<input required placeholder="Seu nome"/></label><label>E-mail<input required type="email" placeholder="voce@empresa.com.br"/></label><label>Empresa<input required placeholder="Nome do restaurante"/></label><label>O que você quer delegar?<textarea required placeholder="Conte quais canais e tarefas quer manter ativos"/></label><button type="submit">Quero falar com a equipe <span>↗</span></button></form></>}</div></div>}
   </div>;

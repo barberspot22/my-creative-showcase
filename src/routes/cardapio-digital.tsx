@@ -81,7 +81,7 @@ function CardapioDigitalPage() {
 
       <FinalCta pageKey="cardapio-digital" productName="Cardápio Digital" title="Quer seu cardápio pedindo por você?" subtitle="Me conta como você vende hoje — mesa, delivery ou os dois. Devolvo escopo, prazo e valor." />
     </main>
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>Cardápio Digital · Mesa, delivery e WhatsApp</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>Cardápio Digital · Mesa, delivery e WhatsApp</span></footer>
   </div>;
 }
 

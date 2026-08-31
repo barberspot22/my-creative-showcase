@@ -730,6 +730,8 @@ body.nav-hidden .nav{transform:translateY(-100%)}
 .gbImageBrand img{width:132px;height:auto;filter:drop-shadow(0 2px 8px rgba(120,180,255,.25)) drop-shadow(0 4px 18px rgba(0,0,0,.55))!important;transition:filter .3s ease,transform .3s ease}
 .gbImageBrand:hover img{filter:drop-shadow(0 2px 10px rgba(140,200,255,.5)) drop-shadow(0 6px 22px rgba(0,0,0,.6))!important;transform:translateY(-1px)}
 @media(max-width:760px){.gbImageBrand img{width:96px}}
+.studioFooter .footerBrand img{width:110px;filter:drop-shadow(0 2px 8px rgba(120,180,255,.2)) drop-shadow(0 4px 14px rgba(0,0,0,.5))!important}
+@media(max-width:760px){.studioFooter .footerBrand img{width:88px}}
 
 /* ---- Circle carousel: tighter mobile line spacing + swipe hint ---- */
 @media(max-width:760px){

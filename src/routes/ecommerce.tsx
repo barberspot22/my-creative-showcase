@@ -107,7 +107,7 @@ function EcommercePage() {
       <FinalCta pageKey="ecommerce" productName="E-commerce" title="Pronto para entrar no mercado que só cresce?" subtitle="Me conta seu produto e onde você quer vender. Devolvo escopo de loja, catálogo, marketplaces e IA vendedora." />
 
     </main>
-    <footer className="studioFooter"><a href="/">GB IA.</a><span>E-commerce · Loja, catálogo, marketplaces e IA vendedora</span></footer>
+    <footer className="studioFooter"><BrandLogo className="footerBrand" /><span>E-commerce · Loja, catálogo, marketplaces e IA vendedora</span></footer>
   </div>;
 }
 
