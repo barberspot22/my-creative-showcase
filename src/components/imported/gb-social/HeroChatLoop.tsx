@@ -5,13 +5,17 @@ type Msg = {
   text?: string;
   images?: string[];
   caption?: string;
+  /** Mensagem de legenda com hashtags, renderizada com destaque. */
+  copy?: string;
+  /** Enquete de aprovação com opções clicáveis. */
+  poll?: { question: string; options: string[]; picked?: string };
   delay?: number;
 };
 
 /** Conversa do hero: pedidos reais de posts da semana, com as artes enviadas no chat. */
 const script: Msg[] = [
   { from: "user", text: "Oi! Preciso dos posts da semana do restaurante, foco no almoço." },
-  { from: "agent", text: "Oi! Boa. Segunda e quinta puxando o self-service, e sexta o jantar em família?", delay: 1300 },
+  { from: "agent", text: "Oi! Boa. Segunda puxando o self-service e quinta o buffet variado?", delay: 1300 },
   { from: "user", text: "Isso. Na quinta quero mostrar a variedade do buffet." },
   {
     from: "agent",
@@ -20,8 +24,21 @@ const script: Msg[] = [
     caption: "Segunda · almoço caprichado  |  Quinta · variedade do buffet",
     delay: 2200,
   },
-  { from: "user", text: "Ficaram ótimas. Legenda e hashtags também?" },
-  { from: "agent", text: "Já vão prontas em cada uma. Falta a de terça, do pessoal do centro, e a de sexta.", delay: 1500 },
+  {
+    from: "agent",
+    copy: "Bateu aquela fome? O almoço de hoje tá caprichado, comida caseira feita na hora. Corre pra cá que ainda dá tempo! #almoco #comidacaseira #selfservice #restaurante #ondecomer #fome",
+    delay: 1800,
+  },
+  {
+    from: "agent",
+    poll: {
+      question: "O que faço com esses dois posts?",
+      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
+      picked: "Aprovar agora",
+    },
+    delay: 1600,
+  },
+  { from: "user", text: "Aprovado! Agora um de terça pro pessoal do centro e o jantar de sexta." },
   { from: "user", text: "O jantar de sexta é 2 parmegianas + Coca 2L por R$ 110." },
   {
     from: "agent",
@@ -30,10 +47,23 @@ const script: Msg[] = [
     caption: "Terça · almoço no centro  |  Sexta · jantar em família R$ 110",
     delay: 2300,
   },
-  { from: "user", text: "Perfeito. Pode aprovar as quatro." },
   {
     from: "agent",
-    text: "Aprovadas. Segunda e terça às 10h40, quinta às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer.",
+    copy: "Sexta é dia de jantar em família: 2 parmegianas + Coca 2L por apenas R$ 110. Peça já o seu! #sexta #jantar #parmegiana #familia #promocao #delivery",
+    delay: 1900,
+  },
+  {
+    from: "agent",
+    poll: {
+      question: "E esses dois, aprova?",
+      options: ["Aprovar agora", "Agendar para depois", "Ajustar algum detalhe"],
+      picked: "Aprovar agora",
+    },
+    delay: 1600,
+  },
+  {
+    from: "agent",
+    text: "Os quatro aprovados e agendados. Segunda e terça às 10h40, quinta às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer. Semana que vem já começo os próximos.",
     delay: 1800,
   },
 ];
@@ -117,6 +147,27 @@ export function HeroChatLoop() {
                 <p className={m.from === "user" ? "socialHeroPhoneUser" : "socialHeroPhoneAgent"}>
                   {m.text}
                 </p>
+              )}
+              {m.copy && (
+                <div className="socialHeroCopy">
+                  <small className="socialHeroCopyLabel">Legenda pronta</small>
+                  <p className="socialHeroPhoneAgent">{m.copy}</p>
+                </div>
+              )}
+              {m.poll && (
+                <div className="socialHeroPoll">
+                  <p className="socialHeroPollQuestion">{m.poll.question}</p>
+                  <div className="socialHeroPollOptions">
+                    {m.poll.options.map((opt) => (
+                      <span
+                        key={opt}
+                        className={`socialHeroPollOption ${opt === m.poll.picked ? "socialHeroPollOptionPicked" : ""}`}
+                      >
+                        {opt}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
               {m.images && (
                 <div className="socialHeroShots">
