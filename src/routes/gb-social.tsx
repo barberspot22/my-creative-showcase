@@ -5,6 +5,8 @@ import { FormEvent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { HeroChatLoop } from "@/components/imported/gb-social/HeroChatLoop";
+import { ChannelGrid } from "@/components/imported/gb-social/ChannelGrid";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
@@ -27,6 +29,18 @@ const steps = [
   ["Ele consulta o DNA", "O agente já sabe seu cardápio, sua marca, seu tom de voz e suas regras."],
   ["Você ajusta", "Recebe opções, pede alterações e aprova na própria conversa."],
   ["Publica sozinho", "Ele agenda ou publica nos canais configurados, no horário que vende."],
+];
+
+// Fonte única: alimenta o accordion visível e o schema de FAQ do Google.
+const faqItems = [
+  { question: "Quais canais eu consigo conectar?", answer: "Instagram, Facebook, TikTok, YouTube, LinkedIn, X (Twitter), Threads, Pinterest, Bluesky, Twitch e Google Business Profile." },
+  { question: "Preciso aprender uma ferramenta nova?", answer: "Não. Tudo acontece por conversa, no WhatsApp que você já usa. Nada de painel novo para aprender." },
+  { question: "A IA cria as artes e as legendas?", answer: "Sim, cria arte, legenda com hashtags e sugestão de horário, e você aprova antes de publicar." },
+  { question: "Quem aprova o que vai ao ar?", answer: "Você. O agente entrega a arte e a legenda na conversa e só publica ou agenda depois do seu ok." },
+  { question: "Dá para publicar em vários canais ao mesmo tempo?", answer: "Sim. Você aprova uma vez e o conteúdo é adaptado e distribuído para os canais conectados." },
+  { question: "Consigo usar minhas próprias fotos?", answer: "Sim. Você pode mandar a foto na própria conversa ou conectar seu Drive para o agente buscar as referências." },
+  { question: "Serve para restaurantes?", answer: "Sim, o GB Social foi desenhado principalmente para gastronomia e varejo local." },
+  { question: "Ele também mostra resultados?", answer: "Sim. Métricas de perfil, desempenho dos posts e comparação com concorrentes chegam na mesma conversa." },
 ];
 
 function GBSocialPage() {
@@ -79,6 +93,25 @@ function GBSocialPage() {
 
       <section className="socialFlow"><p className="studioEyebrow">DA CONVERSA PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
 
+      <section className="socialChannels">
+        <div className="socialChannelsHead">
+          <p className="studioEyebrow">CANAIS CONECTÁVEIS</p>
+          <h2>Publique onde seu público está.</h2>
+          <p>Você aprova uma vez na conversa e o agente distribui para os canais que fizerem sentido para o seu negócio.</p>
+        </div>
+        <ChannelGrid />
+        <SectionCta message="Olá! Quero conectar minhas redes ao GB Social e publicar tudo por conversa." label="Quero conectar meus canais" />
+      </section>
+
+      <section className="socialFaq">
+        <div className="socialFaqHead">
+          <p className="studioEyebrow">PERGUNTAS FREQUENTES</p>
+          <h2>Ficou alguma dúvida?</h2>
+        </div>
+        <FaqAccordion items={faqItems} />
+        <SectionCta message="Olá! Tenho uma dúvida sobre o GB Social e quero falar com alguém." label="Falar com a equipe" />
+      </section>
+
       <FinalCta pageKey="gb-social" productName="GB Social" title="Crie seu calendário de posts sozinho. Sem contratar ninguém." subtitle="Em poucos minutos, você monta semanas de conteúdo no tom da sua marca. Sem agência, sem freelancer." />
     </main>
     <footer className="studioFooter"><a href="/">GB IA.</a><span>GB Social · Seu Social Media de IA por mensagem</span></footer>
@@ -105,11 +138,7 @@ export const Route = createFileRoute("/gb-social")({
       serviceType: "Gestão de redes sociais com IA",
       description: "Criação de posts, calendário editorial, análise de métricas e de concorrentes por conversa no WhatsApp, sem contratar agência ou designer.",
       path: "/gb-social",
-      faq: [
-        { question: "Preciso aprender uma ferramenta nova?", answer: "Não. Tudo acontece por conversa, no WhatsApp que você já usa." },
-        { question: "A IA cria as artes e as legendas?", answer: "Sim, cria arte, legenda e sugestão de horário, e você aprova antes de publicar." },
-        { question: "Serve para restaurantes?", answer: "Sim, o GB Social foi desenhado principalmente para gastronomia e varejo local." },
-      ],
+      faq: faqItems,
     }),
   }),
 });
