@@ -8,43 +8,41 @@ type Msg = {
   delay?: number;
 };
 
-/** Conversa do hero: pedidos de post por dia da semana, com artes enviadas no chat. */
+/** Conversa do hero: pedidos reais de posts da semana, com as artes enviadas no chat. */
 const script: Msg[] = [
-  { from: "user", text: "Oi! Preciso do post de terça, o do almoço executivo." },
-  { from: "agent", text: "Oi, bom te ver! Mesma pegada do mês passado, prato + suco?", delay: 1100 },
-  { from: "user", text: "Isso. R$ 34,90 nesta semana." },
+  { from: "user", text: "Oi! Preciso dos posts da semana do restaurante, foco no almoço." },
+  { from: "agent", text: "Oi! Boa. Segunda e quinta puxando o self-service, e sexta o jantar em família?", delay: 1300 },
+  { from: "user", text: "Isso. Na quinta quero mostrar a variedade do buffet." },
   {
     from: "agent",
-    text: "Fechou. Fiz duas versões, olha aí:",
-    images: ["/gb-social-designs/design-17.jpg", "/gb-social-designs/design-05.jpg"],
-    caption: "Terça · Almoço executivo · legenda e hashtags já prontas",
+    text: "Fechou. Fiz esses dois primeiro:",
+    images: ["/gb-social-designs/design-09.jpg", "/gb-social-designs/design-22.jpg"],
+    caption: "Segunda · almoço caprichado  |  Quinta · variedade do buffet",
     delay: 2200,
   },
-  { from: "user", text: "A primeira. Ficou ótima." },
-  { from: "agent", text: "Agendei para terça às 10h40, que é quando seu público decide o almoço.", delay: 1400 },
-  { from: "user", text: "E o de sexta? Queria puxar o combo da noite." },
+  { from: "user", text: "Ficaram ótimas. Legenda e hashtags também?" },
+  { from: "agent", text: "Já vão prontas em cada uma. Falta a de terça, do pessoal do centro, e a de sexta.", delay: 1500 },
+  { from: "user", text: "O jantar de sexta é 2 parmegianas + Coca 2L por R$ 110." },
   {
     from: "agent",
-    text: "Já subi o de sexta e deixei um story pra quinta esquentando:",
-    images: ["/gb-social-designs/design-22.jpg", "/gb-social-designs/design-09.jpg"],
-    caption: "Sexta · Combo da noite  |  Quinta · Story de bastidor",
+    text: "Prontas também:",
+    images: ["/gb-social-designs/design-05.jpg", "/gb-social-designs/design-17.jpg"],
+    caption: "Terça · almoço no centro  |  Sexta · jantar em família R$ 110",
     delay: 2300,
   },
-  { from: "user", text: "Perfeito. Pode aprovar os dois." },
+  { from: "user", text: "Perfeito. Pode aprovar as quatro." },
   {
     from: "agent",
-    text: "Aprovados. Semana fechada: terça, quinta e sexta na fila. Sábado te mando o resultado de cada um.",
+    text: "Aprovadas. Segunda e terça às 10h40, quinta às 11h10 e sexta às 17h30, na hora em que seu público decide onde comer.",
     delay: 1800,
   },
 ];
 
-const RESET_PAUSE = 3800;
-
-/** Chat animado do hero do GB Social, em loop, com indicador de digitação. */
+/** Chat animado do hero do GB Social. Roda uma vez por carregamento e depois libera o scroll. */
 export function HeroChatLoop() {
   const [count, setCount] = useState(script.length);
   const [typing, setTyping] = useState(false);
-  const [fading, setFading] = useState(false);
+  const [done, setDone] = useState(true);
   const bodyRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -59,18 +57,7 @@ export function HeroChatLoop() {
     const run = () => {
       if (!alive) return;
       if (step >= script.length) {
-        wait(RESET_PAUSE, () => {
-          setFading(true);
-          wait(600, () => {
-            step = 0;
-            setCount(0);
-            if (bodyRef.current) bodyRef.current.scrollTop = 0;
-            wait(260, () => {
-              setFading(false);
-              wait(500, run);
-            });
-          });
-        });
+        setDone(true);
         return;
       }
       const msg = script[step];
@@ -85,6 +72,7 @@ export function HeroChatLoop() {
       });
     };
 
+    setDone(false);
     setCount(0);
     wait(700, run);
     return () => {
@@ -95,12 +83,13 @@ export function HeroChatLoop() {
 
   useEffect(() => {
     const el = bodyRef.current;
-    if (!el || fading) return;
+    if (!el || done) return;
     const id = requestAnimationFrame(() => {
       el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
     });
     return () => cancelAnimationFrame(id);
-  }, [count, typing, fading]);
+  }, [count, typing, done]);
+
 
   return (
     <div className="socialHeroMock" aria-hidden="true">
