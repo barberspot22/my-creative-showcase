@@ -74,7 +74,7 @@ const script: Msg[] = [
   { from: "user", text: "Aprova e agenda para outro dia." },
   {
     from: "agent",
-    text: "Combinado! Posts aprovados e agendados para os melhores horários: segunda às 10h40, terça às 11h10 e sexta às 17h30. Semana que vem eu começo os próximos.",
+    text: "Combinado! Posts aprovados e agendados para os melhores horários: segunda às 10h40, terça às 11h10 e sexta às 17h30. Quer criar os próximos posts?",
     delay: 1800,
   },
 ];
