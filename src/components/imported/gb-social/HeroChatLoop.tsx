@@ -17,7 +17,9 @@ const script: Msg[] = [
   { from: "user", text: "Oi! Preciso de posts para essa semana. Quero começar com o de segunda sobre o almoço self-service." },
   { from: "agent", text: "Claro! Para a arte de segunda, você quer que eu use uma imagem do seu Drive conectado ou vai me mandar uma foto de referência aqui na conversa?", delay: 1400 },
   { from: "user", text: "Pode usar o Drive conectado." },
-  { from: "agent", text: "Perfeito! Deixa eu buscar uma referência boa lá e já te mando a arte.", delay: 1500 },
+  { from: "agent", text: "Boa. Antes de gerar, me diz o que você quer que apareça escrito na arte do post de segunda.", delay: 1500 },
+  { from: "user", text: "Pode colocar: 'Segundou com fome? Almoço self-service completo!'" },
+  { from: "agent", text: "Perfeito! Deixa eu buscar uma referência boa lá e já te mando a arte gerada.", delay: 1600 },
   {
     from: "agent",
     images: ["/gb-social-designs/design-09.jpg"],
@@ -41,7 +43,9 @@ const script: Msg[] = [
   { from: "user", text: "Aprova e publica agora." },
   { from: "agent", text: "Aprovado! Já vou publicar o de segunda. Agora me conta dos próximos: terça para o pessoal do centro e sexta com a promoção do jantar?", delay: 1500 },
   { from: "user", text: "Isso, pode fazer os dois. Pode usar o Drive também." },
-  { from: "agent", text: "Boa, anotei. Vou buscar as referências no Drive e preparar as artes...", delay: 1600 },
+  { from: "agent", text: "Boa. Antes de gerar, me diz o que você quer escrito na arte de terça e na de sexta.", delay: 1600 },
+  { from: "user", text: "Terça: 'Buffet variado no centro'. Sexta: 'Jantar em família: 2 parmegianas + Coca 2L por R$ 110'." },
+  { from: "agent", text: "Perfeito! Agora sim, vou buscar as referências no Drive e gerar as artes...", delay: 1700 },
   {
     from: "agent",
     images: ["/gb-social-designs/design-22.jpg", "/gb-social-designs/design-17.jpg"],
