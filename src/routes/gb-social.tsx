@@ -5,6 +5,8 @@ import { FormEvent, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { PerspectiveTicker } from "@/components/imported/gb-social/PerspectiveTicker";
 import { HeroChatLoop } from "@/components/imported/gb-social/HeroChatLoop";
+import { ChannelGrid } from "@/components/imported/gb-social/ChannelGrid";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { usePageLink } from "@/lib/adminLinks";
 import { FinalCta } from "@/components/FinalCta";
 import { ProductSwitcher } from "@/components/ProductSwitcher";
@@ -90,6 +92,25 @@ function GBSocialPage() {
       </section>
 
       <section className="socialFlow"><p className="studioEyebrow">DA CONVERSA PARA O FEED</p><h2>Assim funciona.</h2><ol>{steps.map(([title, copy], i) => <li key={title}><span>{String(i + 1).padStart(2, "0")}</span><div><b>{title}</b><p>{copy}</p></div></li>)}</ol></section>
+
+      <section className="socialChannels">
+        <div className="socialChannelsHead">
+          <p className="studioEyebrow">CANAIS CONECTÁVEIS</p>
+          <h2>Publique onde seu público está.</h2>
+          <p>Você aprova uma vez na conversa e o agente distribui para os canais que fizerem sentido para o seu negócio.</p>
+        </div>
+        <ChannelGrid />
+        <SectionCta message="Olá! Quero conectar minhas redes ao GB Social e publicar tudo por conversa." label="Quero conectar meus canais" />
+      </section>
+
+      <section className="socialFaq">
+        <div className="socialFaqHead">
+          <p className="studioEyebrow">PERGUNTAS FREQUENTES</p>
+          <h2>Ficou alguma dúvida?</h2>
+        </div>
+        <FaqAccordion items={faqItems} />
+        <SectionCta message="Olá! Tenho uma dúvida sobre o GB Social e quero falar com alguém." label="Falar com a equipe" />
+      </section>
 
       <FinalCta pageKey="gb-social" productName="GB Social" title="Crie seu calendário de posts sozinho. Sem contratar ninguém." subtitle="Em poucos minutos, você monta semanas de conteúdo no tom da sua marca. Sem agência, sem freelancer." />
     </main>
