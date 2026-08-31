@@ -54,8 +54,6 @@ function GBSocialPage() {
           </div>
 
           <p>Crie, agende e analise conteúdo conversando. Sem ferramenta nova, no tom da sua marca e com informações do seu cardápio.</p>
-
-          <small>Tudo por mensagem · Sem plataforma para aprender · Feito para quem vende comida</small>
         </div>
 
         <HeroChatLoop />
